@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veil OS — AI Media Creation Platform | Watchman OS</title>
+  <meta name="description" content="Veil OS is a powerful AI-driven media creation platform for iOS and web. Generate images, synthesize video, and produce audio at professional quality.">
+  <meta property="og:title" content="Veil OS — Create Without Limits">
+  <meta property="og:description" content="AI-powered media creation. Images, video, audio — generated at professional quality by Veil OS from Watchman OS.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://watchmanforge.com/products/veil-os.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .veil-hero-glow { background: radial-gradient(circle, rgba(144,0,255,0.15) 0%, transparent 70%); }
+
+    .generation-demo {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .generation-demo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(144,0,255,0.07) 0%, transparent 60%);
+    }
+    .demo-prompt {
+      background: var(--bg-input);
+      border: 1px solid var(--border-faint);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .demo-prompt::after {
+      content: '|';
+      color: var(--neon-purple);
+      animation: pulse-dot 1s infinite;
+      margin-left: 2px;
+    }
+    .demo-output-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .demo-tile {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+    }
+    .demo-tile-1 { background: linear-gradient(135deg, #0a0018, #200040, #0a0018); }
+    .demo-tile-2 { background: linear-gradient(135deg, #001020, #003060, #001020); }
+    .demo-tile-3 { background: linear-gradient(135deg, #180008, #500020, #180008); }
+
+    .capability-strip {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .capability-strip::-webkit-scrollbar { display: none; }
+    .cap-chip {
+      flex-shrink: 0;
+      padding: 10px 20px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      background: rgba(144,0,255,0.05);
+      transition: all var(--t-fast);
+      cursor: default;
+    }
+    .cap-chip:hover { border-color: rgba(144,0,255,0.4); color: #cc88ff; background: rgba(144,0,255,0.1); }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="logo-mark"><svg viewBox="0 0 22 22" fill="none"><path d="M3 4L8 18L11 10L14 18L19 4" stroke="#010104" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="logo-text">Watchman<span>OS — NEW JERSEY, USA</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li class="has-dropdown"><a href="#">Products</a>
+          <ul class="nav-dropdown">
+            <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder</a></li>
+            <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil OS</a></li>
+            <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>Unified BT LED</a></li>
+            <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>AI Investment App</a></li>
+          </ul>
+        </li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-right"><a href="/contact.html" class="btn btn-primary btn-sm">Get Started</a></div>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav">
+    <a href="/">Home</a>
+    <div class="mobile-nav-section">Products</div>
+    <a href="/products/pathfinder.html">Pathfinder</a>
+    <a href="/products/veil-os.html">Veil OS</a>
+    <a href="/products/unified-bt-led-controller.html">Unified BT LED Controller</a>
+    <a href="/products/ai-investment-app.html">AI Investment App</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="page-hero-glow veil-hero-glow"></div>
+      <div class="page-hero-content">
+        <div class="breadcrumb">
+          <a href="/">Home</a><span class="breadcrumb-sep">/</span>
+          <a href="/#products">Products</a><span class="breadcrumb-sep">/</span>
+          <span>Veil OS</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+          <div>
+            <div class="badge badge-live" style="margin-bottom:20px;background:rgba(144,0,255,0.1);color:#cc88ff;border-color:rgba(144,0,255,0.3);">Available · iOS &amp; Web</div>
+            <div class="product-icon icon-purple" style="margin-bottom:24px;">
+              <svg viewBox="0 0 32 32" fill="none">
+                <ellipse cx="16" cy="16" rx="14" ry="9" stroke="#9000ff" stroke-width="1.5"/>
+                <circle cx="16" cy="16" r="4" fill="#9000ff" opacity="0.3"/>
+                <circle cx="16" cy="16" r="2.5" fill="#9000ff"/>
+                <path d="M8 12 Q12 8 16 8 Q20 8 24 12" stroke="#9000ff" stroke-width="1" opacity="0.5" fill="none"/>
+                <path d="M8 20 Q12 24 16 24 Q20 24 24 20" stroke="#9000ff" stroke-width="1" opacity="0.5" fill="none"/>
+              </svg>
+            </div>
+            <h1 class="display-lg" style="margin-bottom:16px;">
+              <span style="background:linear-gradient(135deg,#cc88ff,#9000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Veil OS</span>
+            </h1>
+            <p style="font-size:1.3rem;color:var(--text-secondary);margin-bottom:12px;font-family:var(--font-heading);font-weight:500;">Create Without Limits.</p>
+            <p style="color:var(--text-secondary);line-height:1.8;max-width:520px;margin-bottom:36px;">
+              An AI-powered media creation platform that puts professional-grade generation tools in your pocket. Describe it, and Veil OS builds it — images, video, audio, and more.
+            </p>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;">
+              <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#9000ff,#cc00ff);color:#fff;box-shadow:var(--glow-p-md);">Get Veil OS</a>
+              <a href="#features" class="btn btn-outline btn-lg" style="border-color:rgba(144,0,255,0.4);color:#cc88ff;">See Features</a>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="generation-demo">
+              <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:12px;">VEIL OS · GENERATION</div>
+              <div class="demo-prompt">A neon-lit city skyline at midnight, cyberpunk aesthetic, ultra-detailed...</div>
+              <div class="demo-output-grid">
+                <div class="demo-tile demo-tile-1">GEN 01</div>
+                <div class="demo-tile demo-tile-2">GEN 02</div>
+                <div class="demo-tile demo-tile-3">GEN 03</div>
+              </div>
+              <div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);">3 VARIANTS · 1024×1024</span>
+                <span class="badge badge-live" style="background:rgba(144,0,255,0.1);color:#cc88ff;border-color:rgba(144,0,255,0.25);">Generated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capability strip -->
+    <section style="background:var(--bg-void);padding:32px 0;border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint);">
+      <div class="container">
+        <div class="capability-strip">
+          <div class="cap-chip">Image Generation</div>
+          <div class="cap-chip">Video Synthesis</div>
+          <div class="cap-chip">Audio Creation</div>
+          <div class="cap-chip">Style Transfer</div>
+          <div class="cap-chip">Text-to-Image</div>
+          <div class="cap-chip">Inpainting</div>
+          <div class="cap-chip">Upscaling</div>
+          <div class="cap-chip">ControlNet</div>
+          <div class="cap-chip">Batch Generation</div>
+          <div class="cap-chip">Cloud Rendering</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow reveal">Core Features</div>
+          <h2 class="section-title reveal reveal-delay-1">The Full Creative Suite</h2>
+          <p class="section-sub reveal reveal-delay-2">Every creative discipline, unified under a single intelligent platform.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card card-corner reveal">
+            <div class="product-icon icon-purple" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">AI Image Generation</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Generate photorealistic and artistic images from text prompts. Fine-tune with styles, aspect ratios, and negative prompts for precision output.</p>
+          </div>
+          <div class="card card-corner reveal reveal-delay-1">
+            <div class="product-icon icon-purple" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Video Synthesis</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Transform images or text prompts into fluid, cinematic video clips. Export-ready for social media, presentations, or professional production.</p>
+          </div>
+          <div class="card card-corner reveal reveal-delay-2">
+            <div class="product-icon icon-purple" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Audio Generation</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Generate original music, sound effects, and voiceovers. Choose genre, mood, tempo, and duration for precisely crafted audio assets.</p>
+          </div>
+          <div class="card card-corner reveal">
+            <div class="product-icon icon-purple" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Inpainting &amp; Editing</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Select and regenerate any region of an image. Intelligent inpainting seamlessly blends AI-generated content with your originals.</p>
+          </div>
+          <div class="card card-corner reveal reveal-delay-1">
+            <div class="product-icon icon-purple" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Style Transfer</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Apply artistic styles from references to any image. Blend, interpolate, and create entirely new visual aesthetics with AI assistance.</p>
+          </div>
+          <div class="card card-corner reveal reveal-delay-2">
+            <div class="product-icon icon-purple" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Cloud Rendering</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Offload intensive generation to our cloud infrastructure. Queue large batches, run overnight, and download polished results in the morning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section section" style="background:var(--bg-void);">
+      <div class="container">
+        <div class="cta-box reveal" style="border-color:rgba(144,0,255,0.25);">
+          <div class="eyebrow" style="justify-content:center;color:#cc88ff;">
+            <span style="width:24px;height:1px;background:#cc88ff;display:block;box-shadow:0 0 6px #cc88ff;"></span>
+            Veil OS
+            <span style="width:24px;height:1px;background:#cc88ff;display:block;box-shadow:0 0 6px #cc88ff;"></span>
+          </div>
+          <h2 class="section-title">Unleash Your Creativity</h2>
+          <p class="section-sub">Veil OS is available on iOS and the web. Contact us to learn more or request beta access.</p>
+          <div class="cta-actions">
+            <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#9000ff,#cc00ff);color:#fff;box-shadow:var(--glow-p-md);">Request Access</a>
+            <a href="/#products" class="btn btn-outline btn-lg">All Products</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo"><div class="logo-mark"><svg viewBox="0 0 22 22" fill="none"><path d="M3 4L8 18L11 10L14 18L19 4" stroke="#010104" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-text">Watchman<span>OS — NEW JERSEY, USA</span></div></a>
+        <p>Building premium software and hardware for the next generation. Based in New Jersey, USA.</p>
+        <div class="footer-contact"><a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a><span>New Jersey, USA</span></div>
+      </div>
+      <div class="footer-col"><h4>Products</h4><ul><li><a href="/products/pathfinder.html">Pathfinder</a></li><li><a href="/products/veil-os.html">Veil OS</a></li><li><a href="/products/unified-bt-led-controller.html">Unified BT LED Controller</a></li><li><a href="/products/ai-investment-app.html">AI Investment App</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-service.html">Terms of Service</a></li></ul></div>
+    </div>
+    <hr class="hr-neon">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Watchman OS. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Contact</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

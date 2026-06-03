@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Investment App — Your AI Financial Edge | Watchman OS</title>
+  <meta name="description" content="The Watchman OS AI Investment App is an intelligent iOS investment analysis platform with AI-powered portfolio management, risk modeling, and real-time market signals. Coming soon.">
+  <meta property="og:title" content="AI Investment App — Your AI Financial Edge">
+  <meta property="og:description" content="AI-powered portfolio analysis, risk modeling, and market signals. Coming soon from Watchman OS.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://watchmanforge.com/products/ai-investment-app.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .ai-invest-glow { background: radial-gradient(circle, rgba(255,0,204,0.1) 0%, transparent 70%); }
+
+    .countdown-row {
+      display: flex;
+      gap: 24px;
+      margin: 32px 0;
+    }
+    .countdown-cell {
+      text-align: center;
+      padding: 20px 24px;
+      border: 1px solid rgba(255,0,204,0.2);
+      border-radius: 8px;
+      background: rgba(255,0,204,0.04);
+      min-width: 80px;
+    }
+    .countdown-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ff66dd;
+      line-height: 1;
+    }
+    .countdown-label {
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .notify-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+    }
+    .notify-form input {
+      flex: 1;
+      padding: 14px 18px;
+      background: var(--bg-input);
+      border: 1px solid rgba(255,0,204,0.2);
+      border-radius: 3px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    }
+    .notify-form input:focus {
+      border-color: rgba(255,0,204,0.5);
+      box-shadow: 0 0 0 3px rgba(255,0,204,0.07);
+    }
+    .notify-form input::placeholder { color: var(--text-muted); }
+
+    .market-widget {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,0,204,0.15);
+      border-radius: 12px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .market-widget::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,0,204,0.05) 0%, transparent 60%);
+    }
+    .market-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-faint);
+    }
+    .market-row:last-child { border-bottom: none; }
+    .market-symbol {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+    }
+    .market-name { font-size: 0.75rem; color: var(--text-muted); }
+    .market-price {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .market-change-up   { font-family: var(--font-display); font-size: 0.72rem; color: #00ff88; }
+    .market-change-down { font-family: var(--font-display); font-size: 0.72rem; color: #ff4466; }
+    .ai-signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+    .signal-buy  { background: rgba(0,255,136,0.1); color: #00ff88; border: 1px solid rgba(0,255,136,0.2); }
+    .signal-hold { background: rgba(255,204,0,0.1);  color: #ffcc00; border: 1px solid rgba(255,204,0,0.2); }
+    .signal-watch{ background: rgba(255,0,204,0.1);  color: #ff66dd; border: 1px solid rgba(255,0,204,0.2); }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="logo-mark"><svg viewBox="0 0 22 22" fill="none"><path d="M3 4L8 18L11 10L14 18L19 4" stroke="#010104" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="logo-text">Watchman<span>OS — NEW JERSEY, USA</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li class="has-dropdown"><a href="#">Products</a>
+          <ul class="nav-dropdown">
+            <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder</a></li>
+            <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil OS</a></li>
+            <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>Unified BT LED</a></li>
+            <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>AI Investment App</a></li>
+          </ul>
+        </li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-right"><a href="/contact.html" class="btn btn-primary btn-sm">Get Started</a></div>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav">
+    <a href="/">Home</a>
+    <div class="mobile-nav-section">Products</div>
+    <a href="/products/pathfinder.html">Pathfinder</a>
+    <a href="/products/veil-os.html">Veil OS</a>
+    <a href="/products/unified-bt-led-controller.html">Unified BT LED Controller</a>
+    <a href="/products/ai-investment-app.html">AI Investment App</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="page-hero-glow ai-invest-glow"></div>
+      <div class="page-hero-content">
+        <div class="breadcrumb">
+          <a href="/">Home</a><span class="breadcrumb-sep">/</span>
+          <a href="/#products">Products</a><span class="breadcrumb-sep">/</span>
+          <span>AI Investment App</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+          <div>
+            <div class="coming-soon-badge">Coming Soon — 2026</div>
+            <div class="product-icon icon-pink" style="margin-bottom:24px;">
+              <svg viewBox="0 0 32 32" fill="none">
+                <polyline points="4,24 10,16 15,20 22,10 28,6" stroke="#ff00cc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 6h6v6" stroke="#ff00cc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="10" cy="16" r="2" fill="#ff00cc" opacity="0.6"/>
+                <circle cx="22" cy="10" r="2" fill="#ff00cc" opacity="0.6"/>
+              </svg>
+            </div>
+            <h1 class="display-lg" style="margin-bottom:16px;">
+              <span style="background:linear-gradient(135deg,#ff66dd,#9000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AI Investment<br>App</span>
+            </h1>
+            <p style="font-size:1.3rem;color:var(--text-secondary);margin-bottom:12px;font-family:var(--font-heading);font-weight:500;">Your AI Financial Edge.</p>
+            <p style="color:var(--text-secondary);line-height:1.8;max-width:520px;margin-bottom:36px;">
+              An intelligent iOS investment platform that uses AI to analyze portfolios, surface market signals, model risk, and deliver personalized insights — before launch, join the waitlist.
+            </p>
+            <p style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.14em;color:var(--text-muted);margin-bottom:12px;">NOTIFY ME AT LAUNCH</p>
+            <div class="notify-form">
+              <input type="email" placeholder="your@email.com" aria-label="Email for launch notification">
+              <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#ff00cc,#9000ff);color:#fff;box-shadow:0 0 20px rgba(255,0,204,0.3);flex-shrink:0;">Notify Me</a>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="market-widget">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.12em;color:var(--text-muted);">AI WATCHMAN · MARKET SIGNALS</div>
+                <div class="badge badge-soon" style="font-size:0.55rem;">Preview</div>
+              </div>
+              <div class="market-row">
+                <div>
+                  <div class="market-symbol">AAPL</div>
+                  <div class="market-name">Apple Inc.</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="market-price">$192.40</div>
+                  <div class="market-change-up">▲ +2.14%</div>
+                </div>
+                <div class="ai-signal signal-buy">BUY</div>
+              </div>
+              <div class="market-row">
+                <div>
+                  <div class="market-symbol">NVDA</div>
+                  <div class="market-name">NVIDIA Corp.</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="market-price">$878.30</div>
+                  <div class="market-change-up">▲ +0.88%</div>
+                </div>
+                <div class="ai-signal signal-buy">BUY</div>
+              </div>
+              <div class="market-row">
+                <div>
+                  <div class="market-symbol">TSLA</div>
+                  <div class="market-name">Tesla Inc.</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="market-price">$247.10</div>
+                  <div class="market-change-down">▼ -1.22%</div>
+                </div>
+                <div class="ai-signal signal-hold">HOLD</div>
+              </div>
+              <div class="market-row">
+                <div>
+                  <div class="market-symbol">BTC</div>
+                  <div class="market-name">Bitcoin</div>
+                </div>
+                <div style="text-align:right;">
+                  <div class="market-price">$94,120</div>
+                  <div class="market-change-up">▲ +3.41%</div>
+                </div>
+                <div class="ai-signal signal-watch">WATCH</div>
+              </div>
+              <div style="margin-top:16px;padding:12px;background:rgba(255,0,204,0.04);border:1px solid rgba(255,0,204,0.1);border-radius:6px;">
+                <div style="font-family:var(--font-display);font-size:0.55rem;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:4px;">AI INSIGHT</div>
+                <div style="font-size:0.82rem;color:var(--text-secondary);">Sector rotation detected. Tech momentum accelerating. Portfolio risk score: 42/100 (Moderate).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to expect -->
+    <section class="section" style="background:var(--bg-void);" id="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow reveal" style="color:#ff66dd;"><span style="width:24px;height:1px;background:#ff66dd;"></span>What to Expect<span style="width:24px;height:1px;background:#ff66dd;"></span></div>
+          <h2 class="section-title reveal reveal-delay-1">Intelligence That Compounds</h2>
+          <p class="section-sub reveal reveal-delay-2">The AI Investment App combines machine learning, real-time data feeds, and behavioral finance to give you an edge that traditional tools can't match.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-corner reveal" style="border-color:rgba(255,0,204,0.1);">
+            <div class="product-icon icon-pink" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ff00cc" stroke-width="1.5" stroke-linecap="round"><path d="M12 20V10M6 20V4M18 20v-4"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#ff66dd;">Portfolio AI Analysis</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Upload your portfolio and receive AI-generated insights on diversification, sector exposure, correlation risk, and performance attribution — in plain English.</p>
+          </div>
+          <div class="card card-corner reveal reveal-delay-1" style="border-color:rgba(255,0,204,0.1);">
+            <div class="product-icon icon-pink" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ff00cc" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#ff66dd;">Real-Time Market Signals</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">AI scans news, filings, social sentiment, and price action 24/7. Get buy, hold, or watch signals with confidence scores and reasoning.</p>
+          </div>
+          <div class="card card-corner reveal" style="border-color:rgba(255,0,204,0.1);">
+            <div class="product-icon icon-pink" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ff00cc" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#ff66dd;">Risk Modeling</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Monte Carlo simulations and scenario analysis show the full range of outcomes for your portfolio. Know your downside before you commit capital.</p>
+          </div>
+          <div class="card card-corner reveal reveal-delay-1" style="border-color:rgba(255,0,204,0.1);">
+            <div class="product-icon icon-pink" style="width:52px;height:52px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ff00cc" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#ff66dd;">Personalized Insights</h3>
+            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">The more you use it, the smarter it gets. AI learns your risk tolerance, goals, and trading style to deliver insights that actually fit your strategy.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:48px;padding:32px;border:1px solid rgba(255,0,204,0.15);border-radius:8px;background:rgba(255,0,204,0.03);text-align:center;" class="reveal">
+          <p style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:#ff66dd;margin-bottom:8px;">Disclaimer</p>
+          <p style="font-size:0.82rem;color:var(--text-muted);max-width:640px;margin:0 auto;line-height:1.7;">The AI Investment App provides informational analysis only and does not constitute financial, investment, or legal advice. All investment decisions are made solely by the user. Past performance does not guarantee future results.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section section">
+      <div class="container">
+        <div class="cta-box reveal" style="border-color:rgba(255,0,204,0.2);">
+          <div class="eyebrow" style="justify-content:center;color:#ff66dd;"><span style="width:24px;height:1px;background:#ff66dd;"></span>Join the Waitlist<span style="width:24px;height:1px;background:#ff66dd;"></span></div>
+          <h2 class="section-title">Be First in Line</h2>
+          <p class="section-sub">Early access members get priority onboarding, locked-in founding pricing, and direct input on features.</p>
+          <div class="cta-actions">
+            <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#ff00cc,#9000ff);color:#fff;box-shadow:0 0 24px rgba(255,0,204,0.3);">Join Waitlist</a>
+            <a href="/#products" class="btn btn-outline btn-lg">All Products</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo"><div class="logo-mark"><svg viewBox="0 0 22 22" fill="none"><path d="M3 4L8 18L11 10L14 18L19 4" stroke="#010104" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-text">Watchman<span>OS — NEW JERSEY, USA</span></div></a>
+        <p>Building premium software and hardware for the next generation. Based in New Jersey, USA.</p>
+        <div class="footer-contact"><a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a><span>New Jersey, USA</span></div>
+      </div>
+      <div class="footer-col"><h4>Products</h4><ul><li><a href="/products/pathfinder.html">Pathfinder</a></li><li><a href="/products/veil-os.html">Veil OS</a></li><li><a href="/products/unified-bt-led-controller.html">Unified BT LED Controller</a></li><li><a href="/products/ai-investment-app.html">AI Investment App</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-service.html">Terms of Service</a></li></ul></div>
+    </div>
+    <hr class="hr-neon">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Watchman OS. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Contact</a></div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
