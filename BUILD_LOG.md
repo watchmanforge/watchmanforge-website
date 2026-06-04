@@ -52,3 +52,34 @@ Not a signup form — an enlistment. "Take the Post" hero; info column recast (T
 
 ---
 ### Now: Task 4 (product pages → tools for the mission) + Task 5 (brand/nav/footer/meta sweep on products + legal)
+
+## Task 4 — Product pages → tools for the mission ✅  (live)
+Added the soul's mission taglines as the prominent hero line on each product (accent-colored, original descriptor kept as subline):
+- Veil Studio — "Sound the trumpet at scale."
+- Pathfinder: The Grid — "Know the territory."
+- ChromaForge — "Light up the darkness."
+- Vantage Edge — "See what others can't."
+
+## Task 5 — Sitewide brand / nav / footer / meta sweep ✅  (live)
+Swept all 4 product pages + privacy + terms to the Watchman Forge identity: logo "Forged in Faith", nav (The Arsenal / The Manifesto / Enlist / Take the Post), mobile nav, footer columns (The Arsenal / The Movement), copyright, titles/meta. **Result: 0 occurrences of "Watchman OS" anywhere on the site.**
+
+**Commit `c90b152`** → deployed → all 6 pages verified live (brand present, zero stale brand, taglines live).
+
+---
+
+## ✅ Session complete — all 5 tasks done & deployed
+
+| # | Task | Status | Verified live |
+|---|---|---|---|
+| 1 | Homepage → manifesto/enlistment | ✅ | title "Watchman Forge — Sound the Trumpet" |
+| 2 | About → The Manifesto | ✅ | "We Are the Watchmen" + Creed |
+| 3 | Contact → Enlistment | ✅ | "Take the Post" / "Welcome to the Wall" |
+| 4 | Product pages → mission taglines | ✅ | 4/4 taglines live |
+| 5 | Sitewide brand sweep | ✅ | 0 "Watchman OS" anywhere |
+
+**Live:** https://www.watchmanforge.com  ·  all on `main`, deployed via Vercel CLI.
+
+### ⚠️ One thing for the owner
+Git push → auto-deploy is **not wired** (Vercel project has no GitHub integration; `vercel git connect` fails because the Vercel GitHub App isn't authorized on the `watchmanforge` org). I deployed every task with `vercel --prod`. To get true push-to-deploy: in the Vercel dashboard → Project → Settings → Git, connect `watchmanforge/watchmanforge-website` (one-time OAuth).
+
+_Forged in Faith. Built for the Future._
