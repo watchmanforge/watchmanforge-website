@@ -13,6 +13,7 @@
   <link rel="canonical" href="https://watchmanforge.com/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/gtr.css">
   <style>
     /* Home-specific overrides */
     .hero { min-height: 100vh; }
@@ -282,7 +283,17 @@
       </div>
     </section>
 
-    <div class="tech-bar"></div>
+    <!-- ── R33 GTR Burnout ────────────────────────────────────── -->
+    <section id="gtr-section">
+      <div id="gtr-sticky">
+        <canvas id="gtr-canvas"></canvas>
+        <div id="gtr-verse">
+          <div class="verse-text">"The Lord watches over your coming and going."</div>
+          <div class="verse-ref">Psalm 121:8</div>
+        </div>
+        <div id="gtr-hint">Scroll to ignite</div>
+      </div>
+    </section>
 
     <!-- ── The Arsenal ──────────────────────────────────────── -->
     <section class="section products-section" id="arsenal">
@@ -489,5 +500,6 @@
   </footer>
 
   <script src="/js/main.js"></script>
+  <script src="/js/gtr-burnout.js"></script>
 </body>
 </html>
