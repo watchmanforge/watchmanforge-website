@@ -41,3 +41,14 @@ Rewrote `index.html` end to end from corporate product-pitch into a movement/enl
 ### ⚠️ Deploy mechanism finding (important)
 "Push → Vercel auto-deploys" is **NOT active** — the GitHub push triggered no build (latest deploy was 27m stale). The Vercel project has **no Git integration connected**, and `vercel git connect` fails (the Vercel GitHub app isn't authorized on the `watchmanforge` org — needs a one-time dashboard OAuth by the owner).
 **Workaround in use:** deploying each task with `vercel --prod --yes` from the linked project. Task 1 deploy `dpl_HxGtbY9RTnqkCQCPipoqvEqRbADu` → **READY**, confirmed live at https://www.watchmanforge.com (title "Watchman Forge — Sound the Trumpet").
+
+## Task 2 — About → The Manifesto ✅  (live)
+Full rewrite: "We Are the Watchmen", Ezekiel 33:6/33:7 statement band, "Why We Forge / Tools Are Not Neutral", The Wall / The Trumpet / The Remnant (Isaiah 62:6, Habakkuk 2:1, Romans 13:11), "The Watch" facts recast, Arsenal w/ mission taglines, **The Watchman's Creed** (6 tenets: Faith First, Excellence as Worship, The Hour Is Late, Watchfulness, The Remnant, Accountability), "Take the Post" CTA. Verified live (title "The Manifesto — Watchman Forge").
+
+## Task 3 — Contact → Enlistment ✅  (live)
+Not a signup form — an enlistment. "Take the Post" hero; info column recast (The Line / The Post / The Answer); reframed form ("Why You're Answering" with enlist/tools/partner/press/prayer options, "Your Word" message); success state "Welcome to the Wall — Stand watch, Watchman." Verified live (title "Enlist — Watchman Forge").
+
+**Commit `ae425d2`** → deployed → both verified on www.watchmanforge.com.
+
+---
+### Now: Task 4 (product pages → tools for the mission) + Task 5 (brand/nav/footer/meta sweep on products + legal)
