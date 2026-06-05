@@ -29,13 +29,13 @@
 
   // ── R33 canonical dimensions (pre-scale) ──────────────────
   // Origin: ground level at car center. Y negative = upward.
-  const FWX =  120;  // front wheel center X
-  const RWX = -145;  // rear wheel center X
+  const FWX =  150;  // front wheel center X
+  const RWX = -185;  // rear wheel center X
   const WR  =   40;  // wheel radius
   const WCY = -WR;   // wheel center Y = -40
   const CLR = WCY - WR + 4;   // sill underside = -76
-  const roofH = 162;
-  const roofY = CLR - roofH;  // = -238
+  const roofH = 98;
+  const roofY = CLR - roofH;  // = -174
 
   // ── Scale & layout ─────────────────────────────────────────
   let W, H, groundY;
