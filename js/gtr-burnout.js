@@ -1,6 +1,6 @@
 /* ============================================================
    R33 SKYLINE GTR — Scroll-Reactive Burnout Animation
-   Watchman Forge · EZK 33:6
+   Watchman Forge · EZK 33:6 · The Mascot
    Pure vanilla JS + HTML5 Canvas
    ============================================================ */
 
@@ -89,31 +89,53 @@
     lastScrollT    = now;
   }
 
-  // ── Smoke particle ─────────────────────────────────────────
+  // ── Smoke particle — real burnout physics ──────────────────
   class Particle {
     constructor(x, y, intensity) {
-      this.x = x + (Math.random() - 0.5) * 24;
-      this.y = y;
-      const speed = (0.6 + Math.random() * 0.8) * Math.max(intensity, 0.3);
-      const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.4;
-      this.vx   = Math.cos(angle) * speed;
-      this.vy   = Math.sin(angle) * speed;
-      this.r    = 6 + Math.random() * 10 * intensity;
-      this.maxR = this.r * (3 + Math.random() * 3);
-      this.life  = 1;
-      this.decay = 0.006 + Math.random() * 0.009 / Math.max(intensity, 0.2);
-      this.grow  = 0.35 + Math.random() * 0.25;
+      // Spawn within rear tire contact patch
+      const patchW = 32 + intensity * 18;
+      this.x = x + (Math.random() - 0.35) * patchW;   // biased slightly behind
+      this.y = y - Math.random() * 12;                  // just above ground
+
+      const speed = (0.35 + Math.random() * 1.5) * Math.max(intensity, 0.25);
+
+      // Wide billow: mostly upward with large angular spread
+      const upBias = -Math.PI / 2;
+      const spread = (Math.random() - 0.5) * 2.8;     // very wide spread
+      const angle  = upBias + spread;
+
+      // Wind drift leftward — backward from car facing right
+      const wind = -(0.5 + Math.random() * 1.3) * Math.max(intensity * 0.7, 0.35);
+      this.vx = Math.cos(angle) * speed + wind;
+      this.vy = Math.sin(angle) * speed * 0.78;       // softer vertical
+
+      // Two-layer system: base clouds (large/slow) and detail puffs (small/fast)
+      this.isBase = Math.random() < 0.28;
+      if (this.isBase) {
+        this.r    = 20 + Math.random() * 24 * Math.max(intensity, 0.5);
+        this.maxR = this.r * (2.4 + Math.random() * 1.8);
+        this.decay = 0.0022 + Math.random() * 0.003 / Math.max(intensity, 0.2);
+        this.grow  = 0.16 + Math.random() * 0.12;
+      } else {
+        this.r    = 4 + Math.random() * 14 * intensity;
+        this.maxR = this.r * (3.5 + Math.random() * 4);
+        this.decay = 0.0045 + Math.random() * 0.008 / Math.max(intensity, 0.2);
+        this.grow  = 0.38 + Math.random() * 0.32;
+      }
+
+      this.life = 1;
+
       const rng = Math.random();
-      if      (rng < 0.25) this.type = 'blue';
-      else if (rng < 0.40) this.type = 'purple';
+      if      (rng < 0.10) this.type = 'blue';
+      else if (rng < 0.20) this.type = 'purple';
       else                  this.type = 'dark';
     }
 
     update(dt) {
       this.x  += this.vx * dt;
       this.y  += this.vy * dt;
-      this.vy *= 0.978;
-      this.vx *= 0.972;
+      this.vy *= 0.984;   // gentle vertical decel
+      this.vx *= 0.970;   // horizontal drift lingers
       this.r   = Math.min(this.r + this.grow * dt, this.maxR);
       this.life -= this.decay * dt;
       return this.life > 0;
@@ -123,17 +145,18 @@
       const a = this.life;
       const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
       if (this.type === 'blue') {
-        g.addColorStop(0,   `rgba(0,180,255,${a * 0.55})`);
-        g.addColorStop(0.5, `rgba(0,80,140,${a * 0.28})`);
-        g.addColorStop(1,   'rgba(0,10,30,0)');
+        g.addColorStop(0,    `rgba(0,170,255,${a * 0.52})`);
+        g.addColorStop(0.45, `rgba(0,55,115,${a * 0.24})`);
+        g.addColorStop(1,    'rgba(0,8,25,0)');
       } else if (this.type === 'purple') {
-        g.addColorStop(0,   `rgba(140,0,255,${a * 0.45})`);
-        g.addColorStop(0.5, `rgba(60,0,100,${a * 0.22})`);
-        g.addColorStop(1,   'rgba(5,0,15,0)');
+        g.addColorStop(0,    `rgba(115,0,230,${a * 0.44})`);
+        g.addColorStop(0.45, `rgba(45,0,85,${a * 0.20})`);
+        g.addColorStop(1,    'rgba(4,0,12,0)');
       } else {
-        g.addColorStop(0,   `rgba(30,35,55,${a * 0.80})`);
-        g.addColorStop(0.6, `rgba(15,18,30,${a * 0.45})`);
-        g.addColorStop(1,   'rgba(2,3,8,0)');
+        const baseA = this.isBase ? a * 0.60 : a * 0.68;
+        g.addColorStop(0,    `rgba(26,30,44,${baseA})`);
+        g.addColorStop(0.5,  `rgba(10,12,20,${baseA * 0.52})`);
+        g.addColorStop(1,    'rgba(2,2,6,0)');
       }
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
@@ -144,7 +167,7 @@
 
   function emitSmoke(x, y, count, intensity) {
     for (let i = 0; i < count; i++) particles.push(new Particle(x, y, intensity));
-    while (particles.length > 700) particles.shift();
+    while (particles.length > 900) particles.shift();
   }
 
   // ── Background ─────────────────────────────────────────────
@@ -158,50 +181,35 @@
     ctx.fillRect(0, 0, W, H);
   }
 
-  // ── Road: gothic stone + neon grid ─────────────────────────
+  // ── Road: dark asphalt + neon grid ─────────────────────────
   function drawRoad() {
-    // Dark stone base — cool blue-black gradient
+    // Dark asphalt base
     const asp = ctx.createLinearGradient(0, groundY, 0, H);
-    asp.addColorStop(0,   '#0d0d20');
-    asp.addColorStop(0.4, '#070710');
-    asp.addColorStop(1,   '#030309');
+    asp.addColorStop(0,   '#0a0a18');
+    asp.addColorStop(0.4, '#060610');
+    asp.addColorStop(1,   '#020208');
     ctx.fillStyle = asp;
     ctx.fillRect(0, groundY, W, H - groundY);
 
-    // Gothic stone cobblestone texture — subtle mortar lines
+    // Fine asphalt texture lines
     ctx.save();
-    const rowH = 30;
+    const rowH = 28;
     const rows = Math.ceil((H - groundY) / rowH);
     for (let r = 1; r < rows; r++) {
       const y    = groundY + r * rowH;
       const fade = 1 - (r / rows) * 0.8;
-      ctx.strokeStyle = `rgba(0,212,255,${0.06 * fade})`;
-      ctx.lineWidth = 0.6;
+      ctx.strokeStyle = `rgba(0,212,255,${0.05 * fade})`;
+      ctx.lineWidth = 0.5;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-    }
-    // Staggered vertical joints (every other row offset)
-    const colW = 64;
-    const cols = Math.ceil(W / colW) + 1;
-    for (let r = 0; r < rows; r++) {
-      const y0   = groundY + r * rowH;
-      const y1   = y0 + rowH;
-      const fade = 1 - (r / rows) * 0.9;
-      const off  = (r % 2 === 0) ? 0 : colW * 0.5;
-      ctx.strokeStyle = `rgba(0,212,255,${0.03 * fade})`;
-      ctx.lineWidth = 0.4;
-      for (let c = 0; c < cols; c++) {
-        const x = c * colW + off;
-        ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke();
-      }
     }
     ctx.restore();
 
-    // Ground horizon glow line
+    // Ground horizon glow
     ctx.save();
-    ctx.shadowBlur  = 24;
+    ctx.shadowBlur  = 28;
     ctx.shadowColor = C_BLUE;
-    ctx.strokeStyle = 'rgba(0,212,255,0.80)';
-    ctx.lineWidth   = 2.2;
+    ctx.strokeStyle = 'rgba(0,212,255,0.85)';
+    ctx.lineWidth   = 2.4;
     ctx.beginPath();
     ctx.moveTo(0, groundY);
     ctx.lineTo(W, groundY);
@@ -212,17 +220,17 @@
     const vpX = W * 0.5;
     ctx.save();
 
-    // Horizontal receding lines — much more visible than before
-    for (let i = 1; i <= 9; i++) {
-      const frac  = i / 9;
+    // Horizontal receding grid lines
+    for (let i = 1; i <= 10; i++) {
+      const frac  = i / 10;
       const y     = groundY + frac * (H - groundY);
-      const alpha = (1 - frac * 0.65) * 0.42;
+      const alpha = (1 - frac * 0.65) * 0.45;
       ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
-      ctx.lineWidth   = frac < 0.3 ? 1.2 : 0.8;
+      ctx.lineWidth   = frac < 0.25 ? 1.4 : 0.8;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
     }
 
-    // Converging vertical lines toward horizon
+    // Converging vertical lines toward vanishing point
     const numV = 22;
     for (let i = 0; i <= numV; i++) {
       const frac   = i / numV;
@@ -230,10 +238,10 @@
       const xTop   = vpX + (xBot - vpX) * 0.06;
       const isMaj  = (i % 4 === 0);
       ctx.strokeStyle = isMaj
-        ? `rgba(0,212,255,0.28)`
-        : `rgba(100,0,255,0.10)`;
-      ctx.lineWidth = isMaj ? 0.9 : 0.4;
-      if (isMaj) { ctx.shadowBlur = 5; ctx.shadowColor = C_BLUE; }
+        ? `rgba(0,212,255,0.30)`
+        : `rgba(100,0,255,0.11)`;
+      ctx.lineWidth = isMaj ? 1.0 : 0.4;
+      if (isMaj) { ctx.shadowBlur = 6; ctx.shadowColor = C_BLUE; }
       else        { ctx.shadowBlur = 0; }
       ctx.beginPath();
       ctx.moveTo(xTop, groundY);
@@ -243,12 +251,12 @@
     ctx.shadowBlur = 0;
     ctx.restore();
 
-    // Underglow reflection pool
-    const refl = ctx.createLinearGradient(0, groundY, 0, groundY + 100);
-    refl.addColorStop(0, 'rgba(0,212,255,0.07)');
+    // Ambient underglow on asphalt
+    const refl = ctx.createLinearGradient(0, groundY, 0, groundY + 120);
+    refl.addColorStop(0, 'rgba(0,212,255,0.09)');
     refl.addColorStop(1, 'rgba(144,0,255,0)');
     ctx.fillStyle = refl;
-    ctx.fillRect(0, groundY, W, 100);
+    ctx.fillRect(0, groundY, W, 120);
   }
 
   // ── Tire marks ─────────────────────────────────────────────
@@ -282,7 +290,7 @@
     ctx.restore();
   }
 
-  // ── Car: R33 Skyline GT-R precise side profile ─────────────
+  // ── Car: R33 GTR — mascot, character, soul of Watchman Forge
   function drawCar(cx, baseY, tireA, shX, shY, intensity, reversing, launch) {
     ctx.save();
     ctx.translate(cx + shX, baseY + shY);
@@ -290,77 +298,75 @@
 
     const t = Date.now();
 
-    // ── UNDERGLOW POOL ─────────────────────────────────────
-    const bP = 0.08 + Math.sin(t * 0.003) * 0.04 + intensity * 0.14;
-    const pP = 0.05 + Math.sin(t * 0.002 + 1.2) * 0.03 + intensity * 0.08;
-    const ug = ctx.createRadialGradient(-8, CLR + 6, 0, -8, CLR + 16, 275);
+    // ── UNDERGLOW POOL — vivid neon blue ───────────────────
+    const bP = 0.16 + Math.sin(t * 0.003) * 0.07 + intensity * 0.22;
+    const pP = 0.09 + Math.sin(t * 0.002 + 1.2) * 0.045 + intensity * 0.13;
+    const ug = ctx.createRadialGradient(-8, CLR + 6, 0, -8, CLR + 22, 320);
     ug.addColorStop(0,    `rgba(0,212,255,${bP})`);
     ug.addColorStop(0.42, `rgba(144,0,255,${pP})`);
     ug.addColorStop(1,    'rgba(0,0,0,0)');
     ctx.fillStyle = ug;
     ctx.beginPath();
-    ctx.ellipse(-8, CLR + 16, 260, 34, 0, 0, Math.PI * 2);
+    ctx.ellipse(-8, CLR + 20, 295, 40, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    // ── MAIN BODY PATH (R33 GTR clockwise from front-bottom) ─
+    // ── MAIN BODY — clean matte black wide-body R33 ────────
     const bodyGrad = ctx.createLinearGradient(RWX - 90, roofY, FWX + 90, CLR);
-    bodyGrad.addColorStop(0,    '#1e1e38');
-    bodyGrad.addColorStop(0.28, '#14142a');
-    bodyGrad.addColorStop(0.62, '#0e0e1e');
-    bodyGrad.addColorStop(1,    '#080816');
+    bodyGrad.addColorStop(0,    '#0e0e0e');
+    bodyGrad.addColorStop(0.28, '#090909');
+    bodyGrad.addColorStop(0.62, '#050505');
+    bodyGrad.addColorStop(1,    '#030303');
 
     ctx.beginPath();
 
     // Front bumper base
     ctx.moveTo(FWX + WR + 20, -5);
 
-    // Chin spoiler — juts forward, R33 characteristic lower air dam
+    // Chin spoiler
     ctx.bezierCurveTo(
       FWX + WR + 30, -5,
       FWX + WR + 42, -9,
-      FWX + WR + 44, -18   // chin tip (extreme front of car)
+      FWX + WR + 44, -18
     );
     ctx.bezierCurveTo(
       FWX + WR + 46, -30,
       FWX + WR + 44, -42,
-      FWX + WR + 42, -54   // lower grille zone
+      FWX + WR + 42, -54
     );
 
-    // Bumper face going up (slightly angled inward at top)
+    // Bumper face
     ctx.lineTo(FWX + WR + 40, -72);
-
-    // Bumper top corner — rounded transition to hood underside
     ctx.bezierCurveTo(
       FWX + WR + 36, -80,
       FWX + WR + 22, -82,
-      FWX + WR + 12, -82   // bumper/hood seam
+      FWX + WR + 12, -82
     );
 
-    // Hood leading edge — front of hood panel
+    // Hood leading edge
     ctx.bezierCurveTo(
       FWX + WR + 2,  -80,
       FWX + 26,      -82,
-      FWX + 14,      -86   // hood surface starts here
+      FWX + 14,      -86
     );
 
-    // Hood surface — R33 has gentle power dome
+    // Hood surface — R33 power dome
     ctx.bezierCurveTo(
       FWX - 8,   -92,
       FWX - 32,  -98,
-      FWX - 50, -104        // hood mid-crown
+      FWX - 50, -104
     );
 
-    // Hood toward windshield cowl — slight additional rise
+    // Hood toward windshield cowl
     ctx.bezierCurveTo(
       FWX - 64, -110,
       FWX - 76, -120,
-      FWX - 84, -128        // cowl / windshield lower front
+      FWX - 84, -128
     );
 
     // Cowl detail
     ctx.lineTo(FWX - 90, -136);
 
-    // A-pillar — steep (~60° from horizontal), characteristic R33
+    // A-pillar — steep, characteristic R33
     ctx.bezierCurveTo(
       FWX -  98, roofY + 82,
       FWX - 112, roofY + 54,
@@ -368,25 +374,25 @@
     );
     ctx.lineTo(FWX - 130, roofY + 12);
 
-    // Roof header front edge
+    // Roof front header
     ctx.bezierCurveTo(
       FWX - 140, roofY + 3,
       FWX - 154, roofY,
-      -22,        roofY       // roof begins (nearly flat)
+      -22,        roofY
     );
 
-    // Roof continues rearward — very slight crown
+    // Roof — slight crown rearward
     ctx.bezierCurveTo(
       RWX + 108, roofY,
       RWX +  88, roofY +  8,
-      RWX +  68, roofY + 30   // C-pillar starts
+      RWX +  68, roofY + 30
     );
 
-    // Fastback C-pillar — smooth sweep down
+    // C-pillar fastback sweep
     ctx.bezierCurveTo(
       RWX + 48, roofY + 62,
       RWX + 28, roofY + 100,
-      RWX + 12, roofY + 130   // trunk lid start
+      RWX + 12, roofY + 130
     );
 
     // Trunk lid (short on R33)
@@ -396,19 +402,19 @@
       RWX - 12, CLR - 34
     );
 
-    // Ducktail — slight integral uptick (R33 GT-R gurney flap base)
-    ctx.lineTo(RWX - 16, CLR - 42);   // kick up
-    ctx.lineTo(RWX - 24, CLR - 38);   // ducktail tip
-    ctx.lineTo(RWX - 26, CLR - 26);   // back down to rear panel
+    // Ducktail uptick
+    ctx.lineTo(RWX - 16, CLR - 42);
+    ctx.lineTo(RWX - 24, CLR - 38);
+    ctx.lineTo(RWX - 26, CLR - 26);
 
-    // Rear panel (nearly vertical)
+    // Rear panel
     ctx.bezierCurveTo(
       RWX - WR +  2, CLR - 20,
       RWX - WR -  6, CLR - 12,
-      RWX - WR - 12, -80          // top of rear bumper
+      RWX - WR - 12, -80
     );
 
-    // Rear bumper — stepped, slight undercut at base
+    // Rear bumper
     ctx.bezierCurveTo(
       RWX - WR - 24, -66,
       RWX - WR - 34, -44,
@@ -417,39 +423,38 @@
     ctx.bezierCurveTo(
       RWX - WR - 34, -12,
       RWX - WR - 24,  -4,
-      RWX - WR - 12,  -3   // rear bumper base
+      RWX - WR - 12,  -3
     );
 
     ctx.closePath();
     ctx.fillStyle = bodyGrad;
     ctx.fill();
-    ctx.strokeStyle = 'rgba(0,212,255,0.35)';
-    ctx.lineWidth   = 1.4;
+    ctx.strokeStyle = 'rgba(0,212,255,0.52)';
+    ctx.lineWidth   = 1.6;
     ctx.stroke();
 
-    // ── WHEEL ARCH CUTOUTS ──────────────────────────────────
-    // Overpaint with floor color to create arch openings
+    // ── WHEEL ARCH CUTOUTS — wide-body (WR+16) ────────────
     for (const wx of [FWX, RWX]) {
       ctx.save();
       ctx.beginPath();
-      ctx.arc(wx, WCY, WR + 13, Math.PI, 0, false);
-      ctx.lineTo(wx + WR + 13, CLR + 3);
-      ctx.lineTo(wx - WR - 13, CLR + 3);
+      ctx.arc(wx, WCY, WR + 16, Math.PI, 0, false);
+      ctx.lineTo(wx + WR + 16, CLR + 3);
+      ctx.lineTo(wx - WR - 16, CLR + 3);
       ctx.closePath();
-      ctx.fillStyle = '#040409';
+      ctx.fillStyle = '#030307';
       ctx.fill();
       ctx.restore();
     }
 
-    // ── FENDER FLARE ARCHES (R33 wide-body) ────────────────
+    // ── FENDER FLARE ARCHES — pronounced wide-body ────────
     for (const wx of [FWX, RWX]) {
       ctx.save();
-      ctx.strokeStyle = 'rgba(0,212,255,0.38)';
-      ctx.lineWidth   = 2.2;
-      ctx.shadowBlur  = 6;
+      ctx.strokeStyle = 'rgba(0,212,255,0.44)';
+      ctx.lineWidth   = 2.8;
+      ctx.shadowBlur  = 9;
       ctx.shadowColor = C_BLUE;
       ctx.beginPath();
-      ctx.arc(wx, WCY, WR + 13, Math.PI * 1.06, 0, false);
+      ctx.arc(wx, WCY, WR + 16, Math.PI * 1.06, 0, false);
       ctx.stroke();
       ctx.restore();
     }
@@ -462,21 +467,32 @@
     ctx.lineTo(FWX + WR - 8,  CLR + 13);
     ctx.bezierCurveTo(FWX - WR, CLR + 13, RWX + WR, CLR + 13, RWX - WR + 8, CLR + 13);
     ctx.closePath();
-    ctx.fillStyle   = '#09091c';
+    ctx.fillStyle   = '#07071a';
     ctx.fill();
     ctx.strokeStyle = 'rgba(0,212,255,0.22)';
     ctx.lineWidth   = 0.8;
     ctx.stroke();
 
-    // Purple neon skirt strip
+    // Neon blue sill strip
     ctx.beginPath();
     ctx.moveTo(RWX - WR + 10, CLR + 7);
     ctx.bezierCurveTo(RWX + WR, CLR + 8, FWX - WR, CLR + 8, FWX + WR - 10, CLR + 7);
-    ctx.strokeStyle = `rgba(144,0,255,0.72)`;
+    ctx.strokeStyle = `rgba(0,212,255,0.82)`;
     ctx.lineWidth   = 1.8;
-    ctx.shadowBlur  = 10;
-    ctx.shadowColor = C_PURPLE;
+    ctx.shadowBlur  = 12;
+    ctx.shadowColor = C_BLUE;
     ctx.stroke();
+    ctx.restore();
+
+    // ── WATCHMAN DOOR SILL INSCRIPTION ─────────────────────
+    ctx.save();
+    ctx.font         = `bold 8px 'Orbitron', monospace`;
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowBlur   = 10;
+    ctx.shadowColor  = C_BLUE;
+    ctx.fillStyle    = 'rgba(0,212,255,0.70)';
+    ctx.fillText('WATCHMAN', (FWX + RWX) / 2, CLR + 7);
     ctx.restore();
 
     // ── BODY CHARACTER LINE (door crease) ───────────────────
@@ -503,10 +519,9 @@
     ctx.stroke();
     ctx.restore();
 
-    // ── WINDSHIELD GLASS ────────────────────────────────────
+    // ── WINDSHIELD — dark tinted ────────────────────────────
     ctx.save();
     ctx.beginPath();
-    // Outer edge follows body path A-pillar
     ctx.moveTo(FWX - 80, -128);
     ctx.lineTo(FWX - 90, -136);
     ctx.bezierCurveTo(
@@ -515,13 +530,12 @@
       FWX - 122, roofY + 32
     );
     ctx.lineTo(FWX - 130, roofY + 12);
-    // Inner return — B-pillar inner edge going back down
     ctx.lineTo(-24, roofY + 4);
     ctx.lineTo(-22, -140);
     ctx.closePath();
     const wsGrad = ctx.createLinearGradient(FWX - 130, roofY + 12, FWX - 80, -128);
-    wsGrad.addColorStop(0, 'rgba(0,55,115,0.90)');
-    wsGrad.addColorStop(1, 'rgba(0,28,70,0.80)');
+    wsGrad.addColorStop(0, 'rgba(0,8,22,0.97)');
+    wsGrad.addColorStop(1, 'rgba(0,5,14,0.97)');
     ctx.fillStyle = wsGrad;
     ctx.fill();
     ctx.strokeStyle = 'rgba(0,212,255,0.22)';
@@ -534,26 +548,28 @@
     ctx.font         = `bold 9px 'Orbitron', monospace`;
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.shadowBlur   = 11;
+    ctx.shadowBlur   = 12;
     ctx.shadowColor  = C_BLUE;
-    ctx.fillStyle    = 'rgba(0,212,255,0.88)';
+    ctx.fillStyle    = 'rgba(0,212,255,0.90)';
     ctx.fillText('KING OF KINGS', bX, bY);
 
-    // Ghost cross reflection
-    ctx.globalAlpha  = 0.14;
+    // Ghost cross reflection in glass
+    ctx.globalAlpha  = 0.10;
     ctx.strokeStyle  = C_BLUE;
     ctx.lineWidth    = 2;
     ctx.lineCap      = 'round';
+    ctx.shadowBlur   = 6;
+    ctx.shadowColor  = C_BLUE;
     ctx.beginPath();
     ctx.moveTo(bX, bY + 14); ctx.lineTo(bX, bY + 32);
     ctx.moveTo(bX - 7, bY + 22); ctx.lineTo(bX + 7, bY + 22);
     ctx.stroke();
     ctx.restore();
 
-    // ── REAR WINDOW (fastback glass) ────────────────────────
+    // ── REAR WINDOW — dark tinted fastback ─────────────────
     ctx.save();
     ctx.beginPath();
-    ctx.moveTo(-22, roofY + 4);          // B-pillar inner top (matches ws closure)
+    ctx.moveTo(-22, roofY + 4);
     ctx.bezierCurveTo(
       RWX + 108, roofY,
       RWX +  88, roofY + 10,
@@ -564,7 +580,6 @@
       RWX +  30, roofY + 98,
       RWX +  18, CLR - 38
     );
-    // Return along inside of C-pillar
     ctx.bezierCurveTo(
       RWX +  28, CLR - 36,
       RWX +  44, roofY + 94,
@@ -576,48 +591,61 @@
       -20, roofY + 2
     );
     ctx.closePath();
-    ctx.fillStyle   = 'rgba(0,14,34,0.94)';
+    ctx.fillStyle   = 'rgba(0,5,16,0.97)';
     ctx.fill();
     ctx.strokeStyle = 'rgba(0,212,255,0.15)';
     ctx.lineWidth   = 0.7;
     ctx.stroke();
     ctx.restore();
 
-    // ── HOOD GOTHIC CROSS ───────────────────────────────────
+    // ── HOOD GOTHIC CROSS — the mark of the Watchman ───────
     ctx.save();
-    const hcx = FWX + 22;
-    const hcy = CLR - 40;
-    const cp  = 0.7 + Math.sin(t * 0.0024) * 0.3;
-    ctx.shadowBlur  = 26 * cp;
+    const hcx = FWX - 20;    // centered on hood face
+    const hcy = -100;         // on the hood surface plane
+    const cp  = 0.75 + Math.sin(t * 0.0024) * 0.25;
+
+    // Outer glow halo
+    ctx.shadowBlur  = 42 * cp;
     ctx.shadowColor = C_BLUE;
-    ctx.strokeStyle = `rgba(0,212,255,${0.92 * cp})`;
-    ctx.lineWidth   = 3.8;
+    ctx.strokeStyle = `rgba(0,212,255,${0.95 * cp})`;
+    ctx.lineWidth   = 4.2;
     ctx.lineCap     = 'round';
     ctx.beginPath();
-    ctx.moveTo(hcx, hcy - 30); ctx.lineTo(hcx, hcy + 30);
-    ctx.moveTo(hcx - 19, hcy - 9); ctx.lineTo(hcx + 19, hcy - 9);
+    ctx.moveTo(hcx, hcy - 26); ctx.lineTo(hcx, hcy + 26);          // vertical
+    ctx.moveTo(hcx - 17, hcy - 10); ctx.lineTo(hcx + 17, hcy - 10); // crossbar upper third
     ctx.stroke();
-    // Gothic serifs
-    ctx.lineWidth   = 1.6;
-    ctx.globalAlpha = 0.55 * cp;
-    const sk = 6;
+
+    // Inner bright core line
+    ctx.shadowBlur  = 20 * cp;
+    ctx.strokeStyle = `rgba(180,242,255,${0.72 * cp})`;
+    ctx.lineWidth   = 1.8;
     ctx.beginPath();
-    ctx.moveTo(hcx - sk, hcy - 30); ctx.lineTo(hcx + sk, hcy - 30);
-    ctx.moveTo(hcx - sk, hcy + 30); ctx.lineTo(hcx + sk, hcy + 30);
-    ctx.moveTo(hcx - 19, hcy - 9 - sk); ctx.lineTo(hcx - 19, hcy - 9 + sk);
-    ctx.moveTo(hcx + 19, hcy - 9 - sk); ctx.lineTo(hcx + 19, hcy - 9 + sk);
+    ctx.moveTo(hcx, hcy - 26); ctx.lineTo(hcx, hcy + 26);
+    ctx.moveTo(hcx - 17, hcy - 10); ctx.lineTo(hcx + 17, hcy - 10);
+    ctx.stroke();
+
+    // Gothic serifs
+    ctx.lineWidth   = 1.8;
+    ctx.globalAlpha = 0.62 * cp;
+    ctx.strokeStyle = `rgba(0,212,255,${0.88 * cp})`;
+    ctx.shadowBlur  = 12 * cp;
+    const sk = 7;
+    ctx.beginPath();
+    ctx.moveTo(hcx - sk, hcy - 26); ctx.lineTo(hcx + sk, hcy - 26);       // top
+    ctx.moveTo(hcx - sk, hcy + 26); ctx.lineTo(hcx + sk, hcy + 26);       // bottom
+    ctx.moveTo(hcx - 17, hcy - 10 - sk); ctx.lineTo(hcx - 17, hcy - 10 + sk); // left
+    ctx.moveTo(hcx + 17, hcy - 10 - sk); ctx.lineTo(hcx + 17, hcy - 10 + sk); // right
     ctx.stroke();
     ctx.restore();
 
-    // ── HEADLIGHTS (R33 rectangular fixed-mount) ───────────
+    // ── HEADLIGHTS ──────────────────────────────────────────
     ctx.save();
     const hlP = 0.78 + Math.sin(t * 0.0035) * 0.22;
     ctx.shadowBlur  = 28 * hlP;
     ctx.shadowColor = C_BLUE;
 
-    // Housing bezel (dark frame)
-    ctx.fillStyle   = '#09091c';
-    ctx.strokeStyle = 'rgba(0,212,255,0.50)';
+    ctx.fillStyle   = '#07071a';
+    ctx.strokeStyle = 'rgba(0,212,255,0.52)';
     ctx.lineWidth   = 1.2;
     ctx.beginPath();
     ctx.moveTo(FWX + WR + 12, -48);
@@ -628,7 +656,6 @@
     ctx.fill();
     ctx.stroke();
 
-    // Lens (bright gradient)
     const hlG = ctx.createLinearGradient(FWX + WR + 14, -72, FWX + WR + 38, -52);
     hlG.addColorStop(0,    `rgba(220,252,255,${hlP * 0.96})`);
     hlG.addColorStop(0.30, `rgba(0,212,255,${hlP * 0.90})`);
@@ -642,7 +669,6 @@
     ctx.closePath();
     ctx.fill();
 
-    // Dual-bulb divider
     ctx.globalAlpha = 0.55;
     ctx.strokeStyle = 'rgba(0,20,50,0.9)';
     ctx.lineWidth   = 1.6;
@@ -651,7 +677,6 @@
     ctx.lineTo(FWX + WR + 27, -71);
     ctx.stroke();
 
-    // Light beam projection
     ctx.globalAlpha = hlP * 0.28;
     const beamG = ctx.createLinearGradient(FWX + WR + 40, -62, FWX + WR + 148, -62);
     beamG.addColorStop(0, 'rgba(0,212,255,0.42)');
@@ -666,7 +691,6 @@
     ctx.fill();
     ctx.globalAlpha = 1;
 
-    // Fog/DRL strip (lower bumper)
     ctx.shadowBlur  = 14 * hlP;
     ctx.shadowColor = C_BLUE;
     ctx.fillStyle   = `rgba(0,212,255,${0.72 * hlP})`;
@@ -676,7 +700,7 @@
     ctx.fill();
     ctx.restore();
 
-    // ── FRONT BUMPER GRILLE OPENING ─────────────────────────
+    // ── FRONT BUMPER GRILLE ─────────────────────────────────
     ctx.save();
     ctx.fillStyle   = '#010108';
     ctx.strokeStyle = 'rgba(0,212,255,0.28)';
@@ -691,7 +715,6 @@
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
-    // Grille bars
     ctx.strokeStyle = 'rgba(0,212,255,0.18)';
     ctx.lineWidth   = 0.6;
     for (let g = 0; g < 5; g++) {
@@ -732,8 +755,6 @@
       ctx.arc(tl.x, tl.y, tl.r, 0, Math.PI * 2);
       ctx.fill();
     }
-
-    // Divider lines in housing
     ctx.strokeStyle = 'rgba(255,30,55,0.30)';
     ctx.lineWidth   = 0.7;
     ctx.shadowBlur  = 0;
@@ -743,7 +764,7 @@
     ctx.stroke();
     ctx.restore();
 
-    // ── REVERSE LIGHTS ──────────────────────────────────────
+    // Reverse lights
     if (reversing) {
       ctx.save();
       ctx.shadowBlur  = 20;
@@ -755,19 +776,16 @@
       ctx.restore();
     }
 
-    // ── REAR WING (R33 GT-R signature tall adjustable wing) ──
-    // The BCNR33's most recognizable feature after the round tail-lights: a wide
-    // blade standing on two uprights well above the bootlid, with a rear endplate.
+    // ── REAR WING — tall R33 GT-R signature ────────────────
     ctx.save();
-    const deckY   = CLR - 38;     // bootlid surface (~ -114)
-    const wingY   = roofY + 64;   // blade height — tall, just below roofline (~ -174)
-    const wingFX  = RWX + 24;     // blade front edge (toward cabin)
-    const wingRX  = RWX - 64;     // blade rear edge (past the tail)
-    const strutFX = RWX + 6;      // front upright
-    const strutRX = RWX - 40;     // rear upright
+    const deckY   = CLR - 38;
+    const wingY   = roofY + 64;
+    const wingFX  = RWX + 24;
+    const wingRX  = RWX - 64;
+    const strutFX = RWX + 6;
+    const strutRX = RWX - 40;
 
-    // Two mounting uprights from deck up to the blade
-    ctx.strokeStyle = '#15152a';
+    ctx.strokeStyle = '#12122a';
     ctx.lineWidth   = 6;
     ctx.lineCap     = 'round';
     ctx.shadowBlur  = 4;
@@ -777,35 +795,34 @@
     ctx.moveTo(strutRX, deckY); ctx.lineTo(strutRX + 2, wingY + 7);
     ctx.stroke();
 
-    // Wing blade — wide, with a slight downward rake toward the rear
     const wG = ctx.createLinearGradient(wingFX, wingY, wingRX, wingY);
-    wG.addColorStop(0,   '#23234a');
-    wG.addColorStop(0.5, '#33336a');
-    wG.addColorStop(1,   '#1a1a32');
+    wG.addColorStop(0,   '#1c1c3e');
+    wG.addColorStop(0.5, '#2a2a5a');
+    wG.addColorStop(1,   '#141428');
     ctx.fillStyle   = wG;
-    ctx.strokeStyle = 'rgba(0,212,255,0.60)';
-    ctx.lineWidth   = 1.2;
-    ctx.shadowBlur  = 12;
+    ctx.strokeStyle = 'rgba(0,212,255,0.65)';
+    ctx.lineWidth   = 1.4;
+    ctx.shadowBlur  = 14;
     ctx.shadowColor = C_BLUE;
     ctx.beginPath();
     ctx.moveTo(wingFX, wingY - 6);
-    ctx.lineTo(wingRX, wingY + 2);   // top edge rakes down to the rear
+    ctx.lineTo(wingRX, wingY + 2);
     ctx.lineTo(wingRX, wingY + 11);
     ctx.lineTo(wingFX, wingY + 3);
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
 
-    // Neon trailing-edge highlight along the blade underside
-    ctx.strokeStyle = 'rgba(0,212,255,0.85)';
-    ctx.lineWidth   = 1.6;
+    // Neon trailing-edge underside highlight
+    ctx.strokeStyle = 'rgba(0,212,255,0.90)';
+    ctx.lineWidth   = 1.8;
     ctx.beginPath();
     ctx.moveTo(wingFX, wingY + 3);
     ctx.lineTo(wingRX, wingY + 11);
     ctx.stroke();
 
     // Rear endplate
-    ctx.strokeStyle = 'rgba(0,212,255,0.55)';
+    ctx.strokeStyle = 'rgba(0,212,255,0.58)';
     ctx.lineWidth   = 1.4;
     ctx.shadowBlur  = 6;
     ctx.beginPath();
@@ -814,41 +831,52 @@
     ctx.stroke();
     ctx.restore();
 
-    // ── DUAL CENTER EXHAUSTS ────────────────────────────────
+    // ── TWIN NEON BLUE EXHAUST TIPS ─────────────────────────
     ctx.save();
-    const ep    = 0.55 + Math.sin(t * 0.005) * 0.35 + intensity * 0.45;
-    const exX   = RWX - WR - 28;
+    const ep  = 0.60 + Math.sin(t * 0.005) * 0.35 + intensity * 0.50;
+    const exX = RWX - WR - 26;
     for (let i = 0; i < 2; i++) {
-      const ey = -13 - i * 16;
-      ctx.fillStyle = '#141428';
+      const ey = -14 - i * 18;
+
+      // Housing
+      ctx.fillStyle = '#0a0a1e';
       ctx.beginPath();
-      ctx.rect(exX - 2, ey - 5, 18, 10);
+      if (ctx.roundRect) ctx.roundRect(exX - 4, ey - 7, 22, 13, 3);
+      else                ctx.rect(exX - 4, ey - 7, 22, 13);
       ctx.fill();
-      ctx.strokeStyle = 'rgba(0,212,255,0.35)';
-      ctx.lineWidth   = 0.9;
+      ctx.strokeStyle = 'rgba(0,212,255,0.58)';
+      ctx.lineWidth   = 1.2;
       ctx.stroke();
 
-      const eg = ctx.createRadialGradient(exX, ey, 0, exX, ey, 13);
-      eg.addColorStop(0,   `rgba(0,212,255,${ep})`);
-      eg.addColorStop(0.5, `rgba(0,80,200,${ep * 0.4})`);
-      eg.addColorStop(1,   'rgba(0,0,0,0)');
+      // Dark exhaust interior
+      ctx.fillStyle = '#040410';
+      ctx.beginPath();
+      ctx.arc(exX + 3, ey, 5.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Neon blue glow
+      const eg = ctx.createRadialGradient(exX + 3, ey, 0, exX + 3, ey, 24);
+      eg.addColorStop(0,    `rgba(0,212,255,${ep})`);
+      eg.addColorStop(0.35, `rgba(0,140,255,${ep * 0.55})`);
+      eg.addColorStop(0.7,  `rgba(0,40,100,${ep * 0.22})`);
+      eg.addColorStop(1,    'rgba(0,0,0,0)');
       ctx.fillStyle   = eg;
-      ctx.shadowBlur  = 20 * ep;
+      ctx.shadowBlur  = 34 * ep;
       ctx.shadowColor = C_BLUE;
       ctx.beginPath();
-      ctx.arc(exX, ey, 9, 0, Math.PI * 2);
+      ctx.arc(exX + 3, ey, 18, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
 
-    // ── LICENSE PLATE ───────────────────────────────────────
+    // ── LICENSE PLATE — EZK 33:6 ───────────────────────────
     ctx.save();
     const px = RWX - WR + 10;
     const py = -44;
-    ctx.fillStyle   = 'rgba(5,5,18,0.96)';
-    ctx.strokeStyle = 'rgba(0,212,255,0.58)';
-    ctx.lineWidth   = 0.9;
-    ctx.shadowBlur  = 9;
+    ctx.fillStyle   = 'rgba(4,4,16,0.98)';
+    ctx.strokeStyle = 'rgba(0,212,255,0.68)';
+    ctx.lineWidth   = 1.0;
+    ctx.shadowBlur  = 10;
     ctx.shadowColor = C_BLUE;
     ctx.beginPath();
     if (ctx.roundRect) ctx.roundRect(px - 28, py - 10, 56, 20, 2);
@@ -862,7 +890,7 @@
     ctx.fillText('EZK 33:6', px, py);
     ctx.restore();
 
-    // ── WHEELS (cross-spoke, glowing hubs) ──────────────────
+    // ── DEEP DISH 5-SPOKE WHEELS WITH CROSS CENTER CAPS ────
     const wheels = [
       { x: FWX, spin: tireA,  wobble: 0 },
       { x: RWX, spin: tireA,  wobble: state === S.BURNOUT ? Math.sin(t * 0.012) * 0.4 : 0 }
@@ -872,71 +900,102 @@
       ctx.save();
       ctx.translate(w.x, WCY);
 
-      // Arch shadow fill
+      // Arch shadow
       ctx.beginPath();
-      ctx.arc(0, 0, WR + 14, Math.PI, 0);
-      ctx.lineTo(WR + 14,  CLR - WCY + 3);
-      ctx.lineTo(-WR - 14, CLR - WCY + 3);
+      ctx.arc(0, 0, WR + 17, Math.PI, 0);
+      ctx.lineTo(WR + 17,  CLR - WCY + 3);
+      ctx.lineTo(-WR - 17, CLR - WCY + 3);
       ctx.closePath();
-      ctx.fillStyle = '#030308';
+      ctx.fillStyle = '#020206';
       ctx.fill();
 
-      // Tire
+      // Tire — wider appearance
       ctx.beginPath();
       ctx.arc(0, 0, WR, 0, Math.PI * 2);
-      ctx.fillStyle   = '#0d0d14';
+      ctx.fillStyle   = '#0a0a12';
       ctx.fill();
-      ctx.strokeStyle = '#1e1e2c';
-      ctx.lineWidth   = 3.5;
+      ctx.strokeStyle = '#181826';
+      ctx.lineWidth   = 4;
       ctx.stroke();
 
-      // Rim (rotates)
+      // Rim rotates with wheel
       ctx.save();
       ctx.rotate(w.spin + w.wobble);
 
-      const rg = ctx.createRadialGradient(0, 0, 2, 0, 0, WR - 3);
-      rg.addColorStop(0,    '#30305a');
-      rg.addColorStop(0.55, '#1c1c3a');
-      rg.addColorStop(1,    '#0e0e22');
+      // Deep dish barrel wall shadow
+      const barrelG = ctx.createRadialGradient(0, 0, WR - 12, 0, 0, WR - 1);
+      barrelG.addColorStop(0, 'rgba(0,30,60,0.75)');
+      barrelG.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath();
-      ctx.arc(0, 0, WR - 2, 0, Math.PI * 2);
+      ctx.arc(0, 0, WR - 1, 0, Math.PI * 2);
+      ctx.fillStyle = barrelG;
+      ctx.fill();
+
+      // Rim face
+      const rg = ctx.createRadialGradient(0, 0, 2, 0, 0, WR - 3);
+      rg.addColorStop(0,    '#282852');
+      rg.addColorStop(0.55, '#18183a');
+      rg.addColorStop(1,    '#0c0c20');
+      ctx.beginPath();
+      ctx.arc(0, 0, WR - 4, 0, Math.PI * 2);
       ctx.fillStyle = rg;
       ctx.fill();
 
-      // 5-spoke rim (R33 GT-R signature wheel)
-      ctx.shadowBlur  = 12;
+      // Deep dish inner lip ring
+      ctx.globalAlpha = 0.60;
+      ctx.strokeStyle = 'rgba(0,212,255,0.52)';
+      ctx.lineWidth   = 3.0;
+      ctx.shadowBlur  = 0;
+      ctx.beginPath();
+      ctx.arc(0, 0, WR - 8, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // 5-spoke design
+      ctx.shadowBlur  = 14;
       ctx.shadowColor = C_BLUE;
-      ctx.strokeStyle = 'rgba(0,212,255,0.88)';
-      ctx.lineWidth   = 3.4;
+      ctx.strokeStyle = 'rgba(0,212,255,0.92)';
+      ctx.lineWidth   = 3.6;
       ctx.lineCap     = 'round';
       for (let sp = 0; sp < 5; sp++) {
-        const a = sp * Math.PI * 0.4 - Math.PI / 2;   // 5 evenly spaced, one pointing up
+        const a = sp * Math.PI * 0.4 - Math.PI / 2;
         ctx.beginPath();
-        ctx.moveTo(Math.cos(a) * 6,        Math.sin(a) * 6);
-        ctx.lineTo(Math.cos(a) * (WR - 6), Math.sin(a) * (WR - 6));
+        ctx.moveTo(Math.cos(a) * 7,        Math.sin(a) * 7);
+        ctx.lineTo(Math.cos(a) * (WR - 7), Math.sin(a) * (WR - 7));
         ctx.stroke();
       }
+
       // Outer rim lip
-      ctx.globalAlpha = 0.5;
-      ctx.lineWidth   = 1.5;
+      ctx.globalAlpha = 0.55;
+      ctx.lineWidth   = 1.8;
+      ctx.shadowBlur  = 6;
       ctx.beginPath();
       ctx.arc(0, 0, WR - 5, 0, Math.PI * 2);
       ctx.stroke();
       ctx.globalAlpha = 1;
       ctx.restore(); // rim rotation
 
-      // Hub cap glow
+      // Gothic cross center cap
       ctx.save();
-      ctx.shadowBlur = 18;
+      ctx.shadowBlur  = 20;
       ctx.shadowColor = C_BLUE;
+      ctx.strokeStyle = 'rgba(0,212,255,0.97)';
+      ctx.lineWidth   = 2.0;
+      ctx.lineCap     = 'round';
       ctx.beginPath();
-      ctx.arc(0, 0, 7, 0, Math.PI * 2);
-      ctx.fillStyle = C_BLUE;
-      ctx.fill();
+      ctx.moveTo(0, -7);  ctx.lineTo(0, 7);        // vertical arm
+      ctx.moveTo(-5, -2); ctx.lineTo(5, -2);        // crossbar at upper third
+      ctx.stroke();
+      // Mini serifs
+      ctx.lineWidth   = 1.2;
+      ctx.globalAlpha = 0.65;
+      const hs = 2.5;
       ctx.beginPath();
-      ctx.arc(0, 0, 3.5, 0, Math.PI * 2);
-      ctx.fillStyle = '#e8f8ff';
-      ctx.fill();
+      ctx.moveTo(-hs, -7);  ctx.lineTo(hs, -7);          // top serif
+      ctx.moveTo(-hs,  7);  ctx.lineTo(hs,  7);          // bottom serif
+      ctx.moveTo(-5, -2 - hs); ctx.lineTo(-5, -2 + hs);  // left end serif
+      ctx.moveTo( 5, -2 - hs); ctx.lineTo( 5, -2 + hs);  // right end serif
+      ctx.stroke();
       ctx.restore();
 
       // Burnout spin ring
@@ -980,7 +1039,7 @@
   // ── Burnout cloud overlay ──────────────────────────────────
   function drawBurnoutCloud() {
     if (state !== S.BURNOUT) return;
-    const alpha = Math.min(burnoutTime / 1.5, 1) * 0.22;
+    const alpha = Math.min(burnoutTime / 1.5, 1) * 0.20;
     const cloud = ctx.createRadialGradient(
       carX * CAR_SCALE, groundY - 65, 0,
       carX * CAR_SCALE, groundY - 85, W * 0.55
@@ -1031,7 +1090,7 @@
       }
     }
 
-    // Car movement
+    // Car position
     if (state === S.LAUNCHING) {
       launchProgress = Math.min(launchProgress + dt * 0.014, 1);
       const ease = launchProgress * launchProgress * (3 - 2 * launchProgress);
@@ -1065,24 +1124,27 @@
       shakeY = Math.sin(now * 0.0025) * 0.9;
     }
 
-    // Tire marks from rear wheel
+    // Tire marks from rear wheel only
     if ((state === S.BURNOUT || (state === S.BUILDING && intensity > 0.55)) && !isMobile) {
       marks.push(carX + CAR_SCALE * (RWX - WR));
       if (marks.length > 220) marks.shift();
     }
     if (state === S.GONE) markOpacity = Math.max(0, markOpacity - 0.0008 * dt);
 
-    // Smoke from rear wheel contact
-    const rwX = carX + CAR_SCALE * (RWX - WR);
-    const rwY = groundY - WR * CAR_SCALE;
-    if (state === S.IDLE && !isMobile && Math.random() < 0.05) {
-      emitSmoke(rwX - 14, groundY - 18, 1, 0.18);
+    // Smoke from rear tire GROUND CONTACT ONLY — realistic burnout physics
+    const rwX      = carX + CAR_SCALE * RWX;  // rear wheel center X
+    const rwContactY = groundY;               // ground contact level
+    if (state === S.IDLE && !isMobile && Math.random() < 0.04) {
+      emitSmoke(rwX, rwContactY - 6, 1, 0.15);
     } else if (state === S.BUILDING) {
-      emitSmoke(rwX, rwY, Math.max(1, Math.floor(intensity * 6)), intensity);
+      emitSmoke(rwX, rwContactY - 4, Math.max(2, Math.floor(intensity * 8)), intensity);
     } else if (state === S.BURNOUT) {
-      emitSmoke(rwX, rwY, 18, 1.6);
+      // Multi-position across contact patch: billow outward, drift left
+      emitSmoke(rwX - 16, rwContactY - 2, 7, 1.9);
+      emitSmoke(rwX,      rwContactY,     5, 1.7);
+      emitSmoke(rwX + 10, rwContactY - 4, 3, 1.5);
     } else if (state === S.LAUNCHING) {
-      emitSmoke(rwX, rwY, 10, 1.1);
+      emitSmoke(rwX - 8, rwContactY - 2, 8, 1.3);
     }
 
     // Render
