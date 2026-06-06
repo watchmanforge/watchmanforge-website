@@ -1100,6 +1100,33 @@ textarea.form-control {
 }
 
 /* ============================================================
+   Coming Soon Corner Badge
+   ============================================================ */
+.cs-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #010104;
+  background: #00d4ff;
+  padding: 6px 14px 6px 16px;
+  clip-path: polygon(12px 0%, 100% 0%, 100% 100%, 0% 100%);
+  white-space: nowrap;
+  z-index: 5;
+  animation: cs-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cs-pulse {
+  0%, 100% { box-shadow: 0 2px 10px rgba(0,212,255,0.55); }
+  50%       { box-shadow: 0 2px 22px rgba(0,212,255,1), 0 0 36px rgba(0,212,255,0.45); }
+}
+
+/* ============================================================
    Animations
    ============================================================ */
 @keyframes fadeUp {
