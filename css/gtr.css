@@ -32,10 +32,29 @@
   width: 100%;
   overflow: hidden;
   background: #010104;
-  /* Gothic arch vignette — dark purple corners */
   box-shadow:
     inset 0  40px 80px rgba(1,1,4,0.85),
     inset 0 -10px 40px rgba(144,0,255,0.08);
+}
+
+/* Smooth gradient transitions into/out of the GTR section */
+#gtr-sticky::before,
+#gtr-sticky::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+#gtr-sticky::before {
+  top: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #010104 0%, transparent 100%);
+}
+#gtr-sticky::after {
+  bottom: 0;
+  height: 120px;
+  background: linear-gradient(to top, #010104 0%, transparent 100%);
 }
 
 #gtr-canvas {

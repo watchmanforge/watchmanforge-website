@@ -42,80 +42,111 @@
     }
   });
 
-  /* ── Particle Canvas ────────────────────────────────────── */
+  /* ── Forge Ember Canvas ──────────────────────────────────── */
   const canvas = document.getElementById('hero-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let W, H, particles, animId;
-    const COUNT       = 100;
-    const MAX_DIST    = 140;
-    const PARTICLE_R  = 1.5;
-    const COLORS      = ['rgba(0,212,255,', 'rgba(144,0,255,', 'rgba(255,0,204,'];
+    let W, H, embers = [], animId;
+    const MAX_EMBERS = 110;
+
+    class Ember {
+      constructor() { this.spawn(); }
+
+      spawn() {
+        this.x  = W * (0.1 + Math.random() * 0.8);
+        this.y  = H * (0.5 + Math.random() * 0.5);
+        this.vx = (Math.random() - 0.5) * 1.4;
+        this.vy = -(0.7 + Math.random() * 2.4);
+        this.r  = 1.1 + Math.random() * 2.8;
+        this.life = 1;
+        this.decay = 0.0025 + Math.random() * 0.0055;
+        this.wander = Math.random() * Math.PI * 2;
+        this.ws = 0.022 + Math.random() * 0.032; // wander speed
+        this.isSpark = Math.random() < 0.09;
+        if (this.isSpark) {
+          this.r   *= 1.6;
+          this.vy  *= 1.9;
+          this.vx  *= 1.8;
+          this.decay *= 1.3;
+        }
+      }
+
+      update(dt) {
+        this.wander += this.ws * dt;
+        this.vx += Math.sin(this.wander) * 0.015 * dt;
+        this.vx *= 0.987;
+        this.x  += this.vx * dt;
+        this.y  += this.vy * dt;
+        this.vy += 0.006 * dt; // slight upward deceleration
+        this.life -= this.decay * dt;
+      }
+
+      draw(ctx) {
+        const a    = Math.max(0, this.life);
+        const heat = Math.min(a * 2, 1);
+        const g    = Math.floor(heat * 168);
+        const b    = heat > 0.75 ? Math.floor((heat - 0.75) * 4 * 220) : 0;
+        const glow = this.r * (this.isSpark ? 14 : 8) * heat;
+
+        ctx.save();
+        ctx.shadowBlur  = glow;
+        ctx.shadowColor = `rgba(255,${Math.floor(g * 0.5)},0,${a * 0.75})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, Math.max(this.r * a, 0.4), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,${g},${b},${Math.min(a * 1.7, 1)})`;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
 
     function resize() {
       W = canvas.width  = canvas.offsetWidth;
       H = canvas.height = canvas.offsetHeight;
     }
 
-    function makeParticle() {
-      const colorBase = COLORS[Math.floor(Math.random() * COLORS.length)];
-      return {
-        x:    Math.random() * W,
-        y:    Math.random() * H,
-        vx:   (Math.random() - 0.5) * 0.4,
-        vy:   (Math.random() - 0.5) * 0.4,
-        r:    PARTICLE_R * (0.5 + Math.random() * 0.8),
-        color: colorBase,
-        alpha: 0.4 + Math.random() * 0.5,
-      };
-    }
-
     function init() {
       resize();
-      particles = Array.from({ length: COUNT }, makeParticle);
+      embers = [];
+      for (let i = 0; i < 50; i++) {
+        const e = new Ember();
+        e.life = Math.random();
+        e.y    = H * Math.random();
+        embers.push(e);
+      }
     }
 
-    function draw() {
+    let lastT = 0;
+    function draw(now) {
+      animId = requestAnimationFrame(draw);
+      const dt = Math.min((now - lastT) / 16.67, 3);
+      lastT = now;
+
       ctx.clearRect(0, 0, W, H);
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + p.alpha + ')';
-        ctx.fill();
+      if (embers.length < MAX_EMBERS) {
+        const n = Math.floor(Math.random() * 3) + 1;
+        for (let i = 0; i < n; i++) embers.push(new Ember());
+      }
 
-        for (let j = i + 1; j < particles.length; j++) {
-          const q   = particles[j];
-          const dx  = p.x - q.x;
-          const dy  = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.18;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
+      for (let i = embers.length - 1; i >= 0; i--) {
+        const e = embers[i];
+        e.update(dt);
+        if (e.life <= 0 || e.y < -30 || e.x < -40 || e.x > W + 40) {
+          embers.splice(i, 1);
+        } else {
+          e.draw(ctx);
         }
       }
-      animId = requestAnimationFrame(draw);
     }
 
     window.addEventListener('resize', () => {
       cancelAnimationFrame(animId);
       init();
-      draw();
+      requestAnimationFrame(draw);
     });
 
     init();
-    draw();
+    requestAnimationFrame(draw);
   }
 
   /* ── Scroll Reveal ──────────────────────────────────────── */

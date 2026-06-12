@@ -108,21 +108,21 @@
       const upBias = -Math.PI / 2;
       const spread = (Math.random() - 0.5) * 3.0;
       const angle  = upBias + spread;
-      const wind   = -(0.55 + Math.random() * 1.4) * Math.max(intensity * 0.72, 0.38);
+      const wind   = -(0.80 + Math.random() * 2.0) * Math.max(intensity * 0.85, 0.50);
       this.vx = Math.cos(angle) * speed + wind;
       this.vy = Math.sin(angle) * speed * 0.76;
 
       this.isBase = Math.random() < 0.28;
       if (this.isBase) {
-        this.r    = 22 + Math.random() * 26 * Math.max(intensity, 0.5);
-        this.maxR = this.r * (2.5 + Math.random() * 1.8);
-        this.decay = 0.0020 + Math.random() * 0.0028 / Math.max(intensity, 0.2);
-        this.grow  = 0.14 + Math.random() * 0.10;
+        this.r    = 30 + Math.random() * 40 * Math.max(intensity, 0.5);
+        this.maxR = this.r * (3.4 + Math.random() * 2.4);
+        this.decay = 0.0014 + Math.random() * 0.0020 / Math.max(intensity, 0.2);
+        this.grow  = 0.20 + Math.random() * 0.14;
       } else {
-        this.r    = 5 + Math.random() * 15 * intensity;
-        this.maxR = this.r * (3.8 + Math.random() * 4);
-        this.decay = 0.0042 + Math.random() * 0.008 / Math.max(intensity, 0.2);
-        this.grow  = 0.36 + Math.random() * 0.30;
+        this.r    = 7 + Math.random() * 24 * intensity;
+        this.maxR = this.r * (5.0 + Math.random() * 5.5);
+        this.decay = 0.0030 + Math.random() * 0.0065 / Math.max(intensity, 0.2);
+        this.grow  = 0.48 + Math.random() * 0.40;
       }
 
       this.life = 1;
@@ -152,10 +152,10 @@
         g.addColorStop(0.45, `rgba(45,0,85,${a * 0.22})`);
         g.addColorStop(1,    'rgba(4,0,12,0)');
       } else {
-        const baseA = this.isBase ? a * 0.62 : a * 0.70;
-        g.addColorStop(0,    `rgba(28,32,48,${baseA})`);
-        g.addColorStop(0.5,  `rgba(10,12,22,${baseA * 0.50})`);
-        g.addColorStop(1,    'rgba(2,2,6,0)');
+        const baseA = this.isBase ? a * 0.75 : a * 0.82;
+        g.addColorStop(0,    `rgba(14,16,22,${baseA})`);
+        g.addColorStop(0.45, `rgba(6,7,12,${baseA * 0.58})`);
+        g.addColorStop(1,    'rgba(1,1,3,0)');
       }
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
@@ -166,80 +166,185 @@
 
   function emitSmoke(x, y, count, intensity) {
     for (let i = 0; i < count; i++) particles.push(new Particle(x, y, intensity));
-    while (particles.length > 950) particles.shift();
+    while (particles.length > 1600) particles.shift();
   }
 
-  // ── Dark stone wall background ─────────────────────────────
-  function drawStoneBg() {
-    // Base fill
-    const wallGrad = ctx.createLinearGradient(0, 0, 0, groundY);
-    wallGrad.addColorStop(0,   '#040408');
-    wallGrad.addColorStop(0.5, '#06060e');
-    wallGrad.addColorStop(1,   '#0a0a16');
-    ctx.fillStyle = wallGrad;
+  // ── Gothic arch silhouette helper ──────────────────────────
+  function drawGothicArch(x, baseY, archW, archH, fogAlpha) {
+    ctx.save();
+    ctx.globalAlpha = fogAlpha;
+    ctx.fillStyle = '#010104';
+
+    // Main arch opening (pointed Gothic arch)
+    const halfW   = archW * 0.38;
+    const pX      = x;
+    const topY    = baseY - archH;
+    const apexY   = topY - archH * 0.28; // pointed apex above opening
+
+    // Pier left
+    ctx.fillRect(x - archW * 0.5, topY, archW * 0.12, archH);
+    // Pier right
+    ctx.fillRect(x + archW * 0.38, topY, archW * 0.12, archH);
+
+    // Arch opening cutout using composite
+    const openG = ctx.createLinearGradient(pX, topY, pX, baseY);
+    openG.addColorStop(0,   'rgba(2,2,8,0)');
+    openG.addColorStop(1,   'rgba(2,2,8,0.0)');
+
+    // Draw solid arch shape
+    ctx.beginPath();
+    ctx.moveTo(pX - archW * 0.5, baseY);
+    ctx.lineTo(pX - archW * 0.5, topY);
+    // Left arch curve (ogee / pointed)
+    ctx.bezierCurveTo(
+      pX - archW * 0.5, topY - archH * 0.5,
+      pX - halfW * 0.5, apexY,
+      pX, apexY
+    );
+    // Right arch curve
+    ctx.bezierCurveTo(
+      pX + halfW * 0.5, apexY,
+      pX + archW * 0.38, topY - archH * 0.5,
+      pX + archW * 0.38, topY
+    );
+    ctx.lineTo(pX + archW * 0.38, baseY);
+    ctx.closePath();
+    ctx.fill();
+
+    // Gothic arch frame/tracery highlight
+    ctx.strokeStyle = `rgba(0,212,255,${fogAlpha * 0.12})`;
+    ctx.lineWidth   = 0.7;
+    ctx.beginPath();
+    ctx.moveTo(pX - archW * 0.5, topY);
+    ctx.bezierCurveTo(
+      pX - archW * 0.5, topY - archH * 0.5,
+      pX - halfW * 0.5, apexY,
+      pX, apexY
+    );
+    ctx.bezierCurveTo(
+      pX + halfW * 0.5, apexY,
+      pX + archW * 0.38, topY - archH * 0.5,
+      pX + archW * 0.38, topY
+    );
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // ── Dark atmospheric city background ───────────────────────
+  function drawAtmosphericBg() {
+    // Deep void sky
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, groundY);
+    skyGrad.addColorStop(0,    '#010104');
+    skyGrad.addColorStop(0.55, '#02020a');
+    skyGrad.addColorStop(0.82, '#040414');
+    skyGrad.addColorStop(1,    '#06061e');
+    ctx.fillStyle = skyGrad;
     ctx.fillRect(0, 0, W, groundY + 2);
 
-    // Stone block grid — irregular gothic masonry
+    // City skyline silhouette (background layer)
+    ctx.fillStyle = '#010108';
+    const _bldgs = [
+      [0.03, 0.07, 0.22], [0.11, 0.05, 0.16], [0.17, 0.09, 0.34], [0.28, 0.04, 0.18],
+      [0.33, 0.11, 0.38], [0.45, 0.06, 0.24], [0.52, 0.08, 0.30], [0.61, 0.05, 0.20],
+      [0.67, 0.10, 0.36], [0.78, 0.07, 0.26], [0.86, 0.05, 0.18], [0.92, 0.08, 0.28],
+    ];
+    for (const [bx, bw, bh] of _bldgs) {
+      ctx.fillRect(bx * W, groundY - bh * groundY, bw * W, bh * groundY + 2);
+    }
+
+    // ── GOTHIC ARCH SILHOUETTES in background fog ───────────
+    const archFogAlpha = 0.78;
+    // Far-back arch cluster (very dim, in deep fog)
     ctx.save();
-    const BW = 88;   // block width
-    const BH = 44;   // block height
-    const M  = 2;    // mortar thickness
+    const fogL = ctx.createLinearGradient(0, groundY * 0.4, 0, groundY);
+    fogL.addColorStop(0,   'rgba(2,4,14,0)');
+    fogL.addColorStop(0.6, 'rgba(2,4,18,0.45)');
+    fogL.addColorStop(1,   'rgba(2,4,18,0.7)');
+    ctx.fillStyle = fogL;
+    ctx.fillRect(0, groundY * 0.4, W, groundY * 0.6);
+    ctx.restore();
 
-    for (let row = 0; row * BH < groundY + BH; row++) {
-      const rowOff = (row % 2) * (BW * 0.5);
-      for (let col = -1; col * BW < W + BW; col++) {
-        const bx = col * BW + rowOff;
-        const by = row * BH;
-        const v  = (Math.sin(row * 5.7 + col * 3.1) * 0.5 + 0.5) * 10;
-        const b  = 7 + v | 0;
-        ctx.fillStyle = `rgb(${b},${b},${b + 6})`;
-        ctx.fillRect(bx + M, by + M, BW - M * 2, BH - M * 2);
-      }
-    }
+    // Gothic cathedral arches — right side cluster
+    drawGothicArch(W * 0.82, groundY, W * 0.12, groundY * 0.52, archFogAlpha);
+    drawGothicArch(W * 0.74, groundY, W * 0.09, groundY * 0.42, archFogAlpha * 0.8);
+    drawGothicArch(W * 0.90, groundY, W * 0.10, groundY * 0.45, archFogAlpha * 0.85);
 
-    // Mortar hairlines — neon blue ghost traces
-    ctx.lineWidth = 0.6;
+    // Gothic cathedral arches — left side cluster
+    drawGothicArch(W * 0.08, groundY, W * 0.10, groundY * 0.48, archFogAlpha * 0.75);
+    drawGothicArch(W * 0.18, groundY, W * 0.09, groundY * 0.38, archFogAlpha * 0.65);
 
-    // Horizontal courses
-    for (let row = 1; row * BH < groundY; row++) {
-      const y    = row * BH;
-      const neon = (row % 3 === 0);
-      ctx.strokeStyle = neon ? 'rgba(0,212,255,0.18)' : 'rgba(0,212,255,0.06)';
-      if (neon) { ctx.shadowBlur = 5; ctx.shadowColor = 'rgba(0,212,255,0.4)'; }
-      else      { ctx.shadowBlur = 0; }
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-    }
-    ctx.shadowBlur = 0;
-
-    // Vertical joints (staggered per course)
-    ctx.strokeStyle = 'rgba(0,212,255,0.05)';
-    for (let row = 0; row * BH < groundY + BH; row++) {
-      const rowOff = (row % 2) * (BW * 0.5);
-      for (let col = -1; col * BW < W + BW; col++) {
-        const x = col * BW + rowOff;
-        ctx.beginPath();
-        ctx.moveTo(x, row * BH);
-        ctx.lineTo(x, row * BH + BH);
-        ctx.stroke();
+    // Window glow dots on buildings
+    ctx.save();
+    for (const [bx, bw, bh] of _bldgs) {
+      const cols = Math.floor(bw * 18);
+      const rows = Math.floor(bh * 8);
+      for (let _r = 0; _r < rows; _r++) {
+        for (let _c = 0; _c < cols; _c++) {
+          const lit = Math.sin(bx * 999 + _r * 17 + _c * 31) > 0.45;
+          if (!lit) continue;
+          const isPurp = Math.sin(bx * 543 + _r * 11 + _c * 23) > 0.62;
+          ctx.fillStyle = isPurp ? 'rgba(144,0,255,0.07)' : 'rgba(0,212,255,0.07)';
+          ctx.fillRect(
+            bx * W + _c * (bw * W / cols) + 1,
+            groundY - bh * groundY + _r * (bh * groundY / rows) + 3,
+            2, 2
+          );
+        }
       }
     }
     ctx.restore();
 
-    // Dark vignette / spotlight — draws attention to car centre
-    const cx  = W * 0.42;
-    const vig = ctx.createRadialGradient(cx, groundY * 0.55, 0, cx, groundY * 0.55, W * 0.72);
-    vig.addColorStop(0,    'rgba(0,0,0,0)');
-    vig.addColorStop(0.55, 'rgba(0,0,6,0.35)');
-    vig.addColorStop(1,    'rgba(0,0,10,0.78)');
-    ctx.fillStyle = vig;
+    // Horizon city glow
+    const horizGlow = ctx.createLinearGradient(0, groundY * 0.58, 0, groundY);
+    horizGlow.addColorStop(0,    'rgba(0,0,0,0)');
+    horizGlow.addColorStop(0.55, 'rgba(0,25,72,0.14)');
+    horizGlow.addColorStop(1,    'rgba(0,212,255,0.22)');
+    ctx.fillStyle = horizGlow;
+    ctx.fillRect(0, groundY * 0.58, W, groundY * 0.42);
+
+    // Purple atmospheric haze (upper area)
+    const purpGlow = ctx.createRadialGradient(W * 0.62, groundY * 0.28, 0, W * 0.62, groundY * 0.28, W * 0.55);
+    purpGlow.addColorStop(0,   'rgba(144,0,255,0.08)');
+    purpGlow.addColorStop(0.5, 'rgba(80,0,140,0.04)');
+    purpGlow.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = purpGlow;
     ctx.fillRect(0, 0, W, groundY);
 
-    // Subtle purple atmospheric haze — lower third of wall
-    const haze = ctx.createLinearGradient(0, groundY * 0.55, 0, groundY);
-    haze.addColorStop(0, 'rgba(144,0,255,0)');
-    haze.addColorStop(1, 'rgba(144,0,255,0.06)');
-    ctx.fillStyle = haze;
-    ctx.fillRect(0, groundY * 0.55, W, groundY * 0.45);
+    // Ground fog / mist layer
+    ctx.save();
+    const fogG = ctx.createLinearGradient(0, groundY - 60, 0, groundY + 40);
+    fogG.addColorStop(0,   'rgba(0,4,16,0)');
+    fogG.addColorStop(0.5, 'rgba(0,6,24,0.22)');
+    fogG.addColorStop(1,   'rgba(0,8,30,0.45)');
+    ctx.fillStyle = fogG;
+    ctx.fillRect(0, groundY - 60, W, 100);
+    ctx.restore();
+
+    // Rain streaks
+    ctx.save();
+    ctx.lineWidth = 0.7;
+    const _rT = Date.now() * 0.0008;
+    for (let _ri = 0; _ri < 52; _ri++) {
+      const _alpha = 0.05 + Math.abs(Math.sin(_ri * 7.3)) * 0.04;
+      ctx.strokeStyle = `rgba(0,110,200,${_alpha})`;
+      const _rx = ((Math.sin(_ri * 13.7) + 1) * 0.5 * W + _rT * 80 * (0.6 + _ri * 0.008)) % W;
+      const _ry = ((Math.cos(_ri * 9.1) + 1) * 0.5 * groundY + _rT * 160 * (0.8 + _ri * 0.004)) % groundY;
+      ctx.beginPath();
+      ctx.moveTo(_rx, _ry);
+      ctx.lineTo(_rx - 2, Math.min(_ry + 18, groundY - 2));
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // Dark spotlight vignette
+    const _vigCX = W * 0.42;
+    const vig = ctx.createRadialGradient(_vigCX, groundY * 0.55, 0, _vigCX, groundY * 0.55, W * 0.72);
+    vig.addColorStop(0,    'rgba(0,0,0,0)');
+    vig.addColorStop(0.52, 'rgba(0,0,8,0.32)');
+    vig.addColorStop(1,    'rgba(0,0,12,0.82)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, groundY);
   }
 
   // ── Road: dark asphalt + perspective neon grid ─────────────
@@ -299,12 +404,29 @@
     ctx.shadowBlur = 0;
     ctx.restore();
 
-    // Asphalt underglow — neon blue reflection
-    const refl = ctx.createLinearGradient(0, groundY, 0, groundY + 130);
-    refl.addColorStop(0, 'rgba(0,212,255,0.10)');
-    refl.addColorStop(1, 'rgba(144,0,255,0)');
+    // Enhanced asphalt underglow — neon reflection pool
+    const refl = ctx.createLinearGradient(0, groundY, 0, groundY + 220);
+    refl.addColorStop(0,    'rgba(0,212,255,0.22)');
+    refl.addColorStop(0.30, 'rgba(0,150,255,0.14)');
+    refl.addColorStop(0.65, 'rgba(144,0,255,0.06)');
+    refl.addColorStop(1,    'rgba(0,0,0,0)');
     ctx.fillStyle = refl;
-    ctx.fillRect(0, groundY, W, 130);
+    ctx.fillRect(0, groundY, W, 220);
+
+    // Wet-asphalt specular highlights
+    ctx.save();
+    ctx.globalAlpha = 0.18;
+    for (let _si = 0; _si < 3; _si++) {
+      const _sx = W * (0.22 + _si * 0.26);
+      const _sw = W * (0.06 + _si * 0.025);
+      const _sg = ctx.createLinearGradient(_sx - _sw, groundY + 8, _sx + _sw, groundY + 8);
+      _sg.addColorStop(0,   'rgba(0,212,255,0)');
+      _sg.addColorStop(0.5, 'rgba(0,212,255,0.85)');
+      _sg.addColorStop(1,   'rgba(0,212,255,0)');
+      ctx.fillStyle = _sg;
+      ctx.fillRect(_sx - _sw, groundY + 4, _sw * 2, 7);
+    }
+    ctx.restore();
   }
 
   // ── Tire marks ─────────────────────────────────────────────
@@ -365,10 +487,10 @@
     // ── MAIN BODY — R33 silhouette ───────────────────────────
     // Long hood, compact greenhouse, sweeping fastback
     const bodyGrad = ctx.createLinearGradient(RWX - 90, roofY, FWX + 90, CLR);
-    bodyGrad.addColorStop(0,    '#0e0e0e');
-    bodyGrad.addColorStop(0.28, '#090909');
-    bodyGrad.addColorStop(0.62, '#050505');
-    bodyGrad.addColorStop(1,    '#030303');
+    bodyGrad.addColorStop(0,    '#a8adb4');
+    bodyGrad.addColorStop(0.30, '#c8cdd4');
+    bodyGrad.addColorStop(0.65, '#dde2e8');
+    bodyGrad.addColorStop(1,    '#9ea4ac');
 
     ctx.beginPath();
 
@@ -482,9 +604,58 @@
     ctx.closePath();
     ctx.fillStyle = bodyGrad;
     ctx.fill();
-    ctx.strokeStyle = 'rgba(0,212,255,0.50)';
-    ctx.lineWidth   = 1.6;
+    ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+    ctx.lineWidth   = 1.4;
     ctx.stroke();
+
+    // ── BLACK GRAPHIC OVERLAYS ───────────────────────────────
+    ctx.save();
+    // Lower rocker accent band
+    ctx.fillStyle = 'rgba(6,6,16,0.92)';
+    ctx.beginPath();
+    ctx.moveTo(RWX - WR + 8,  CLR - 2);
+    ctx.bezierCurveTo(RWX + WR, CLR - 10, FWX - WR, CLR - 10, FWX + WR - 8, CLR - 2);
+    ctx.lineTo(FWX + WR - 8,  CLR - 28);
+    ctx.bezierCurveTo(FWX - WR, CLR - 32, RWX + WR, CLR - 32, RWX - WR + 8, CLR - 24);
+    ctx.closePath();
+    ctx.fill();
+    // Rear quarter diagonal swoosh
+    ctx.fillStyle = 'rgba(6,6,16,0.86)';
+    ctx.beginPath();
+    ctx.moveTo(RWX - WR - 10, CLR - 2);
+    ctx.bezierCurveTo(RWX, CLR - 30, RWX + 28, CLR - 65, RWX + 48, CLR - 100);
+    ctx.bezierCurveTo(RWX + 65, CLR - 122, RWX + 88, CLR - 118, RWX + 95, CLR - 95);
+    ctx.bezierCurveTo(RWX + 100, CLR - 72, RWX + 80, CLR - 34, RWX + 40, CLR - 12);
+    ctx.bezierCurveTo(RWX + 10, CLR - 4, RWX - WR, CLR + 2, RWX - WR - 10, CLR - 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    // ── CIRCUIT BOARD TRACES ─────────────────────────────────
+    ctx.save();
+    ctx.strokeStyle = 'rgba(0,212,255,0.22)';
+    ctx.fillStyle   = 'rgba(0,212,255,0.40)';
+    ctx.lineWidth   = 0.7;
+    ctx.lineCap     = 'square';
+    ctx.shadowBlur  = 3;
+    ctx.shadowColor = C_BLUE;
+    const _ctr = [
+      [RWX -  5, CLR-26, RWX - 5, CLR-50, RWX+20, CLR-50, RWX+20, CLR-72],
+      [RWX + 10, CLR-36, RWX+32,  CLR-36, RWX+32, CLR-62, RWX+52, CLR-62],
+      [RWX + 18, CLR-24, RWX+44,  CLR-24, RWX+44, CLR-56, RWX+62, CLR-56, RWX+62, CLR-86],
+      [RWX + 28, CLR-30, RWX+28,  CLR-58, RWX+48, CLR-58, RWX+48, CLR-80],
+      [RWX - 16, CLR-42, RWX+ 8,  CLR-42, RWX+ 8, CLR-66],
+    ];
+    for (const _tr of _ctr) {
+      ctx.beginPath(); ctx.moveTo(_tr[0], _tr[1]);
+      for (let _ci = 2; _ci < _tr.length; _ci += 2) ctx.lineTo(_tr[_ci], _tr[_ci+1]);
+      ctx.stroke();
+      for (let _ci = 2; _ci < _tr.length - 2; _ci += 2) {
+        ctx.beginPath(); ctx.arc(_tr[_ci], _tr[_ci+1], 1.8, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    ctx.shadowBlur = 0;
+    ctx.restore();
 
     // ── WHEEL ARCH CUTOUTS — wide-body ───────────────────────
     for (const wx of [FWX, RWX]) {
@@ -605,7 +776,7 @@
     ctx.shadowBlur   = 12;
     ctx.shadowColor  = C_BLUE;
     ctx.fillStyle    = 'rgba(0,212,255,0.90)';
-    ctx.fillText('KING OF KINGS', bX, bY);
+    ctx.fillText('JESUS IS KING', bX, bY);
 
     // Ghost cross in glass
     ctx.globalAlpha  = 0.10;
@@ -686,6 +857,72 @@
     ctx.moveTo(hcx - 17, hcy - 10 - sk); ctx.lineTo(hcx - 17, hcy - 10 + sk);
     ctx.moveTo(hcx + 17, hcy - 10 - sk); ctx.lineTo(hcx + 17, hcy - 10 + sk);
     ctx.stroke();
+    ctx.restore();
+
+    // ── LARGE BODY CROSS — door/rear quarter ─────────────────
+    ctx.save();
+    const dcx = RWX + 110;
+    const dcy = CLR - 56;
+    const dcp = 0.85 + Math.sin(t * 0.0024) * 0.15;
+    ctx.lineCap = 'round';
+    // Outer corona
+    ctx.shadowBlur  = 55 * dcp; ctx.shadowColor = C_BLUE;
+    ctx.strokeStyle = `rgba(0,212,255,${0.72 * dcp})`;
+    ctx.lineWidth   = 11;
+    ctx.beginPath();
+    ctx.moveTo(dcx, dcy - 38); ctx.lineTo(dcx, dcy + 38);
+    ctx.moveTo(dcx - 26, dcy - 8); ctx.lineTo(dcx + 26, dcy - 8);
+    ctx.stroke();
+    // Mid glow
+    ctx.shadowBlur  = 26 * dcp;
+    ctx.lineWidth   = 5.5;
+    ctx.strokeStyle = `rgba(60,220,255,${0.90 * dcp})`;
+    ctx.beginPath();
+    ctx.moveTo(dcx, dcy - 38); ctx.lineTo(dcx, dcy + 38);
+    ctx.moveTo(dcx - 26, dcy - 8); ctx.lineTo(dcx + 26, dcy - 8);
+    ctx.stroke();
+    // White-hot core
+    ctx.shadowBlur  = 12 * dcp;
+    ctx.lineWidth   = 2.2;
+    ctx.strokeStyle = `rgba(235,254,255,${0.97 * dcp})`;
+    ctx.beginPath();
+    ctx.moveTo(dcx, dcy - 38); ctx.lineTo(dcx, dcy + 38);
+    ctx.moveTo(dcx - 26, dcy - 8); ctx.lineTo(dcx + 26, dcy - 8);
+    ctx.stroke();
+    // Gothic flare tips
+    const _dcFe = 7;
+    ctx.globalAlpha = 0.72 * dcp;
+    ctx.lineWidth   = 1.6; ctx.shadowBlur = 8;
+    ctx.strokeStyle = `rgba(200,248,255,0.82)`;
+    ctx.beginPath();
+    ctx.moveTo(dcx - _dcFe, dcy - 38); ctx.lineTo(dcx + _dcFe, dcy - 38);
+    ctx.moveTo(dcx - _dcFe, dcy + 38); ctx.lineTo(dcx + _dcFe, dcy + 38);
+    ctx.moveTo(dcx - 26, dcy - 8 - _dcFe); ctx.lineTo(dcx - 26, dcy - 8 + _dcFe);
+    ctx.moveTo(dcx + 26, dcy - 8 - _dcFe); ctx.lineTo(dcx + 26, dcy - 8 + _dcFe);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    // JESUS SAVES — rear quarter bold gothic text
+    ctx.font         = `bold 10px 'Orbitron', monospace`;
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowBlur   = 14; ctx.shadowColor = C_BLUE;
+    ctx.fillStyle    = `rgba(0,212,255,0.94)`;
+    ctx.fillText('JESUS  SAVES', dcx, dcy + 52);
+
+    // NOT OF THIS WORLD — front quarter
+    ctx.font         = `bold 7px 'Orbitron', monospace`;
+    ctx.shadowBlur   = 8;
+    ctx.fillStyle    = `rgba(0,212,255,0.78)`;
+    ctx.fillText('NOT OF THIS WORLD', FWX - 64, CLR - 30);
+
+    // Scripture references — small, scattered along sill area
+    ctx.font         = `600 5.5px 'Orbitron', monospace`;
+    ctx.fillStyle    = `rgba(0,212,255,0.55)`;
+    ctx.shadowBlur   = 4;
+    ctx.fillText('JOHN 17:16',          RWX + 55,               CLR - 15);
+    ctx.fillText('EPH 6:12',  (FWX + RWX) / 2 - 10,             CLR - 15);
+    ctx.fillText('PHIL 4:13',           FWX - 28,               CLR - 15);
     ctx.restore();
 
     // ── HEADLIGHTS ───────────────────────────────────────────
@@ -1173,15 +1410,18 @@
     } else if (state === S.BUILDING) {
       emitSmoke(rwX, rwContact - 4, Math.max(2, Math.floor(intensity * 8)), intensity);
     } else if (state === S.BURNOUT) {
-      emitSmoke(rwX - 18, rwContact - 2, 7, 2.0);
-      emitSmoke(rwX,      rwContact,     5, 1.8);
-      emitSmoke(rwX + 12, rwContact - 4, 3, 1.6);
+      emitSmoke(rwX - 26, rwContact,      8, 3.0);
+      emitSmoke(rwX - 10, rwContact - 2,  8, 2.6);
+      emitSmoke(rwX +  6, rwContact,      7, 2.3);
+      emitSmoke(rwX + 20, rwContact - 4,  5, 2.0);
+      if (Math.random() < 0.70) emitSmoke(rwX - 42, rwContact - 20, 4, 1.8);
+      if (Math.random() < 0.40) emitSmoke(rwX - 55, rwContact - 40, 2, 1.5);
     } else if (state === S.LAUNCHING) {
       emitSmoke(rwX - 8, rwContact - 2, 8, 1.4);
     }
 
     // Render
-    drawStoneBg();
+    drawAtmosphericBg();
     drawRoad();
 
     for (let i = particles.length - 1; i >= 0; i--) {

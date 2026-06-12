@@ -12,8 +12,8 @@
   <meta property="og:url" content="https://watchmanforge.com">
   <link rel="canonical" href="https://watchmanforge.com/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css?v=r33-5">
-  <link rel="stylesheet" href="/css/gtr.css?v=r33-5">
+  <link rel="stylesheet" href="/css/main.css?v=logo-1">
+  <link rel="stylesheet" href="/css/gtr.css?v=logo-1">
   <style>
     /* Home-specific overrides */
     .hero { min-height: 100vh; }
@@ -41,10 +41,24 @@
       box-shadow: 0 0 16px rgba(0,212,255,0.25);
     }
 
+    /* Section gradient blends */
+    .sect-fade-down {
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--bg-void));
+      pointer-events: none;
+      margin: 0;
+    }
+    .sect-fade-up {
+      height: 80px;
+      background: linear-gradient(to top, transparent, var(--bg-void));
+      pointer-events: none;
+      margin: 0;
+    }
+
     /* Glitch on hero title */
     .glitch-text { animation: glitch 8s steps(1) infinite; }
 
-    /* ── Scripture band ─────────────────────────────────────── */
+    /* ── Scripture band ─────────────────────────────────────────── */
     .scripture {
       position: relative;
       padding: clamp(70px, 11vw, 150px) var(--pad-x);
@@ -126,6 +140,17 @@
       letter-spacing: 0.01em;
       margin: 2px 0 12px;
     }
+
+    /* Product logo display area */
+    .product-logo-wrap {
+      margin-bottom: 20px;
+      display: block;
+      line-height: 0;
+    }
+    .product-logo-wrap svg {
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
@@ -133,18 +158,28 @@
   <!-- ── Navigation ───────────────────────────────────────── -->
   <nav id="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <svg viewBox="0 0 112 44" width="112" height="44" xmlns="http://www.w3.org/2000/svg" aria-label="Watchman Forge">
-          <text y="19" font-family="'Orbitron',monospace" font-weight="900" font-size="15" style="letter-spacing:2px;filter:drop-shadow(0 0 3px #00d4ff) drop-shadow(0 0 8px rgba(0,212,255,0.55))"><tspan x="2" fill="white">W</tspan><tspan fill="white">A</tspan><tspan fill="none">T</tspan><tspan fill="white">C</tspan><tspan fill="white">H</tspan><tspan fill="white">M</tspan><tspan fill="white">A</tspan><tspan fill="white">N</tspan></text>
-          <g style="filter:drop-shadow(0 0 5px #9000ff) drop-shadow(0 0 2px #00d4ff)">
-            <line x1="34" y1="5" x2="34" y2="21" stroke="#00d4ff" stroke-width="3" stroke-linecap="square"/>
-            <line x1="27.5" y1="11" x2="40.5" y2="11" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="square"/>
-            <line x1="31" y1="5" x2="37" y2="5" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-            <line x1="31" y1="21" x2="37" y2="21" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-            <line x1="27.5" y1="8.5" x2="27.5" y2="13.5" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-            <line x1="40.5" y1="8.5" x2="40.5" y2="13.5" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-          </g>
-          <text x="52" y="37" text-anchor="middle" font-family="'Orbitron',monospace" font-weight="500" font-size="8" fill="#c8940c" style="letter-spacing:3px;filter:drop-shadow(0 0 3px rgba(200,148,12,0.65))">—FORGE—</text>
+      <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
+        <!-- Gothic Cross — chrome pattée with blue neon glow -->
+        <svg viewBox="0 0 80 100" width="30" height="38" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="nav-cg" x1="15%" y1="0%" x2="85%" y2="100%">
+              <stop offset="0%"   stop-color="#c8ccd8"/>
+              <stop offset="18%"  stop-color="#eceef8"/>
+              <stop offset="42%"  stop-color="#a8abbe"/>
+              <stop offset="68%"  stop-color="#707384"/>
+              <stop offset="88%"  stop-color="#9294a8"/>
+              <stop offset="100%" stop-color="#b8bac8"/>
+            </linearGradient>
+            <filter id="nav-gf" x="-55%" y="-55%" width="210%" height="210%">
+              <feDropShadow dx="0" dy="0" stdDeviation="2"   flood-color="#00d4ff" flood-opacity="0.9"/>
+              <feDropShadow dx="0" dy="0" stdDeviation="7"   flood-color="#00d4ff" flood-opacity="0.5"/>
+              <feDropShadow dx="0" dy="0" stdDeviation="1.2" flood-color="#9000ff" flood-opacity="0.4"/>
+            </filter>
+          </defs>
+          <path filter="url(#nav-gf)" fill="url(#nav-cg)"
+            d="M 40 0 L 55 6 L 50 11 L 50 34 L 74 34 L 80 40 L 74 46
+               L 50 46 L 50 89 L 55 94 L 40 100 L 25 94 L 30 89
+               L 30 46 L 6 46 L 0 40 L 6 34 L 30 34 L 30 11 L 25 6 Z"/>
         </svg>
       </a>
 
@@ -286,6 +321,9 @@
       </div>
     </section>
 
+    <!-- Gradient fade into GTR -->
+    <div class="sect-fade-down"></div>
+
     <!-- ── R33 GTR Burnout ────────────────────────────────────── -->
     <section id="gtr-section">
       <div id="gtr-sticky">
@@ -297,6 +335,9 @@
         <div id="gtr-hint">Scroll to ignite</div>
       </div>
     </section>
+
+    <!-- Gradient fade out of GTR -->
+    <div class="sect-fade-up" style="background:linear-gradient(to top,var(--bg-void),transparent);margin-top:-80px;position:relative;z-index:3;pointer-events:none;"></div>
 
     <!-- ── The Arsenal ──────────────────────────────────────── -->
     <section class="section products-section" id="arsenal">
@@ -312,18 +353,83 @@
           <!-- Veil Studio -->
           <div class="product-card card-corner reveal">
             <div class="cs-badge">Coming Soon</div>
-            <div class="product-icon icon-purple">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="16" cy="16" rx="14" ry="9" stroke="#9000ff" stroke-width="1.5"/>
-                <circle cx="16" cy="16" r="4" fill="#9000ff" opacity="0.3"/>
-                <circle cx="16" cy="16" r="2.5" fill="#9000ff"/>
-                <path d="M8 12 Q12 8 16 8 Q20 8 24 12" stroke="#9000ff" stroke-width="1" opacity="0.5" fill="none"/>
-                <path d="M8 20 Q12 24 16 24 Q20 24 24 20" stroke="#9000ff" stroke-width="1" opacity="0.5" fill="none"/>
+
+            <!-- Veil Studio Logo -->
+            <div class="product-logo-wrap">
+              <svg viewBox="0 0 260 68" xmlns="http://www.w3.org/2000/svg" aria-label="Veil Studio" width="220" height="58">
+                <defs>
+                  <linearGradient id="vs-chr" x1="15%" y1="0%" x2="85%" y2="110%">
+                    <stop offset="0%"   stop-color="#ccd0e4"/>
+                    <stop offset="22%"  stop-color="#eef0ff"/>
+                    <stop offset="48%"  stop-color="#a0a4b8"/>
+                    <stop offset="72%"  stop-color="#6e7082"/>
+                    <stop offset="100%" stop-color="#b0b2c4"/>
+                  </linearGradient>
+                  <linearGradient id="vs-txt" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#dfe2f5"/>
+                    <stop offset="45%"  stop-color="#bcc0d4"/>
+                    <stop offset="100%" stop-color="#888898"/>
+                  </linearGradient>
+                  <filter id="vs-gf" x="-60%" y="-60%" width="220%" height="220%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2"   flood-color="#9000ff" flood-opacity="0.8"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="8"   flood-color="#9000ff" flood-opacity="0.4"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00d4ff" flood-opacity="0.3"/>
+                  </filter>
+                </defs>
+
+                <!-- Veil icon: draped fabric torn open, light breaking through -->
+                <g filter="url(#vs-gf)">
+                  <!-- Background light source -->
+                  <ellipse cx="34" cy="22" rx="8" ry="5" fill="rgba(200,180,255,0.85)"/>
+                  <!-- Light rays through tear -->
+                  <g stroke="rgba(180,140,255,0.55)" stroke-width="0.9" stroke-linecap="round">
+                    <line x1="34" y1="22" x2="10" y2="58"/>
+                    <line x1="34" y1="22" x2="20" y2="60"/>
+                    <line x1="34" y1="22" x2="34" y2="62"/>
+                    <line x1="34" y1="22" x2="48" y2="60"/>
+                    <line x1="34" y1="22" x2="58" y2="54"/>
+                  </g>
+                  <!-- Left veil panel -->
+                  <path fill="url(#vs-chr)"
+                    d="M 8 10 C 12 6 18 7 22 10 C 26 13 28 18 26 24
+                       C 24 30 20 38 18 46 C 16 54 16 60 14 62
+                       C 10 60 6 54 6 48 C 6 40 10 32 10 24
+                       C 10 18 8 14 8 10 Z"/>
+                  <!-- Right veil panel -->
+                  <path fill="url(#vs-chr)"
+                    d="M 60 10 C 56 6 50 7 46 10 C 42 13 40 18 42 24
+                       C 44 30 48 38 50 46 C 52 54 52 60 54 62
+                       C 58 60 62 54 62 48 C 62 40 58 32 58 24
+                       C 58 18 60 14 60 10 Z"/>
+                  <!-- Torn inner edge left -->
+                  <path fill="url(#vs-chr)" opacity="0.7"
+                    d="M 22 10 C 24 14 25 18 24 22 C 23 26 21 28 22 32
+                       C 23 36 25 38 24 42 C 23 46 20 50 22 54
+                       L 26 54 C 24 50 26 46 27 42
+                       C 28 38 26 36 27 32 C 28 28 30 24 28 20
+                       C 27 16 25 12 24 10 Z"/>
+                  <!-- Torn inner edge right -->
+                  <path fill="url(#vs-chr)" opacity="0.7"
+                    d="M 46 10 C 44 14 43 18 44 22 C 45 26 47 28 46 32
+                       C 45 36 43 38 44 42 C 45 46 48 50 46 54
+                       L 42 54 C 44 50 42 46 41 42
+                       C 40 38 42 36 41 32 C 40 28 38 24 40 20
+                       C 41 16 43 12 44 10 Z"/>
+                </g>
+
+                <!-- VEIL wordmark -->
+                <text x="76" y="40"
+                  font-family="'Rajdhani',sans-serif" font-size="34" font-weight="700"
+                  letter-spacing="2" fill="url(#vs-txt)">VEIL</text>
+                <!-- STUDIO -->
+                <text x="78" y="58"
+                  font-family="'Orbitron',monospace" font-size="11" font-weight="600"
+                  letter-spacing="7.5" fill="rgba(160,162,182,0.8)">STUDIO</text>
               </svg>
             </div>
+
             <div class="badge badge-live" style="margin-bottom:12px;">Live</div>
-            <div class="product-card-name">Veil Studio</div>
-            <div class="product-mission">"Sound the trumpet at scale."</div>
+            <div class="product-mission">&ldquo;Sound the trumpet at scale.&rdquo;</div>
             <p class="product-card-desc">An AI-driven media engine that turns conviction into content — generate visuals, synthesize video, and produce voice at professional quality, so the message reaches the wall faster than the sword.</p>
             <div class="product-card-footer">
               <a href="/products/veil-os.html" class="btn btn-outline btn-sm">Learn More →</a>
@@ -334,20 +440,81 @@
           <!-- Pathfinder: The Grid -->
           <div class="product-card card-corner reveal reveal-delay-1">
             <div class="cs-badge">Coming Soon</div>
-            <div class="product-icon icon-blue">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="12" stroke="#00d4ff" stroke-width="1.5"/>
-                <circle cx="16" cy="16" r="2" fill="#00d4ff"/>
-                <line x1="16" y1="4" x2="16" y2="9" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="16" y1="23" x2="16" y2="28" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="4" y1="16" x2="9" y2="16" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="23" y1="16" x2="28" y2="16" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M16 10l2.5 7-2.5 1-2.5-1L16 10z" fill="#00d4ff" opacity="0.8"/>
+
+            <!-- Pathfinder Logo -->
+            <div class="product-logo-wrap">
+              <svg viewBox="0 0 260 68" xmlns="http://www.w3.org/2000/svg" aria-label="Pathfinder: The Grid" width="220" height="58">
+                <defs>
+                  <linearGradient id="pf-chr" x1="15%" y1="0%" x2="85%" y2="110%">
+                    <stop offset="0%"   stop-color="#ccd0e4"/>
+                    <stop offset="22%"  stop-color="#eef0ff"/>
+                    <stop offset="48%"  stop-color="#a0a4b8"/>
+                    <stop offset="72%"  stop-color="#6e7082"/>
+                    <stop offset="100%" stop-color="#b0b2c4"/>
+                  </linearGradient>
+                  <linearGradient id="pf-txt" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#dfe2f5"/>
+                    <stop offset="45%"  stop-color="#bcc0d4"/>
+                    <stop offset="100%" stop-color="#888898"/>
+                  </linearGradient>
+                  <filter id="pf-gf" x="-60%" y="-60%" width="220%" height="220%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2"   flood-color="#00d4ff" flood-opacity="0.85"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="8"   flood-color="#00d4ff" flood-opacity="0.45"/>
+                  </filter>
+                </defs>
+
+                <!-- Compass rose icon -->
+                <g filter="url(#pf-gf)" transform="translate(34, 34)">
+                  <!-- Outer ring -->
+                  <circle cx="0" cy="0" r="26" fill="none" stroke="url(#pf-chr)" stroke-width="1.4" opacity="0.55"/>
+                  <!-- 8 compass spokes -->
+                  <g stroke="url(#pf-chr)" stroke-linecap="round">
+                    <!-- Cardinal points (longer) -->
+                    <line x1="0" y1="-26" x2="0" y2="-18" stroke-width="2.2"/>
+                    <line x1="0" y1="18"  x2="0" y2="26"  stroke-width="2.2"/>
+                    <line x1="-26" y1="0" x2="-18" y2="0" stroke-width="2.2"/>
+                    <line x1="18"  y1="0" x2="26"  y2="0" stroke-width="2.2"/>
+                    <!-- Intercardinal points (shorter) -->
+                    <line x1="-18" y1="-18" x2="-13" y2="-13" stroke-width="1.4"/>
+                    <line x1="18"  y1="-18" x2="13"  y2="-13" stroke-width="1.4"/>
+                    <line x1="-18" y1="18"  x2="-13" y2="13"  stroke-width="1.4"/>
+                    <line x1="18"  y1="18"  x2="13"  y2="13"  stroke-width="1.4"/>
+                  </g>
+                  <!-- North diamond pointer -->
+                  <polygon points="0,-30 3,-18 0,-12 -3,-18"
+                    fill="url(#pf-chr)" stroke="none"/>
+                  <!-- South pointer (smaller) -->
+                  <polygon points="0,30 2,20 0,15 -2,20"
+                    fill="url(#pf-chr)" opacity="0.6" stroke="none"/>
+                  <!-- Center dot -->
+                  <circle cx="0" cy="0" r="4" fill="url(#pf-chr)"/>
+                  <!-- Gothic cross at north pointer tip -->
+                  <g stroke="rgba(0,212,255,0.9)" stroke-width="1.2" stroke-linecap="round">
+                    <line x1="0" y1="-37" x2="0" y2="-28"/>
+                    <line x1="-4" y1="-33" x2="4" y2="-33"/>
+                  </g>
+                  <!-- Inner tick ring -->
+                  <g stroke="url(#pf-chr)" stroke-width="0.7" opacity="0.4">
+                    <line x1="0" y1="-26" x2="0" y2="-22"/>
+                    <line x1="0" y1="22"  x2="0" y2="26"/>
+                    <line x1="-26" y1="0" x2="-22" y2="0"/>
+                    <line x1="22"  y1="0" x2="26"  y2="0"/>
+                  </g>
+                </g>
+
+                <!-- PATHFINDER wordmark -->
+                <text x="72" y="36"
+                  font-family="'Rajdhani',sans-serif" font-size="27" font-weight="700"
+                  letter-spacing="1.5" fill="url(#pf-txt)">PATHFINDER</text>
+                <!-- THE GRID -->
+                <text x="74" y="55"
+                  font-family="'Orbitron',monospace" font-size="10.5" font-weight="600"
+                  letter-spacing="7" fill="rgba(160,162,182,0.8)">THE GRID</text>
               </svg>
             </div>
+
             <div class="badge badge-live" style="margin-bottom:12px;">Live</div>
-            <div class="product-card-name">Pathfinder: The Grid</div>
-            <div class="product-mission">"Know the territory."</div>
+            <div class="product-mission">&ldquo;Know the territory.&rdquo;</div>
             <p class="product-card-desc">A next-generation navigation and exploration app that turns every journey into a mission — gamified waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it. Built for iOS.</p>
             <div class="product-card-footer">
               <a href="/products/pathfinder.html" class="btn btn-outline btn-sm">Learn More →</a>
@@ -358,17 +525,80 @@
           <!-- ChromaForge -->
           <div class="product-card card-corner reveal reveal-delay-2">
             <div class="cs-badge">Coming Soon</div>
-            <div class="product-icon icon-cyan">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 4v24M10 8l12 8-12 8" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="16" cy="16" r="8" stroke="#00ffc8" stroke-width="1" opacity="0.3"/>
-                <circle cx="16" cy="4"  r="1.5" fill="#00ffc8"/>
-                <circle cx="16" cy="28" r="1.5" fill="#00ffc8"/>
+
+            <!-- ChromaForge Logo -->
+            <div class="product-logo-wrap">
+              <svg viewBox="0 0 260 68" xmlns="http://www.w3.org/2000/svg" aria-label="ChromaForge" width="220" height="58">
+                <defs>
+                  <linearGradient id="cf-chr" x1="15%" y1="0%" x2="85%" y2="110%">
+                    <stop offset="0%"   stop-color="#ccd0e4"/>
+                    <stop offset="22%"  stop-color="#eef0ff"/>
+                    <stop offset="48%"  stop-color="#a0a4b8"/>
+                    <stop offset="72%"  stop-color="#6e7082"/>
+                    <stop offset="100%" stop-color="#b0b2c4"/>
+                  </linearGradient>
+                  <linearGradient id="cf-txt" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#dfe2f5"/>
+                    <stop offset="45%"  stop-color="#bcc0d4"/>
+                    <stop offset="100%" stop-color="#888898"/>
+                  </linearGradient>
+                  <filter id="cf-gf" x="-60%" y="-60%" width="220%" height="220%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2"   flood-color="#00ffc8" flood-opacity="0.7"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="8"   flood-color="#00d4ff" flood-opacity="0.4"/>
+                  </filter>
+                </defs>
+
+                <!-- Anvil icon -->
+                <g filter="url(#cf-gf)">
+                  <!-- Anvil body -->
+                  <path fill="url(#cf-chr)"
+                    d="M 12 44 L 12 36 C 12 32 14 30 18 30
+                       L 52 30 C 56 30 58 32 58 36 L 58 44 Z"/>
+                  <!-- Anvil face (flat top) -->
+                  <path fill="url(#cf-chr)"
+                    d="M 8 30 C 8 26 10 24 14 24
+                       L 56 24 C 60 24 62 26 62 30
+                       L 8 30 Z"/>
+                  <!-- Anvil horn (left beak) -->
+                  <path fill="url(#cf-chr)"
+                    d="M 8 30 C 6 30 2 28 0 26 C 2 24 6 23 8 24 Z"/>
+                  <!-- Anvil base/feet -->
+                  <rect x="14" y="44" width="12" height="5" rx="1" fill="url(#cf-chr)"/>
+                  <rect x="44" y="44" width="12" height="5" rx="1" fill="url(#cf-chr)"/>
+                  <!-- Surface detail line -->
+                  <line x1="10" y1="28" x2="60" y2="28" stroke="rgba(220,225,255,0.5)" stroke-width="0.8"/>
+                </g>
+
+                <!-- Color sparks above anvil -->
+                <g stroke-linecap="round" stroke-width="1.8">
+                  <line x1="35" y1="24" x2="28" y2="10" stroke="#ff3333" opacity="0.9"/>
+                  <line x1="38" y1="22" x2="34" y2="8"  stroke="#ff8800" opacity="0.9"/>
+                  <line x1="41" y1="23" x2="40" y2="7"  stroke="#ffdd00" opacity="0.9"/>
+                  <line x1="44" y1="22" x2="47" y2="8"  stroke="#00ff88" opacity="0.85"/>
+                  <line x1="47" y1="24" x2="53" y2="10" stroke="#00d4ff" opacity="0.85"/>
+                  <line x1="50" y1="25" x2="58" y2="14" stroke="#9000ff" opacity="0.8"/>
+                  <!-- Spark dots -->
+                  <circle cx="28" cy="9"  r="1.8" fill="#ff3333"/>
+                  <circle cx="34" cy="7"  r="1.8" fill="#ff8800"/>
+                  <circle cx="40" cy="6"  r="2"   fill="#ffdd00"/>
+                  <circle cx="47" cy="7"  r="1.8" fill="#00ff88"/>
+                  <circle cx="53" cy="9"  r="1.8" fill="#00d4ff"/>
+                  <circle cx="58" cy="13" r="1.6" fill="#9000ff"/>
+                </g>
+
+                <!-- CHROMA wordmark -->
+                <text x="76" y="38"
+                  font-family="'Rajdhani',sans-serif" font-size="30" font-weight="700"
+                  letter-spacing="2" fill="url(#cf-txt)">CHROMA</text>
+                <!-- FORGE -->
+                <text x="78" y="57"
+                  font-family="'Orbitron',monospace" font-size="11" font-weight="600"
+                  letter-spacing="8" fill="rgba(160,162,182,0.8)">FORGE</text>
               </svg>
             </div>
+
             <div class="badge badge-live" style="margin-bottom:12px;">Live</div>
-            <div class="product-card-name">ChromaForge</div>
-            <div class="product-mission">"Light up the darkness."</div>
+            <div class="product-mission">&ldquo;Light up the darkness.&rdquo;</div>
             <p class="product-card-desc">The universal Bluetooth LED controller — command multi-brand lighting from a single iOS app with 16M colors, custom sequences, and scene programming. Because the Watchman doesn't curse the dark. He floods it with light.</p>
             <div class="product-card-footer">
               <a href="/products/unified-bt-led-controller.html" class="btn btn-outline btn-sm">Learn More →</a>
@@ -379,17 +609,73 @@
           <!-- Vantage Edge -->
           <div class="product-card card-corner reveal reveal-delay-3">
             <div class="cs-badge">Coming Soon</div>
-            <div class="product-icon icon-pink">
-              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="4,24 10,16 15,20 22,10 28,6" stroke="#ff00cc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M22 6h6v6" stroke="#ff00cc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="10" cy="16" r="2" fill="#ff00cc" opacity="0.6"/>
-                <circle cx="22" cy="10" r="2" fill="#ff00cc" opacity="0.6"/>
+
+            <!-- Vantage Edge Logo -->
+            <div class="product-logo-wrap">
+              <svg viewBox="0 0 260 68" xmlns="http://www.w3.org/2000/svg" aria-label="Vantage Edge" width="220" height="58">
+                <defs>
+                  <linearGradient id="ve-chr" x1="15%" y1="0%" x2="85%" y2="110%">
+                    <stop offset="0%"   stop-color="#ccd0e4"/>
+                    <stop offset="22%"  stop-color="#eef0ff"/>
+                    <stop offset="48%"  stop-color="#a0a4b8"/>
+                    <stop offset="72%"  stop-color="#6e7082"/>
+                    <stop offset="100%" stop-color="#b0b2c4"/>
+                  </linearGradient>
+                  <linearGradient id="ve-blade" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#eef0ff"/>
+                    <stop offset="35%"  stop-color="#ffffff"/>
+                    <stop offset="60%"  stop-color="#b0b4c8"/>
+                    <stop offset="100%" stop-color="#707285"/>
+                  </linearGradient>
+                  <linearGradient id="ve-txt" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="#dfe2f5"/>
+                    <stop offset="45%"  stop-color="#bcc0d4"/>
+                    <stop offset="100%" stop-color="#888898"/>
+                  </linearGradient>
+                  <filter id="ve-gf" x="-60%" y="-60%" width="220%" height="220%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2"   flood-color="#00d4ff" flood-opacity="0.7"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="9"   flood-color="#00d4ff" flood-opacity="0.35"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#ff00cc" flood-opacity="0.3"/>
+                  </filter>
+                </defs>
+
+                <!-- Sword icon: angled ~45° pointing upper-left -->
+                <g filter="url(#ve-gf)" transform="translate(34, 34) rotate(-44)">
+                  <!-- Blade (tapered) -->
+                  <path fill="url(#ve-blade)"
+                    d="M 0 -30 C 1 -30 3 -24 4 -14
+                       L 5 10 L 0 12 L -5 10 L -4 -14
+                       C -3 -24 -1 -30 0 -30 Z"/>
+                  <!-- Blade center fuller -->
+                  <line x1="0" y1="-28" x2="0" y2="10" stroke="rgba(255,255,255,0.55)" stroke-width="0.9" stroke-linecap="round"/>
+                  <!-- Guard (crossguard) -->
+                  <rect x="-12" y="10" width="24" height="5" rx="2.5" fill="url(#ve-chr)"/>
+                  <!-- Grip wrapping lines -->
+                  <rect x="-3.5" y="15" width="7" height="18" rx="1.5" fill="url(#ve-chr)" opacity="0.85"/>
+                  <g stroke="rgba(100,105,125,0.6)" stroke-width="0.7">
+                    <line x1="-3.5" y1="18" x2="3.5" y2="18"/>
+                    <line x1="-3.5" y1="21" x2="3.5" y2="21"/>
+                    <line x1="-3.5" y1="24" x2="3.5" y2="24"/>
+                    <line x1="-3.5" y1="27" x2="3.5" y2="27"/>
+                    <line x1="-3.5" y1="30" x2="3.5" y2="30"/>
+                  </g>
+                  <!-- Pommel -->
+                  <ellipse cx="0" cy="38" rx="6" ry="5" fill="url(#ve-chr)"/>
+                </g>
+
+                <!-- VANTAGE wordmark -->
+                <text x="72" y="36"
+                  font-family="'Rajdhani',sans-serif" font-size="30" font-weight="700"
+                  letter-spacing="2" fill="url(#ve-txt)">VANTAGE</text>
+                <!-- EDGE -->
+                <text x="74" y="55"
+                  font-family="'Orbitron',monospace" font-size="11" font-weight="600"
+                  letter-spacing="8.5" fill="rgba(160,162,182,0.8)">EDGE</text>
               </svg>
             </div>
+
             <div class="badge badge-soon" style="margin-bottom:12px;">Coming Soon</div>
-            <div class="product-card-name">Vantage Edge</div>
-            <div class="product-mission">"See what others can't."</div>
+            <div class="product-mission">&ldquo;See what others can&rsquo;t.&rdquo;</div>
             <p class="product-card-desc">An AI-powered financial co-pilot — portfolio analysis, real-time market signals, and risk modeling that gives the Watchman the high ground over his resources. Stewardship, sharpened. Launching soon.</p>
             <div class="product-card-footer">
               <a href="/products/ai-investment-app.html" class="btn btn-outline btn-sm">Learn More →</a>
@@ -457,18 +743,27 @@
   <footer id="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <a href="/" class="nav-logo" style="text-decoration:none;">
-          <svg viewBox="0 0 112 44" width="112" height="44" xmlns="http://www.w3.org/2000/svg" aria-label="Watchman Forge">
-            <text y="19" font-family="'Orbitron',monospace" font-weight="900" font-size="15" style="letter-spacing:2px;filter:drop-shadow(0 0 3px #00d4ff) drop-shadow(0 0 8px rgba(0,212,255,0.55))"><tspan x="2" fill="white">W</tspan><tspan fill="white">A</tspan><tspan fill="none">T</tspan><tspan fill="white">C</tspan><tspan fill="white">H</tspan><tspan fill="white">M</tspan><tspan fill="white">A</tspan><tspan fill="white">N</tspan></text>
-            <g style="filter:drop-shadow(0 0 5px #9000ff) drop-shadow(0 0 2px #00d4ff)">
-              <line x1="34" y1="5" x2="34" y2="21" stroke="#00d4ff" stroke-width="3" stroke-linecap="square"/>
-              <line x1="27.5" y1="11" x2="40.5" y2="11" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="square"/>
-              <line x1="31" y1="5" x2="37" y2="5" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-              <line x1="31" y1="21" x2="37" y2="21" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-              <line x1="27.5" y1="8.5" x2="27.5" y2="13.5" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-              <line x1="40.5" y1="8.5" x2="40.5" y2="13.5" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
-            </g>
-            <text x="52" y="37" text-anchor="middle" font-family="'Orbitron',monospace" font-weight="500" font-size="8" fill="#c8940c" style="letter-spacing:3px;filter:drop-shadow(0 0 3px rgba(200,148,12,0.65))">—FORGE—</text>
+        <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
+          <!-- Gothic Cross footer (slightly larger) -->
+          <svg viewBox="0 0 80 100" width="38" height="48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="ft-cg" x1="15%" y1="0%" x2="85%" y2="100%">
+                <stop offset="0%"   stop-color="#c8ccd8"/>
+                <stop offset="22%"  stop-color="#eceef8"/>
+                <stop offset="48%"  stop-color="#a0a4b4"/>
+                <stop offset="72%"  stop-color="#686a7a"/>
+                <stop offset="100%" stop-color="#b4b6c4"/>
+              </linearGradient>
+              <filter id="ft-gf" x="-55%" y="-55%" width="210%" height="210%">
+                <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#00d4ff" flood-opacity="0.8"/>
+                <feDropShadow dx="0" dy="0" stdDeviation="9"   flood-color="#00d4ff" flood-opacity="0.4"/>
+                <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#9000ff" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+            <path filter="url(#ft-gf)" fill="url(#ft-cg)"
+              d="M 40 0 L 55 6 L 50 11 L 50 34 L 74 34 L 80 40 L 74 46
+                 L 50 46 L 50 89 L 55 94 L 40 100 L 25 94 L 30 89
+                 L 30 46 L 6 46 L 0 40 L 6 34 L 30 34 L 30 11 L 25 6 Z"/>
           </svg>
         </a>
         <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
@@ -512,7 +807,7 @@
     </div>
   </footer>
 
-  <script src="/js/main.js"></script>
-  <script src="/js/gtr-burnout.js?v=r33-5"></script>
+  <script src="/js/main.js?v=logo-1"></script>
+  <script src="/js/gtr-burnout.js?v=logo-1"></script>
 </body>
 </html>
