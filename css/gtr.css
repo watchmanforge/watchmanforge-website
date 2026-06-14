@@ -122,9 +122,34 @@
   50%       { opacity: 0.75; }
 }
 
+/* ── GTR PNG car element ──────────────────────────────────── */
+#gtr-png {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 3;
+  /* bottom 30% = groundY at 70% from top */
+  bottom: 30%;
+  width: clamp(480px, 55vw, 840px);
+  filter:
+    drop-shadow(0 20px 55px rgba(0,212,255,0.24))
+    drop-shadow(0 10px 22px rgba(0,0,0,0.9));
+  transform-origin: bottom center;
+  transition: filter 0.3s ease;
+}
+#gtr-png.state-launching {
+  filter:
+    drop-shadow(0 20px 55px rgba(0,212,255,0.35))
+    drop-shadow(0 10px 22px rgba(0,0,0,0.9));
+}
+
 /* ── Mobile simplification ─────────────────────────────────── */
 @media (max-width: 767px) {
   #gtr-section { height: 180vh; }
   #gtr-verse .verse-text { font-size: 0.95rem; white-space: normal; padding: 0 20px; }
   #gtr-verse .verse-ref  { font-size: 0.6rem; }
+  #gtr-png {
+    width: min(94vw, 460px);
+    bottom: 26%;
+  }
 }

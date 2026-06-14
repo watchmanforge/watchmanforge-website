@@ -1254,6 +1254,144 @@ textarea.form-control {
 .contact-info-body a:hover { color: var(--neon-blue); }
 
 /* ============================================================
+   Custom Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
+* { scrollbar-width: thin; scrollbar-color: var(--neon-blue) var(--bg-void); }
+
+/* ============================================================
+   Nav / Footer Cross PNG Logo
+   ============================================================ */
+.nav-cross {
+  width: 30px;
+  height: auto;
+  display: block;
+  transition: filter 0.35s var(--ease-out-quint);
+}
+.nav-logo:hover .nav-cross {
+  filter: drop-shadow(0 0 8px rgba(0,212,255,0.95)) drop-shadow(0 0 22px rgba(0,212,255,0.55));
+}
+.footer-cross {
+  width: 42px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(0,212,255,0.5)) drop-shadow(0 0 30px rgba(0,212,255,0.2));
+}
+
+/* ============================================================
+   Hero — New Brand Identity Layout
+   ============================================================ */
+.hero {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Brand cross mark */
+.hero-brand-icon {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.1s forwards;
+  margin-bottom: 18px;
+}
+.hero-cross-img {
+  width: clamp(56px, 7.5vw, 88px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 14px rgba(0,212,255,0.7)) drop-shadow(0 0 44px rgba(0,212,255,0.3));
+  animation: crossPulse 4s ease-in-out infinite 1.4s;
+}
+
+/* GTR Centerpiece */
+.hero-gtr-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 24px auto 0;
+  opacity: 0;
+  transform: translateX(-56px);
+  animation: heroSlideIn 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+.hero-gtr-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter:
+    drop-shadow(0 0 70px rgba(0,212,255,0.2))
+    drop-shadow(0 28px 80px rgba(0,0,0,0.92))
+    drop-shadow(0 6px 18px rgba(0,212,255,0.18));
+}
+.hero-gtr-reflection {
+  position: absolute;
+  bottom: 2%;
+  left: 6%; right: 6%;
+  height: 48px;
+  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(0,212,255,0.38), transparent 80%);
+  filter: blur(10px);
+  pointer-events: none;
+  transform: scaleY(-1);
+  opacity: 0.6;
+}
+
+/* Text overrides for centered layout */
+.hero-sub {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-actions {
+  justify-content: center;
+}
+/* Adjusted animation delays for sequential entrance */
+.hero-eyebrow { animation-delay: 0.45s; }
+.hero-title   { animation-delay: 0.75s; }
+.hero-sub     { animation-delay: 0.95s; }
+.hero-actions { animation-delay: 1.15s; }
+
+/* Product PNG logos */
+.product-logo-img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* New animation keyframes */
+@keyframes heroSlideIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes crossPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 14px rgba(0,212,255,0.7)) drop-shadow(0 0 44px rgba(0,212,255,0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 24px rgba(0,212,255,1.0)) drop-shadow(0 0 70px rgba(0,212,255,0.5));
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    justify-content: flex-start;
+    padding-top: calc(var(--nav-h) + 12px);
+  }
+  .hero-gtr-stage {
+    margin: 16px auto 0;
+    transform: translateX(-30px);
+  }
+  .hero-cross-img { width: 60px; }
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 1100px) {
