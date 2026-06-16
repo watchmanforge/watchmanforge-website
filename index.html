@@ -12,57 +12,37 @@
   <meta property="og:url" content="https://watchmanforge.com">
   <link rel="canonical" href="https://watchmanforge.com/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css?v=premium-1">
-  <link rel="stylesheet" href="/css/gtr.css?v=premium-1">
+  <link rel="stylesheet" href="/css/main.css?v=v2-premium">
+  <link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
   <style>
-    /* Home-specific overrides */
+    /* ── Hero page overrides ── */
     .hero { min-height: 100vh; }
-    .hero .hero-content { padding-top: clamp(24px, 4vh, 60px); padding-bottom: clamp(24px, 4vh, 60px); }
-    .products-section { background: var(--bg-void); }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-    @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
-
-    .about-teaser {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 6vw, 100px);
-      align-items: center;
-    }
-    @media (max-width: 760px) { .about-teaser { grid-template-columns: 1fr; } }
-
+    /* ── Section gradient blends ── */
     .tech-bar {
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--border-mid), var(--neon-blue), var(--border-mid), transparent);
       margin: 0;
-      box-shadow: 0 0 16px rgba(0,212,255,0.25);
+      box-shadow: 0 0 16px rgba(0,212,255,0.22);
     }
-
-    /* Section gradient blends */
     .sect-fade-down {
       height: 80px;
       background: linear-gradient(to bottom, transparent, var(--bg-void));
-      pointer-events: none;
-      margin: 0;
+      pointer-events: none; margin: 0;
     }
     .sect-fade-up {
       height: 80px;
       background: linear-gradient(to top, transparent, var(--bg-void));
-      pointer-events: none;
-      margin: 0;
+      pointer-events: none; margin: 0;
     }
 
-    /* Glitch on hero title */
+    /* ── Glitch on hero title ── */
     .glitch-text { animation: glitch 8s steps(1) infinite; }
 
-    /* ── Scripture band ─────────────────────────────────────────── */
+    /* ── Scripture band ── */
     .scripture {
       position: relative;
-      padding: clamp(70px, 11vw, 150px) var(--pad-x);
+      padding: clamp(70px, 11vw, 140px) var(--pad-x);
       text-align: center;
       background:
         radial-gradient(ellipse 70% 80% at 50% 50%, rgba(144,0,255,0.10) 0%, transparent 70%),
@@ -72,9 +52,8 @@
     .scripture-verse {
       font-family: var(--font-heading);
       font-weight: 600;
-      font-size: clamp(1.5rem, 3.6vw, 3rem);
+      font-size: clamp(1.5rem, 3.5vw, 2.9rem);
       line-height: 1.4;
-      letter-spacing: 0.01em;
       max-width: 18ch;
       margin: 0 auto 28px;
       color: var(--text-primary);
@@ -82,7 +61,7 @@
     .scripture-verse .accent { color: var(--neon-blue); text-shadow: var(--glow-sm); }
     .scripture-ref {
       font-family: var(--font-display);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--neon-purple);
@@ -91,14 +70,13 @@
       font-family: var(--font-display);
       font-size: clamp(6rem, 16vw, 13rem);
       line-height: 0.6;
-      color: rgba(0,212,255,0.05);
+      color: rgba(0,212,255,0.04);
       position: absolute;
       top: 8%; left: 50%; transform: translateX(-50%);
-      pointer-events: none;
-      user-select: none;
+      pointer-events: none; user-select: none;
     }
 
-    /* ── The Charge (3 pillars) ─────────────────────────────── */
+    /* ── The Charge (3 pillars) ── */
     .charge-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -110,57 +88,73 @@
       padding: clamp(28px, 4vw, 48px);
       border: 1px solid var(--border-faint);
       background: var(--grad-card-bg);
+      position: relative;
+    }
+    .charge-cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 14px; height: 14px;
+      border-top: 1px solid var(--neon-blue);
+      border-left: 1px solid var(--neon-blue);
+      opacity: 0.4;
     }
     .charge-not {
       font-family: var(--font-display);
-      font-size: 0.72rem;
-      letter-spacing: 0.28em;
+      font-size: 0.70rem;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .charge-not s { color: var(--text-muted); opacity: 0.7; }
     .charge-is {
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
       letter-spacing: 0.04em;
-      background: var(--grad-text);
+      background: var(--grad-silver);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
-    .charge-cell p { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+    .charge-cell p { color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; }
 
-    /* Product mission tagline */
+    /* ── Products ── */
+    .products-section { background: var(--bg-void); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
+
     .product-mission {
       font-family: var(--font-heading);
       font-weight: 600;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--neon-blue);
       letter-spacing: 0.01em;
       margin: 2px 0 12px;
     }
 
-    /* Product logo display area */
-    .product-logo-wrap {
-      margin-bottom: 20px;
-      display: block;
-      line-height: 0;
+    /* ── Manifesto teaser ── */
+    .about-teaser {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
     }
-    .product-logo-wrap svg {
-      max-width: 100%;
-      height: auto;
-    }
+    @media (max-width: 760px) { .about-teaser { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-  <!-- ── Navigation ───────────────────────────────────────── -->
+  <!-- ── Navigation ─────────────────────────────────────────── -->
   <nav id="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-        <img src="/assets/images/cross-final.png" alt="Watchman Forge" class="nav-cross">
+        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
       </a>
 
       <ul class="nav-links">
@@ -230,43 +224,65 @@
 
   <main>
 
-    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <!-- ── Hero — 2-col desktop, stacked mobile ─────────────── -->
     <section class="hero">
-      <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+      <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;"></canvas>
+      <div class="hero-scan-line"></div>
       <div class="hero-glow-a"></div>
       <div class="hero-glow-b"></div>
 
       <div class="hero-content">
 
-        <!-- Brand Icon -->
-        <div class="hero-brand-icon">
-          <img src="/assets/images/cross-final.png" alt="Watchman Forge" class="hero-cross-img">
+        <!-- LEFT: Brand mark + text + CTAs -->
+        <div class="hero-left">
+
+          <div class="hero-brand-icon" style="margin-bottom:20px;opacity:0;animation:fadeIn 0.8s ease 0.1s forwards;">
+            <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="hero-cross-img">
+          </div>
+
+          <div class="eyebrow hero-eyebrow">A remnant is rising · Ezekiel 33:6</div>
+
+          <h1 class="display-xl hero-title glitch-text">
+            Forged in Faith.<br>
+            <span class="text-silver">Built for the Future.</span>
+          </h1>
+
+          <p class="hero-sub">
+            Watchman Forge is not a company. It is a remnant — those who have accepted the post, taken their place on the wall, and refused to stay silent while the hour grows late. Every tool we forge is a trumpet. Every product, a weapon for the watch.
+          </p>
+
+          <div class="hero-actions">
+            <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post →</a>
+            <a href="/about.html" class="btn btn-outline btn-lg">Read the Manifesto</a>
+          </div>
+
+          <div class="hud-readout">
+            <span>// SYS:WATCHMAN_FORGE_OS</span>
+            <span>// STATUS:ACTIVE</span>
+            <span>// EZK 33:6 · NODE:ALPHA</span>
+          </div>
+
         </div>
 
-        <div class="eyebrow hero-eyebrow">A remnant is rising · Ezekiel 33:6</div>
-
-        <!-- GTR Centerpiece — cinematic hero image -->
-        <div class="hero-gtr-stage">
-          <img src="/assets/images/gtr-final.png"
-               alt="R33 Skyline GTR — Light in the Darkness. Watchman Forge."
-               class="hero-gtr-img"
-               loading="eager"
-               fetchpriority="high">
-          <div class="hero-gtr-reflection"></div>
-        </div>
-
-        <h1 class="display-xl hero-title">
-          Forged in Faith.<br>
-          <span class="text-gradient">Built for the Future.</span>
-        </h1>
-
-        <p class="hero-sub">
-          Watchman Forge is not a company. It is a remnant — those who have accepted the post, taken their place on the wall, and refused to stay silent while the hour grows late. Every tool we forge is a trumpet. Every product, a weapon for the watch.
-        </p>
-
-        <div class="hero-actions">
-          <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post →</a>
-          <a href="/about.html" class="btn btn-outline btn-lg">Read the Manifesto</a>
+        <!-- RIGHT: GTR Viewport -->
+        <div class="hero-right">
+          <div class="hero-gtr-frame hud-frame">
+            <div class="hud-bracket hud-bracket-tl"></div>
+            <div class="hud-bracket hud-bracket-tr"></div>
+            <div class="hud-bracket hud-bracket-bl"></div>
+            <div class="hud-bracket hud-bracket-br"></div>
+            <canvas id="hero-gtr-canvas"></canvas>
+            <img src="/assets/images/gtr-transparent.png"
+                 class="hero-gtr-car"
+                 alt="R33 Skyline GTR — Light in the Darkness. Watchman Forge."
+                 loading="eager"
+                 fetchpriority="high">
+            <div class="hero-gtr-ground-glow"></div>
+            <div class="hero-gtr-hud-label">
+              <span>R33 SKYLINE GT-R · WATCHMAN FORGE</span>
+              <span>PSALM 121:8</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -277,7 +293,7 @@
       </div>
     </section>
 
-    <!-- ── Scripture band ───────────────────────────────────── -->
+    <!-- ── Scripture band ──────────────────────────────────────── -->
     <section class="scripture">
       <div class="scripture-mark">&ldquo;</div>
       <p class="scripture-verse">
@@ -288,11 +304,12 @@
 
     <div class="tech-bar"></div>
 
-    <!-- ── The Charge ───────────────────────────────────────── -->
+    <!-- ── The Charge ─────────────────────────────────────────── -->
     <section class="section">
       <div class="container">
         <div class="section-header">
           <div class="eyebrow reveal">The Charge</div>
+          <span class="hud-section-label">// NODE:WATCHMAN-ALPHA · COORD:31.7683°N 35.2137°E</span>
           <h2 class="section-title reveal reveal-delay-1">You Are Not a Customer.<br>You Are Called.</h2>
           <p class="section-sub reveal reveal-delay-2">When you stand with Watchman Forge — when you carry the mark, wield the tools, sound the trumpet — you do not buy a product. You accept a post. You become a Watchman.</p>
         </div>
@@ -317,16 +334,14 @@
       </div>
     </section>
 
-    <!-- Gradient fade into GTR -->
     <div class="sect-fade-down"></div>
 
-    <!-- ── R33 GTR Burnout ────────────────────────────────────── -->
+    <!-- ── R33 GTR Burnout ─────────────────────────────────────── -->
     <section id="gtr-section">
       <div id="gtr-sticky">
         <canvas id="gtr-canvas"></canvas>
-        <!-- GTR car PNG — positioned over canvas, smoke renders behind -->
         <img id="gtr-png"
-             src="/assets/images/gtr-final.png"
+             src="/assets/images/gtr-transparent.png"
              alt="R33 Skyline GTR — Watchman Forge"
              loading="eager">
         <div id="gtr-verse">
@@ -337,14 +352,14 @@
       </div>
     </section>
 
-    <!-- Gradient fade out of GTR -->
     <div class="sect-fade-up" style="background:linear-gradient(to top,var(--bg-void),transparent);margin-top:-80px;position:relative;z-index:3;pointer-events:none;"></div>
 
-    <!-- ── The Arsenal ──────────────────────────────────────── -->
+    <!-- ── The Arsenal ────────────────────────────────────────── -->
     <section class="section products-section" id="arsenal">
       <div class="container">
         <div class="section-header">
           <div class="eyebrow reveal">The Arsenal</div>
+          <span class="hud-section-label">// 4 INSTRUMENTS · 1 MISSION · STATUS:FORGING</span>
           <h2 class="section-title reveal reveal-delay-1">Tools Forged for the Watch</h2>
           <p class="section-sub reveal reveal-delay-2">Four instruments, one mission — equip the Watchman to see clearly, move surely, and sound the trumpet at scale.</p>
         </div>
@@ -352,66 +367,78 @@
         <div class="products-grid">
 
           <!-- Veil Studio -->
-          <div class="product-card card-corner reveal">
+          <div class="product-card card-corner hud-frame reveal">
+            <div class="hud-bracket hud-bracket-tl"></div>
+            <div class="hud-bracket hud-bracket-tr"></div>
             <div class="cs-badge">Coming Soon</div>
 
-            <div class="product-logo-wrap">
-              <img src="/assets/images/veil-logo.png" alt="Veil Studio" class="product-logo-img">
+            <div class="app-icon-wrap">
+              <img src="/assets/images/veil-logo.png" alt="Veil Studio">
             </div>
 
+            <div class="product-card-name">Veil Studio</div>
             <div class="product-mission">&ldquo;Sound the trumpet at scale.&rdquo;</div>
             <p class="product-card-desc">An AI-driven media engine that turns conviction into content — generate visuals, synthesize video, and produce voice at professional quality, so the message reaches the wall faster than the sword.</p>
             <div class="product-card-footer">
               <a href="/products/veil-os.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.75rem;color:var(--text-muted);">iOS · Web</span>
+              <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Web</span>
             </div>
           </div>
 
           <!-- Pathfinder: The Grid -->
-          <div class="product-card card-corner reveal reveal-delay-1">
+          <div class="product-card card-corner hud-frame reveal reveal-delay-1">
+            <div class="hud-bracket hud-bracket-tl"></div>
+            <div class="hud-bracket hud-bracket-tr"></div>
             <div class="cs-badge">Coming Soon</div>
 
-            <div class="product-logo-wrap">
-              <img src="/assets/images/pathfinder-logo.png" alt="Pathfinder: The Grid" class="product-logo-img">
+            <div class="app-icon-wrap">
+              <img src="/assets/images/pathfinder-logo.png" alt="Pathfinder: The Grid">
             </div>
 
+            <div class="product-card-name">Pathfinder: The Grid</div>
             <div class="product-mission">&ldquo;Know the territory.&rdquo;</div>
-            <p class="product-card-desc">A next-generation navigation and exploration app that turns every journey into a mission — gamified waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it. Built for iOS.</p>
+            <p class="product-card-desc">A next-generation navigation and exploration app that turns every journey into a mission — gamified waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it.</p>
             <div class="product-card-footer">
               <a href="/products/pathfinder.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.75rem;color:var(--text-muted);">iOS</span>
+              <span style="font-size:0.72rem;color:var(--text-muted);">iOS</span>
             </div>
           </div>
 
           <!-- ChromaForge -->
-          <div class="product-card card-corner reveal reveal-delay-2">
+          <div class="product-card card-corner hud-frame reveal reveal-delay-2">
+            <div class="hud-bracket hud-bracket-tl"></div>
+            <div class="hud-bracket hud-bracket-tr"></div>
             <div class="cs-badge">Coming Soon</div>
 
-            <div class="product-logo-wrap">
-              <img src="/assets/images/chromaforge-logo.png" alt="ChromaForge" class="product-logo-img">
+            <div class="app-icon-wrap">
+              <img src="/assets/images/chromaforge-logo.png" alt="ChromaForge">
             </div>
 
+            <div class="product-card-name">ChromaForge</div>
             <div class="product-mission">&ldquo;Light up the darkness.&rdquo;</div>
             <p class="product-card-desc">The universal Bluetooth LED controller — command multi-brand lighting from a single iOS app with 16M colors, custom sequences, and scene programming. Because the Watchman doesn't curse the dark. He floods it with light.</p>
             <div class="product-card-footer">
               <a href="/products/unified-bt-led-controller.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.75rem;color:var(--text-muted);">iOS · Hardware</span>
+              <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Hardware</span>
             </div>
           </div>
 
           <!-- Vantage Edge -->
-          <div class="product-card card-corner reveal reveal-delay-3">
+          <div class="product-card card-corner hud-frame reveal reveal-delay-3">
+            <div class="hud-bracket hud-bracket-tl"></div>
+            <div class="hud-bracket hud-bracket-tr"></div>
             <div class="cs-badge">Coming Soon</div>
 
-            <div class="product-logo-wrap">
-              <img src="/assets/images/vantage-logo.png" alt="Vantage Edge" class="product-logo-img">
+            <div class="app-icon-wrap" style="background:linear-gradient(145deg,rgba(18,8,30,0.98),rgba(8,4,18,0.98));">
+              <img src="/assets/images/vantage-sword.png" alt="Vantage Edge">
             </div>
 
+            <div class="product-card-name">Vantage Edge</div>
             <div class="product-mission">&ldquo;See what others can&rsquo;t.&rdquo;</div>
-            <p class="product-card-desc">An AI-powered financial co-pilot — portfolio analysis, real-time market signals, and risk modeling that gives the Watchman the high ground over his resources. Stewardship, sharpened. Launching soon.</p>
+            <p class="product-card-desc">An AI-powered financial co-pilot — portfolio analysis, real-time market signals, and risk modeling that gives the Watchman the high ground over his resources. Stewardship, sharpened.</p>
             <div class="product-card-footer">
               <a href="/products/ai-investment-app.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.75rem;color:var(--text-muted);">iOS · Coming Soon</span>
+              <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Coming Soon</span>
             </div>
           </div>
 
@@ -421,31 +448,36 @@
 
     <div class="tech-bar"></div>
 
-    <!-- ── Manifesto Teaser ──────────────────────────────────── -->
+    <!-- ── Manifesto Teaser ───────────────────────────────────── -->
     <section class="section">
       <div class="container">
         <div class="about-teaser">
           <div class="reveal">
             <div class="eyebrow">Who We Are</div>
-            <h2 class="section-title" style="margin-bottom:20px;">Forged in Faith.<br>Built for the Future.</h2>
+            <span class="hud-section-label">// MISSION:ACTIVE · WALL:MANNED · TRUMPET:READY</span>
+            <h2 class="section-title" style="margin-bottom:20px;background:var(--grad-silver);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Forged in Faith.<br>Built for the Future.</h2>
             <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">Watchman Forge builds technology for a people with a purpose. We are makers and believers who refuse to let the most powerful tools of this age belong only to those who would use them for less. Every line of code is consecrated to a mission older than any of us.</p>
             <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:36px;">We stand at our watch before the King of Kings — Revelation 19:16 — and we forge for the day His name is on every wall. This is the work. This is the watch.</p>
             <a href="/about.html" class="btn btn-outline">Read the Manifesto →</a>
           </div>
           <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
-            <div class="stat-block" style="border:1px solid var(--border-faint);border-radius:4px 0 0 0;">
+            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:4px 0 0 0;">
+              <div class="hud-bracket hud-bracket-tl"></div>
               <div class="stat-number">33:6</div>
               <div class="stat-label">The Charge</div>
             </div>
-            <div class="stat-block" style="border:1px solid var(--border-faint);border-radius:0 4px 0 0;border-left:none;">
+            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:0 4px 0 0;border-left:none;">
+              <div class="hud-bracket hud-bracket-tr"></div>
               <div class="stat-number">4</div>
               <div class="stat-label">Tools Forged</div>
             </div>
-            <div class="stat-block" style="border:1px solid var(--border-faint);border-top:none;border-radius:0 0 0 4px;">
+            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-radius:0 0 0 4px;">
+              <div class="hud-bracket hud-bracket-bl"></div>
               <div class="stat-number">24/7</div>
               <div class="stat-label">On the Wall</div>
             </div>
-            <div class="stat-block" style="border:1px solid var(--border-faint);border-top:none;border-left:none;border-radius:0 0 4px 0;">
+            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-left:none;border-radius:0 0 4px 0;">
+              <div class="hud-bracket hud-bracket-br"></div>
               <div class="stat-number">1</div>
               <div class="stat-label">King of Kings</div>
             </div>
@@ -454,10 +486,14 @@
       </div>
     </section>
 
-    <!-- ── Enlist CTA ────────────────────────────────────────── -->
+    <!-- ── Enlist CTA ─────────────────────────────────────────── -->
     <section class="cta-section section" id="enlist">
       <div class="container">
-        <div class="cta-box reveal">
+        <div class="cta-box hud-frame reveal">
+          <div class="hud-bracket hud-bracket-tl"></div>
+          <div class="hud-bracket hud-bracket-tr"></div>
+          <div class="hud-bracket hud-bracket-bl"></div>
+          <div class="hud-bracket hud-bracket-br"></div>
           <div class="eyebrow" style="justify-content:center;">Join the Forge</div>
           <h2 class="section-title">The Hour Has Come<br>to Wake From Slumber.</h2>
           <p class="section-sub">This is your enlistment. Not a signup — a stand. Take the post, take up the wall, and join the remnant sounding the trumpet before the King returns.</p>
@@ -471,12 +507,12 @@
 
   </main>
 
-  <!-- ── Footer ───────────────────────────────────────────── -->
+  <!-- ── Footer ──────────────────────────────────────────────── -->
   <footer id="footer">
     <div class="footer-main">
       <div class="footer-brand">
         <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
-          <img src="/assets/images/cross-final.png" alt="Watchman Forge" class="footer-cross">
+          <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross">
         </a>
         <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
         <div class="footer-contact">
@@ -519,7 +555,7 @@
     </div>
   </footer>
 
-  <script src="/js/main.js?v=premium-1"></script>
-  <script src="/js/gtr-burnout.js?v=premium-1"></script>
+  <script src="/js/main.js?v=v2-premium"></script>
+  <script src="/js/gtr-burnout.js?v=v2-premium"></script>
 </body>
 </html>

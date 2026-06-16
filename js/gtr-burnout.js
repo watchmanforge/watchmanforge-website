@@ -2,7 +2,7 @@
    R33 SKYLINE GTR — Scroll-Reactive Burnout Animation
    Watchman Forge · EZK 33:6
    Canvas: bg + road + smoke particles (behind PNG car)
-   gtr-final.png: the car, positioned/animated as DOM element
+   gtr-transparent.png: the car, positioned/animated as DOM element
    ============================================================ */
 
 (function () {
