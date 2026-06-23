@@ -193,9 +193,92 @@
     align-items: center;
   }
   @media (max-width: 760px) { .about-teaser { grid-template-columns: 1fr; } }
+
+  /* ═══════════ App icon tiles — fill the squircle, iOS-style ═══════════ */
+  .app-icon-wrap{ border-radius:22%; overflow:hidden; padding:0; aspect-ratio:1/1;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.07), 0 8px 26px rgba(0,0,0,0.5); }
+  .app-icon-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* ═══════════ Hidden scripture ═══════════ */
+  .wf-has-verse{ cursor:help; }
+  .wf-verse-tip{ position:fixed; z-index:9998; pointer-events:none; max-width:260px; padding:9px 12px;
+    background:rgba(4,6,12,0.97); border:1px solid var(--border-mid, rgba(0,212,255,0.32));
+    box-shadow:0 0 18px rgba(0,212,255,0.18); font-family:var(--font-display, ui-monospace, monospace);
+    font-size:0.72rem; line-height:1.5; color:var(--text-secondary,#9fb6c9);
+    opacity:0; transform:translateY(4px); transition:opacity .18s ease, transform .18s ease; }
+  .wf-verse-tip.show{ opacity:1; transform:translateY(0); }
+  .wf-verse-tip .vref{ display:block; color:var(--neon-blue,#00d4ff); letter-spacing:.12em; font-size:.62rem; margin-bottom:4px; }
+  #wf-whisper{ position:fixed; left:16px; bottom:14px; z-index:50; font-family:var(--font-display, ui-monospace, monospace);
+    font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--neon-blue,#00d4ff);
+    opacity:0; transition:opacity 1.3s ease; pointer-events:none; user-select:none; mix-blend-mode:screen; }
+  @media (max-width:760px){ #wf-whisper{ font-size:.54rem; left:12px; bottom:10px; } }
+
+  /* ═══════════ Boot sequence — THE GRID ═══════════ */
+  #wf-boot{ display:none; }
+  html.wf-booting{ overflow:hidden; }
+  html.wf-booting #wf-boot{ display:flex; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center;
+    overflow:hidden; background:radial-gradient(ellipse 120% 85% at 50% 36%, #03141f 0%, #010a13 46%, #00040a 100%);
+    transition:opacity .6s ease; }
+  html.wf-booting #wf-boot::after{ content:''; position:absolute; left:-60%; right:-60%; bottom:-12%; height:72%; z-index:0;
+    background-image:linear-gradient(rgba(0,212,255,0.20) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.12) 1px, transparent 1px);
+    background-size:48px 48px; transform:perspective(360px) rotateX(64deg); transform-origin:center bottom;
+    -webkit-mask-image:linear-gradient(to top,#000 4%,transparent 72%); mask-image:linear-gradient(to top,#000 4%,transparent 72%);
+    animation:wf-grid 6s linear infinite; opacity:.85; pointer-events:none; }
+  @keyframes wf-grid{ from{ background-position:0 0; } to{ background-position:0 48px; } }
+  #wf-boot.wf-done{ opacity:0; pointer-events:none; }
+  .wf-boot-inner{ position:relative; z-index:2; width:min(680px,92vw); padding:0 22px; }
+  #wf-boot-log{ margin:0; font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(.7rem,1.6vw,.92rem);
+    line-height:1.8; color:#7fe9ff; white-space:pre-wrap; min-height:13em;
+    text-shadow:0 0 10px rgba(0,212,255,.6), 0 0 2px rgba(0,212,255,.9); }
+  #wf-boot-log .ok{ color:#00ffc8; }
+  #wf-boot-log .hl{ color:#eafdff; text-shadow:0 0 12px rgba(120,230,255,.95); }
+  #wf-boot-log .hl2{ color:#bff3ff; letter-spacing:.04em; }
+  #wf-boot-log .vs{ color:#9fb6c9; text-shadow:none; }
+  #wf-boot-log .cursor{ color:#eafdff; animation:wf-blink 1s steps(1) infinite; }
+  @keyframes wf-blink{ 50%{ opacity:0; } }
+  .wf-boot-skip{ position:relative; z-index:2; margin-top:22px; font-family:var(--font-display, ui-monospace, monospace); font-size:.58rem;
+    letter-spacing:.22em; text-transform:uppercase; color:#3f6173; }
+
+  /* ═══════════ The Watch (beacon scene) ═══════════ */
+  .watchtower{ position:relative; overflow:hidden; min-height:clamp(460px,64vh,680px);
+    background:radial-gradient(ellipse 95% 75% at 50% 14%, #0a1330 0%, #05060f 50%, var(--bg-void,#010104) 100%);
+    display:flex; align-items:flex-start; }
+  .wt-svg{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+  .wt-stars{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+  .wt-star{ position:absolute; background:#cfe9ff; border-radius:50%; opacity:.5; animation:wt-tw 3s ease-in-out infinite; }
+  @keyframes wt-tw{ 0%,100%{opacity:.16;} 50%{opacity:.9;} }
+  .wt-content{ position:relative; z-index:3; width:100%; padding-top:clamp(48px,8vh,92px); }
+  .wt-inner{ max-width:580px; }
+  .watchtower .section-title{ margin:12px 0 16px; }
+  .wt-pillar{ transform-box:view-box; transform-origin:600px 272px; animation:wt-breathe 4.8s ease-in-out infinite; }
+  @keyframes wt-breathe{ 0%,100%{ opacity:.48; transform:scaleY(.95);} 50%{ opacity:.9; transform:scaleY(1.05);} }
+  .wt-rays{ transform-box:view-box; transform-origin:600px 272px; animation:wt-sway 9.5s ease-in-out infinite alternate; }
+  @keyframes wt-sway{ 0%{ transform:rotate(-4deg);} 100%{ transform:rotate(4deg);} }
+  .wt-beacon-glow{ transform-box:view-box; transform-origin:600px 272px; animation:wt-glow 2.8s ease-in-out infinite; }
+  @keyframes wt-glow{ 0%,100%{ opacity:.5; transform:scale(.9);} 50%{ opacity:.9; transform:scale(1.14);} }
+  .wt-beacon-dot{ animation:wt-bdot 2.8s ease-in-out infinite; }
+  @keyframes wt-bdot{ 0%,100%{opacity:.75;} 50%{opacity:1;} }
+  @media (prefers-reduced-motion:reduce){ .wt-pillar,.wt-rays,.wt-beacon-glow,.wt-beacon-dot,.wt-star{ animation:none !important; } }
 </style>
+<script>
+(function(){try{
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(sessionStorage.getItem('wf_booted'))return;
+  document.documentElement.classList.add('wf-booting');
+  setTimeout(function(){document.documentElement.classList.remove('wf-booting');},9000);
+}catch(e){}})();
+</script>
 </head>
 <body>
+<!-- "My soul waits for the Lord more than watchmen wait for the morning." — Psalm 130:6  ·  you're reading the source. good. the remnant pays attention. -->
+
+<!-- ── Boot sequence (first visit per session; skippable) ───── -->
+<div id="wf-boot" aria-hidden="true">
+  <div class="wf-boot-inner">
+    <div id="wf-boot-log"></div>
+    <div class="wf-boot-skip">▸ press any key or tap to skip</div>
+  </div>
+</div>
 
 <!-- ── Navigation ─────────────────────────────────────────── -->
 <nav id="nav">
@@ -384,6 +467,65 @@
 
   <div class="tech-bar"></div>
 
+  <!-- ── The Watch ──────────────────────────────────────────── -->
+  <section class="watchtower" id="the-watch" aria-label="The Watch">
+    <svg class="wt-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="wtPillar" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%"  stop-color="#cdf6ff" stop-opacity="0.55"/>
+          <stop offset="20%" stop-color="#00d4ff" stop-opacity="0.30"/>
+          <stop offset="68%" stop-color="#00d4ff" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="wtRay" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.26"/>
+          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="wtBeacon" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#eafdff"/>
+          <stop offset="45%" stop-color="#00d4ff"/>
+          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="wtDawn" cx="50%" cy="100%" r="78%">
+          <stop offset="0%" stop-color="#ff9d5c" stop-opacity="0.50"/>
+          <stop offset="36%" stop-color="#9c5f43" stop-opacity="0.16"/>
+          <stop offset="100%" stop-color="#010104" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="wtCity" cx="50%" cy="100%" r="62%">
+          <stop offset="0%" stop-color="#0c3346" stop-opacity="0.65"/>
+          <stop offset="100%" stop-color="#010104" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="600" cy="602" rx="840" ry="200" fill="url(#wtDawn)"/>
+      <ellipse cx="600" cy="602" rx="700" ry="240" fill="url(#wtCity)"/>
+      <g class="wt-rays">
+        <polygon points="600,272 372,-130 486,-130" fill="url(#wtRay)"/>
+        <polygon points="600,272 714,-130 828,-130" fill="url(#wtRay)"/>
+      </g>
+      <polygon class="wt-pillar" points="582,272 468,-170 732,-170 618,272" fill="url(#wtPillar)"/>
+      <g id="wt-buildings" fill="#04050b"></g>
+      <g fill="#05070d">
+        <path d="M 566 600 L 566 332 L 586 300 L 614 300 L 634 332 L 634 600 Z"/>
+        <rect x="558" y="294" width="84" height="12"/>
+        <rect x="578" y="270" width="44" height="26"/>
+        <path d="M 578 270 L 600 250 L 622 270 Z"/>
+      </g>
+      <circle class="wt-beacon-glow" cx="600" cy="272" r="64" fill="url(#wtBeacon)"/>
+      <circle class="wt-beacon-dot" cx="600" cy="272" r="7" fill="#eafdff"/>
+    </svg>
+    <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
+    <div class="wt-content container">
+      <div class="wt-inner">
+        <div class="eyebrow reveal">The Watch</div>
+        <span class="hud-section-label">// THE_WATCH · LIGHT:OUTBOUND · HORIZON:CLEAR · DAWN:PENDING · PS 130:6</span>
+        <h2 class="section-title reveal reveal-delay-1">We Hold the Light<br>Till Morning Comes.</h2>
+        <p class="section-sub reveal reveal-delay-2" data-vref="PS 130:6">The watch was never about watching you. It's about watching <em>for</em> you — standing between the city and the dark, holding the line of light until the sun breaks the horizon. And the morning always comes.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="tech-bar"></div>
+
   <!-- ── Who We Are ─────────────────────────────────────────── -->
   <section class="section">
     <div class="container">
@@ -492,6 +634,7 @@
 </footer>
 
 <script src="/js/main.js?v=v2-premium"></script>
+<script src="/js/watchman-fx.js?v=v1"></script>
 <script src="/js/hero-burnout.js?v=v3"></script>
 </body>
 </html>

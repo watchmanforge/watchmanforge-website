@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://claude.ai/chat/123c023a-ce43-42cd-9045-9f9f72e0ee68
+HostUrl=https://claude.ai/api/organizations/d1c2b849-08bf-4183-aab8-5be4f6c82edd/conversations/123c023a-ce43-42cd-9045-9f9f72e0ee68/wiggle/download-file?path=%2Fmnt%2Fuser-data%2Foutputs%2Fveil-logo.png
