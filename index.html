@@ -1,561 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Watchman Forge — Sound the Trumpet</title>
-  <meta name="description" content="Watchman Forge is not a company — it is a movement. A remnant called to stand on the wall and sound the trumpet before the King of Kings returns. Take the post. Forged in Faith. Built for the Future.">
-  <meta name="keywords" content="Watchman Forge, the watchman, Ezekiel 33:6, sound the trumpet, faith movement, Veil Studio, Pathfinder The Grid, ChromaForge, Vantage Edge">
-  <meta property="og:title" content="Watchman Forge — Sound the Trumpet">
-  <meta property="og:description" content="This is not a purchase. It is an enlistment. Stand on the wall. Forged in Faith. Built for the Future.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://watchmanforge.com">
-  <link rel="canonical" href="https://watchmanforge.com/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css?v=v2-premium">
-  <link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
-  <style>
-    /* ── Hero page overrides ── */
-    .hero { min-height: 100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watchman Forge — Sound the Trumpet</title>
+<meta name="description" content="Watchman Forge is not a company — it is a movement. A remnant called to stand on the wall and sound the trumpet before the King of Kings returns. Take the post. Forged in Faith. Built for the Future.">
+<meta name="keywords" content="Watchman Forge, the watchman, Ezekiel 33:6, sound the trumpet, faith movement, Veil Studio, Pathfinder The Grid, ChromaForge, Vantage Edge">
+<meta property="og:title" content="Watchman Forge — Sound the Trumpet">
+<meta property="og:description" content="This is not a purchase. It is an enlistment. Stand on the wall. Forged in Faith. Built for the Future.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://watchmanforge.com">
+<link rel="canonical" href="https://watchmanforge.com/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
+<link rel="stylesheet" href="/css/main.css?v=v2-premium">
+<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<style>
+  /* ════════════════════════════════════════════════════════════
+     HOME — page-specific layout. Tokens & components come from
+     main.css / gtr.css. This block only handles flow + the hero.
+     ════════════════════════════════════════════════════════════ */
 
-    /* ── Section gradient blends ── */
-    .tech-bar {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-mid), var(--neon-blue), var(--border-mid), transparent);
-      margin: 0;
-      box-shadow: 0 0 16px rgba(0,212,255,0.22);
-    }
-    .sect-fade-down {
-      height: 80px;
-      background: linear-gradient(to bottom, transparent, var(--bg-void));
-      pointer-events: none; margin: 0;
-    }
-    .sect-fade-up {
-      height: 80px;
-      background: linear-gradient(to top, transparent, var(--bg-void));
-      pointer-events: none; margin: 0;
-    }
+  /* Quality floor */
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  a:focus-visible, .btn:focus-visible, button:focus-visible {
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 3px;
+  }
 
-    /* ── Glitch on hero title ── */
-    .glitch-text { animation: glitch 8s steps(1) infinite; }
+  /* ── Section dividers / blends (from your system) ── */
+  .tech-bar {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-mid), var(--neon-blue), var(--border-mid), transparent);
+    margin: 0;
+    box-shadow: 0 0 16px rgba(0,212,255,0.22);
+  }
+  .sect-fade-down { height: 80px; background: linear-gradient(to bottom, transparent, var(--bg-void)); pointer-events: none; margin: 0; }
 
-    /* ── Scripture band ── */
-    .scripture {
-      position: relative;
-      padding: clamp(70px, 11vw, 140px) var(--pad-x);
-      text-align: center;
-      background:
-        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(144,0,255,0.10) 0%, transparent 70%),
-        var(--bg-void);
-      overflow: hidden;
-    }
-    .scripture-verse {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: clamp(1.5rem, 3.5vw, 2.9rem);
-      line-height: 1.4;
-      max-width: 18ch;
-      margin: 0 auto 28px;
-      color: var(--text-primary);
-    }
-    .scripture-verse .accent { color: var(--neon-blue); text-shadow: var(--glow-sm); }
-    .scripture-ref {
-      font-family: var(--font-display);
-      font-size: 0.78rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--neon-purple);
-    }
-    .scripture-mark {
-      font-family: var(--font-display);
-      font-size: clamp(6rem, 16vw, 13rem);
-      line-height: 0.6;
-      color: rgba(0,212,255,0.04);
-      position: absolute;
-      top: 8%; left: 50%; transform: translateX(-50%);
-      pointer-events: none; user-select: none;
-    }
+  /* ════════════════════════════════════════════════════════════
+     HERO — single GTR. Full-bleed burnout, text overlaid bottom-left.
+     ════════════════════════════════════════════════════════════ */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    min-height: 92svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--bg-void);
+    isolation: isolate;
+  }
+  .hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+  }
+  .hero-ready .hero-canvas { opacity: 1; }
+  /* Legibility scrim: dark at bottom + left, clears toward upper-right so the car & city read */
+  .hero-scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(to top, var(--bg-void) 1%, rgba(1,1,4,0.74) 20%, rgba(1,1,4,0.30) 46%, rgba(1,1,4,0) 70%),
+      linear-gradient(to right, rgba(1,1,4,0.80) 0%, rgba(1,1,4,0.32) 34%, rgba(1,1,4,0) 64%);
+  }
+  .hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(54px, 8vh, 112px); }
+  .hero-inner { max-width: 640px; }
+  .hero-title { margin: 14px 0 18px; text-shadow: 0 2px 36px rgba(0,0,0,0.55); }
+  .hero-sub {
+    color: var(--text-secondary);
+    font-size: clamp(1.02rem, 1.5vw, 1.22rem);
+    line-height: 1.6;
+    max-width: 44ch;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 20px rgba(0,0,0,0.5);
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-readout {
+    margin-top: 32px;
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+    font-family: var(--font-display, ui-monospace, monospace);
+    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--neon-blue); opacity: 0.68;
+  }
 
-    /* ── The Charge (3 pillars) ── */
-    .charge-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 56px;
+  @media (max-width: 760px) {
+    .hero { min-height: 80vh; min-height: 80svh; }
+    .hero-canvas { object-position: 50% 46%; }
+    .hero-scrim {
+      background: linear-gradient(to top, var(--bg-void) 3%, rgba(1,1,4,0.84) 30%, rgba(1,1,4,0.40) 60%, rgba(1,1,4,0) 84%);
     }
-    @media (max-width: 820px) { .charge-grid { grid-template-columns: 1fr; gap: 16px; } }
-    .charge-cell {
-      padding: clamp(28px, 4vw, 48px);
-      border: 1px solid var(--border-faint);
-      background: var(--grad-card-bg);
-      position: relative;
-    }
-    .charge-cell::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 14px; height: 14px;
-      border-top: 1px solid var(--neon-blue);
-      border-left: 1px solid var(--neon-blue);
-      opacity: 0.4;
-    }
-    .charge-not {
-      font-family: var(--font-display);
-      font-size: 0.70rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-    .charge-not s { color: var(--text-muted); opacity: 0.7; }
-    .charge-is {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      letter-spacing: 0.04em;
-      background: var(--grad-silver);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-    .charge-cell p { color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; }
+    .hero-content { padding-bottom: clamp(44px, 7vh, 76px); }
+    .hero-sub { font-size: 1.02rem; }
+    .hero-actions { gap: 12px; }
+    .hero-actions .btn { flex: 1 1 auto; text-align: center; }
+    .hero-readout { gap: 6px 16px; font-size: 0.6rem; }
+  }
 
-    /* ── Products ── */
-    .products-section { background: var(--bg-void); }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
+  /* ── Scripture band ── */
+  .scripture {
+    position: relative;
+    padding: clamp(70px, 11vw, 140px) var(--pad-x);
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 80% at 50% 50%, rgba(144,0,255,0.10) 0%, transparent 70%),
+      var(--bg-void);
+    overflow: hidden;
+  }
+  .scripture-verse {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.5vw, 2.9rem);
+    line-height: 1.4;
+    max-width: 18ch;
+    margin: 0 auto 28px;
+    color: var(--text-primary);
+  }
+  .scripture-verse .accent { color: var(--neon-blue); text-shadow: var(--glow-sm); }
+  .scripture-ref {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--neon-purple);
+  }
+  .scripture-mark {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 16vw, 13rem);
+    line-height: 0.6;
+    color: rgba(0,212,255,0.04);
+    position: absolute;
+    top: 8%; left: 50%; transform: translateX(-50%);
+    pointer-events: none; user-select: none;
+  }
 
-    .product-mission {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 1.02rem;
-      color: var(--neon-blue);
-      letter-spacing: 0.01em;
-      margin: 2px 0 12px;
-    }
+  /* ── The Charge (3 pillars) ── */
+  .charge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+  @media (max-width: 820px) { .charge-grid { grid-template-columns: 1fr; gap: 16px; } }
+  .charge-cell {
+    padding: clamp(28px, 4vw, 48px);
+    border: 1px solid var(--border-faint);
+    background: var(--grad-card-bg);
+    position: relative;
+  }
+  .charge-cell::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 14px; height: 14px;
+    border-top: 1px solid var(--neon-blue);
+    border-left: 1px solid var(--neon-blue);
+    opacity: 0.4;
+  }
+  .charge-not {
+    font-family: var(--font-display);
+    font-size: 0.70rem; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 12px;
+  }
+  .charge-not s { color: var(--text-muted); opacity: 0.7; }
+  .charge-is {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+    letter-spacing: 0.04em;
+    background: var(--grad-silver);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .charge-cell p { color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; }
 
-    /* ── Manifesto teaser ── */
-    .about-teaser {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 6vw, 100px);
-      align-items: center;
-    }
-    @media (max-width: 760px) { .about-teaser { grid-template-columns: 1fr; } }
-  </style>
+  /* ── The Arsenal (products) ── */
+  .products-section { background: var(--bg-void); }
+  .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
+  .product-mission {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--neon-blue);
+    letter-spacing: 0.01em;
+    margin: 2px 0 12px;
+  }
+
+  /* ── Manifesto teaser ── */
+  .about-teaser {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: center;
+  }
+  @media (max-width: 760px) { .about-teaser { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
-  <!-- ── Navigation ─────────────────────────────────────────── -->
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
-      </a>
-
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li class="has-dropdown">
-          <a href="#arsenal">The Arsenal</a>
-          <ul class="nav-dropdown">
-            <li>
-              <a href="/products/veil-os.html">
-                <span class="nav-dropdown-icon icon-purple">
-                  <svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg>
-                </span>
-                Veil Studio
-              </a>
-            </li>
-            <li>
-              <a href="/products/pathfinder.html">
-                <span class="nav-dropdown-icon icon-blue">
-                  <svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg>
-                </span>
-                Pathfinder: The Grid
-              </a>
-            </li>
-            <li>
-              <a href="/products/unified-bt-led-controller.html">
-                <span class="nav-dropdown-icon icon-cyan">
-                  <svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg>
-                </span>
-                ChromaForge
-              </a>
-            </li>
-            <li>
-              <a href="/products/ai-investment-app.html">
-                <span class="nav-dropdown-icon icon-pink">
-                  <svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg>
-                </span>
-                Vantage Edge
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li><a href="/about.html">The Manifesto</a></li>
-        <li><a href="/contact.html">Enlist</a></li>
-      </ul>
-
-      <div class="nav-right">
-        <a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a>
-      </div>
-
-      <button class="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
+      <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown">
+        <a href="#arsenal">The Arsenal</a>
+        <ul class="nav-dropdown">
+          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
+          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
+          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
+          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
+        </ul>
+      </li>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a>
     </div>
-  </nav>
-
-  <!-- Mobile Nav -->
-  <div class="mobile-nav">
-    <a href="/">Home</a>
-    <div class="mobile-nav-section">The Arsenal</div>
-    <a href="/products/veil-os.html">Veil Studio</a>
-    <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-    <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-    <a href="/products/ai-investment-app.html">Vantage Edge</a>
-    <a href="/about.html">The Manifesto</a>
-    <a href="/contact.html">Enlist</a>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <main>
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <div class="mobile-nav-section">The Arsenal</div>
+  <a href="/products/veil-os.html">Veil Studio</a>
+  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
+  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
+  <a href="/products/ai-investment-app.html">Vantage Edge</a>
+  <a href="/about.html">The Manifesto</a>
+  <a href="/contact.html">Enlist</a>
+</div>
 
-    <!-- ── Hero — 2-col desktop, stacked mobile ─────────────── -->
-    <section class="hero">
-      <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;"></canvas>
-      <div class="hero-scan-line"></div>
-      <div class="hero-glow-a"></div>
-      <div class="hero-glow-b"></div>
+<main>
 
-      <div class="hero-content">
-
-        <!-- LEFT: Brand mark + text + CTAs -->
-        <div class="hero-left">
-
-          <div class="hero-brand-icon" style="margin-bottom:20px;opacity:0;animation:fadeIn 0.8s ease 0.1s forwards;">
-            <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="hero-cross-img">
-          </div>
-
-          <div class="eyebrow hero-eyebrow">A remnant is rising · Ezekiel 33:6</div>
-
+  <!-- ── HERO — one GTR, the burnout ──────────────────────── -->
+  <section class="hero">
+    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="eyebrow">A remnant is rising · Ezekiel 33:6</div>
           <h1 class="display-xl hero-title glitch-text">
             Forged in Faith.<br>
             <span class="text-silver">Built for the Future.</span>
           </h1>
-
           <p class="hero-sub">
-            Watchman Forge is not a company. It is a remnant — those who have accepted the post, taken their place on the wall, and refused to stay silent while the hour grows late. Every tool we forge is a trumpet. Every product, a weapon for the watch.
+            Not a company — a remnant. Every tool we forge is a trumpet; every product, a weapon for the watch.
           </p>
-
           <div class="hero-actions">
             <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post →</a>
-            <a href="/about.html" class="btn btn-outline btn-lg">Read the Manifesto</a>
+            <a href="#arsenal" class="btn btn-outline btn-lg">See the Arsenal</a>
           </div>
-
-          <div class="hud-readout">
+          <div class="hero-readout">
             <span>// SYS:WATCHMAN_FORGE_OS</span>
             <span>// STATUS:ACTIVE</span>
             <span>// EZK 33:6 · NODE:ALPHA</span>
           </div>
-
-        </div>
-
-        <!-- RIGHT: GTR Viewport -->
-        <div class="hero-right">
-          <div class="hero-gtr-frame hud-frame">
-            <div class="hud-bracket hud-bracket-tl"></div>
-            <div class="hud-bracket hud-bracket-tr"></div>
-            <div class="hud-bracket hud-bracket-bl"></div>
-            <div class="hud-bracket hud-bracket-br"></div>
-            <canvas id="hero-gtr-canvas"></canvas>
-            <img src="/assets/images/gtr-transparent.png"
-                 class="hero-gtr-car"
-                 alt="R33 Skyline GTR — Light in the Darkness. Watchman Forge."
-                 loading="eager"
-                 fetchpriority="high">
-            <div class="hero-gtr-ground-glow"></div>
-            <div class="hero-gtr-hud-label">
-              <span>R33 SKYLINE GT-R · WATCHMAN FORGE</span>
-              <span>PSALM 121:8</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="hero-scroll">
-        <span>Stand watch</span>
-        <div class="hero-scroll-line"></div>
-      </div>
-    </section>
-
-    <!-- ── Scripture band ──────────────────────────────────────── -->
-    <section class="scripture">
-      <div class="scripture-mark">&ldquo;</div>
-      <p class="scripture-verse">
-        But if the watchman sees the sword coming and does <span class="accent">not blow the trumpet</span>&hellip; I will hold the watchman accountable.
-      </p>
-      <div class="scripture-ref">Ezekiel 33:6</div>
-    </section>
-
-    <div class="tech-bar"></div>
-
-    <!-- ── The Charge ─────────────────────────────────────────── -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow reveal">The Charge</div>
-          <span class="hud-section-label">// NODE:WATCHMAN-ALPHA · COORD:31.7683°N 35.2137°E</span>
-          <h2 class="section-title reveal reveal-delay-1">You Are Not a Customer.<br>You Are Called.</h2>
-          <p class="section-sub reveal reveal-delay-2">When you stand with Watchman Forge — when you carry the mark, wield the tools, sound the trumpet — you do not buy a product. You accept a post. You become a Watchman.</p>
-        </div>
-
-        <div class="charge-grid">
-          <div class="charge-cell reveal">
-            <div class="charge-not">This is not <s>a company</s></div>
-            <div class="charge-is">A Movement</div>
-            <p>A people awakened. Romans 13:11 — "The hour has already come for you to wake up from your slumber." We are not building a brand. We are gathering the awake.</p>
-          </div>
-          <div class="charge-cell reveal reveal-delay-1">
-            <div class="charge-not">This is not <s>a purchase</s></div>
-            <div class="charge-is">An Enlistment</div>
-            <p>Habakkuk 2:1 — "I will stand at my watch and station myself on the ramparts." To join is to take up the watch. The post is real. The accountability is yours.</p>
-          </div>
-          <div class="charge-cell reveal reveal-delay-2">
-            <div class="charge-not">This is not <s>a logo</s></div>
-            <div class="charge-is">An Identity</div>
-            <p>Isaiah 62:6 — "I have posted watchmen on your walls, Jerusalem." You do not wear a name. You answer to one. You become what you were made to be.</p>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="sect-fade-down"></div>
+  <!-- ── Scripture band ──────────────────────────────────────── -->
+  <section class="scripture">
+    <div class="scripture-mark">&ldquo;</div>
+    <p class="scripture-verse">
+      But if the watchman sees the sword coming and does <span class="accent">not blow the trumpet</span>&hellip; I will hold the watchman accountable.
+    </p>
+    <div class="scripture-ref">Ezekiel 33:6</div>
+  </section>
 
-    <!-- ── R33 GTR Burnout ─────────────────────────────────────── -->
-    <section id="gtr-section">
-      <div id="gtr-sticky">
-        <canvas id="gtr-canvas"></canvas>
-        <img id="gtr-png"
-             src="/assets/images/gtr-transparent.png"
-             alt="R33 Skyline GTR — Watchman Forge"
-             loading="eager">
-        <div id="gtr-verse">
-          <div class="verse-text">"The Lord watches over your coming and going."</div>
-          <div class="verse-ref">Psalm 121:8</div>
-        </div>
-        <div id="gtr-hint">Scroll to ignite</div>
+  <div class="tech-bar"></div>
+
+  <!-- ── The Charge (mission first) ─────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">The Charge</div>
+        <span class="hud-section-label">// NODE:WATCHMAN-ALPHA · COORD:31.7683°N 35.2137°E</span>
+        <h2 class="section-title reveal reveal-delay-1">You Are Not a Customer.<br>You Are Called.</h2>
+        <p class="section-sub reveal reveal-delay-2">When you stand with Watchman Forge — carry the mark, wield the tools, sound the trumpet — you don't buy a product. You accept a post. You become a Watchman.</p>
       </div>
-    </section>
-
-    <div class="sect-fade-up" style="background:linear-gradient(to top,var(--bg-void),transparent);margin-top:-80px;position:relative;z-index:3;pointer-events:none;"></div>
-
-    <!-- ── The Arsenal ────────────────────────────────────────── -->
-    <section class="section products-section" id="arsenal">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow reveal">The Arsenal</div>
-          <span class="hud-section-label">// 4 INSTRUMENTS · 1 MISSION · STATUS:FORGING</span>
-          <h2 class="section-title reveal reveal-delay-1">Tools Forged for the Watch</h2>
-          <p class="section-sub reveal reveal-delay-2">Four instruments, one mission — equip the Watchman to see clearly, move surely, and sound the trumpet at scale.</p>
+      <div class="charge-grid">
+        <div class="charge-cell reveal">
+          <div class="charge-not">This is not <s>a company</s></div>
+          <div class="charge-is">A Movement</div>
+          <p>A people awakened. Romans 13:11 — "The hour has already come for you to wake up from your slumber." We are not building a brand. We are gathering the awake.</p>
         </div>
-
-        <div class="products-grid">
-
-          <!-- Veil Studio -->
-          <div class="product-card card-corner hud-frame reveal">
-            <div class="hud-bracket hud-bracket-tl"></div>
-            <div class="hud-bracket hud-bracket-tr"></div>
-            <div class="cs-badge">Coming Soon</div>
-
-            <div class="app-icon-wrap">
-              <img src="/assets/images/veil-logo.png" alt="Veil Studio">
-            </div>
-
-            <div class="product-card-name">Veil Studio</div>
-            <div class="product-mission">&ldquo;Sound the trumpet at scale.&rdquo;</div>
-            <p class="product-card-desc">An AI-driven media engine that turns conviction into content — generate visuals, synthesize video, and produce voice at professional quality, so the message reaches the wall faster than the sword.</p>
-            <div class="product-card-footer">
-              <a href="/products/veil-os.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Web</span>
-            </div>
-          </div>
-
-          <!-- Pathfinder: The Grid -->
-          <div class="product-card card-corner hud-frame reveal reveal-delay-1">
-            <div class="hud-bracket hud-bracket-tl"></div>
-            <div class="hud-bracket hud-bracket-tr"></div>
-            <div class="cs-badge">Coming Soon</div>
-
-            <div class="app-icon-wrap">
-              <img src="/assets/images/pathfinder-logo.png" alt="Pathfinder: The Grid">
-            </div>
-
-            <div class="product-card-name">Pathfinder: The Grid</div>
-            <div class="product-mission">&ldquo;Know the territory.&rdquo;</div>
-            <p class="product-card-desc">A next-generation navigation and exploration app that turns every journey into a mission — gamified waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it.</p>
-            <div class="product-card-footer">
-              <a href="/products/pathfinder.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.72rem;color:var(--text-muted);">iOS</span>
-            </div>
-          </div>
-
-          <!-- ChromaForge -->
-          <div class="product-card card-corner hud-frame reveal reveal-delay-2">
-            <div class="hud-bracket hud-bracket-tl"></div>
-            <div class="hud-bracket hud-bracket-tr"></div>
-            <div class="cs-badge">Coming Soon</div>
-
-            <div class="app-icon-wrap">
-              <img src="/assets/images/chromaforge-logo.png" alt="ChromaForge">
-            </div>
-
-            <div class="product-card-name">ChromaForge</div>
-            <div class="product-mission">&ldquo;Light up the darkness.&rdquo;</div>
-            <p class="product-card-desc">The universal Bluetooth LED controller — command multi-brand lighting from a single iOS app with 16M colors, custom sequences, and scene programming. Because the Watchman doesn't curse the dark. He floods it with light.</p>
-            <div class="product-card-footer">
-              <a href="/products/unified-bt-led-controller.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Hardware</span>
-            </div>
-          </div>
-
-          <!-- Vantage Edge -->
-          <div class="product-card card-corner hud-frame reveal reveal-delay-3">
-            <div class="hud-bracket hud-bracket-tl"></div>
-            <div class="hud-bracket hud-bracket-tr"></div>
-            <div class="cs-badge">Coming Soon</div>
-
-            <div class="app-icon-wrap" style="background:linear-gradient(145deg,rgba(18,8,30,0.98),rgba(8,4,18,0.98));">
-              <img src="/assets/images/vantage-sword.png" alt="Vantage Edge">
-            </div>
-
-            <div class="product-card-name">Vantage Edge</div>
-            <div class="product-mission">&ldquo;See what others can&rsquo;t.&rdquo;</div>
-            <p class="product-card-desc">An AI-powered financial co-pilot — portfolio analysis, real-time market signals, and risk modeling that gives the Watchman the high ground over his resources. Stewardship, sharpened.</p>
-            <div class="product-card-footer">
-              <a href="/products/ai-investment-app.html" class="btn btn-outline btn-sm">Learn More →</a>
-              <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Coming Soon</span>
-            </div>
-          </div>
-
+        <div class="charge-cell reveal reveal-delay-1">
+          <div class="charge-not">This is not <s>a purchase</s></div>
+          <div class="charge-is">An Enlistment</div>
+          <p>Habakkuk 2:1 — "I will stand at my watch and station myself on the ramparts." To join is to take up the watch. The post is real. The accountability is yours.</p>
+        </div>
+        <div class="charge-cell reveal reveal-delay-2">
+          <div class="charge-not">This is not <s>a logo</s></div>
+          <div class="charge-is">An Identity</div>
+          <p>Isaiah 62:6 — "I have posted watchmen on your walls, Jerusalem." You do not wear a name. You answer to one. You become what you were made to be.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="tech-bar"></div>
+  <div class="tech-bar"></div>
 
-    <!-- ── Manifesto Teaser ───────────────────────────────────── -->
-    <section class="section">
-      <div class="container">
-        <div class="about-teaser">
-          <div class="reveal">
-            <div class="eyebrow">Who We Are</div>
-            <span class="hud-section-label">// MISSION:ACTIVE · WALL:MANNED · TRUMPET:READY</span>
-            <h2 class="section-title" style="margin-bottom:20px;background:var(--grad-silver);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Forged in Faith.<br>Built for the Future.</h2>
-            <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">Watchman Forge builds technology for a people with a purpose. We are makers and believers who refuse to let the most powerful tools of this age belong only to those who would use them for less. Every line of code is consecrated to a mission older than any of us.</p>
-            <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:36px;">We stand at our watch before the King of Kings — Revelation 19:16 — and we forge for the day His name is on every wall. This is the work. This is the watch.</p>
-            <a href="/about.html" class="btn btn-outline">Read the Manifesto →</a>
-          </div>
-          <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
-            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:4px 0 0 0;">
-              <div class="hud-bracket hud-bracket-tl"></div>
-              <div class="stat-number">33:6</div>
-              <div class="stat-label">The Charge</div>
-            </div>
-            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:0 4px 0 0;border-left:none;">
-              <div class="hud-bracket hud-bracket-tr"></div>
-              <div class="stat-number">4</div>
-              <div class="stat-label">Tools Forged</div>
-            </div>
-            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-radius:0 0 0 4px;">
-              <div class="hud-bracket hud-bracket-bl"></div>
-              <div class="stat-number">24/7</div>
-              <div class="stat-label">On the Wall</div>
-            </div>
-            <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-left:none;border-radius:0 0 4px 0;">
-              <div class="hud-bracket hud-bracket-br"></div>
-              <div class="stat-number">1</div>
-              <div class="stat-label">King of Kings</div>
-            </div>
-          </div>
-        </div>
+  <!-- ── The Arsenal (products) ─────────────────────────────── -->
+  <section class="section products-section" id="arsenal">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">The Arsenal</div>
+        <span class="hud-section-label">// 4 INSTRUMENTS · 1 MISSION · STATUS:FORGING</span>
+        <h2 class="section-title reveal reveal-delay-1">Tools Forged for the Watch</h2>
+        <p class="section-sub reveal reveal-delay-2">Four instruments, one mission — equip the Watchman to see clearly, move surely, and sound the trumpet at scale.</p>
       </div>
-    </section>
+      <div class="products-grid">
 
-    <!-- ── Enlist CTA ─────────────────────────────────────────── -->
-    <section class="cta-section section" id="enlist">
-      <div class="container">
-        <div class="cta-box hud-frame reveal">
+        <div class="product-card card-corner hud-frame reveal">
           <div class="hud-bracket hud-bracket-tl"></div>
           <div class="hud-bracket hud-bracket-tr"></div>
-          <div class="hud-bracket hud-bracket-bl"></div>
-          <div class="hud-bracket hud-bracket-br"></div>
-          <div class="eyebrow" style="justify-content:center;">Join the Forge</div>
-          <h2 class="section-title">The Hour Has Come<br>to Wake From Slumber.</h2>
-          <p class="section-sub">This is your enlistment. Not a signup — a stand. Take the post, take up the wall, and join the remnant sounding the trumpet before the King returns.</p>
-          <div class="cta-actions">
-            <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post</a>
-            <a href="mailto:watchmanforge@gmail.com" class="btn btn-outline btn-lg">watchmanforge@gmail.com</a>
+          <div class="cs-badge">Coming Soon</div>
+          <div class="app-icon-wrap"><img src="/assets/images/veil-logo.png" alt="Veil Studio"></div>
+          <div class="product-card-name">Veil Studio</div>
+          <div class="product-mission">&ldquo;Sound the trumpet at scale.&rdquo;</div>
+          <p class="product-card-desc">An AI-driven media engine that turns conviction into content — generate visuals, synthesize video, and produce voice at professional quality, so the message reaches the wall faster than the sword.</p>
+          <div class="product-card-footer">
+            <a href="/products/veil-os.html" class="btn btn-outline btn-sm">Learn More →</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Web</span>
+          </div>
+        </div>
+
+        <div class="product-card card-corner hud-frame reveal reveal-delay-1">
+          <div class="hud-bracket hud-bracket-tl"></div>
+          <div class="hud-bracket hud-bracket-tr"></div>
+          <div class="cs-badge">Coming Soon</div>
+          <div class="app-icon-wrap"><img src="/assets/images/pathfinder-logo.png" alt="Pathfinder: The Grid"></div>
+          <div class="product-card-name">Pathfinder: The Grid</div>
+          <div class="product-mission">&ldquo;Know the territory.&rdquo;</div>
+          <p class="product-card-desc">A next-generation navigation and exploration app that turns every journey into a mission — gamified waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it.</p>
+          <div class="product-card-footer">
+            <a href="/products/pathfinder.html" class="btn btn-outline btn-sm">Learn More →</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">iOS</span>
+          </div>
+        </div>
+
+        <div class="product-card card-corner hud-frame reveal reveal-delay-2">
+          <div class="hud-bracket hud-bracket-tl"></div>
+          <div class="hud-bracket hud-bracket-tr"></div>
+          <div class="cs-badge">Coming Soon</div>
+          <div class="app-icon-wrap"><img src="/assets/images/chromaforge-logo.png" alt="ChromaForge"></div>
+          <div class="product-card-name">ChromaForge</div>
+          <div class="product-mission">&ldquo;Light up the darkness.&rdquo;</div>
+          <p class="product-card-desc">The universal Bluetooth LED controller — command multi-brand lighting from a single iOS app with 16M colors, custom sequences, and scene programming. Because the Watchman doesn't curse the dark. He floods it with light.</p>
+          <div class="product-card-footer">
+            <a href="/products/unified-bt-led-controller.html" class="btn btn-outline btn-sm">Learn More →</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Hardware</span>
+          </div>
+        </div>
+
+        <div class="product-card card-corner hud-frame reveal reveal-delay-3">
+          <div class="hud-bracket hud-bracket-tl"></div>
+          <div class="hud-bracket hud-bracket-tr"></div>
+          <div class="cs-badge">Coming Soon</div>
+          <div class="app-icon-wrap" style="background:linear-gradient(145deg,rgba(18,8,30,0.98),rgba(8,4,18,0.98));"><img src="/assets/images/vantage-sword.png" alt="Vantage Edge"></div>
+          <div class="product-card-name">Vantage Edge</div>
+          <div class="product-mission">&ldquo;See what others can&rsquo;t.&rdquo;</div>
+          <p class="product-card-desc">An AI-powered financial co-pilot — portfolio analysis, real-time market signals, and risk modeling that gives the Watchman the high ground over his resources. Stewardship, sharpened.</p>
+          <div class="product-card-footer">
+            <a href="/products/ai-investment-app.html" class="btn btn-outline btn-sm">Learn More →</a>
+            <span style="font-size:0.72rem;color:var(--text-muted);">iOS</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="tech-bar"></div>
+
+  <!-- ── Who We Are ─────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="about-teaser">
+        <div class="reveal">
+          <div class="eyebrow">Who We Are</div>
+          <span class="hud-section-label">// MISSION:ACTIVE · WALL:MANNED · TRUMPET:READY</span>
+          <h2 class="section-title" style="margin-bottom:20px;background:var(--grad-silver);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Forged in Faith.<br>Built for the Future.</h2>
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">Watchman Forge builds technology for a people with a purpose. We are makers and believers who refuse to let the most powerful tools of this age belong only to those who would use them for less. Every line of code is consecrated to a mission older than any of us.</p>
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:36px;">We stand at our watch before the King of Kings — Revelation 19:16 — and we forge for the day His name is on every wall. This is the work. This is the watch.</p>
+          <a href="/about.html" class="btn btn-outline">Read the Manifesto →</a>
+        </div>
+        <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:4px 0 0 0;">
+            <div class="hud-bracket hud-bracket-tl"></div>
+            <div class="stat-number">33:6</div>
+            <div class="stat-label">The Charge</div>
+          </div>
+          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:0 4px 0 0;border-left:none;">
+            <div class="hud-bracket hud-bracket-tr"></div>
+            <div class="stat-number">4</div>
+            <div class="stat-label">Tools Forged</div>
+          </div>
+          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-radius:0 0 0 4px;">
+            <div class="hud-bracket hud-bracket-bl"></div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">On the Wall</div>
+          </div>
+          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-left:none;border-radius:0 0 4px 0;">
+            <div class="hud-bracket hud-bracket-br"></div>
+            <div class="stat-number">1</div>
+            <div class="stat-label">King of Kings</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
-
-  <!-- ── Footer ──────────────────────────────────────────────── -->
-  <footer id="footer">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
-          <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross">
-        </a>
-        <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-        <div class="footer-contact">
-          <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
-          <span>Forged in Faith. Built for the Future.</span>
+  <!-- ── Enlist CTA ─────────────────────────────────────────── -->
+  <section class="cta-section section" id="enlist">
+    <div class="container">
+      <div class="cta-box hud-frame reveal">
+        <div class="hud-bracket hud-bracket-tl"></div>
+        <div class="hud-bracket hud-bracket-tr"></div>
+        <div class="hud-bracket hud-bracket-bl"></div>
+        <div class="hud-bracket hud-bracket-br"></div>
+        <div class="eyebrow" style="justify-content:center;">Join the Forge</div>
+        <h2 class="section-title">The Hour Has Come<br>to Wake From Slumber.</h2>
+        <p class="section-sub">This is your enlistment. Not a signup — a stand. Take the post, take up the wall, and join the remnant sounding the trumpet before the King returns.</p>
+        <div class="cta-actions">
+          <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post</a>
+          <a href="mailto:watchmanforge@gmail.com" class="btn btn-outline btn-lg">watchmanforge@gmail.com</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>The Arsenal</h4>
-        <ul>
-          <li><a href="/products/veil-os.html">Veil Studio</a></li>
-          <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
-          <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
-          <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>The Movement</h4>
-        <ul>
-          <li><a href="/about.html">The Manifesto</a></li>
-          <li><a href="/contact.html">Enlist</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="/terms-of-service.html">Terms of Service</a></li>
-        </ul>
-      </div>
     </div>
-    <hr class="hr-neon">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-      <div class="footer-bottom-links">
-        <a href="/privacy-policy.html">Privacy</a>
-        <a href="/terms-of-service.html">Terms</a>
-        <a href="/contact.html">Enlist</a>
-      </div>
-    </div>
-  </footer>
+  </section>
 
-  <script src="/js/main.js?v=v2-premium"></script>
-  <script src="/js/gtr-burnout.js?v=v2-premium"></script>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
+        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross">
+      </a>
+      <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
+      <div class="footer-contact">
+        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+        <span>Forged in Faith. Built for the Future.</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>The Arsenal</h4>
+      <ul>
+        <li><a href="/products/veil-os.html">Veil Studio</a></li>
+        <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
+        <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
+        <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>The Movement</h4>
+      <ul>
+        <li><a href="/about.html">The Manifesto</a></li>
+        <li><a href="/contact.html">Enlist</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hr-neon">
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms-of-service.html">Terms</a>
+      <a href="/contact.html">Enlist</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js?v=v2-premium"></script>
+<script src="/js/hero-burnout.js?v=v3"></script>
 </body>
 </html>
