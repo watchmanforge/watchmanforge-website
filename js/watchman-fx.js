@@ -193,24 +193,15 @@
     var btnLabel = btn ? btn.textContent : '';
     function setStatus(msg, cls){ if (!status) return; status.textContent = msg || ''; status.className = 'enlist-status' + (msg ? ' show ' + (cls||'') : ''); }
     f.addEventListener('submit', function(e){
-      e.preventDefault();
       var hp = f.querySelector('input[name="_gotcha"]');
       var email = (input && input.value || '').trim();
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!valid){ if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
+      if (!valid){ e.preventDefault(); if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
       if (input) input.classList.remove('invalid');
-      if (hp && hp.value){ setStatus('',''); f.classList.add('done'); return; }   // honeypot tripped: silently drop bots
-      var action = f.getAttribute('action') || '';
-      if (btn){ btn.disabled = true; btn.textContent = 'Standing to\u2026'; }
+      if (hp && hp.value){ e.preventDefault(); setStatus('',''); f.classList.add('done'); return; }   // honeypot tripped: drop bots, don't post
+      // valid \u2192 let the native POST go into the hidden iframe (target="kit_sink"): no CORS, no fetch. Show success shortly after.
       setStatus('Taking your post\u2026', '');
-      if (!window.fetch){ f.submit(); return; }              // no fetch: native POST to Kit
-      var body = new FormData(); body.append('email_address', email);
-      fetch(action, { method:'POST', mode:'cors', body:body, headers:{ 'Accept':'application/json' } })
-        .then(function(r){
-          if (r.ok){ setStatus('',''); f.classList.add('done'); }
-          else { throw new Error('failed'); }
-        })
-        .catch(function(){ f.submit(); });                   // AJAX blocked (CORS/etc.): native POST still lands the signup
+      setTimeout(function(){ setStatus('',''); f.classList.add('done'); }, 1200);
     });
   }
 
