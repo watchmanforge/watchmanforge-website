@@ -193,22 +193,24 @@
     var btnLabel = btn ? btn.textContent : '';
     function setStatus(msg, cls){ if (!status) return; status.textContent = msg || ''; status.className = 'enlist-status' + (msg ? ' show ' + (cls||'') : ''); }
     f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var hp = f.querySelector('input[name="_gotcha"]');
       var email = (input && input.value || '').trim();
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!valid){ e.preventDefault(); if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
+      if (!valid){ if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
       if (input) input.classList.remove('invalid');
+      if (hp && hp.value){ setStatus('',''); f.classList.add('done'); return; }   // honeypot tripped: silently drop bots
       var action = f.getAttribute('action') || '';
-      if (action.indexOf('YOUR_FORM_ID') > -1){ e.preventDefault(); setStatus('Almost there \u2014 add your Formspree endpoint to go live (see code comment).', 'err'); return; }
-      if (!window.fetch) return;                 // no fetch: let the native POST happen
-      e.preventDefault();
       if (btn){ btn.disabled = true; btn.textContent = 'Standing to\u2026'; }
       setStatus('Taking your post\u2026', '');
-      fetch(action, { method:'POST', body:new FormData(f), headers:{ 'Accept':'application/json' } })
+      if (!window.fetch){ f.submit(); return; }              // no fetch: native POST to Kit
+      var body = new FormData(); body.append('email_address', email);
+      fetch(action, { method:'POST', mode:'cors', body:body, headers:{ 'Accept':'application/json' } })
         .then(function(r){
           if (r.ok){ setStatus('',''); f.classList.add('done'); }
-          else { return r.json().then(function(j){ throw new Error((j && j.errors && j.errors[0] && j.errors[0].message) || 'failed'); }); }
+          else { throw new Error('failed'); }
         })
-        .catch(function(){ if (btn){ btn.disabled = false; btn.textContent = btnLabel; } setStatus('Something went wrong \u2014 try again, or email us directly below.', 'err'); });
+        .catch(function(){ f.submit(); });                   // AJAX blocked (CORS/etc.): native POST still lands the signup
     });
   }
 
