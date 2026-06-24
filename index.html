@@ -281,11 +281,13 @@
   @keyframes wt-shipb{ 0%,100%{ opacity:.25;} 50%{ opacity:.7;} }
   @media (prefers-reduced-motion:reduce){ .wt-beam,.wt-lantern-glow,.wt-lantern-core,.wt-ship,.wt-star{ animation:none !important; } }
 
-  /* Product cards: the stray vertical line above the icon is the HUD
-     corner bracket — .hud-bracket-tl draws a glowing border-left at the
-     card's top-left (18px, growing to 22px on hover). Hide the brackets
-     on the cards; the card-corner accent + the top-line on hover remain. */
+  /* Product cards: kill the stray vertical line on hover. The card has
+     BOTH .product-card and .card-corner, which each define ::after — they
+     collide into one misplaced cyan corner whose right border reads as a
+     vertical tick above the icon on hover. Drop ::after (and the brackets)
+     on the cards; the top-line accent + lift + icon glow remain. */
   .product-card .hud-bracket{ display:none; }
+  .product-card::after{ display:none; }
 
   /* ═══════════ Enlist — email capture ═══════════ */
   .enlist-form{ max-width:540px; margin:6px auto 0; }
