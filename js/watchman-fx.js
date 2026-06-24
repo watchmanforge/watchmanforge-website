@@ -163,7 +163,7 @@
       if (done) return; done = true;
       try { sessionStorage.setItem('wf_booted','1'); } catch (e) {}
       ov.classList.add('wf-done');
-      setTimeout(function(){ root.classList.remove('wf-booting'); if (ov.parentNode) ov.parentNode.removeChild(ov); }, 640);
+      setTimeout(function(){ root.classList.remove('wf-booting'); if (ov.parentNode) ov.parentNode.removeChild(ov); }, 950);
     }
     ['keydown','click','touchstart','wheel'].forEach(function(ev){ window.addEventListener(ev, finish, { once:true, passive:true }); });
 
@@ -184,7 +184,35 @@
     })();
   }
 
+  /* ---------- enlist / email capture ---------- */
+  function wireEnlist(){
+    var f = D.getElementById('enlist-form'); if (!f) return;
+    var input = f.querySelector('.enlist-input');
+    var btn = f.querySelector('.enlist-submit');
+    var status = D.getElementById('enlist-status');
+    var btnLabel = btn ? btn.textContent : '';
+    function setStatus(msg, cls){ if (!status) return; status.textContent = msg || ''; status.className = 'enlist-status' + (msg ? ' show ' + (cls||'') : ''); }
+    f.addEventListener('submit', function(e){
+      var email = (input && input.value || '').trim();
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!valid){ e.preventDefault(); if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
+      if (input) input.classList.remove('invalid');
+      var action = f.getAttribute('action') || '';
+      if (action.indexOf('YOUR_FORM_ID') > -1){ e.preventDefault(); setStatus('Almost there \u2014 add your Formspree endpoint to go live (see code comment).', 'err'); return; }
+      if (!window.fetch) return;                 // no fetch: let the native POST happen
+      e.preventDefault();
+      if (btn){ btn.disabled = true; btn.textContent = 'Standing to\u2026'; }
+      setStatus('Taking your post\u2026', '');
+      fetch(action, { method:'POST', body:new FormData(f), headers:{ 'Accept':'application/json' } })
+        .then(function(r){
+          if (r.ok){ setStatus('',''); f.classList.add('done'); }
+          else { return r.json().then(function(j){ throw new Error((j && j.errors && j.errors[0] && j.errors[0].message) || 'failed'); }); }
+        })
+        .catch(function(){ if (btn){ btn.disabled = false; btn.textContent = btnLabel; } setStatus('Something went wrong \u2014 try again, or email us directly below.', 'err'); });
+    });
+  }
+
   /* ---------- go ---------- */
-  function init(){ boot(); seedVerses(); whisper(); buildWatch(); }
+  function init(){ boot(); seedVerses(); whisper(); buildWatch(); wireEnlist(); }
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();

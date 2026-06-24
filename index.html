@@ -9,9 +9,22 @@
 <meta property="og:title" content="Watchman Forge — Sound the Trumpet">
 <meta property="og:description" content="This is not a purchase. It is an enlistment. Stand on the wall. Forged in Faith. Built for the Future.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://watchmanforge.com">
+<meta property="og:url" content="https://watchmanforge.com/">
+<meta property="og:site_name" content="Watchman Forge">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Watchman Forge — Forged in Faith. Built for the Future.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Watchman Forge — Sound the Trumpet">
+<meta name="twitter:description" content="Not a company — a movement. A remnant called to stand on the wall and sound the trumpet. Forged in Faith. Built for the Future.">
+<meta name="twitter:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<meta name="theme-color" content="#010104">
 <link rel="canonical" href="https://watchmanforge.com/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23080c14'/><rect x='13.5' y='4' width='5' height='24' rx='1' fill='%23d3dce4'/><rect x='5' y='12.5' width='22' height='5' rx='1' fill='%23d3dce4'/></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="stylesheet" href="/css/main.css?v=v2-premium">
 <link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
 <style>
@@ -225,7 +238,15 @@
     -webkit-mask-image:linear-gradient(to top,#000 4%,transparent 72%); mask-image:linear-gradient(to top,#000 4%,transparent 72%);
     animation:wf-grid 6s linear infinite; opacity:.85; pointer-events:none; }
   @keyframes wf-grid{ from{ background-position:0 0; } to{ background-position:0 48px; } }
-  #wf-boot.wf-done{ opacity:0; pointer-events:none; }
+  #wf-boot.wf-done{ pointer-events:none; animation:wf-bootout .9s ease forwards; }
+  @keyframes wf-bootout{ 0%{ opacity:1; transform:scale(1); filter:brightness(1); }
+    12%{ opacity:1; transform:scale(1.004); filter:brightness(1.65); }
+    32%{ opacity:1; filter:brightness(1); }
+    100%{ opacity:0; transform:scale(1.07); filter:brightness(1); } }
+  #wf-boot.wf-done::before{ content:''; position:absolute; inset:0; z-index:3; pointer-events:none;
+    background:radial-gradient(circle at 50% 45%, rgba(190,243,255,.92), rgba(0,212,255,.22) 42%, transparent 72%);
+    animation:wf-flash .55s ease forwards; }
+  @keyframes wf-flash{ 0%{ opacity:0; } 16%{ opacity:.9; } 100%{ opacity:0; } }
   .wf-boot-inner{ position:relative; z-index:2; width:min(680px,92vw); padding:0 22px; }
   #wf-boot-log{ margin:0; font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(.7rem,1.6vw,.92rem);
     line-height:1.8; color:#7fe9ff; white-space:pre-wrap; min-height:13em;
@@ -239,29 +260,54 @@
   .wf-boot-skip{ position:relative; z-index:2; margin-top:22px; font-family:var(--font-display, ui-monospace, monospace); font-size:.58rem;
     letter-spacing:.22em; text-transform:uppercase; color:#3f6173; }
 
-  /* ═══════════ The Watch (beacon scene) ═══════════ */
-  .watchtower{ position:relative; overflow:hidden; min-height:clamp(460px,64vh,680px);
-    background:radial-gradient(ellipse 95% 75% at 50% 14%, #0a1330 0%, #05060f 50%, var(--bg-void,#010104) 100%);
+  /* ═══════════ The Watch (lighthouse scene) ═══════════ */
+  .watchtower{ position:relative; overflow:hidden; min-height:clamp(480px,66vh,700px);
+    background:linear-gradient(to bottom, #0a1430 0%, #0c1c34 34%, #0a1426 52%, #060c18 64%, var(--bg-void,#010104) 100%);
     display:flex; align-items:flex-start; }
   .wt-svg{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
   .wt-stars{ position:absolute; inset:0; z-index:1; pointer-events:none; }
   .wt-star{ position:absolute; background:#cfe9ff; border-radius:50%; opacity:.5; animation:wt-tw 3s ease-in-out infinite; }
   @keyframes wt-tw{ 0%,100%{opacity:.16;} 50%{opacity:.9;} }
   .wt-content{ position:relative; z-index:3; width:100%; padding-top:clamp(48px,8vh,92px); }
-  .wt-inner{ max-width:580px; }
+  .wt-inner{ max-width:560px; }
   .watchtower .section-title{ margin:12px 0 16px; }
-  .wt-pillar{ transform-box:view-box; transform-origin:600px 272px; animation:wt-breathe 4.8s ease-in-out infinite; }
-  @keyframes wt-breathe{ 0%,100%{ opacity:.48; transform:scaleY(.95);} 50%{ opacity:.9; transform:scaleY(1.05);} }
-  .wt-rays{ transform-box:view-box; transform-origin:600px 272px; animation:wt-sway 9.5s ease-in-out infinite alternate; }
-  @keyframes wt-sway{ 0%{ transform:rotate(-4deg);} 100%{ transform:rotate(4deg);} }
-  .wt-beacon-glow{ transform-box:view-box; transform-origin:600px 272px; animation:wt-glow 2.8s ease-in-out infinite; }
-  @keyframes wt-glow{ 0%,100%{ opacity:.5; transform:scale(.9);} 50%{ opacity:.9; transform:scale(1.14);} }
-  .wt-beacon-dot{ animation:wt-bdot 2.8s ease-in-out infinite; }
-  @keyframes wt-bdot{ 0%,100%{opacity:.75;} 50%{opacity:1;} }
-  @media (prefers-reduced-motion:reduce){ .wt-pillar,.wt-rays,.wt-beacon-glow,.wt-beacon-dot,.wt-star{ animation:none !important; } }
+  .wt-beam{ transform-box:view-box; transform-origin:610px 231px; animation:wt-sweep 7.5s ease-in-out infinite alternate; }
+  @keyframes wt-sweep{ 0%{ transform:rotate(-14deg);} 100%{ transform:rotate(13deg);} }
+  .wt-lantern-glow{ transform-box:view-box; transform-origin:610px 231px; animation:wt-lglow 3.4s ease-in-out infinite; }
+  @keyframes wt-lglow{ 0%,100%{ opacity:.6; transform:scale(.94);} 50%{ opacity:1; transform:scale(1.08);} }
+  .wt-lantern-core{ animation:wt-lcore 3.4s ease-in-out infinite; }
+  @keyframes wt-lcore{ 0%,100%{ opacity:.85;} 50%{ opacity:1;} }
+  .wt-ship{ animation:wt-shipb 5s ease-in-out infinite; }
+  @keyframes wt-shipb{ 0%,100%{ opacity:.25;} 50%{ opacity:.7;} }
+  @media (prefers-reduced-motion:reduce){ .wt-beam,.wt-lantern-glow,.wt-lantern-core,.wt-ship,.wt-star{ animation:none !important; } }
+
+  /* ═══════════ Enlist — email capture ═══════════ */
+  .enlist-form{ max-width:540px; margin:6px auto 0; }
+  .enlist-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .enlist-input{ flex:1 1 290px; min-width:0; padding:15px 18px; border-radius:12px; color:var(--text-primary,#e8f1f8);
+    background:rgba(0,0,0,.42); border:1px solid var(--border-mid,#22303c);
+    font-family:var(--font-display, ui-monospace, monospace); font-size:1rem; letter-spacing:.02em; transition:border-color .2s, box-shadow .2s; }
+  .enlist-input::placeholder{ color:var(--text-muted,#5a6b7a); }
+  .enlist-input:focus{ outline:none; border-color:var(--neon-blue,#00d4ff); box-shadow:0 0 0 3px rgba(0,212,255,.16); }
+  .enlist-input.invalid{ border-color:#ff5a78; box-shadow:0 0 0 3px rgba(255,90,120,.15); }
+  .enlist-submit{ flex:0 0 auto; }
+  .enlist-note{ margin:14px 0 0; font-size:.76rem; color:var(--text-muted,#5a6b7a); text-align:center; letter-spacing:.01em; cursor:help; }
+  .enlist-status{ margin:12px 0 0; min-height:1.1em; text-align:center; opacity:0; transition:opacity .25s;
+    font-family:var(--font-display, ui-monospace, monospace); font-size:.84rem; letter-spacing:.02em; }
+  .enlist-status.show{ opacity:1; }
+  .enlist-status.ok{ color:var(--neon-blue,#00d4ff); }
+  .enlist-status.err{ color:#ff6b86; }
+  .enlist-alt{ margin:18px 0 0; text-align:center; font-size:.82rem; color:var(--text-muted,#5a6b7a); }
+  .enlist-alt a{ color:var(--text-secondary,#9fb6c9); }
+  .enlist-done{ display:none; }
+  .enlist-form.done{ display:none; }
+  .enlist-form.done ~ .enlist-done{ display:block; }
+  @media (max-width:600px){ .enlist-row{ flex-direction:column; } .enlist-submit{ width:100%; } }
 </style>
 <script>
 (function(){try{
+  if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
+  window.addEventListener('load',function(){ try{ window.scrollTo(0,0); }catch(e){} });
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   if(sessionStorage.getItem('wf_booted'))return;
   document.documentElement.classList.add('wf-booting');
@@ -301,7 +347,7 @@
       <li><a href="/contact.html">Enlist</a></li>
     </ul>
     <div class="nav-right">
-      <a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a>
+      <a href="#enlist" class="btn btn-primary btn-sm">Take the Post</a>
     </div>
     <button class="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -339,7 +385,7 @@
             Not a company — a remnant. Every tool we forge is a trumpet; every product, a weapon for the watch.
           </p>
           <div class="hero-actions">
-            <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post →</a>
+            <a href="#enlist" class="btn btn-primary btn-lg">Take the Post →</a>
             <a href="#arsenal" class="btn btn-outline btn-lg">See the Arsenal</a>
           </div>
           <div class="hero-readout">
@@ -471,47 +517,103 @@
   <section class="watchtower" id="the-watch" aria-label="The Watch">
     <svg class="wt-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        <linearGradient id="wtPillar" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%"  stop-color="#cdf6ff" stop-opacity="0.55"/>
-          <stop offset="20%" stop-color="#00d4ff" stop-opacity="0.30"/>
-          <stop offset="68%" stop-color="#00d4ff" stop-opacity="0.05"/>
+        <linearGradient id="wtBeam" gradientUnits="userSpaceOnUse" x1="610" y1="231" x2="1240" y2="300">
+          <stop offset="0%"  stop-color="#dff7ff" stop-opacity="0.60"/>
+          <stop offset="22%" stop-color="#00d4ff" stop-opacity="0.28"/>
+          <stop offset="70%" stop-color="#00d4ff" stop-opacity="0.06"/>
           <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
         </linearGradient>
-        <linearGradient id="wtRay" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.26"/>
+        <linearGradient id="wtBeam2" gradientUnits="userSpaceOnUse" x1="610" y1="231" x2="1180" y2="290">
+          <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.50"/>
+          <stop offset="40%" stop-color="#9fe9ff" stop-opacity="0.16"/>
+          <stop offset="100%" stop-color="#9fe9ff" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="wtLantern" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="35%" stop-color="#9becff"/>
+          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="wtBack" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#0a3a52" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#0a3a52" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="wtTower" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%"  stop-color="#1b2735"/>
+          <stop offset="42%" stop-color="#0e1822"/>
+          <stop offset="100%" stop-color="#070b12"/>
+        </linearGradient>
+        <linearGradient id="wtSea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stop-color="#0a1b2e"/>
+          <stop offset="100%" stop-color="#03060d"/>
+        </linearGradient>
+        <radialGradient id="wtDawn" cx="50%" cy="100%" r="80%">
+          <stop offset="0%"  stop-color="#ff9d5c" stop-opacity="0.44"/>
+          <stop offset="34%" stop-color="#9c5f43" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#010104" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="wtReflect" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#bdefff" stop-opacity="0.32"/>
           <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
         </linearGradient>
-        <radialGradient id="wtBeacon" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#eafdff"/>
-          <stop offset="45%" stop-color="#00d4ff"/>
-          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="wtDawn" cx="50%" cy="100%" r="78%">
-          <stop offset="0%" stop-color="#ff9d5c" stop-opacity="0.50"/>
-          <stop offset="36%" stop-color="#9c5f43" stop-opacity="0.16"/>
-          <stop offset="100%" stop-color="#010104" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="wtCity" cx="50%" cy="100%" r="62%">
-          <stop offset="0%" stop-color="#0c3346" stop-opacity="0.65"/>
-          <stop offset="100%" stop-color="#010104" stop-opacity="0"/>
-        </radialGradient>
       </defs>
-      <ellipse cx="600" cy="602" rx="840" ry="200" fill="url(#wtDawn)"/>
-      <ellipse cx="600" cy="602" rx="700" ry="240" fill="url(#wtCity)"/>
-      <g class="wt-rays">
-        <polygon points="600,272 372,-130 486,-130" fill="url(#wtRay)"/>
-        <polygon points="600,272 714,-130 828,-130" fill="url(#wtRay)"/>
+
+      <!-- dawn glow over the horizon — the morning the watch waits for -->
+      <ellipse cx="720" cy="404" rx="560" ry="150" fill="url(#wtDawn)"/>
+
+      <!-- the sea -->
+      <rect x="0" y="400" width="1200" height="200" fill="url(#wtSea)"/>
+      <rect x="640" y="402" width="170" height="150" fill="url(#wtReflect)" opacity="0.16"/>
+      <g stroke="#2a5f7a" stroke-width="1.4" opacity="0.30">
+        <line x1="120" y1="430" x2="470" y2="430"/>
+        <line x1="760" y1="438" x2="1140" y2="438"/>
+        <line x1="300" y1="470" x2="900" y2="470"/>
+        <line x1="80"  y1="512" x2="520" y2="512"/>
+        <line x1="700" y1="520" x2="1160" y2="520"/>
+        <line x1="360" y1="560" x2="980" y2="560"/>
       </g>
-      <polygon class="wt-pillar" points="582,272 468,-170 732,-170 618,272" fill="url(#wtPillar)"/>
-      <g id="wt-buildings" fill="#04050b"></g>
-      <g fill="#05070d">
-        <path d="M 566 600 L 566 332 L 586 300 L 614 300 L 634 332 L 634 600 Z"/>
-        <rect x="558" y="294" width="84" height="12"/>
-        <rect x="578" y="270" width="44" height="26"/>
-        <path d="M 578 270 L 600 250 L 622 270 Z"/>
+      <!-- a ship still out on the water -->
+      <circle class="wt-ship" cx="978" cy="396" r="2.2" fill="#ffd9a0"/>
+
+      <!-- the sweeping beam, raking over open water -->
+      <g class="wt-beam">
+        <polygon points="610,231 1320,150 1320,452" fill="url(#wtBeam)"/>
+        <polygon points="610,231 1300,214 1300,360" fill="url(#wtBeam2)"/>
       </g>
-      <circle class="wt-beacon-glow" cx="600" cy="272" r="64" fill="url(#wtBeacon)"/>
-      <circle class="wt-beacon-dot" cx="600" cy="272" r="7" fill="#eafdff"/>
+
+      <!-- backlight so the tower silhouette reads against the dark -->
+      <circle cx="610" cy="300" r="150" fill="url(#wtBack)"/>
+      <!-- the light, reflected on the water below -->
+      <polygon points="600,432 620,432 642,600 578,600" fill="url(#wtReflect)" opacity="0.5"/>
+
+      <!-- rocky point -->
+      <path d="M 536 470 L 536 432 L 566 410 L 600 402 L 640 404 L 678 414 L 700 436 L 700 470 Z" fill="#06080f"/>
+      <path d="M 566 410 L 600 402 L 640 404 L 678 414" fill="none" stroke="#1d4b63" stroke-width="1.6" opacity="0.5"/>
+
+      <!-- lighthouse tower (tapered, rim-lit) -->
+      <polygon points="588,406 598,252 622,252 632,406" fill="url(#wtTower)"/>
+      <line x1="588" y1="406" x2="598" y2="252" stroke="#3fc8e6" stroke-width="1.6" opacity="0.55"/>
+      <g stroke="#284a5e" stroke-width="2" opacity="0.6">
+        <line x1="594" y1="320" x2="626" y2="320"/>
+        <line x1="592" y1="362" x2="628" y2="362"/>
+      </g>
+      <circle cx="610" cy="340" r="2.4" fill="#9becff" opacity="0.85"/>
+      <rect x="605" y="386" width="10" height="18" rx="4" fill="#ffcf8a" opacity="0.75"/>
+
+      <!-- gallery, lantern room, cap -->
+      <rect x="590" y="244" width="40" height="9" rx="2" fill="#0e1822"/>
+      <rect x="590" y="244" width="40" height="9" rx="2" fill="none" stroke="#3fc8e6" stroke-width="1" opacity="0.4"/>
+      <rect class="wt-lantern-core" x="598" y="216" width="24" height="30" rx="2" fill="url(#wtLantern)"/>
+      <g stroke="#0b1a24" stroke-width="2">
+        <line x1="606" y1="216" x2="606" y2="246"/>
+        <line x1="614" y1="216" x2="614" y2="246"/>
+      </g>
+      <polygon points="594,216 610,198 626,216" fill="#0e1822"/>
+      <polygon points="594,216 610,198 626,216" fill="none" stroke="#3fc8e6" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="610" cy="195" r="2.6" fill="#9becff"/>
+
+      <!-- the lantern light + halo -->
+      <circle class="wt-lantern-glow" cx="610" cy="231" r="74" fill="url(#wtLantern)"/>
+      <circle class="wt-lantern-core" cx="610" cy="231" r="9" fill="#ffffff"/>
     </svg>
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
@@ -519,7 +621,7 @@
         <div class="eyebrow reveal">The Watch</div>
         <span class="hud-section-label">// THE_WATCH · LIGHT:OUTBOUND · HORIZON:CLEAR · DAWN:PENDING · PS 130:6</span>
         <h2 class="section-title reveal reveal-delay-1">We Hold the Light<br>Till Morning Comes.</h2>
-        <p class="section-sub reveal reveal-delay-2" data-vref="PS 130:6">The watch was never about watching you. It's about watching <em>for</em> you — standing between the city and the dark, holding the line of light until the sun breaks the horizon. And the morning always comes.</p>
+        <p class="section-sub reveal reveal-delay-2" data-vref="PS 130:6">The watch was never about watching you. It's about watching <em>for</em> you — a fixed light on the rocks, holding steady through the dark so the ones still out there can find their way home. And the morning always comes.</p>
       </div>
     </div>
   </section>
@@ -574,11 +676,21 @@
         <div class="hud-bracket hud-bracket-br"></div>
         <div class="eyebrow" style="justify-content:center;">Join the Forge</div>
         <h2 class="section-title">The Hour Has Come<br>to Wake From Slumber.</h2>
-        <p class="section-sub">This is your enlistment. Not a signup — a stand. Take the post, take up the wall, and join the remnant sounding the trumpet before the King returns.</p>
-        <div class="cta-actions">
-          <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post</a>
-          <a href="mailto:watchmanforge@gmail.com" class="btn btn-outline btn-lg">watchmanforge@gmail.com</a>
+        <p class="section-sub">The wall needs watchmen. Leave your email and take your post — we'll sound the trumpet the moment the gates open. No spam, no noise. Just the call when it comes.</p>
+        <form class="enlist-form" id="enlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <div class="enlist-row">
+            <input class="enlist-input" type="email" name="email" inputmode="email" autocomplete="email" required placeholder="you@watchman.com" aria-label="Email address">
+            <button class="btn btn-primary btn-lg enlist-submit" type="submit">Take the Post →</button>
+          </div>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+          <p class="enlist-note" data-vref="EZK 33:6">Ezekiel 33:6 — the watchman who sees the sword coming and sounds the trumpet.</p>
+          <p class="enlist-status" id="enlist-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="enlist-done" aria-hidden="true">
+          <div class="eyebrow" style="justify-content:center;color:var(--neon-blue);">// POST TAKEN</div>
+          <p class="section-sub" style="margin:10px 0 0;">You're on the wall. Watch your inbox — when the trumpet sounds, you'll be among the first to hear it.</p>
         </div>
+        <p class="enlist-alt">Prefer to reach us directly? <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a></p>
       </div>
     </div>
   </section>

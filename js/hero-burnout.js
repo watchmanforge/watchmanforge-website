@@ -58,10 +58,19 @@
     underglow();drawWheel(FRONT);drawWheel(REAR);drawCap(FRONT,0);drawCap(REAR,1.4);
     ctx.drawImage(fender,0,0,CW,CH);smoke();raf=requestAnimationFrame(frame); }
 
+  function resume(){ if(!ready) return; if(reduce) drawStatic(); else start(); }
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){
-      visible=e.isIntersecting; if(!ready||reduce) return; if(visible) start(); else stop(); }); },{threshold:0.01});
+      visible=e.isIntersecting; if(!ready) return; if(visible) resume(); else if(!reduce) stop(); }); },{threshold:0.01});
     io.observe(canvas);
   }
-  document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(visible) start(); });
+  document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(visible) resume(); });
+  // Mobile resilience: the address bar hiding/showing on scroll fires a viewport resize, and iOS
+  // can purge an off-screen canvas's backing store — repaint so the car never vanishes on scroll.
+  var rt; function onViewport(){ clearTimeout(rt); rt=setTimeout(function(){ if(visible) resume(); }, 60); }
+  window.addEventListener('resize', onViewport, {passive:true});
+  window.addEventListener('orientationchange', function(){ setTimeout(function(){ if(visible) resume(); }, 200); }, {passive:true});
+  window.addEventListener('pageshow', function(){ if(visible) resume(); }, {passive:true});
+  if(window.visualViewport){ window.visualViewport.addEventListener('resize', onViewport, {passive:true}); }
+  if(reduce){ var st; window.addEventListener('scroll', function(){ if(st) return; st=setTimeout(function(){ st=null; if(visible) drawStatic(); }, 150); }, {passive:true}); }
 })();
