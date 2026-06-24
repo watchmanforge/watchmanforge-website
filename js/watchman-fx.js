@@ -193,15 +193,23 @@
     var btnLabel = btn ? btn.textContent : '';
     function setStatus(msg, cls){ if (!status) return; status.textContent = msg || ''; status.className = 'enlist-status' + (msg ? ' show ' + (cls||'') : ''); }
     f.addEventListener('submit', function(e){
+      e.preventDefault();
       var hp = f.querySelector('input[name="_gotcha"]');
       var email = (input && input.value || '').trim();
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!valid){ e.preventDefault(); if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
+      if (!valid){ if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
       if (input) input.classList.remove('invalid');
-      if (hp && hp.value){ e.preventDefault(); setStatus('',''); f.classList.add('done'); return; }   // honeypot tripped: drop bots, don't post
-      // valid \u2192 let the native POST go into the hidden iframe (target="kit_sink"): no CORS, no fetch. Show success shortly after.
+      if (hp && hp.value){ setStatus('',''); f.classList.add('done'); return; }   // honeypot tripped: drop bots, don't send
+      var action = f.getAttribute('action') || '';
       setStatus('Taking your post\u2026', '');
-      setTimeout(function(){ setStatus('',''); f.classList.add('done'); }, 1200);
+      if (window.fetch){
+        // POST the email to the Google Sheet (Apps Script). no-cors sidesteps the CORS wall; the row still lands.
+        fetch(action, { method:'POST', mode:'no-cors', body:new URLSearchParams({ email: email }) })
+          .then(function(){ setStatus('',''); f.classList.add('done'); })
+          .catch(function(){ setStatus('Something went wrong \u2014 try again, or email us directly below.', 'err'); });
+      } else {
+        f.submit();   // very old browser fallback: native POST to the script
+      }
     });
   }
 
