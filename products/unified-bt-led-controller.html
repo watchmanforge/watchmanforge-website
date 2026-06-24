@@ -1,359 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChromaForge — Illuminate Your Ride | Watchman Forge</title>
-  <meta name="description" content="The ChromaForge is the universal Bluetooth LED controller for car enthusiasts. Control multi-brand LED systems from a single iOS app with 16M colors and custom sequences.">
-  <meta property="og:title" content="ChromaForge — Illuminate Your Ride">
-  <meta property="og:description" content="Universal Bluetooth car LED control. One app, all brands, infinite color possibilities — by Watchman Forge.">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://watchmanforge.com/products/unified-bt-led-controller.html">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css">
-  <style>
-    .led-glow { background: radial-gradient(circle, rgba(0,255,200,0.12) 0%, transparent 70%); }
-    --led-accent: #00ffc8;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChromaForge — Watchman Forge</title>
+<meta name="description" content="ChromaForge — one app to control every LED. Unify Bluetooth lighting from different brands and their separate apps into a single command center. Built for the build.">
+<meta name="theme-color" content="#010104">
+<meta property="og:title" content="ChromaForge — Watchman Forge">
+<meta property="og:description" content="One app. Every light. Unify your LED devices — whatever the brand — into a single controller.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://watchmanforge.com/products/unified-bt-led-controller.html">
+<meta property="og:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<link rel="canonical" href="https://watchmanforge.com/products/unified-bt-led-controller.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/main.css?v=v2-premium">
+<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<style>
+  :root{ --accent:#00ffc8; --accent-rgb:0,255,200; }
+  html{ scroll-behavior:smooth; } @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+  a:focus-visible, .btn:focus-visible, button:focus-visible{ outline:2px solid var(--neon-blue); outline-offset:3px; }
+  .prod-hero{ position:relative; padding:132px 0 76px; overflow:hidden; border-bottom:1px solid var(--border-mid,#22303c); }
+  .prod-hero::before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(60% 55% at 50% 26%, rgba(var(--accent-rgb),0.20), transparent 64%),
+      linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px) 0 0/100% 42px,
+      linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px) 0 0/42px 100%;
+    -webkit-mask-image:radial-gradient(120% 100% at 50% 0%, #000 38%, transparent 86%); mask-image:radial-gradient(120% 100% at 50% 0%, #000 38%, transparent 86%); }
+  .prod-hero-inner{ position:relative; z-index:1; text-align:center; }
+  .prod-eyebrow{ font-family:var(--font-display, ui-monospace, monospace); font-size:.74rem; letter-spacing:.14em; color:var(--accent); margin-bottom:24px; opacity:.92; }
+  .prod-icon-wrap{ width:128px; height:128px; border-radius:26%; overflow:hidden; margin:0 auto 26px; position:relative;
+    box-shadow:0 0 0 1px rgba(var(--accent-rgb),0.55), 0 12px 44px rgba(0,0,0,0.6), 0 0 56px rgba(var(--accent-rgb),0.28); }
+  .prod-icon-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .prod-title{ font-family:var(--font-heading); font-size:clamp(2.5rem,6.5vw,4.2rem); line-height:1.02; letter-spacing:-.01em; margin:0 0 14px; color:var(--text-primary,#e8f1f8); }
+  .prod-tag{ font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(1rem,2.4vw,1.4rem); color:var(--accent); letter-spacing:.02em; margin:0 0 22px; }
+  .prod-lede{ max-width:660px; margin:0 auto 30px; color:var(--text-secondary,#9fb6c9); font-size:1.06rem; line-height:1.62; }
+  .prod-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .prod-badges{ display:flex; gap:10px; justify-content:center; margin-top:26px; flex-wrap:wrap; }
+  .prod-badges span{ font-family:var(--font-display, ui-monospace, monospace); font-size:.7rem; letter-spacing:.1em; color:var(--text-muted,#5a6b7a); border:1px solid var(--border-mid,#22303c); padding:5px 13px; border-radius:20px; }
+  .prod-badges .prod-status{ color:var(--accent); border-color:rgba(var(--accent-rgb),0.45); }
+  .prod-scripture{ text-align:center; border-top:1px solid var(--border-mid,#22303c); border-bottom:1px solid var(--border-mid,#22303c); background:rgba(var(--accent-rgb),0.035); }
+  .prod-verse-ref{ font-family:var(--font-display, ui-monospace, monospace); color:var(--accent); letter-spacing:.18em; font-size:.74rem; text-transform:uppercase; margin:0 0 14px; }
+  .prod-verse{ font-family:var(--font-heading); font-size:clamp(1.3rem,3vw,2rem); color:var(--text-primary,#e8f1f8); max-width:780px; margin:0 auto; line-height:1.38; font-style:italic; }
+  .feat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; max-width:940px; margin:0 auto; }
+  @media (max-width:680px){ .feat-grid{ grid-template-columns:1fr; } }
+  .feat-card{ position:relative; padding:30px; border:1px solid var(--border-mid,#22303c); border-radius:14px; background:rgba(255,255,255,0.014); transition:border-color .22s ease, transform .22s ease, box-shadow .22s ease; }
+  .feat-card:hover{ border-color:rgba(var(--accent-rgb),0.5); transform:translateY(-4px); box-shadow:0 18px 50px rgba(0,0,0,0.4), 0 0 40px rgba(var(--accent-rgb),0.12); }
+  .feat-ico{ width:42px; height:42px; margin-bottom:16px; color:var(--accent); display:block; }
+  .feat-card h3{ font-family:var(--font-display, ui-monospace, monospace); font-size:1.04rem; margin:0 0 9px; color:var(--text-primary,#e8f1f8); letter-spacing:.01em; }
+  .feat-card p{ margin:0; color:var(--text-secondary,#9fb6c9); font-size:.95rem; line-height:1.56; }
+  .step-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:920px; margin:0 auto; }
+  @media (max-width:680px){ .step-row{ grid-template-columns:1fr; } }
+  .step{ padding:26px; border-left:2px solid var(--accent); background:rgba(255,255,255,0.014); border-radius:0 12px 12px 0; }
+  .step-n{ font-family:var(--font-display, ui-monospace, monospace); color:var(--accent); font-size:.82rem; letter-spacing:.12em; margin-bottom:10px; }
+  .step h3{ font-size:1.02rem; margin:0 0 7px; color:var(--text-primary,#e8f1f8); }
+  .step p{ margin:0; color:var(--text-secondary,#9fb6c9); font-size:.92rem; line-height:1.52; }
+  .prod-mission-box{ text-align:center; padding:clamp(36px,6vw,64px); border-radius:18px; }
+  .prod-note{ max-width:680px; margin:22px auto 0; text-align:center; font-size:.82rem; color:var(--text-muted,#5a6b7a); line-height:1.5; }
+  .promise-list{ list-style:none; padding:0; margin:18px auto 0; max-width:680px; text-align:left; display:grid; gap:12px; }
+  .promise-list li{ padding-left:26px; position:relative; color:var(--text-secondary,#9fb6c9); font-size:.97rem; line-height:1.5; }
+  .promise-list li::before{ content:''; position:absolute; left:0; top:.45em; width:11px; height:11px; border:2px solid var(--accent); border-radius:50%; }
+  .product-card .hud-bracket{ display:none; }
 
-    .color-swatch-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 20px 0;
-    }
-    .color-swatch {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      box-shadow: 0 0 12px currentColor;
-    }
-    .brand-tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 16px;
-      border-radius: 4px;
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--border-faint);
-      color: var(--text-secondary);
-      background: var(--bg-card);
-      transition: all var(--t-fast);
-    }
-    .brand-tag:hover { border-color: rgba(0,255,200,0.3); color: #00ffc8; }
-  </style>
+  /* ═══════════ Hidden scripture ═══════════ */
+  .wf-has-verse{ cursor:help; }
+  .wf-verse-tip{ position:fixed; z-index:9998; pointer-events:none; max-width:260px; padding:9px 12px;
+    background:rgba(4,6,12,0.97); border:1px solid var(--border-mid, rgba(0,212,255,0.32));
+    box-shadow:0 0 18px rgba(0,212,255,0.18); font-family:var(--font-display, ui-monospace, monospace);
+    font-size:0.72rem; line-height:1.5; color:var(--text-secondary,#9fb6c9);
+    opacity:0; transform:translateY(4px); transition:opacity .18s ease, transform .18s ease; }
+  .wf-verse-tip.show{ opacity:1; transform:translateY(0); }
+  .wf-verse-tip .vref{ display:block; color:var(--neon-blue,#00d4ff); letter-spacing:.12em; font-size:.62rem; margin-bottom:4px; }
+  #wf-whisper{ position:fixed; left:16px; bottom:14px; z-index:50; font-family:var(--font-display, ui-monospace, monospace);
+    font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--neon-blue,#00d4ff);
+    opacity:0; transition:opacity 1.3s ease; pointer-events:none; user-select:none; mix-blend-mode:screen; }
+  @media (max-width:760px){ #wf-whisper{ font-size:.54rem; left:12px; bottom:10px; } }
+  #wf-boot{ display:none; }
+  html.wf-booting{ overflow:hidden; }
+  html.wf-booting #wf-boot{ display:flex; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center;
+    overflow:hidden; background:radial-gradient(ellipse 120% 85% at 50% 36%, #03141f 0%, #010a13 46%, #00040a 100%); transition:opacity .6s ease; }
+  html.wf-booting #wf-boot::after{ content:''; position:absolute; left:-60%; right:-60%; bottom:-12%; height:72%; z-index:0;
+    background-image:linear-gradient(rgba(0,212,255,0.20) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.12) 1px, transparent 1px);
+    background-size:48px 48px; transform:perspective(360px) rotateX(64deg); transform-origin:center bottom;
+    -webkit-mask-image:linear-gradient(to top,#000 4%,transparent 72%); mask-image:linear-gradient(to top,#000 4%,transparent 72%);
+    animation:wf-grid 6s linear infinite; opacity:.85; pointer-events:none; }
+  @keyframes wf-grid{ from{ background-position:0 0; } to{ background-position:0 48px; } }
+  #wf-boot.wf-done{ pointer-events:none; animation:wf-bootout .9s ease forwards; }
+  @keyframes wf-bootout{ 0%{ opacity:1; transform:scale(1); filter:brightness(1); } 12%{ opacity:1; transform:scale(1.004); filter:brightness(1.65); } 32%{ opacity:1; filter:brightness(1); } 100%{ opacity:0; transform:scale(1.07); filter:brightness(1); } }
+  #wf-boot.wf-done::before{ content:''; position:absolute; inset:0; z-index:3; pointer-events:none;
+    background:radial-gradient(circle at 50% 45%, rgba(190,243,255,.92), rgba(0,212,255,.22) 42%, transparent 72%); animation:wf-flash .55s ease forwards; }
+  @keyframes wf-flash{ 0%{ opacity:0; } 16%{ opacity:.9; } 100%{ opacity:0; } }
+  .wf-boot-inner{ position:relative; z-index:2; width:min(680px,92vw); padding:0 22px; }
+  #wf-boot-log{ margin:0; font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(.7rem,1.6vw,.92rem); line-height:1.8; color:#7fe9ff; white-space:pre-wrap; min-height:13em; text-shadow:0 0 10px rgba(0,212,255,.6), 0 0 2px rgba(0,212,255,.9); }
+  #wf-boot-log .ok{ color:#00ffc8; } #wf-boot-log .hl{ color:#eafdff; text-shadow:0 0 12px rgba(120,230,255,.95); }
+  #wf-boot-log .hl2{ color:#bff3ff; letter-spacing:.04em; } #wf-boot-log .vs{ color:#9fb6c9; text-shadow:none; }
+  #wf-boot-log .cursor{ color:#eafdff; animation:wf-blink 1s steps(1) infinite; } @keyframes wf-blink{ 50%{ opacity:0; } }
+  .wf-boot-skip{ position:relative; z-index:2; margin-top:22px; font-family:var(--font-display, ui-monospace, monospace); font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:#3f6173; }
+</style>
 </head>
 <body>
-
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li class="has-dropdown"><a href="/#arsenal">The Arsenal</a>
-          <ul class="nav-dropdown">
-            <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-            <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-            <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-            <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-          </ul>
-        </li>
-        <li><a href="/about.html">The Manifesto</a></li>
-        <li><a href="/contact.html">Enlist</a></li>
-      </ul>
-      <div class="nav-right"><a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a></div>
-      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
+      <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown">
+        <a href="/#arsenal">The Arsenal</a>
+        <ul class="nav-dropdown">
+          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
+          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
+          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
+          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
+        </ul>
+      </li>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/#enlist" class="btn btn-primary btn-sm">Take the Post</a>
     </div>
-  </nav>
-
-  <div class="mobile-nav">
-    <a href="/">Home</a>
-    <div class="mobile-nav-section">The Arsenal</div>
-    <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-    <a href="/products/veil-os.html">Veil Studio</a>
-    <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-    <a href="/products/ai-investment-app.html">Vantage Edge</a>
-    <a href="/about.html">The Manifesto</a>
-    <a href="/contact.html">Enlist</a>
+    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
-
-  <main>
-
-    <section class="page-hero">
-      <div class="page-hero-glow led-glow"></div>
-      <div class="page-hero-content">
-        <div class="cs-badge">Coming Soon</div>
-        <div class="breadcrumb">
-          <a href="/">Home</a><span class="breadcrumb-sep">/</span>
-          <a href="/#products">Products</a><span class="breadcrumb-sep">/</span>
-          <span>ChromaForge</span>
-        </div>
-        <div>
-          <div class="badge badge-live" style="margin-bottom:20px;background:rgba(0,255,200,0.08);color:#00ffc8;border-color:rgba(0,255,200,0.25);">Available · iOS + Hardware</div>
-          <!-- ChromaForge Logo -->
-          <div style="margin-bottom:28px;line-height:0;">
-            <svg viewBox="0 0 300 82" xmlns="http://www.w3.org/2000/svg" aria-label="ChromaForge" width="300" height="82">
-              <defs>
-                <linearGradient id="cfh-chr" x1="15%" y1="0%" x2="85%" y2="110%">
-                  <stop offset="0%"   stop-color="#ccd0e4"/>
-                  <stop offset="22%"  stop-color="#eef0ff"/>
-                  <stop offset="48%"  stop-color="#a0a4b8"/>
-                  <stop offset="72%"  stop-color="#6e7082"/>
-                  <stop offset="100%" stop-color="#b0b2c4"/>
-                </linearGradient>
-                <linearGradient id="cfh-txt" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%"   stop-color="#dfe2f5"/>
-                  <stop offset="45%"  stop-color="#bcc0d4"/>
-                  <stop offset="100%" stop-color="#888898"/>
-                </linearGradient>
-                <filter id="cfh-gf" x="-60%" y="-60%" width="220%" height="220%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#00ffc8" flood-opacity="0.8"/>
-                  <feDropShadow dx="0" dy="0" stdDeviation="10"  flood-color="#00d4ff" flood-opacity="0.45"/>
-                </filter>
-              </defs>
-              <g filter="url(#cfh-gf)">
-                <path fill="url(#cfh-chr)"
-                  d="M 14 54 L 14 44 C 14 39 17 37 22 37
-                     L 64 37 C 69 37 72 39 72 44 L 72 54 Z"/>
-                <path fill="url(#cfh-chr)"
-                  d="M 9 37 C 9 32 12 30 17 30
-                     L 69 30 C 74 30 77 32 77 37
-                     L 9 37 Z"/>
-                <path fill="url(#cfh-chr)"
-                  d="M 9 37 C 7 37 2 35 0 32 C 2 29 7 28 9 30 Z"/>
-                <rect x="16" y="54" width="15" height="7" rx="1.5" fill="url(#cfh-chr)"/>
-                <rect x="55" y="54" width="15" height="7" rx="1.5" fill="url(#cfh-chr)"/>
-                <line x1="11" y1="34" x2="75" y2="34" stroke="rgba(220,225,255,0.5)" stroke-width="1"/>
-              </g>
-              <g stroke-linecap="round" stroke-width="2.2">
-                <line x1="43" y1="30" x2="34" y2="12" stroke="#ff3333" opacity="0.95"/>
-                <line x1="47" y1="28" x2="42" y2="9"  stroke="#ff8800" opacity="0.95"/>
-                <line x1="51" y1="28" x2="50" y2="8"  stroke="#ffdd00" opacity="0.95"/>
-                <line x1="55" y1="29" x2="59" y2="10" stroke="#00ff88" opacity="0.9"/>
-                <line x1="59" y1="30" x2="66" y2="13" stroke="#00d4ff" opacity="0.9"/>
-                <line x1="62" y1="32" x2="72" y2="17" stroke="#9000ff" opacity="0.85"/>
-                <circle cx="34" cy="11"  r="2.2" fill="#ff3333"/>
-                <circle cx="42" cy="8"   r="2.2" fill="#ff8800"/>
-                <circle cx="50" cy="7"   r="2.4" fill="#ffdd00"/>
-                <circle cx="59" cy="9"   r="2.2" fill="#00ff88"/>
-                <circle cx="66" cy="12"  r="2.2" fill="#00d4ff"/>
-                <circle cx="72" cy="16"  r="2"   fill="#9000ff"/>
-              </g>
-              <text x="88" y="46"
-                font-family="'Rajdhani',sans-serif" font-size="38" font-weight="700"
-                letter-spacing="2" fill="url(#cfh-txt)">CHROMA</text>
-              <text x="90" y="68"
-                font-family="'Orbitron',monospace" font-size="13" font-weight="600"
-                letter-spacing="9.5" fill="rgba(160,162,182,0.8)">FORGE</text>
-            </svg>
-          </div>
-          <h1 class="display-lg" style="margin-bottom:16px;">
-            <span style="background:linear-gradient(135deg,#00ffc8,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">ChromaForge</span>
-          </h1>
-          <p style="font-size:1.35rem;color:#00ffc8;margin-bottom:6px;font-family:var(--font-heading);font-weight:700;">&ldquo;Light up the darkness.&rdquo;</p>
-          <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:12px;font-family:var(--font-heading);font-weight:500;letter-spacing:0.04em;">Illuminate Your Ride.</p>
-          <p style="color:var(--text-secondary);line-height:1.8;max-width:560px;margin-bottom:28px;">
-            The universal Bluetooth LED controller for car enthusiasts. One iOS app to rule them all — control any brand's LED system, program custom sequences, and turn your vehicle into a rolling light show.
-          </p>
-          <div class="color-swatch-row">
-            <div class="color-swatch" style="background:#ff0000;color:#ff0000;"></div>
-            <div class="color-swatch" style="background:#ff6600;color:#ff6600;"></div>
-            <div class="color-swatch" style="background:#ffcc00;color:#ffcc00;"></div>
-            <div class="color-swatch" style="background:#00ff44;color:#00ff44;"></div>
-            <div class="color-swatch" style="background:#00d4ff;color:#00d4ff;"></div>
-            <div class="color-swatch" style="background:#9000ff;color:#9000ff;"></div>
-            <div class="color-swatch" style="background:#ff00cc;color:#ff00cc;"></div>
-            <div class="color-swatch" style="background:#ffffff;color:#ffffff;"></div>
-          </div>
-          <p style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:32px;">16,000,000+ COLORS · FULL SPECTRUM CONTROL</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;">
-            <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#00ffc8,#00d4ff);color:#010104;font-weight:700;">Get the Controller</a>
-            <a href="#features" class="btn btn-outline btn-lg" style="border-color:rgba(0,255,200,0.3);color:#00ffc8;">See Features</a>
-          </div>
-        </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <div class="mobile-nav-section">The Arsenal</div>
+  <a href="/products/veil-os.html">Veil Studio</a>
+  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
+  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
+  <a href="/products/ai-investment-app.html">Vantage Edge</a>
+  <a href="/about.html">The Manifesto</a>
+  <a href="/contact.html">Enlist</a>
+</div>
+<main>
+  <section class="prod-hero">
+    <div class="container prod-hero-inner">
+      <div class="prod-eyebrow">// CHROMAFORGE · STATUS:COMING_SOON · JN 1:5</div>
+      <div class="prod-icon-wrap wf-has-verse" data-vref="JN 1:5"><img src="/assets/images/chromaforge-logo.png" alt="ChromaForge"></div>
+      <h1 class="prod-title">ChromaForge</h1>
+      <p class="prod-tag">&ldquo;One app. Every light.&rdquo;</p>
+      <p class="prod-lede">A unified Bluetooth controller that brings every LED device under one roof — car underglow, interior strips, room lighting, no matter the brand or its clunky separate app. Stop juggling ten apps. Command them all from one.</p>
+      <div class="prod-cta">
+        <a href="/#enlist" class="btn btn-primary btn-lg">Join the Waitlist →</a>
+        <a href="/#arsenal" class="btn btn-outline btn-lg">← The Arsenal</a>
       </div>
-    </section>
-
-    <!-- Compatible brands -->
-    <section style="background:var(--bg-void);padding:40px 0;border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint);">
-      <div class="container">
-        <p style="font-family:var(--font-display);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);text-align:center;margin-bottom:20px;">Compatible LED Systems</p>
-        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-          <span class="brand-tag">RGBIC LEDs</span>
-          <span class="brand-tag">Govee</span>
-          <span class="brand-tag">HitLights</span>
-          <span class="brand-tag">OPT7</span>
-          <span class="brand-tag">Xprite</span>
-          <span class="brand-tag">SpeedTech</span>
-          <span class="brand-tag">Generic BT Controllers</span>
-          <span class="brand-tag">Custom Builds</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section class="section" id="features">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow reveal" style="color:#00ffc8;"><span style="width:24px;height:1px;background:#00ffc8;box-shadow:0 0 6px #00ffc8;"></span>Features<span style="width:24px;height:1px;background:#00ffc8;box-shadow:0 0 6px #00ffc8;"></span></div>
-          <h2 class="section-title reveal reveal-delay-1">One App.<br>Total Control.</h2>
-          <p class="section-sub reveal reveal-delay-2">Stop juggling multiple brand apps. The ChromaForge connects to all your LED hardware through a single, powerful interface.</p>
-        </div>
-
-        <div class="grid-3">
-          <div class="card card-corner reveal" style="border-color:rgba(0,255,200,0.1);">
-            <div class="product-icon icon-cyan" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#00ffc8;">Multi-Brand Support</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Connect to any Bluetooth LED controller across brands. Our universal protocol layer bridges the gaps left by manufacturer apps.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-1" style="border-color:rgba(0,255,200,0.1);">
-            <div class="product-icon icon-cyan" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#00ffc8;">Scene Programming</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Build custom light sequences with a visual timeline editor. Program color transitions, strobes, and breathing patterns with precision timing.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-2" style="border-color:rgba(0,255,200,0.1);">
-            <div class="product-icon icon-cyan" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#00ffc8;">Music Sync</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Let your LEDs react to music in real time. Beat detection drives color changes and intensity for a synchronized audio-visual experience.</p>
-          </div>
-          <div class="card card-corner reveal" style="border-color:rgba(0,255,200,0.1);">
-            <div class="product-icon icon-cyan" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#00ffc8;">Preset Library</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Dozens of professionally designed presets ready to use. Save your own creations and share them with the enthusiast community.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-1" style="border-color:rgba(0,255,200,0.1);">
-            <div class="product-icon icon-cyan" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#00ffc8;">Zone Control</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Control different zones of your vehicle independently. Front, rear, interior, underglow — each with its own color and pattern settings.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-2" style="border-color:rgba(0,255,200,0.1);">
-            <div class="product-icon icon-cyan" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#00ffc8;">Timer &amp; Auto-Off</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Schedule LEDs to turn on at dusk and off at dawn. Set timers, auto-off durations, and Bluetooth range-based triggers.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hardware section -->
-    <section class="section" style="background:var(--bg-void);">
-      <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;">
-          <div class="reveal">
-            <div class="eyebrow" style="color:#00ffc8;"><span style="width:24px;height:1px;background:#00ffc8;"></span>Hardware + Software<span style="width:24px;height:1px;background:#00ffc8;"></span></div>
-            <h2 class="section-title" style="margin-bottom:20px;">The Complete Ecosystem</h2>
-            <div class="neon-line" style="background:linear-gradient(135deg,#00ffc8,#00d4ff);"></div>
-            <div class="feature-item">
-              <div class="feature-num" style="color:#00ffc8;">01</div>
-              <div class="feature-body">
-                <h3>Compact BT Module</h3>
-                <p>Our controller hardware bridges your vehicle's 12V LED strips to Bluetooth, with support for up to 8 independent zones.</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-num" style="color:#00ffc8;">02</div>
-              <div class="feature-body">
-                <h3>30-Foot Bluetooth Range</h3>
-                <p>Control your setup from across the parking lot. Reliable BLE 5.0 connection even in RF-heavy environments.</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-num" style="color:#00ffc8;">03</div>
-              <div class="feature-body">
-                <h3>Plug-and-Play Install</h3>
-                <p>Simple wiring harness connects inline with existing LED strips. No cutting, no soldering — ready in minutes.</p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="feature-num" style="color:#00ffc8;">04</div>
-              <div class="feature-body">
-                <h3>OTA Firmware Updates</h3>
-                <p>We push hardware improvements directly through the app. Your controller gets smarter over time, automatically.</p>
-              </div>
-            </div>
-          </div>
-          <div class="reveal reveal-delay-2" style="text-align:center;">
-            <div style="background:var(--bg-card);border:1px solid rgba(0,255,200,0.15);border-radius:16px;padding:40px;box-shadow:0 0 40px rgba(0,255,200,0.08);">
-              <div style="width:80px;height:80px;border-radius:16px;background:rgba(0,255,200,0.08);border:1px solid rgba(0,255,200,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
-                <svg viewBox="0 0 32 32" fill="none" width="40" height="40">
-                  <path d="M16 4v24M10 8l12 8-12 8" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="16" cy="16" r="8" stroke="#00ffc8" stroke-width="1" opacity="0.3"/>
-                </svg>
-              </div>
-              <div style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.15em;color:#00ffc8;margin-bottom:8px;">CHROMAFORGE</div>
-              <div style="font-size:0.85rem;color:var(--text-secondary);line-height:1.7;margin-bottom:24px;">Hardware + iOS App Bundle</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;">
-                <div style="padding:12px;background:rgba(0,255,200,0.04);border:1px solid rgba(0,255,200,0.1);border-radius:8px;">
-                  <div style="font-family:var(--font-display);font-size:0.58rem;letter-spacing:0.12em;color:var(--text-muted);">PROTOCOL</div>
-                  <div style="font-size:0.85rem;color:#00ffc8;margin-top:4px;">BLE 5.0</div>
-                </div>
-                <div style="padding:12px;background:rgba(0,255,200,0.04);border:1px solid rgba(0,255,200,0.1);border-radius:8px;">
-                  <div style="font-family:var(--font-display);font-size:0.58rem;letter-spacing:0.12em;color:var(--text-muted);">VOLTAGE</div>
-                  <div style="font-size:0.85rem;color:#00ffc8;margin-top:4px;">12V DC</div>
-                </div>
-                <div style="padding:12px;background:rgba(0,255,200,0.04);border:1px solid rgba(0,255,200,0.1);border-radius:8px;">
-                  <div style="font-family:var(--font-display);font-size:0.58rem;letter-spacing:0.12em;color:var(--text-muted);">ZONES</div>
-                  <div style="font-size:0.85rem;color:#00ffc8;margin-top:4px;">Up to 8</div>
-                </div>
-                <div style="padding:12px;background:rgba(0,255,200,0.04);border:1px solid rgba(0,255,200,0.1);border-radius:8px;">
-                  <div style="font-family:var(--font-display);font-size:0.58rem;letter-spacing:0.12em;color:var(--text-muted);">COLORS</div>
-                  <div style="font-size:0.85rem;color:#00ffc8;margin-top:4px;">16M+</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section section">
-      <div class="container">
-        <div class="cta-box reveal" style="border-color:rgba(0,255,200,0.2);">
-          <div class="eyebrow" style="justify-content:center;color:#00ffc8;"><span style="width:24px;height:1px;background:#00ffc8;"></span>ChromaForge<span style="width:24px;height:1px;background:#00ffc8;"></span></div>
-          <h2 class="section-title">Light Up Your Build</h2>
-          <p class="section-sub">Contact us for pricing, availability, and fleet/installer partnership inquiries.</p>
-          <div class="cta-actions">
-            <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#00ffc8,#00d4ff);color:#010104;font-weight:700;">Order Now</a>
-            <a href="/#products" class="btn btn-outline btn-lg">All Products</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="footer">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo"><img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross"></a>
-        <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-        <div class="footer-contact"><a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a><span>Forged in Faith. Built for the Future.</span></div>
-      </div>
-      <div class="footer-col"><h4>The Arsenal</h4><ul><li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li><li><a href="/products/veil-os.html">Veil Studio</a></li><li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li><li><a href="/products/ai-investment-app.html">Vantage Edge</a></li></ul></div>
-      <div class="footer-col"><h4>The Movement</h4><ul><li><a href="/about.html">The Manifesto</a></li><li><a href="/contact.html">Enlist</a></li></ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-service.html">Terms of Service</a></li></ul></div>
+      <div class="prod-badges"><span>iOS</span><span>Android</span><span class="prod-status">Coming Soon</span></div>
     </div>
-    <hr class="hr-neon">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-      <div class="footer-bottom-links"><a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a></div>
-    </div>
-  </footer>
+  </section>
 
-  <script src="/js/main.js"></script>
+  <section class="section prod-scripture">
+    <div class="container">
+      <p class="prod-verse-ref">John 1:5</p>
+      <p class="prod-verse">&ldquo;The light shines in the darkness, and the darkness has not overcome it.&rdquo;</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="eyebrow">// CAPABILITIES</div>
+        <h2 class="section-title">One Controller for the Whole Build</h2>
+        <p class="section-sub">Every strip, every device, every brand — finally answering to a single app.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card reveal">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg>
+          <h3>Every Brand, One App</h3>
+          <p>Pair LED products from different makers — the cheap strip, the name-brand kit, the no-name controller — and run them together.</p>
+        </div>
+        <div class="feat-card reveal reveal-delay-1">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5M5 13h14v4H5z"/><circle cx="7.5" cy="17.5" r="1.3"/><circle cx="16.5" cy="17.5" r="1.3"/></svg>
+          <h3>Built for the Car</h3>
+          <p>Made for the build: underglow, interior accents, trunk, and wheels — all synced from the driver&rsquo;s seat.</p>
+        </div>
+        <div class="feat-card reveal reveal-delay-2">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="7.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="9" r="1.1" fill="currentColor" stroke="none"/><path d="M12 21a3 3 0 0 1 0-6 2 2 0 0 0 2-2"/></svg>
+          <h3>Colors, Scenes &amp; Sync</h3>
+          <p>Custom colors, saved scenes, and music sync — set the whole rig to one mood in a tap.</p>
+        </div>
+        <div class="feat-card reveal reveal-delay-3 wf-has-verse" data-vref="JN 1:5">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <h3>Group &amp; Zone Control</h3>
+          <p>Bundle devices into zones and control them as one, or fine-tune each independently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="hud-frame prod-mission-box reveal">
+        <div class="hud-bracket hud-bracket-tl"></div><div class="hud-bracket hud-bracket-tr"></div>
+        <div class="hud-bracket hud-bracket-bl"></div><div class="hud-bracket hud-bracket-br"></div>
+        <div class="eyebrow" style="justify-content:center;">// THE_WHY</div>
+        <h2 class="section-title">Ten Apps. One Light.<br>That Ends Here.</h2>
+        <p class="section-sub" data-vref="JN 1:5">You bought the strips, the kit, the controller — and each one shipped its own buggy app. ChromaForge is the one app that finally speaks to all of them, so your light moves as one and the darkness doesn&rsquo;t get a say.</p>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal"><div class="eyebrow">// THE_FLOW</div><h2 class="section-title">From Boxes of Apps to One</h2></div>
+      <div class="step-row">
+        <div class="step reveal">
+          <div class="step-n">01 · PAIR</div>
+          <h3>Connect Everything</h3>
+          <p>Add your LED devices across brands — ChromaForge finds and links them.</p>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-n">02 · GROUP</div>
+          <h3>Build Your Zones</h3>
+          <p>Sort them into zones — car, room, rig — however you run your space.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-n">03 · LIGHT</div>
+          <h3>Command It All</h3>
+          <p>Color, scene, sync, schedule — one tap moves every light at once.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section section">
+    <div class="container">
+      <div class="cta-box hud-frame reveal">
+        <div class="hud-bracket hud-bracket-tl"></div><div class="hud-bracket hud-bracket-tr"></div>
+        <div class="hud-bracket hud-bracket-bl"></div><div class="hud-bracket hud-bracket-br"></div>
+        <div class="eyebrow" style="justify-content:center;">// JOIN_THE_FORGE</div>
+        <h2 class="section-title">Be First to Run<br>One Light Command.</h2>
+        <p class="section-sub">ChromaForge is coming. Take your post on the waitlist and you&rsquo;ll be first to unify the rig.</p>
+        <div class="cta-actions"><a href="/#enlist" class="btn btn-primary btn-lg">Join the Waitlist →</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
+        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross">
+      </a>
+      <p>Tools for the Watchman&rsquo;s mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
+      <div class="footer-contact">
+        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+        <span>Forged in Faith. Built for the Future.</span>
+      </div>
+    </div>
+    <div class="footer-col"><h4>The Arsenal</h4><ul>
+      <li><a href="/products/veil-os.html">Veil Studio</a></li>
+      <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
+      <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
+      <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>The Movement</h4><ul>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul>
+      <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <hr class="hr-neon">
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.js?v=v2-premium"></script>
+<script src="/js/watchman-fx.js?v=v1"></script>
 </body>
 </html>

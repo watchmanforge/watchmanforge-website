@@ -1,348 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veil Studio — AI Media Creation Platform | Watchman Forge</title>
-  <meta name="description" content="Veil Studio is a powerful AI-driven media creation platform for iOS and web. Generate images, synthesize video, and produce audio at professional quality.">
-  <meta property="og:title" content="Veil Studio — Create Without Limits">
-  <meta property="og:description" content="AI-powered media creation. Images, video, audio — generated at professional quality by Veil Studio from Watchman Forge.">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://watchmanforge.com/products/veil-os.html">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css">
-  <style>
-    .veil-hero-glow { background: radial-gradient(circle, rgba(144,0,255,0.15) 0%, transparent 70%); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veil Studio — Watchman Forge</title>
+<meta name="description" content="Veil Studio — an AI-driven media engine that turns conviction into content. Generate visuals, synthesize video, and produce voice at professional quality. Sound the trumpet at scale.">
+<meta name="theme-color" content="#010104">
+<meta property="og:title" content="Veil Studio — Watchman Forge">
+<meta property="og:description" content="Sound the trumpet at scale. An AI media engine for the remnant — visuals, video, and voice at professional quality.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://watchmanforge.com/products/veil-os.html">
+<meta property="og:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<link rel="canonical" href="https://watchmanforge.com/products/veil-os.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/main.css?v=v2-premium">
+<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<style>
+  /* ════════════════════════════════════════════════════════════
+     VEIL STUDIO — product page. Tokens & components from main.css.
+     Accent = purple (Veil's color in the Arsenal). This block adds
+     the product hero, capability grid, flow, and the FX layer.
+     ════════════════════════════════════════════════════════════ */
+  :root{ --accent:#9000ff; --accent-rgb:144,0,255; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+  a:focus-visible, .btn:focus-visible, button:focus-visible{ outline:2px solid var(--neon-blue); outline-offset:3px; }
 
-    .generation-demo {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 28px;
-      position: relative;
-      overflow: hidden;
-    }
-    .generation-demo::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(144,0,255,0.07) 0%, transparent 60%);
-    }
-    .demo-prompt {
-      background: var(--bg-input);
-      border: 1px solid var(--border-faint);
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-family: var(--font-body);
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-      position: relative;
-    }
-    .demo-prompt::after {
-      content: '|';
-      color: var(--neon-purple);
-      animation: pulse-dot 1s infinite;
-      margin-left: 2px;
-    }
-    .demo-output-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .demo-tile {
-      aspect-ratio: 1;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.55rem;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.3);
-    }
-    .demo-tile-1 { background: linear-gradient(135deg, #0a0018, #200040, #0a0018); }
-    .demo-tile-2 { background: linear-gradient(135deg, #001020, #003060, #001020); }
-    .demo-tile-3 { background: linear-gradient(135deg, #180008, #500020, #180008); }
+  /* ── Product hero ── */
+  .prod-hero{ position:relative; padding:132px 0 76px; overflow:hidden; border-bottom:1px solid var(--border-mid,#22303c); }
+  .prod-hero::before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(60% 55% at 50% 26%, rgba(var(--accent-rgb),0.20), transparent 64%),
+      linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px) 0 0/100% 42px,
+      linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px) 0 0/42px 100%;
+    -webkit-mask-image:radial-gradient(120% 100% at 50% 0%, #000 38%, transparent 86%);
+    mask-image:radial-gradient(120% 100% at 50% 0%, #000 38%, transparent 86%); }
+  .prod-hero-inner{ position:relative; z-index:1; text-align:center; }
+  .prod-eyebrow{ font-family:var(--font-display, ui-monospace, monospace); font-size:.74rem; letter-spacing:.14em;
+    color:var(--accent); margin-bottom:24px; opacity:.92; }
+  .prod-icon-wrap{ width:128px; height:128px; border-radius:26%; overflow:hidden; margin:0 auto 26px; position:relative;
+    box-shadow:0 0 0 1px rgba(var(--accent-rgb),0.55), 0 12px 44px rgba(0,0,0,0.6), 0 0 56px rgba(var(--accent-rgb),0.28); }
+  .prod-icon-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .prod-title{ font-family:var(--font-heading); font-size:clamp(2.5rem,6.5vw,4.2rem); line-height:1.02; letter-spacing:-.01em;
+    margin:0 0 14px; color:var(--text-primary,#e8f1f8); }
+  .prod-tag{ font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(1rem,2.4vw,1.4rem);
+    color:var(--accent); letter-spacing:.02em; margin:0 0 22px; }
+  .prod-lede{ max-width:640px; margin:0 auto 30px; color:var(--text-secondary,#9fb6c9); font-size:1.06rem; line-height:1.62; }
+  .prod-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .prod-badges{ display:flex; gap:10px; justify-content:center; margin-top:26px; flex-wrap:wrap; }
+  .prod-badges span{ font-family:var(--font-display, ui-monospace, monospace); font-size:.7rem; letter-spacing:.1em;
+    color:var(--text-muted,#5a6b7a); border:1px solid var(--border-mid,#22303c); padding:5px 13px; border-radius:20px; }
+  .prod-badges .prod-status{ color:var(--accent); border-color:rgba(var(--accent-rgb),0.45); }
 
-    .capability-strip {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-width: none;
-    }
-    .capability-strip::-webkit-scrollbar { display: none; }
-    .cap-chip {
-      flex-shrink: 0;
-      padding: 10px 20px;
-      border: 1px solid var(--border-subtle);
-      border-radius: 100px;
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      background: rgba(144,0,255,0.05);
-      transition: all var(--t-fast);
-      cursor: default;
-    }
-    .cap-chip:hover { border-color: rgba(144,0,255,0.4); color: #cc88ff; background: rgba(144,0,255,0.1); }
-  </style>
+  /* ── Scripture band ── */
+  .prod-scripture{ text-align:center; border-top:1px solid var(--border-mid,#22303c); border-bottom:1px solid var(--border-mid,#22303c);
+    background:rgba(var(--accent-rgb),0.035); }
+  .prod-verse-ref{ font-family:var(--font-display, ui-monospace, monospace); color:var(--accent); letter-spacing:.18em;
+    font-size:.74rem; text-transform:uppercase; margin:0 0 14px; }
+  .prod-verse{ font-family:var(--font-heading); font-size:clamp(1.3rem,3vw,2rem); color:var(--text-primary,#e8f1f8);
+    max-width:780px; margin:0 auto; line-height:1.38; font-style:italic; }
+
+  /* ── Capability grid ── */
+  .feat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; max-width:940px; margin:0 auto; }
+  @media (max-width:680px){ .feat-grid{ grid-template-columns:1fr; } }
+  .feat-card{ position:relative; padding:30px; border:1px solid var(--border-mid,#22303c); border-radius:14px;
+    background:rgba(255,255,255,0.014); transition:border-color .22s ease, transform .22s ease, box-shadow .22s ease; }
+  .feat-card:hover{ border-color:rgba(var(--accent-rgb),0.5); transform:translateY(-4px);
+    box-shadow:0 18px 50px rgba(0,0,0,0.4), 0 0 40px rgba(var(--accent-rgb),0.12); }
+  .feat-ico{ width:42px; height:42px; margin-bottom:16px; color:var(--accent); display:block; }
+  .feat-card h3{ font-family:var(--font-display, ui-monospace, monospace); font-size:1.04rem; margin:0 0 9px;
+    color:var(--text-primary,#e8f1f8); letter-spacing:.01em; }
+  .feat-card p{ margin:0; color:var(--text-secondary,#9fb6c9); font-size:.95rem; line-height:1.56; }
+
+  /* ── Flow / steps ── */
+  .step-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:920px; margin:0 auto; }
+  @media (max-width:680px){ .step-row{ grid-template-columns:1fr; } }
+  .step{ padding:26px; border-left:2px solid var(--accent); background:rgba(255,255,255,0.014); border-radius:0 12px 12px 0; }
+  .step-n{ font-family:var(--font-display, ui-monospace, monospace); color:var(--accent); font-size:.82rem; letter-spacing:.12em; margin-bottom:10px; }
+  .step h3{ font-size:1.02rem; margin:0 0 7px; color:var(--text-primary,#e8f1f8); }
+  .step p{ margin:0; color:var(--text-secondary,#9fb6c9); font-size:.92rem; line-height:1.52; }
+
+  /* ── Mission box ── */
+  .prod-mission-box{ text-align:center; padding:clamp(36px,6vw,64px); border-radius:18px; }
+
+  /* keep any HUD product cards clean on hover (no stray vertical accent) */
+  .product-card .hud-bracket{ display:none; }
+
+  /* ═══════════ Hidden scripture ═══════════ */
+  .wf-has-verse{ cursor:help; }
+  .wf-verse-tip{ position:fixed; z-index:9998; pointer-events:none; max-width:260px; padding:9px 12px;
+    background:rgba(4,6,12,0.97); border:1px solid var(--border-mid, rgba(0,212,255,0.32));
+    box-shadow:0 0 18px rgba(0,212,255,0.18); font-family:var(--font-display, ui-monospace, monospace);
+    font-size:0.72rem; line-height:1.5; color:var(--text-secondary,#9fb6c9);
+    opacity:0; transform:translateY(4px); transition:opacity .18s ease, transform .18s ease; }
+  .wf-verse-tip.show{ opacity:1; transform:translateY(0); }
+  .wf-verse-tip .vref{ display:block; color:var(--neon-blue,#00d4ff); letter-spacing:.12em; font-size:.62rem; margin-bottom:4px; }
+  #wf-whisper{ position:fixed; left:16px; bottom:14px; z-index:50; font-family:var(--font-display, ui-monospace, monospace);
+    font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--neon-blue,#00d4ff);
+    opacity:0; transition:opacity 1.3s ease; pointer-events:none; user-select:none; mix-blend-mode:screen; }
+  @media (max-width:760px){ #wf-whisper{ font-size:.54rem; left:12px; bottom:10px; } }
+
+  /* ═══════════ Boot sequence — THE GRID ═══════════ */
+  #wf-boot{ display:none; }
+  html.wf-booting{ overflow:hidden; }
+  html.wf-booting #wf-boot{ display:flex; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center;
+    overflow:hidden; background:radial-gradient(ellipse 120% 85% at 50% 36%, #03141f 0%, #010a13 46%, #00040a 100%);
+    transition:opacity .6s ease; }
+  html.wf-booting #wf-boot::after{ content:''; position:absolute; left:-60%; right:-60%; bottom:-12%; height:72%; z-index:0;
+    background-image:linear-gradient(rgba(0,212,255,0.20) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.12) 1px, transparent 1px);
+    background-size:48px 48px; transform:perspective(360px) rotateX(64deg); transform-origin:center bottom;
+    -webkit-mask-image:linear-gradient(to top,#000 4%,transparent 72%); mask-image:linear-gradient(to top,#000 4%,transparent 72%);
+    animation:wf-grid 6s linear infinite; opacity:.85; pointer-events:none; }
+  @keyframes wf-grid{ from{ background-position:0 0; } to{ background-position:0 48px; } }
+  #wf-boot.wf-done{ pointer-events:none; animation:wf-bootout .9s ease forwards; }
+  @keyframes wf-bootout{ 0%{ opacity:1; transform:scale(1); filter:brightness(1); }
+    12%{ opacity:1; transform:scale(1.004); filter:brightness(1.65); }
+    32%{ opacity:1; filter:brightness(1); }
+    100%{ opacity:0; transform:scale(1.07); filter:brightness(1); } }
+  #wf-boot.wf-done::before{ content:''; position:absolute; inset:0; z-index:3; pointer-events:none;
+    background:radial-gradient(circle at 50% 45%, rgba(190,243,255,.92), rgba(0,212,255,.22) 42%, transparent 72%);
+    animation:wf-flash .55s ease forwards; }
+  @keyframes wf-flash{ 0%{ opacity:0; } 16%{ opacity:.9; } 100%{ opacity:0; } }
+  .wf-boot-inner{ position:relative; z-index:2; width:min(680px,92vw); padding:0 22px; }
+  #wf-boot-log{ margin:0; font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(.7rem,1.6vw,.92rem);
+    line-height:1.8; color:#7fe9ff; white-space:pre-wrap; min-height:13em;
+    text-shadow:0 0 10px rgba(0,212,255,.6), 0 0 2px rgba(0,212,255,.9); }
+  #wf-boot-log .ok{ color:#00ffc8; }
+  #wf-boot-log .hl{ color:#eafdff; text-shadow:0 0 12px rgba(120,230,255,.95); }
+  #wf-boot-log .hl2{ color:#bff3ff; letter-spacing:.04em; }
+  #wf-boot-log .vs{ color:#9fb6c9; text-shadow:none; }
+  #wf-boot-log .cursor{ color:#eafdff; animation:wf-blink 1s steps(1) infinite; }
+  @keyframes wf-blink{ 50%{ opacity:0; } }
+  .wf-boot-skip{ position:relative; z-index:2; margin-top:22px; font-family:var(--font-display, ui-monospace, monospace); font-size:.58rem;
+    letter-spacing:.22em; text-transform:uppercase; color:#3f6173; }
+</style>
 </head>
 <body>
 
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
+      <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown">
+        <a href="/#arsenal">The Arsenal</a>
+        <ul class="nav-dropdown">
+          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
+          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
+          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
+          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
+        </ul>
+      </li>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/#enlist" class="btn btn-primary btn-sm">Take the Post</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <div class="mobile-nav-section">The Arsenal</div>
+  <a href="/products/veil-os.html">Veil Studio</a>
+  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
+  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
+  <a href="/products/ai-investment-app.html">Vantage Edge</a>
+  <a href="/about.html">The Manifesto</a>
+  <a href="/contact.html">Enlist</a>
+</div>
+
+<main>
+
+  <!-- ── Product hero ─────────────────────────────────────────── -->
+  <section class="prod-hero">
+    <div class="container prod-hero-inner">
+      <div class="prod-eyebrow">// VEIL_STUDIO · STATUS:COMING_SOON · MATT 5:14</div>
+      <div class="prod-icon-wrap wf-has-verse" data-vref="MATT 5:14"><img src="/assets/images/veil-logo.png" alt="Veil Studio"></div>
+      <h1 class="prod-title">Veil Studio</h1>
+      <p class="prod-tag">&ldquo;Sound the trumpet at scale.&rdquo;</p>
+      <p class="prod-lede">An AI-driven media engine that turns conviction into content — generate visuals, synthesize video, and produce voice at professional quality, so the message reaches the wall faster than the sword.</p>
+      <div class="prod-cta">
+        <a href="/#enlist" class="btn btn-primary btn-lg">Join the Waitlist →</a>
+        <a href="/#arsenal" class="btn btn-outline btn-lg">← The Arsenal</a>
+      </div>
+      <div class="prod-badges">
+        <span>iOS</span><span>Web</span><span class="prod-status">Coming Soon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Scripture ────────────────────────────────────────────── -->
+  <section class="section prod-scripture">
+    <div class="container">
+      <p class="prod-verse-ref">Matthew 5:14</p>
+      <p class="prod-verse">&ldquo;You are the light of the world. A city set on a hill cannot be hidden.&rdquo;</p>
+    </div>
+  </section>
+
+  <!-- ── Capabilities ─────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="eyebrow">// CAPABILITIES</div>
+        <h2 class="section-title">What It Forges</h2>
+        <p class="section-sub">One engine for the whole message — image, motion, and voice, all on-brand, all at the speed of conviction.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card reveal">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5-5L6 20"/></svg>
+          <h3>Visual Generation</h3>
+          <p>Posters, social, campaign art — rendered on-brand in seconds, not days. Your message, made to be seen.</p>
+        </div>
+        <div class="feat-card reveal reveal-delay-1">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+          <h3>Video Synthesis</h3>
+          <p>Turn a script — or a single verse — into motion. Short-form reels to long-form story, voiced and cut.</p>
+        </div>
+        <div class="feat-card reveal reveal-delay-2">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          <h3>Voice Production</h3>
+          <p>Studio-grade narration and voiceover, synthesized clean — so the word goes out clear and carries.</p>
+        </div>
+        <div class="feat-card reveal reveal-delay-3 wf-has-verse" data-vref="MATT 5:14">
+          <svg class="feat-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+          <h3>On-Message Memory</h3>
+          <p>It learns your voice and your mission and keeps every output true to it — the light stays the light.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── The why ──────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="hud-frame prod-mission-box reveal">
+        <div class="hud-bracket hud-bracket-tl"></div>
+        <div class="hud-bracket hud-bracket-tr"></div>
+        <div class="hud-bracket hud-bracket-bl"></div>
+        <div class="hud-bracket hud-bracket-br"></div>
+        <div class="eyebrow" style="justify-content:center;">// THE_WHY</div>
+        <h2 class="section-title">The Message Should Move<br>as Fast as the World Does.</h2>
+        <p class="section-sub" data-vref="MATT 5:14">The enemy floods the feed. Veil Studio puts professional media in the hands of the remnant — so the light isn&rsquo;t only true, it&rsquo;s loud, and it reaches the wall before the sword does.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── The flow ─────────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="eyebrow">// THE_FLOW</div>
+        <h2 class="section-title">From Conviction to Content</h2>
+      </div>
+      <div class="step-row">
+        <div class="step reveal">
+          <div class="step-n">01 · SPEAK</div>
+          <h3>Bring the Message</h3>
+          <p>A verse, a script, a thought. Start with what&rsquo;s on your heart — no studio required.</p>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-n">02 · FORGE</div>
+          <h3>Veil Builds It</h3>
+          <p>Visuals, video, and voice — generated together, on-brand, in minutes.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-n">03 · SEND</div>
+          <h3>Sound It Out</h3>
+          <p>Export and post — to every wall, every feed, every soul still out there in the dark.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────────── -->
+  <section class="cta-section section" id="enlist-cta">
+    <div class="container">
+      <div class="cta-box hud-frame reveal">
+        <div class="hud-bracket hud-bracket-tl"></div>
+        <div class="hud-bracket hud-bracket-tr"></div>
+        <div class="hud-bracket hud-bracket-bl"></div>
+        <div class="hud-bracket hud-bracket-br"></div>
+        <div class="eyebrow" style="justify-content:center;">// JOIN_THE_FORGE</div>
+        <h2 class="section-title">Be on the Wall When<br>Veil Studio Goes Live.</h2>
+        <p class="section-sub">It&rsquo;s coming. Take your post on the waitlist and you&rsquo;ll be first through the gate when the trumpet sounds.</p>
+        <div class="cta-actions">
+          <a href="/#enlist" class="btn btn-primary btn-lg">Join the Waitlist →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
+        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross">
       </a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li class="has-dropdown"><a href="/#arsenal">The Arsenal</a>
-          <ul class="nav-dropdown">
-            <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-            <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-            <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-            <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-          </ul>
-        </li>
+      <p>Tools for the Watchman&rsquo;s mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
+      <div class="footer-contact">
+        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+        <span>Forged in Faith. Built for the Future.</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>The Arsenal</h4>
+      <ul>
+        <li><a href="/products/veil-os.html">Veil Studio</a></li>
+        <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
+        <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
+        <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>The Movement</h4>
+      <ul>
         <li><a href="/about.html">The Manifesto</a></li>
         <li><a href="/contact.html">Enlist</a></li>
       </ul>
-      <div class="nav-right"><a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a></div>
-      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
-  </nav>
-
-  <div class="mobile-nav">
-    <a href="/">Home</a>
-    <div class="mobile-nav-section">The Arsenal</div>
-    <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-    <a href="/products/veil-os.html">Veil Studio</a>
-    <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-    <a href="/products/ai-investment-app.html">Vantage Edge</a>
-    <a href="/about.html">The Manifesto</a>
-    <a href="/contact.html">Enlist</a>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
   </div>
-
-  <main>
-
-    <section class="page-hero">
-      <div class="page-hero-glow veil-hero-glow"></div>
-      <div class="page-hero-content">
-        <div class="cs-badge">Coming Soon</div>
-        <div class="breadcrumb">
-          <a href="/">Home</a><span class="breadcrumb-sep">/</span>
-          <a href="/#products">Products</a><span class="breadcrumb-sep">/</span>
-          <span>Veil Studio</span>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-          <div>
-            <div class="badge badge-live" style="margin-bottom:20px;background:rgba(144,0,255,0.1);color:#cc88ff;border-color:rgba(144,0,255,0.3);">Available · iOS &amp; Web</div>
-            <!-- Veil Studio Logo -->
-            <div style="margin-bottom:28px;line-height:0;">
-              <svg viewBox="0 0 300 82" xmlns="http://www.w3.org/2000/svg" aria-label="Veil Studio" width="300" height="82">
-                <defs>
-                  <linearGradient id="vsh-chr" x1="15%" y1="0%" x2="85%" y2="110%">
-                    <stop offset="0%"   stop-color="#ccd0e4"/>
-                    <stop offset="22%"  stop-color="#eef0ff"/>
-                    <stop offset="48%"  stop-color="#a0a4b8"/>
-                    <stop offset="72%"  stop-color="#6e7082"/>
-                    <stop offset="100%" stop-color="#b0b2c4"/>
-                  </linearGradient>
-                  <linearGradient id="vsh-txt" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%"   stop-color="#dfe2f5"/>
-                    <stop offset="45%"  stop-color="#bcc0d4"/>
-                    <stop offset="100%" stop-color="#888898"/>
-                  </linearGradient>
-                  <filter id="vsh-gf" x="-60%" y="-60%" width="220%" height="220%">
-                    <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#9000ff" flood-opacity="0.9"/>
-                    <feDropShadow dx="0" dy="0" stdDeviation="10"  flood-color="#9000ff" flood-opacity="0.5"/>
-                    <feDropShadow dx="0" dy="0" stdDeviation="2"   flood-color="#00d4ff" flood-opacity="0.3"/>
-                  </filter>
-                </defs>
-                <g filter="url(#vsh-gf)">
-                  <ellipse cx="40" cy="26" rx="10" ry="6" fill="rgba(210,180,255,0.9)"/>
-                  <g stroke="rgba(180,140,255,0.55)" stroke-width="1.1" stroke-linecap="round">
-                    <line x1="40" y1="26" x2="12" y2="70"/>
-                    <line x1="40" y1="26" x2="24" y2="74"/>
-                    <line x1="40" y1="26" x2="40" y2="76"/>
-                    <line x1="40" y1="26" x2="56" y2="74"/>
-                    <line x1="40" y1="26" x2="68" y2="66"/>
-                  </g>
-                  <path fill="url(#vsh-chr)"
-                    d="M 10 12 C 14 7 21 8 27 12 C 31 16 33 22 31 29
-                       C 29 36 24 46 22 56 C 20 64 20 72 17 75
-                       C 12 72 7 65 7 58 C 7 48 12 38 12 28
-                       C 12 21 10 16 10 12 Z"/>
-                  <path fill="url(#vsh-chr)"
-                    d="M 70 12 C 66 7 59 8 53 12 C 49 16 47 22 49 29
-                       C 51 36 56 46 58 56 C 60 64 60 72 63 75
-                       C 68 72 73 65 73 58 C 73 48 68 38 68 28
-                       C 68 21 70 16 70 12 Z"/>
-                  <path fill="url(#vsh-chr)" opacity="0.65"
-                    d="M 27 12 C 29 17 30 22 29 27 C 28 32 25 35 26 40
-                       C 27 45 30 48 29 53 C 28 58 24 62 26 67
-                       L 32 67 C 30 62 32 57 33 52
-                       C 34 46 31 43 32 38 C 33 33 36 28 34 23
-                       C 32 18 30 14 29 12 Z"/>
-                  <path fill="url(#vsh-chr)" opacity="0.65"
-                    d="M 53 12 C 51 17 50 22 51 27 C 52 32 55 35 54 40
-                       C 53 45 50 48 51 53 C 52 58 56 62 54 67
-                       L 48 67 C 50 62 48 57 47 52
-                       C 46 46 49 43 48 38 C 47 33 44 28 46 23
-                       C 48 18 50 14 51 12 Z"/>
-                </g>
-                <text x="88" y="48"
-                  font-family="'Rajdhani',sans-serif" font-size="42" font-weight="700"
-                  letter-spacing="3" fill="url(#vsh-txt)">VEIL</text>
-                <text x="90" y="70"
-                  font-family="'Orbitron',monospace" font-size="13" font-weight="600"
-                  letter-spacing="9" fill="rgba(160,162,182,0.8)">STUDIO</text>
-              </svg>
-            </div>
-            <p style="font-size:1.35rem;color:#cc88ff;margin-bottom:6px;font-family:var(--font-heading);font-weight:700;">&ldquo;Sound the trumpet at scale.&rdquo;</p>
-            <p style="font-size:0.95rem;color:var(--text-muted);margin-bottom:12px;font-family:var(--font-heading);font-weight:500;letter-spacing:0.04em;">Create Without Limits.</p>
-            <p style="color:var(--text-secondary);line-height:1.8;max-width:520px;margin-bottom:36px;">
-              An AI-powered media creation platform that puts professional-grade generation tools in your pocket. Describe it, and Veil Studio builds it — images, video, audio, and more.
-            </p>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;">
-              <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#9000ff,#cc00ff);color:#fff;box-shadow:var(--glow-p-md);">Get Veil Studio</a>
-              <a href="#features" class="btn btn-outline btn-lg" style="border-color:rgba(144,0,255,0.4);color:#cc88ff;">See Features</a>
-            </div>
-          </div>
-          <div class="reveal reveal-delay-2">
-            <div class="generation-demo">
-              <div style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:12px;">VEIL STUDIO · GENERATION</div>
-              <div class="demo-prompt">A neon-lit city skyline at midnight, cyberpunk aesthetic, ultra-detailed...</div>
-              <div class="demo-output-grid">
-                <div class="demo-tile demo-tile-1">GEN 01</div>
-                <div class="demo-tile demo-tile-2">GEN 02</div>
-                <div class="demo-tile demo-tile-3">GEN 03</div>
-              </div>
-              <div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.1em;color:var(--text-muted);">3 VARIANTS · 1024×1024</span>
-                <span class="badge badge-live" style="background:rgba(144,0,255,0.1);color:#cc88ff;border-color:rgba(144,0,255,0.25);">Generated</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Capability strip -->
-    <section style="background:var(--bg-void);padding:32px 0;border-top:1px solid var(--border-faint);border-bottom:1px solid var(--border-faint);">
-      <div class="container">
-        <div class="capability-strip">
-          <div class="cap-chip">Image Generation</div>
-          <div class="cap-chip">Video Synthesis</div>
-          <div class="cap-chip">Audio Creation</div>
-          <div class="cap-chip">Style Transfer</div>
-          <div class="cap-chip">Text-to-Image</div>
-          <div class="cap-chip">Inpainting</div>
-          <div class="cap-chip">Upscaling</div>
-          <div class="cap-chip">ControlNet</div>
-          <div class="cap-chip">Batch Generation</div>
-          <div class="cap-chip">Cloud Rendering</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section class="section" id="features">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow reveal">Core Features</div>
-          <h2 class="section-title reveal reveal-delay-1">The Full Creative Suite</h2>
-          <p class="section-sub reveal reveal-delay-2">Every creative discipline, unified under a single intelligent platform.</p>
-        </div>
-
-        <div class="grid-3">
-          <div class="card card-corner reveal">
-            <div class="product-icon icon-purple" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">AI Image Generation</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Generate photorealistic and artistic images from text prompts. Fine-tune with styles, aspect ratios, and negative prompts for precision output.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-1">
-            <div class="product-icon icon-purple" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Video Synthesis</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Transform images or text prompts into fluid, cinematic video clips. Export-ready for social media, presentations, or professional production.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-2">
-            <div class="product-icon icon-purple" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Audio Generation</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Generate original music, sound effects, and voiceovers. Choose genre, mood, tempo, and duration for precisely crafted audio assets.</p>
-          </div>
-          <div class="card card-corner reveal">
-            <div class="product-icon icon-purple" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Inpainting &amp; Editing</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Select and regenerate any region of an image. Intelligent inpainting seamlessly blends AI-generated content with your originals.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-1">
-            <div class="product-icon icon-purple" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Style Transfer</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Apply artistic styles from references to any image. Blend, interpolate, and create entirely new visual aesthetics with AI assistance.</p>
-          </div>
-          <div class="card card-corner reveal reveal-delay-2">
-            <div class="product-icon icon-purple" style="width:52px;height:52px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <h3 style="font-family:var(--font-display);font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 10px;color:#cc88ff;">Cloud Rendering</h3>
-            <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;">Offload intensive generation to our cloud infrastructure. Queue large batches, run overnight, and download polished results in the morning.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section section" style="background:var(--bg-void);">
-      <div class="container">
-        <div class="cta-box reveal" style="border-color:rgba(144,0,255,0.25);">
-          <div class="eyebrow" style="justify-content:center;color:#cc88ff;">
-            <span style="width:24px;height:1px;background:#cc88ff;display:block;box-shadow:0 0 6px #cc88ff;"></span>
-            Veil Studio
-            <span style="width:24px;height:1px;background:#cc88ff;display:block;box-shadow:0 0 6px #cc88ff;"></span>
-          </div>
-          <h2 class="section-title">Unleash Your Creativity</h2>
-          <p class="section-sub">Veil Studio is available on iOS and the web. Contact us to learn more or request beta access.</p>
-          <div class="cta-actions">
-            <a href="/contact.html" class="btn btn-lg" style="background:linear-gradient(135deg,#9000ff,#cc00ff);color:#fff;box-shadow:var(--glow-p-md);">Request Access</a>
-            <a href="/#products" class="btn btn-outline btn-lg">All Products</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="footer">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo"><img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross"></a>
-        <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-        <div class="footer-contact"><a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a><span>Forged in Faith. Built for the Future.</span></div>
-      </div>
-      <div class="footer-col"><h4>The Arsenal</h4><ul><li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li><li><a href="/products/veil-os.html">Veil Studio</a></li><li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li><li><a href="/products/ai-investment-app.html">Vantage Edge</a></li></ul></div>
-      <div class="footer-col"><h4>The Movement</h4><ul><li><a href="/about.html">The Manifesto</a></li><li><a href="/contact.html">Enlist</a></li></ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-service.html">Terms of Service</a></li></ul></div>
+  <hr class="hr-neon">
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/terms-of-service.html">Terms</a>
+      <a href="/contact.html">Enlist</a>
     </div>
-    <hr class="hr-neon">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-      <div class="footer-bottom-links"><a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a></div>
-    </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="/js/main.js"></script>
+<script src="/js/main.js?v=v2-premium"></script>
+<script src="/js/watchman-fx.js?v=v1"></script>
 </body>
 </html>

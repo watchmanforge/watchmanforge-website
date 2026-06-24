@@ -22,8 +22,8 @@
 <meta name="twitter:image" content="https://watchmanforge.com/assets/images/og-image.png">
 <meta name="theme-color" content="#010104">
 <link rel="canonical" href="https://watchmanforge.com/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23080c14'/><rect x='13.5' y='4' width='5' height='24' rx='1' fill='%23d3dce4'/><rect x='5' y='12.5' width='22' height='5' rx='1' fill='%23d3dce4'/></svg>">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="stylesheet" href="/css/main.css?v=v2-premium">
 <link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
@@ -280,6 +280,12 @@
   .wt-ship{ animation:wt-shipb 5s ease-in-out infinite; }
   @keyframes wt-shipb{ 0%,100%{ opacity:.25;} 50%{ opacity:.7;} }
   @media (prefers-reduced-motion:reduce){ .wt-beam,.wt-lantern-glow,.wt-lantern-core,.wt-ship,.wt-star{ animation:none !important; } }
+
+  /* Product cards: the stray vertical line above the icon is the HUD
+     corner bracket — .hud-bracket-tl draws a glowing border-left at the
+     card's top-left (18px, growing to 22px on hover). Hide the brackets
+     on the cards; the card-corner accent + the top-line on hover remain. */
+  .product-card .hud-bracket{ display:none; }
 
   /* ═══════════ Enlist — email capture ═══════════ */
   .enlist-form{ max-width:540px; margin:6px auto 0; }
