@@ -758,32 +758,44 @@
 <script src="/js/hero-burnout.js?v=v3"></script>
 
 
-<!-- Hero burnout: static fallback so the GTR never blanks on a fullscreen/visibility toggle -->
+<!-- Hero burnout: keep the GTR visible if the WebGL canvas blanks on a fullscreen/visibility toggle -->
 <script>
 (function () {
   var canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
-  var hero = canvas.parentElement;
+  var prev = document.getElementById('hero-fallback-img');
+  if (prev) prev.remove();
+  var overlay = document.createElement('img');
+  overlay.id = 'hero-fallback-img';
+  overlay.alt = '';
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:1;opacity:0;transition:opacity .25s ease;pointer-events:none;';
+  canvas.insertAdjacentElement('afterend', overlay);
+  var snap = null;
   function capture() {
     try {
-      var url = canvas.toDataURL('image/jpeg', 0.82);
-      if (url && url.length > 50000) {
-        hero.style.backgroundImage    = "url('" + url + "')";
-        hero.style.backgroundSize     = 'cover';
-        hero.style.backgroundPosition = '50% 50%';
-        hero.style.backgroundRepeat   = 'no-repeat';
-        return true;
-      }
+      var u = canvas.toDataURL('image/jpeg', 0.85);
+      if (u && u.length > 50000) { snap = u; overlay.src = u; return true; }
     } catch (e) {}
     return false;
   }
+  function isBlank() {
+    try {
+      var u = canvas.toDataURL('image/jpeg', 0.6);
+      return !u || u.length < 40000;
+    } catch (e) { return false; }
+  }
+  function show() { if (snap) overlay.style.opacity = '1'; }
+  function maybeHide() { if (!isBlank()) overlay.style.opacity = '0'; }
   var tries = 0;
-  var iv = setInterval(function () {
-    if ((document.documentElement.classList.contains('hero-ready') && capture()) || ++tries > 80) {
-      clearInterval(iv);
-    }
-  }, 200);
-  setTimeout(capture, 5000);
+  var iv = setInterval(function () { if (capture() || ++tries > 150) clearInterval(iv); }, 200);
+  function onEvent() { show(); [400, 900, 1500, 2200].forEach(function (ms) { setTimeout(maybeHide, ms); }); }
+  window.addEventListener('resize', onEvent);
+  document.addEventListener('fullscreenchange', onEvent);
+  document.addEventListener('webkitfullscreenchange', onEvent);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) onEvent(); });
+  var st;
+  window.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(maybeHide, 150); }, { passive: true });
 })();
 </script>
 </body>
