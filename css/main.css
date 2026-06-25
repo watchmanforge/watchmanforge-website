@@ -1622,5 +1622,13 @@ textarea.form-control {
 @media (max-width: 640px) {
   .hero-gtr-frame { aspect-ratio: 4 / 3; }
   .hero-gtr-car { width: 95%; }
+}
+
+/* Product-card stray hover line — global */
 .product-card::after { border: none !important; }
+
+/* Hero headline — keep it from ballooning on desktop / fullscreen */
+.hero-title {
+  font-size: clamp(2rem, 4.4vw, 3.25rem) !important;
+  line-height: 1.06 !important;
 }

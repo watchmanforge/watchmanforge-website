@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Off the Grid — Watchman Forge</title>
+<meta name="description" content="This page isn't on the grid. Find your way back to Watchman Forge.">
+<meta name="theme-color" content="#010104">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/main.css?v=v2-premium">
+<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<style>
+  html{ scroll-behavior:smooth; }
+  a:focus-visible, .btn:focus-visible, button:focus-visible{ outline:2px solid var(--neon-blue); outline-offset:3px; }
+  .e404{ position:relative; min-height:78vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; padding:120px 0 80px; }
+  .e404::before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(58% 50% at 50% 38%, rgba(0,212,255,0.16), transparent 64%),
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px) 0 0/100% 44px,
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px) 0 0/44px 100%;
+    -webkit-mask-image:radial-gradient(120% 100% at 50% 30%, #000 36%, transparent 84%);
+    mask-image:radial-gradient(120% 100% at 50% 30%, #000 36%, transparent 84%); }
+  .e404-inner{ position:relative; z-index:1; max-width:640px; padding:0 24px; }
+  .e404-eyebrow{ font-family:var(--font-display, ui-monospace, monospace); font-size:.74rem; letter-spacing:.32em; color:var(--neon-blue); text-transform:uppercase; margin-bottom:26px; }
+  .e404-code{ font-family:var(--font-display, ui-monospace, monospace); font-weight:700; font-size:clamp(5.5rem, 22vw, 11rem); line-height:.9; letter-spacing:.02em; margin:0 0 8px;
+    color:#eaf8ff; text-shadow:0 0 28px rgba(0,212,255,0.55), 0 0 2px rgba(0,212,255,0.9), 3px 0 0 rgba(144,0,255,0.55), -3px 0 0 rgba(0,212,255,0.35);
+    animation:e404-flicker 5.5s linear infinite; }
+  @keyframes e404-flicker{ 0%,100%{ opacity:1; } 48%{ opacity:1; } 49%{ opacity:.72; } 50%{ opacity:1; } 71%{ opacity:1; } 72%{ opacity:.85; } 73%{ opacity:1; } }
+  @media (prefers-reduced-motion:reduce){ .e404-code{ animation:none; } html{ scroll-behavior:auto; } }
+  .e404-title{ font-family:var(--font-heading); font-size:clamp(1.6rem, 4vw, 2.4rem); line-height:1.12; color:var(--text-primary,#e8f1f8); margin:0 0 16px; }
+  .e404-sub{ font-size:1.04rem; line-height:1.62; color:var(--text-secondary,#9fb6c9); max-width:480px; margin:0 auto 26px; }
+  .e404-verse{ font-family:var(--font-display, ui-monospace, monospace); font-size:.82rem; letter-spacing:.04em; color:var(--text-muted,#5a6b7a); font-style:italic; margin:0 auto 30px; max-width:440px; }
+  .e404-verse b{ display:block; font-style:normal; letter-spacing:.18em; font-size:.64rem; color:var(--neon-purple,#9000ff); margin-bottom:7px; }
+  .e404-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
+      <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="nav-cross">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown">
+        <a href="/#arsenal">The Arsenal</a>
+        <ul class="nav-dropdown">
+          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
+          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
+          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
+          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
+        </ul>
+      </li>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/#enlist" class="btn btn-primary btn-sm">Take the Post</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <div class="mobile-nav-section">The Arsenal</div>
+  <a href="/products/veil-os.html">Veil Studio</a>
+  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
+  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
+  <a href="/products/ai-investment-app.html">Vantage Edge</a>
+  <a href="/about.html">The Manifesto</a>
+  <a href="/contact.html">Enlist</a>
+</div>
+
+<main>
+  <section class="e404">
+    <div class="e404-inner">
+      <div class="e404-eyebrow">// SIGNAL LOST</div>
+      <div class="e404-code">404</div>
+      <h1 class="e404-title">This post is unmanned.</h1>
+      <p class="e404-sub">The page you're after isn't on the grid &mdash; moved, retired, or never here. Even a watchman loses the path sometimes. The way back is always lit.</p>
+      <p class="e404-verse"><b>PSALM 119:105</b>Your word is a lamp to my feet, and a light for my path.</p>
+      <div class="e404-actions">
+        <a href="/" class="btn btn-primary btn-lg">← Back to the Wall</a>
+        <a href="/#arsenal" class="btn btn-outline btn-lg">The Arsenal</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
+        <img src="/assets/images/cross-transparent.png" alt="Watchman Forge" class="footer-cross">
+      </a>
+      <p>Tools for the Watchman&rsquo;s mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
+      <div class="footer-contact">
+        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+        <span>Forged in Faith. Built for the Future.</span>
+      </div>
+    </div>
+    <div class="footer-col"><h4>The Arsenal</h4><ul>
+      <li><a href="/products/veil-os.html">Veil Studio</a></li>
+      <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
+      <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
+      <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>The Movement</h4><ul>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul>
+      <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <hr class="hr-neon">
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js?v=v2-premium"></script>
+</body>
+</html>
