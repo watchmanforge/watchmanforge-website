@@ -756,5 +756,35 @@
 <script src="/js/main.js?v=v2-premium"></script>
 <script src="/js/watchman-fx.js?v=v1"></script>
 <script src="/js/hero-burnout.js?v=v3"></script>
+
+
+<!-- Hero burnout: static fallback so the GTR never blanks on a fullscreen/visibility toggle -->
+<script>
+(function () {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var hero = canvas.parentElement;
+  function capture() {
+    try {
+      var url = canvas.toDataURL('image/jpeg', 0.82);
+      if (url && url.length > 50000) {
+        hero.style.backgroundImage    = "url('" + url + "')";
+        hero.style.backgroundSize     = 'cover';
+        hero.style.backgroundPosition = '50% 50%';
+        hero.style.backgroundRepeat   = 'no-repeat';
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+  var tries = 0;
+  var iv = setInterval(function () {
+    if ((document.documentElement.classList.contains('hero-ready') && capture()) || ++tries > 80) {
+      clearInterval(iv);
+    }
+  }, 200);
+  setTimeout(capture, 5000);
+})();
+</script>
 </body>
 </html>
