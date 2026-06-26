@@ -65,6 +65,11 @@
     io.observe(canvas);
   }
   document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(visible) resume(); });
+  // Entering/leaving fullscreen (incl. element.requestFullscreen) can re-layout the hero
+  // without firing the scroll the IntersectionObserver waits on — resume so the loop never
+  // sticks on a frozen frame after a fullscreen toggle.
+  document.addEventListener('fullscreenchange', function(){ if(visible) resume(); });
+  document.addEventListener('webkitfullscreenchange', function(){ if(visible) resume(); });
   // Mobile resilience: the address bar hiding/showing on scroll fires a viewport resize, and iOS
   // can purge an off-screen canvas's backing store — repaint so the car never vanishes on scroll.
   var rt; function onViewport(){ clearTimeout(rt); rt=setTimeout(function(){ if(visible) resume(); }, 60); }

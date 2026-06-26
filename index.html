@@ -113,6 +113,16 @@
     .hero-readout { gap: 6px 16px; font-size: 0.6rem; }
   }
 
+  /* Keep the whole burnout visible on portrait / narrow screens.
+     The car art is a fixed 1536x1024 landscape frame. object-fit:cover fills the
+     box and crops the overflow, which on a tall screen lops off the front & rear
+     wheels (you end up seeing only the middle). Below a 7:5 viewport we switch to
+     contain so the entire car scales to fit the width; wider/landscape screens keep
+     the full-bleed cover above. Nudge the object-position % to raise/lower the car. */
+  @media (max-aspect-ratio: 7/5) {
+    .hero-canvas { object-fit: contain; object-position: 50% 30%; }
+  }
+
   /* ── Scripture band ── */
   .scripture {
     position: relative;
@@ -756,47 +766,5 @@
 <script src="/js/main.js?v=v2-premium"></script>
 <script src="/js/watchman-fx.js?v=v1"></script>
 <script src="/js/hero-burnout.js?v=v3"></script>
-
-
-<!-- Hero burnout: keep the GTR visible if the WebGL canvas blanks on a fullscreen/visibility toggle -->
-<script>
-(function () {
-  var canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  var prev = document.getElementById('hero-fallback-img');
-  if (prev) prev.remove();
-  var overlay = document.createElement('img');
-  overlay.id = 'hero-fallback-img';
-  overlay.alt = '';
-  overlay.setAttribute('aria-hidden', 'true');
-  overlay.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;z-index:1;opacity:0;transition:opacity .25s ease;pointer-events:none;';
-  canvas.insertAdjacentElement('afterend', overlay);
-  var snap = null;
-  function capture() {
-    try {
-      var u = canvas.toDataURL('image/jpeg', 0.85);
-      if (u && u.length > 50000) { snap = u; overlay.src = u; return true; }
-    } catch (e) {}
-    return false;
-  }
-  function isBlank() {
-    try {
-      var u = canvas.toDataURL('image/jpeg', 0.6);
-      return !u || u.length < 40000;
-    } catch (e) { return false; }
-  }
-  function show() { if (snap) overlay.style.opacity = '1'; }
-  function maybeHide() { if (!isBlank()) overlay.style.opacity = '0'; }
-  var tries = 0;
-  var iv = setInterval(function () { if (capture() || ++tries > 150) clearInterval(iv); }, 200);
-  function onEvent() { show(); [400, 900, 1500, 2200].forEach(function (ms) { setTimeout(maybeHide, ms); }); }
-  window.addEventListener('resize', onEvent);
-  document.addEventListener('fullscreenchange', onEvent);
-  document.addEventListener('webkitfullscreenchange', onEvent);
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) onEvent(); });
-  var st;
-  window.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(maybeHide, 150); }, { passive: true });
-})();
-</script>
 </body>
 </html>
