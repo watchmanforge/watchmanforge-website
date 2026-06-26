@@ -65,11 +65,26 @@
     io.observe(canvas);
   }
   document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else if(visible) resume(); });
-  // Entering/leaving fullscreen (incl. element.requestFullscreen) can re-layout the hero
-  // without firing the scroll the IntersectionObserver waits on — resume so the loop never
-  // sticks on a frozen frame after a fullscreen toggle.
+  // Fullscreen handling. NOTE: pressing F11 toggles the *browser's* fullscreen chrome and does
+  // NOT fire 'fullscreenchange' (only element.requestFullscreen() does). During the fullscreen
+  // re-layout the IntersectionObserver can briefly report the canvas as off-screen, which calls
+  // stop() and freezes the loop until the next scroll/resize — that's the "disappears, then comes
+  // back" glitch. The handlers below cover the JS Fullscreen API case immediately; the watchdog
+  // below is the real guarantee and is event-independent.
   document.addEventListener('fullscreenchange', function(){ if(visible) resume(); });
   document.addEventListener('webkitfullscreenchange', function(){ if(visible) resume(); });
+  // Self-healing watchdog: every 500ms, if the tab is visible and the canvas is actually on
+  // screen, make sure the render loop is running. This recomputes on-screen-ness itself instead
+  // of trusting a possibly-stale observer flag, so no event quirk (F11, fullscreen API, layout
+  // thrash, backing-store purge) can leave the car frozen or blank while it's in view. When the
+  // canvas is scrolled fully out of view it does nothing, preserving the off-screen power saving.
+  setInterval(function(){
+    if(reduce || document.hidden) return;
+    var r = canvas.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var onScreen = r.bottom > 0 && r.top < vh && r.width > 0;
+    if(onScreen){ visible = true; if(ready && !raf) start(); }
+  }, 500);
   // Mobile resilience: the address bar hiding/showing on scroll fires a viewport resize, and iOS
   // can purge an off-screen canvas's backing store — repaint so the car never vanishes on scroll.
   var rt; function onViewport(){ clearTimeout(rt); rt=setTimeout(function(){ if(visible) resume(); }, 60); }
