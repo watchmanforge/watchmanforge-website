@@ -1,3 +1,13 @@
+/* ── Lenis inertial scroll (progressive — site works fine without it) ── */
+(function () {
+  if (typeof Lenis === 'undefined') return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var lenis = new Lenis({ lerp: 0.09 });
+  window.__lenis = lenis;
+  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+})();
+
 /* ============================================================
    WATCHMAN OS — Main JavaScript
    ============================================================ */
@@ -166,6 +176,7 @@
   /* ── Contact Form ───────────────────────────────────────── */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
+    const CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwxXKjZml9-Bq1e2pL7T1mZpD9j8tivUxoMmyac8G9vSsqYnok4y-2qO-Aw7jktUBs_/exec';
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const btn  = contactForm.querySelector('button[type="submit"]');
@@ -173,16 +184,26 @@
       btn.innerHTML = 'SENDING...';
       btn.disabled = true;
 
-      setTimeout(() => {
-        const success = document.getElementById('form-success');
-        if (success) {
-          contactForm.style.display  = 'none';
-          success.style.display      = 'block';
-        } else {
-          btn.innerHTML = 'MESSAGE SENT';
-          btn.style.background = 'linear-gradient(135deg, #00ff88, #00d4ff)';
-        }
-      }, 1200);
+      const body = new URLSearchParams();
+      body.set('form', 'contact');
+      new FormData(contactForm).forEach((v, k) => body.set(k, String(v)));
+
+      fetch(CONTACT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
+        .then(() => {
+          const success = document.getElementById('form-success');
+          if (success) {
+            contactForm.style.display  = 'none';
+            success.style.display      = 'block';
+          } else {
+            btn.innerHTML = 'MESSAGE SENT';
+            btn.style.background = 'linear-gradient(135deg, #00ff88, #00d4ff)';
+          }
+        })
+        .catch(() => {
+          btn.innerHTML = orig;
+          btn.disabled  = false;
+          alert('The signal was interrupted — please email us directly at watchmanforge@gmail.com');
+        });
     });
   }
 

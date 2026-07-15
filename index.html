@@ -281,9 +281,9 @@
   .wt-content{ position:relative; z-index:3; width:100%; padding-top:clamp(48px,8vh,92px); }
   .wt-inner{ max-width:560px; }
   .watchtower .section-title{ margin:12px 0 16px; }
-  .wt-beam{ transform-box:view-box; transform-origin:610px 231px; animation:wt-sweep 7.5s ease-in-out infinite alternate; }
-  @keyframes wt-sweep{ 0%{ transform:rotate(-14deg);} 100%{ transform:rotate(13deg);} }
-  .wt-lantern-glow{ transform-box:view-box; transform-origin:610px 231px; animation:wt-lglow 3.4s ease-in-out infinite; }
+  .wt-beam{ transform-box:view-box; transform-origin:840px 96px; animation:wt-sweep 7.5s ease-in-out infinite alternate; }
+  @keyframes wt-sweep{ 0%{ transform:rotate(-11deg);} 100%{ transform:rotate(10deg);} }
+  .wt-lantern-glow{ transform-box:view-box; transform-origin:840px 96px; animation:wt-lglow 3.4s ease-in-out infinite; }
   @keyframes wt-lglow{ 0%,100%{ opacity:.6; transform:scale(.94);} 50%{ opacity:1; transform:scale(1.08);} }
   .wt-lantern-core{ animation:wt-lcore 3.4s ease-in-out infinite; }
   @keyframes wt-lcore{ 0%,100%{ opacity:.85;} 50%{ opacity:1;} }
@@ -432,7 +432,6 @@
     <div class="container">
       <div class="section-header">
         <div class="eyebrow reveal">The Charge</div>
-        <span class="hud-section-label">// NODE:WATCHMAN-ALPHA · COORD:31.7683°N 35.2137°E</span>
         <h2 class="section-title reveal reveal-delay-1">You Are Not a Customer.<br>You Are Called.</h2>
         <p class="section-sub reveal reveal-delay-2">When you stand with Watchman Forge — carry the mark, wield the tools, sound the trumpet — you don't buy a product. You accept a post. You become a Watchman.</p>
       </div>
@@ -463,7 +462,6 @@
     <div class="container">
       <div class="section-header">
         <div class="eyebrow reveal">The Arsenal</div>
-        <span class="hud-section-label">// 4 INSTRUMENTS · 1 MISSION · STATUS:FORGING</span>
         <h2 class="section-title reveal reveal-delay-1">Tools Forged for the Watch</h2>
         <p class="section-sub reveal reveal-delay-2">Four instruments, one mission — equip the Watchman to see clearly, move surely, and sound the trumpet at scale.</p>
       </div>
@@ -533,111 +531,57 @@
 
   <!-- ── The Watch ──────────────────────────────────────────── -->
   <section class="watchtower" id="the-watch" aria-label="The Watch">
-    <svg class="wt-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg class="wt-svg" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        <linearGradient id="wtBeam" gradientUnits="userSpaceOnUse" x1="610" y1="231" x2="1240" y2="300">
-          <stop offset="0%"  stop-color="#dff7ff" stop-opacity="0.60"/>
-          <stop offset="22%" stop-color="#00d4ff" stop-opacity="0.28"/>
-          <stop offset="70%" stop-color="#00d4ff" stop-opacity="0.06"/>
-          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        <linearGradient id="wtSkyB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#04060c"/><stop offset=".62" stop-color="#0a1428"/><stop offset="1" stop-color="#050a14"/>
         </linearGradient>
-        <linearGradient id="wtBeam2" gradientUnits="userSpaceOnUse" x1="610" y1="231" x2="1180" y2="290">
-          <stop offset="0%"  stop-color="#ffffff" stop-opacity="0.50"/>
-          <stop offset="40%" stop-color="#9fe9ff" stop-opacity="0.16"/>
-          <stop offset="100%" stop-color="#9fe9ff" stop-opacity="0"/>
+        <linearGradient id="wtBeamB" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#dff7ff" stop-opacity=".55"/><stop offset=".35" stop-color="#7fdcff" stop-opacity=".16"/><stop offset="1" stop-color="#7fdcff" stop-opacity="0"/>
         </linearGradient>
-        <radialGradient id="wtLantern" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="35%" stop-color="#9becff"/>
-          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        <radialGradient id="wtLampB" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#9becff" stop-opacity=".9"/><stop offset="1" stop-color="#00d4ff" stop-opacity="0"/>
         </radialGradient>
-        <radialGradient id="wtBack" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#0a3a52" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#0a3a52" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="wtTower" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"  stop-color="#1b2735"/>
-          <stop offset="42%" stop-color="#0e1822"/>
-          <stop offset="100%" stop-color="#070b12"/>
-        </linearGradient>
-        <linearGradient id="wtSea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="#0a1b2e"/>
-          <stop offset="100%" stop-color="#03060d"/>
-        </linearGradient>
-        <radialGradient id="wtDawn" cx="50%" cy="100%" r="80%">
-          <stop offset="0%"  stop-color="#ff9d5c" stop-opacity="0.44"/>
-          <stop offset="34%" stop-color="#9c5f43" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#010104" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="wtReflect" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#bdefff" stop-opacity="0.32"/>
-          <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+        <linearGradient id="wtSeaB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0c1a33"/><stop offset="1" stop-color="#050910"/>
         </linearGradient>
       </defs>
-
-      <!-- dawn glow over the horizon — the morning the watch waits for -->
-      <ellipse cx="720" cy="404" rx="560" ry="150" fill="url(#wtDawn)"/>
-
-      <!-- the sea -->
-      <rect x="0" y="400" width="1200" height="200" fill="url(#wtSea)"/>
-      <rect x="640" y="402" width="170" height="150" fill="url(#wtReflect)" opacity="0.16"/>
-      <g stroke="#2a5f7a" stroke-width="1.4" opacity="0.30">
-        <line x1="120" y1="430" x2="470" y2="430"/>
-        <line x1="760" y1="438" x2="1140" y2="438"/>
-        <line x1="300" y1="470" x2="900" y2="470"/>
-        <line x1="80"  y1="512" x2="520" y2="512"/>
-        <line x1="700" y1="520" x2="1160" y2="520"/>
-        <line x1="360" y1="560" x2="980" y2="560"/>
+      <rect width="1200" height="460" fill="url(#wtSkyB)"/>
+      <g fill="#cfe9ff">
+        <circle cx="120" cy="70" r="1" opacity=".5"/><circle cx="245" cy="132" r="1.2" opacity=".35"/>
+        <circle cx="380" cy="52" r="1" opacity=".45"/><circle cx="512" cy="110" r="1" opacity=".3"/>
+        <circle cx="1020" cy="60" r="1.2" opacity=".5"/><circle cx="1120" cy="150" r="1" opacity=".35"/>
+        <circle cx="948" cy="40" r="1" opacity=".4"/><circle cx="662" cy="66" r="1" opacity=".35"/>
+        <circle cx="80" cy="180" r="1" opacity=".3"/><circle cx="1170" cy="96" r="1" opacity=".4"/>
       </g>
-      <!-- a ship still out on the water -->
-      <circle class="wt-ship" cx="978" cy="396" r="2.2" fill="#ffd9a0"/>
-
-      <!-- the sweeping beam, raking over open water -->
+      <rect y="330" width="1200" height="130" fill="url(#wtSeaB)"/>
+      <path d="M0 330h1200" stroke="#00d4ff" stroke-opacity=".35" stroke-width="1"/>
+      <path d="M60 356h90M210 372h60M420 362h110M980 368h80M660 380h70" stroke="#00d4ff" stroke-opacity=".14" stroke-width="1"/>
       <g class="wt-beam">
-        <polygon points="610,231 1320,150 1320,452" fill="url(#wtBeam)"/>
-        <polygon points="610,231 1300,214 1300,360" fill="url(#wtBeam2)"/>
+        <polygon points="840,96 1200,28 1200,190" fill="url(#wtBeamB)"/>
       </g>
-
-      <!-- backlight so the tower silhouette reads against the dark -->
-      <circle cx="610" cy="300" r="150" fill="url(#wtBack)"/>
-      <!-- the light, reflected on the water below -->
-      <polygon points="600,432 620,432 642,600 578,600" fill="url(#wtReflect)" opacity="0.5"/>
-
-      <!-- rocky point -->
-      <path d="M 536 470 L 536 432 L 566 410 L 600 402 L 640 404 L 678 414 L 700 436 L 700 470 Z" fill="#06080f"/>
-      <path d="M 566 410 L 600 402 L 640 404 L 678 414" fill="none" stroke="#1d4b63" stroke-width="1.6" opacity="0.5"/>
-
-      <!-- lighthouse tower (tapered, rim-lit) -->
-      <polygon points="588,406 598,252 622,252 632,406" fill="url(#wtTower)"/>
-      <line x1="588" y1="406" x2="598" y2="252" stroke="#3fc8e6" stroke-width="1.6" opacity="0.55"/>
-      <g stroke="#284a5e" stroke-width="2" opacity="0.6">
-        <line x1="594" y1="320" x2="626" y2="320"/>
-        <line x1="592" y1="362" x2="628" y2="362"/>
+      <circle class="wt-lantern-glow" cx="840" cy="96" r="52" fill="url(#wtLampB)"/>
+      <path d="M700 460V400c26-18 54-24 84-30 34-7 62-4 92 6 26 9 46 24 56 42v42z" fill="#070b13"/>
+      <path d="M735 402c18-9 40-13 62-15" stroke="#131c2e" stroke-width="1.4" fill="none"/>
+      <g>
+        <path d="M822 380l6-232h24l6 232z" fill="#0a0f1a" stroke="#1a2436" stroke-width="1"/>
+        <path d="M818 148h44l-4-10h-36z" fill="#0c1220" stroke="#1a2436" stroke-width="1"/>
+        <rect x="829" y="112" width="22" height="26" fill="#0b101c" stroke="#7fdcff" stroke-opacity=".55" stroke-width="1"/>
+        <rect x="833" y="117" width="14" height="16" fill="#cfefff" opacity=".92"/>
+        <path d="M826 112l14-16 14 16z" fill="#0c1220" stroke="#1a2436" stroke-width="1"/>
+        <path d="M840 96v-8M836.6 91.4h6.8" stroke="#cfefff" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M824 152h32" stroke="#1a2436" stroke-width="2"/>
+        <rect x="835" y="342" width="10" height="18" fill="#9adfff" opacity=".5"/>
+        <path d="M827 210h26M826 260h28M824 310h32" stroke="#131c2e" stroke-width="1"/>
       </g>
-      <circle cx="610" cy="340" r="2.4" fill="#9becff" opacity="0.85"/>
-      <rect x="605" y="386" width="10" height="18" rx="4" fill="#ffcf8a" opacity="0.75"/>
-
-      <!-- gallery, lantern room, cap -->
-      <rect x="590" y="244" width="40" height="9" rx="2" fill="#0e1822"/>
-      <rect x="590" y="244" width="40" height="9" rx="2" fill="none" stroke="#3fc8e6" stroke-width="1" opacity="0.4"/>
-      <rect class="wt-lantern-core" x="598" y="216" width="24" height="30" rx="2" fill="url(#wtLantern)"/>
-      <g stroke="#0b1a24" stroke-width="2">
-        <line x1="606" y1="216" x2="606" y2="246"/>
-        <line x1="614" y1="216" x2="614" y2="246"/>
-      </g>
-      <polygon points="594,216 610,198 626,216" fill="#0e1822"/>
-      <polygon points="594,216 610,198 626,216" fill="none" stroke="#3fc8e6" stroke-width="1.2" opacity="0.45"/>
-      <circle cx="610" cy="195" r="2.6" fill="#9becff"/>
-
-      <!-- the lantern light + halo -->
-      <circle class="wt-lantern-glow" cx="610" cy="231" r="74" fill="url(#wtLantern)"/>
-      <circle class="wt-lantern-core" cx="610" cy="231" r="9" fill="#ffffff"/>
+      <circle class="wt-lantern-core" cx="840" cy="125" r="6.5" fill="#ffffff"/>
+      <path d="M840 330v96" stroke="#7fdcff" stroke-opacity=".18" stroke-width="3"/>
+      <path d="M840 330v60" stroke="#7fdcff" stroke-opacity=".14" stroke-width="9"/>
     </svg>
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
       <div class="wt-inner">
         <div class="eyebrow reveal">The Watch</div>
-        <span class="hud-section-label">// THE_WATCH · LIGHT:OUTBOUND · HORIZON:CLEAR · DAWN:PENDING · PS 130:6</span>
         <h2 class="section-title reveal reveal-delay-1">We Hold the Light<br>Till Morning Comes.</h2>
         <p class="section-sub reveal reveal-delay-2" data-vref="PS 130:6">The watch was never about watching you. It's about watching <em>for</em> you — a fixed light on the rocks, holding steady through the dark so the ones still out there can find their way home. And the morning always comes.</p>
       </div>
@@ -652,8 +596,7 @@
       <div class="about-teaser">
         <div class="reveal">
           <div class="eyebrow">Who We Are</div>
-          <span class="hud-section-label">// MISSION:ACTIVE · WALL:MANNED · TRUMPET:READY</span>
-          <h2 class="section-title" style="margin-bottom:20px;background:var(--grad-silver);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Forged in Faith.<br>Built for the Future.</h2>
+          <h2 class="section-title" style="margin-bottom:20px;background:var(--grad-silver);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">The Work<br>Is the Watch.</h2>
           <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">Watchman Forge builds technology for a people with a purpose. We are makers and believers who refuse to let the most powerful tools of this age belong only to those who would use them for less. Every line of code is consecrated to a mission older than any of us.</p>
           <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:36px;">We stand at our watch before the King of Kings — Revelation 19:16 — and we forge for the day His name is on every wall. This is the work. This is the watch.</p>
           <a href="/about.html" class="btn btn-outline">Read the Manifesto →</a>
@@ -763,6 +706,7 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="/js/main.js?v=v2-premium"></script>
 <script src="/js/watchman-fx.js?v=v1"></script>
 <script src="/js/hero-burnout.js?v=v4"></script>

@@ -59,7 +59,7 @@
   --nav-h:        76px;
   --max-w:        1280px;
   --pad-x:        clamp(20px, 5vw, 80px);
-  --section-py:   clamp(70px, 10vw, 130px);
+  --section-py:   clamp(96px, 12vw, 168px);
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out:    cubic-bezier(0.4, 0, 0.2, 1);
@@ -1177,8 +1177,8 @@ textarea.form-control {
 /* Scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s var(--ease-out-quint), transform 0.7s var(--ease-out-quint);
+  transform: translateY(44px);
+  transition: opacity 0.9s var(--ease-out-quint), transform 0.9s var(--ease-out-quint);
 }
 .reveal.visible {
   opacity: 1;
