@@ -1622,3 +1622,41 @@ textarea.form-control {
   border-color: rgba(0, 212, 255, 0.55);
   box-shadow: 0 0 30px rgba(0, 212, 255, 0.25), 0 6px 26px rgba(0, 0, 0, 0.45);
 }
+
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE PASS — portrait phones get their own composition.
+   Desktop is landscape; phones are vertical. Different layout,
+   not a squeezed one.
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 760px) {
+
+  /* ── The Watch: tower-focused crop (JS narrows the viewBox),
+        scene anchored low, copy sits in the clear sky above ── */
+  .watchtower { min-height: 620px; }
+  .wt-svg { top: auto; bottom: 0; height: 62%; }
+  .watchtower::after {
+    content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(to bottom,
+      rgba(1,4,10,0.92) 0%, rgba(1,4,10,0.72) 26%, rgba(1,4,10,0.15) 44%, rgba(1,4,10,0) 58%);
+  }
+  .wt-content { padding-top: 40px; }
+  .wt-inner { max-width: 100%; }
+
+  /* ── Arsenal cards: icon over text, not beside it ── */
+  .app-icon-wrap { width: 96px; height: 96px; border-radius: 20px; }
+  .product-card { text-align: left; }
+
+  /* ── Manifesto product rows stack ── */
+  .grid-2 > .card[style*="display:flex"] { flex-direction: column; gap: 16px !important; }
+
+  /* ── breathing room, tuned for thumbs ── */
+  :root { --section-py: clamp(44px, 9vw, 64px); }
+  .btn { min-height: 46px; }
+  .nav-dropdown li a { padding-top: 12px; padding-bottom: 12px; }
+}
+
+@media (max-width: 420px) {
+  .watchtower { min-height: 560px; }
+  .app-icon-wrap { width: 84px; height: 84px; border-radius: 18px; }
+}
