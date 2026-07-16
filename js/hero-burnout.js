@@ -19,6 +19,15 @@
     var rg=g.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);for(var i=0;i<st.length;i++)rg.addColorStop(st[i][0],st[i][1]);
     g.fillStyle=rg;g.fillRect(0,0,s,s);return c;}
   var smokeS,glowC,glowB,t=0,angle=0,parts=[],SPIN=13,BLURN=7,SPREAD=20,raf=null,visible=true;
+  /* scroll-forged: hero pin progress drives the burnout (0 = idle simmer, 1 = full send) */
+  var pinEl=null, igniteEl=null, curP=0.6, pinChecked=false;
+  function prog(){
+    if(!pinChecked){ pinEl=document.querySelector('.hero-pin'); igniteEl=document.querySelector('.hero-ignite'); pinChecked=true; }
+    if(!pinEl) return 0.6;
+    var r=pinEl.getBoundingClientRect(); var span=r.height-(window.innerHeight||1);
+    if(span<=10) return 0.6;
+    var p=(-r.top)/span; return p<0?0:(p>1?1:p);
+  }
   function rnd(a,b){return a+Math.random()*(b-a);}
   function init(){
     smokeS=sprite(128,[[0,'rgba(212,218,230,1)'],[0.5,'rgba(205,212,226,0.5)'],[1,'rgba(205,212,226,0)']]);
@@ -39,25 +48,25 @@
   }
   function drawWheel(w){ for(var i=0;i<BLURN;i++){ var a=(angle+(i/(BLURN-1)-0.5)*SPREAD)*Math.PI/180;
     ctx.save();ctx.globalAlpha=1/BLURN;ctx.translate(w.x,w.y);ctx.rotate(a);ctx.drawImage(wheel,-D/2,-D/2,D,D);ctx.restore();} ctx.globalAlpha=1; }
-  function drawCap(w,ph){ var wob=0; var fy=0; /* cap wobble removed — was sin-float causing off-center look */
+  function drawCap(w,ph){ var wob=Math.sin(t*0.05+ph)*0.07; var fy=Math.sin(t*0.04+ph)*0.7;
     ctx.save();ctx.translate(w.x,w.y+fy);ctx.rotate(wob);ctx.drawImage(cap,-capD/2,-capD/2,capD,capD);ctx.restore(); }
   function underglow(){ ctx.save();ctx.globalCompositeOperation='lighter';
-    var pulse=0.6+0.18*Math.sin(t*0.05),xs=[420,700,980,1235];
+    var pulse=(0.45+0.55*curP)*(0.6+0.18*Math.sin(t*0.05)),xs=[420,700,980,1235];
     for(var j=0;j<xs.length;j++){var s=440*pulse;ctx.globalAlpha=0.22*pulse;ctx.drawImage(glowB,xs[j]-s/2,700-s/2,s,s);}
     var per=260,pp=(t%per)/per;
     for(var k=0;k<6;k++){var q=pp-k*0.035;if(q<0||q>1)continue;
       var xx=1240+(330-1240)*q,yy=694-Math.sin(q*Math.PI)*6,ff=Math.sin(q*Math.PI),s2=330*(1-k*0.07);
-      ctx.globalAlpha=0.46*ff*(1-k/6.5);ctx.drawImage(glowC,xx-s2/2,yy-s2/2,s2,s2);}
+      ctx.globalAlpha=0.46*ff*(1-k/6.5)*(0.25+0.75*curP);ctx.drawImage(glowC,xx-s2/2,yy-s2/2,s2,s2);}
     ctx.restore();ctx.globalAlpha=1; }
-  function smoke(){
-    if(t%2===0)parts.push({x:REAR.x+rnd(-12,30),y:688,vx:rnd(0.5,1.9),vy:-rnd(0.4,1.2),r:rnd(16,30),a:0.15+rnd(0,0.05)});
-    if(t%4===0)parts.push({x:FRONT.x+rnd(-8,22),y:700,vx:rnd(0.4,1.5),vy:-rnd(0.4,1.0),r:rnd(14,26),a:0.10+rnd(0,0.04)});
+  function smoke(){ var pw=0.3+0.7*curP;
+    if(curP>0.08&&t%2===0)parts.push({x:REAR.x+rnd(-12,30),y:688,vx:rnd(0.5,1.9),vy:-rnd(0.4,1.2),r:rnd(16,30),a:(0.15+rnd(0,0.05))*pw});
+    if(curP>0.15&&t%4===0)parts.push({x:FRONT.x+rnd(-8,22),y:700,vx:rnd(0.4,1.5),vy:-rnd(0.4,1.0),r:rnd(14,26),a:(0.10+rnd(0,0.04))*pw});
     if(parts.length>95)parts.splice(0,parts.length-95);
     ctx.save();
     for(var i=parts.length-1;i>=0;i--){var q=parts[i];q.x+=q.vx;q.y+=q.vy;q.vy-=0.004;q.vx*=0.996;q.r+=0.7;q.a*=0.984;
       if(q.a<0.006){parts.splice(i,1);continue;}ctx.globalAlpha=q.a;ctx.drawImage(smokeS,q.x-q.r,q.y-q.r,q.r*2,q.r*2);}
     ctx.restore();ctx.globalAlpha=1; }
-  function frame(){ t++;angle+=SPIN;ctx.clearRect(0,0,CW,CH);ctx.drawImage(base,0,0,CW,CH);
+  function frame(){ t++;curP=prog();angle+=(3+27*curP);SPREAD=6+18*curP;if(igniteEl)igniteEl.style.opacity=Math.max(0,0.75-curP*2.1);ctx.clearRect(0,0,CW,CH);ctx.drawImage(base,0,0,CW,CH);
     underglow();drawWheel(FRONT);drawWheel(REAR);drawCap(FRONT,0);drawCap(REAR,1.4);
     ctx.drawImage(fender,0,0,CW,CH);smoke();raf=requestAnimationFrame(frame); }
 

@@ -59,7 +59,7 @@
   --nav-h:        76px;
   --max-w:        1280px;
   --pad-x:        clamp(20px, 5vw, 80px);
-  --section-py:   clamp(96px, 12vw, 168px);
+  --section-py:   clamp(56px, 8vw, 96px);
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out:    cubic-bezier(0.4, 0, 0.2, 1);
@@ -512,7 +512,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1px;
   transition: transform var(--t-fast);
 }
-.nav-links > li.has-dropdown:hover > a::after { transform: rotate(180deg); }
+.nav-links > li.has-dropdown.open > a::after { transform: rotate(180deg); }
 
 /* Dropdown */
 .nav-dropdown {
@@ -531,7 +531,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity var(--t-fast), transform var(--t-fast);
   box-shadow: 0 16px 48px rgba(0,0,0,0.6), var(--glow-sm);
 }
-.nav-links > li.has-dropdown:hover .nav-dropdown {
+.nav-links > li.has-dropdown.open .nav-dropdown {
   opacity: 1;
   pointer-events: all;
   transform: translateX(-50%) translateY(0);
@@ -1449,28 +1449,14 @@ textarea.form-control {
 
 /* ── App-Icon Squircle Treatment ─────────────────────────────  */
 .app-icon-wrap {
-  width: 80px;
-  height: 80px;
-  border-radius: 22%;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 20px;
-  background: linear-gradient(145deg, rgba(10,12,26,0.98), rgba(5,6,14,0.98));
-  box-shadow:
-    0 0 0 1px rgba(0,212,255,0.20),
-    0 4px 22px rgba(0,0,0,0.75),
-    0 0 28px rgba(0,212,255,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.07),
-    inset 0 0 18px rgba(0,212,255,0.03);
-  padding: 10px;
-  flex-shrink: 0;
-  transition: box-shadow var(--t-mid), transform var(--t-mid);
+  width: 116px; height: 116px; flex: none;
+  border-radius: 24px; overflow: hidden;
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .app-icon-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .product-card:hover .app-icon-wrap {
   box-shadow:
@@ -1631,4 +1617,8 @@ textarea.form-control {
 .hero-title {
   font-size: clamp(2rem, 4.4vw, 3.25rem) !important;
   line-height: 1.06 !important;
+}
+.product-card:hover .app-icon-wrap, .app-icon-wrap:hover {
+  border-color: rgba(0, 212, 255, 0.55);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.25), 0 6px 26px rgba(0, 0, 0, 0.45);
 }

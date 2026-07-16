@@ -26,7 +26,11 @@
     ['PROV 4:23', 'Above all else, guard your heart, for everything you do flows from it.'],
     ['REV 19:16', 'On his robe and on his thigh he has a name written: KING OF KINGS.'],
     ['MARK 13:37','What I say to you, I say to everyone: Watch!'],
-    ['JOSH 1:9',  'Be strong and courageous. The Lord your God will be with you wherever you go.']
+    ['JOSH 1:9',  'Be strong and courageous. The Lord your God will be with you wherever you go.'],
+    ['1TH 5:6', 'Therefore let us not sleep, as do others; but let us watch and be sober.'],
+    ['MK 13:37', 'And what I say unto you I say unto all, Watch.'],
+    ['MIC 7:7', 'Therefore I will look unto the Lord; I will wait for the God of my salvation: my God will hear me.'],
+    ['MATT 5:16', 'Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.']
   ];
   function vByRef(ref){ for (var i=0;i<VERSES.length;i++) if (VERSES[i][0]===ref) return VERSES[i]; return null; }
   function randV(){ return VERSES[(Math.random()*VERSES.length)|0]; }
@@ -144,7 +148,7 @@
     var ov = D.getElementById('wf-boot');
     if (!root.classList.contains('wf-booting') || !ov){ if (ov && ov.parentNode) ov.parentNode.removeChild(ov); return; }
     var log = D.getElementById('wf-boot-log'), done = false;
-    var lightRefs = ['JN 1:5','MATT 5:14','ROM 13:12','PS 130:6'];
+    var lightRefs = ['EZK 33:6','EZK 33:7','HAB 2:1','ISA 62:6','ISA 21:6','PS 121:8','PS 127:1','PS 130:6','JN 1:5','MATT 5:14','ROM 13:11','ROM 13:12','EPH 6:11','2TIM 1:7','PROV 4:23','REV 19:16','MARK 13:37','1TH 5:6','MK 13:37','MIC 7:7','MATT 5:16'];
     var bv = vByRef(lightRefs[(Math.random()*lightRefs.length)|0]);
     var lines = [
       ['> WATCHMAN_FORGE :: GRID OS  v3.3', 'sys'],

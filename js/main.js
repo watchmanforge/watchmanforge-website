@@ -1,13 +1,3 @@
-/* ── Lenis inertial scroll (progressive — site works fine without it) ── */
-(function () {
-  if (typeof Lenis === 'undefined') return;
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var lenis = new Lenis({ lerp: 0.09 });
-  window.__lenis = lenis;
-  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
-})();
-
 /* ============================================================
    WATCHMAN OS — Main JavaScript
    ============================================================ */
@@ -53,7 +43,7 @@
   });
 
   /* ── Forge Ember Canvas ──────────────────────────────────── */
-  const canvas = document.getElementById('hero-canvas');
+  const canvas = document.getElementById('hero-embers'); // parked: the burnout engine owns #hero-canvas; embers get their own layer if revived
   if (canvas) {
     const ctx = canvas.getContext('2d');
     let W, H, embers = [], animId;
@@ -376,4 +366,25 @@
     requestAnimationFrame(drawGtrStage);
   }
 
+})();
+
+
+/* ── Arsenal dropdown: click to open, click item to navigate ── */
+(function () {
+  var li = document.querySelector('.nav-links li.has-dropdown');
+  if (!li) return;
+  var trigger = li.querySelector('a');
+  if (!trigger) return;
+  trigger.setAttribute('role', 'button');
+  trigger.setAttribute('aria-haspopup', 'true');
+  trigger.setAttribute('aria-expanded', 'false');
+  function close() { li.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }
+  trigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var open = li.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function (e) { if (!li.contains(e.target)) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();

@@ -25,7 +25,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/main.css?v=v3">
+<link rel="stylesheet" href="/css/main.css?v=v4">
 <link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
 <style>
   /* ════════════════════════════════════════════════════════════
@@ -121,6 +121,27 @@
      the full-bleed cover above. Nudge the object-position % to raise/lower the car. */
   @media (max-aspect-ratio: 7/5) {
     .hero-canvas { object-fit: contain; object-position: 50% 30%; }
+  }
+
+  /* ── Scroll-forged burnout: the hero pins, your scroll feeds the fire ── */
+  .hero-pin { height: 260vh; }
+  .hero { position: sticky; top: 0; height: 85vh; min-height: 0; }
+  .hero-ignite {
+    position: absolute; left: 0; right: 0; bottom: 16px; z-index: 2;
+    text-align: center; pointer-events: none;
+    font-family: var(--font-display, ui-monospace, monospace);
+    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--neon-blue); opacity: 0.75; transition: opacity 0.3s ease;
+  }
+  @media (max-width: 760px), (max-aspect-ratio: 7/5) {
+    .hero-pin { height: auto; }
+    .hero { position: relative; height: auto; min-height: 80svh; }
+    .hero-ignite { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-pin { height: auto; }
+    .hero { position: relative; height: auto; min-height: 85vh; }
+    .hero-ignite { display: none; }
   }
 
   /* ── Scripture band ── */
@@ -388,7 +409,8 @@
 <main>
 
   <!-- ── HERO — one GTR, the burnout ──────────────────────── -->
-  <section class="hero">
+  <div class="hero-pin">
+<section class="hero">
     <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-scrim"></div>
     <div class="hero-content">
@@ -414,7 +436,9 @@
         </div>
       </div>
     </div>
+    <div class="hero-ignite" aria-hidden="true">&#9656; scroll to ignite</div>
   </section>
+</div>
 
   <!-- ── Scripture band ──────────────────────────────────────── -->
   <section class="scripture">
@@ -537,17 +561,17 @@
           <stop offset="0" stop-color="#04060c"/><stop offset=".62" stop-color="#0a1428"/><stop offset="1" stop-color="#050a14"/>
         </linearGradient>
         <linearGradient id="wtBeamB" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#dff7ff" stop-opacity=".55"/><stop offset=".35" stop-color="#7fdcff" stop-opacity=".16"/><stop offset="1" stop-color="#7fdcff" stop-opacity="0"/>
+          <stop offset="0" stop-color="#e8c56d" stop-opacity=".55"/><stop offset=".35" stop-color="#e8c56d" stop-opacity=".16"/><stop offset="1" stop-color="#e8c56d" stop-opacity="0"/>
         </linearGradient>
         <radialGradient id="wtLampB" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#9becff" stop-opacity=".9"/><stop offset="1" stop-color="#00d4ff" stop-opacity="0"/>
+          <stop offset="0" stop-color="#fdf3d8"/><stop offset=".35" stop-color="#e8c56d" stop-opacity=".9"/><stop offset="1" stop-color="#e8c56d" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="wtSeaB" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#0c1a33"/><stop offset="1" stop-color="#050910"/>
         </linearGradient>
       </defs>
       <rect width="1200" height="460" fill="url(#wtSkyB)"/>
-      <g fill="#cfe9ff">
+      <g fill="#eae4d6">
         <circle cx="120" cy="70" r="1" opacity=".5"/><circle cx="245" cy="132" r="1.2" opacity=".35"/>
         <circle cx="380" cy="52" r="1" opacity=".45"/><circle cx="512" cy="110" r="1" opacity=".3"/>
         <circle cx="1020" cy="60" r="1.2" opacity=".5"/><circle cx="1120" cy="150" r="1" opacity=".35"/>
@@ -555,8 +579,8 @@
         <circle cx="80" cy="180" r="1" opacity=".3"/><circle cx="1170" cy="96" r="1" opacity=".4"/>
       </g>
       <rect y="330" width="1200" height="130" fill="url(#wtSeaB)"/>
-      <path d="M0 330h1200" stroke="#00d4ff" stroke-opacity=".35" stroke-width="1"/>
-      <path d="M60 356h90M210 372h60M420 362h110M980 368h80M660 380h70" stroke="#00d4ff" stroke-opacity=".14" stroke-width="1"/>
+      <path d="M0 330h1200" stroke="#4a76b8" stroke-opacity=".35" stroke-width="1"/>
+      <path d="M60 356h90M210 372h60M420 362h110M980 368h80M660 380h70" stroke="#4a76b8" stroke-opacity=".14" stroke-width="1"/>
       <g class="wt-beam">
         <polygon points="840,96 1200,28 1200,190" fill="url(#wtBeamB)"/>
       </g>
@@ -566,17 +590,17 @@
       <g>
         <path d="M822 380l6-232h24l6 232z" fill="#0a0f1a" stroke="#1a2436" stroke-width="1"/>
         <path d="M818 148h44l-4-10h-36z" fill="#0c1220" stroke="#1a2436" stroke-width="1"/>
-        <rect x="829" y="112" width="22" height="26" fill="#0b101c" stroke="#7fdcff" stroke-opacity=".55" stroke-width="1"/>
-        <rect x="833" y="117" width="14" height="16" fill="#cfefff" opacity=".92"/>
+        <rect x="829" y="112" width="22" height="26" fill="#0b101c" stroke="#c9a24b" stroke-opacity=".55" stroke-width="1"/>
+        <rect x="833" y="117" width="14" height="16" fill="#e8c56d" opacity=".92"/>
         <path d="M826 112l14-16 14 16z" fill="#0c1220" stroke="#1a2436" stroke-width="1"/>
-        <path d="M840 96v-8M836.6 91.4h6.8" stroke="#cfefff" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M840 96v-8M836.6 91.4h6.8" stroke="#c9a24b" stroke-width="1.4" stroke-linecap="round"/>
         <path d="M824 152h32" stroke="#1a2436" stroke-width="2"/>
-        <rect x="835" y="342" width="10" height="18" fill="#9adfff" opacity=".5"/>
+        <rect x="835" y="342" width="10" height="18" fill="#e8c56d" opacity=".5"/>
         <path d="M827 210h26M826 260h28M824 310h32" stroke="#131c2e" stroke-width="1"/>
       </g>
-      <circle class="wt-lantern-core" cx="840" cy="125" r="6.5" fill="#ffffff"/>
-      <path d="M840 330v96" stroke="#7fdcff" stroke-opacity=".18" stroke-width="3"/>
-      <path d="M840 330v60" stroke="#7fdcff" stroke-opacity=".14" stroke-width="9"/>
+      <circle class="wt-lantern-core" cx="840" cy="125" r="6.5" fill="#fff3d6"/>
+      <path d="M840 330v96" stroke="#e8c56d" stroke-opacity=".18" stroke-width="3"/>
+      <path d="M840 330v60" stroke="#e8c56d" stroke-opacity=".14" stroke-width="9"/>
     </svg>
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
@@ -706,9 +730,8 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="/js/main.js?v=v3"></script>
-<script src="/js/watchman-fx.js?v=v1"></script>
-<script src="/js/hero-burnout.js?v=v5"></script>
+<script src="/js/main.js?v=v4"></script>
+<script src="/js/watchman-fx.js?v=v2"></script>
+<script src="/js/hero-burnout.js?v=v6"></script>
 </body>
 </html>
