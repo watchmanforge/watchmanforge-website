@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collection 01: Illuminated Engravings &mdash; The Gallery | Watchman Forge</title>
+<meta name="description" content="Collection 01: Illuminated Engravings — fifteen dark gothic Christian prints. Doré and Dürer engravings re-lit from a single source, one colorway per theological register, with verbatim KJV scripture.">
+<meta name="theme-color" content="#010104">
+<meta property="og:title" content="Collection 01: Illuminated Engravings | Watchman Forge">
+<meta property="og:description" content="Collection 01: Illuminated Engravings — fifteen dark gothic Christian prints. Doré and Dürer engravings re-lit from a single source, one colorway per theological register, with verbatim KJV scripture.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://watchmanforge.com/gallery.html">
+<meta property="og:site_name" content="Watchman Forge">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://watchmanforge.com/assets/gallery/he-is-risen-1400.webp">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="1766">
+<meta property="og:image:alt" content="He Is Risen — dark gothic Christian wall art, ashen colorway, with Matthew 28:6 KJV">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Collection 01: Illuminated Engravings | Watchman Forge">
+<meta name="twitter:description" content="Collection 01: Illuminated Engravings — fifteen dark gothic Christian prints. Doré and Dürer engravings re-lit from a single source, one colorway per theological register, with verbatim KJV scripture.">
+<meta name="twitter:image" content="https://watchmanforge.com/assets/gallery/he-is-risen-1400.webp">
+<link rel="canonical" href="https://watchmanforge.com/gallery.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/main.css?v=v6">
+<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<style>
+  :root{ --accent:#8c8a85; --accent-rgb:140,138,133; }
+  :root{
+    --gal-ink:#e9e7e2; --gal-ink-2:#a3a19b; --gal-ink-3:#6f6d69;
+    --gal-line:rgba(255,255,255,0.12); --gal-line-soft:rgba(255,255,255,0.055);
+    --gal-field:#08080c;
+    --gal-serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif;
+    --gal-sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  html{ scroll-behavior:smooth; } @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+  a:focus-visible, .btn:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .ex-wrap{ max-width:1180px; margin:0 auto; padding:0 var(--pad-x); }
+  .ex-measure{ max-width:37rem; }
+  .ex-label{ font-family:var(--gal-sans); font-size:.66rem; font-weight:500; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--gal-ink-3); margin:0; }
+  .ex-rule{ height:1px; background:var(--gal-line); border:0; margin:0; }
+  .ex-rule-accent{ height:1px; width:52px; background:var(--accent); border:0; margin:0; opacity:.85; }
+
+  /* ── Plate grid ── the image is the image: no overlay, no brackets, caption
+     below. Fixed-height field + object-fit keeps every plate on one baseline
+     so the collection scans as a hung wall rather than a ragged catalog. ── */
+  .ex-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:clamp(22px,2.6vw,36px) clamp(16px,2vw,30px); }
+  @media (max-width:860px){ .ex-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:480px){ .ex-grid{ grid-template-columns:1fr; } }
+  .ex-plate{ display:block; text-decoration:none; }
+  .ex-plate-field{ display:flex; align-items:center; justify-content:center;
+    height:clamp(178px,18vw,262px); background:var(--gal-field);
+    border:1px solid var(--gal-line-soft); transition:border-color .25s ease; }
+  .ex-plate-field img{ display:block; max-width:100%; max-height:100%; width:auto; height:auto;
+    transition:opacity .25s ease; }
+  .ex-plate:hover .ex-plate-field{ border-color:rgba(var(--accent-rgb),0.5); }
+  .ex-plate:hover .ex-plate-field img{ opacity:.88; }
+  .ex-cap{ display:block; padding:13px 1px 0; }
+  .ex-cap-title{ display:block; font-family:var(--gal-serif); font-size:1.02rem; line-height:1.25;
+    color:var(--gal-ink); }
+  .ex-cap-ref{ display:block; margin-top:5px; font-family:var(--gal-sans); font-size:.62rem;
+    letter-spacing:.17em; text-transform:uppercase; color:var(--gal-ink-3); transition:color .25s ease; }
+  .ex-plate:hover .ex-cap-ref{ color:rgba(var(--accent-rgb),0.95); }
+  .ex-cap-note{ display:block; margin-top:5px; font-family:var(--gal-sans); font-size:.62rem;
+    letter-spacing:.17em; text-transform:uppercase; color:var(--gal-ink-3); }
+  .ex-masthead{ padding:calc(var(--nav-h,76px) + clamp(56px,9vw,116px)) 0 clamp(48px,7vw,84px); }
+  .ex-collection{ font-family:var(--gal-sans); font-size:.68rem; font-weight:500; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--gal-ink-3); margin:0 0 26px; }
+  .ex-title{ font-family:var(--gal-serif); font-weight:400; font-size:clamp(2.6rem,7vw,4.6rem);
+    line-height:1.02; letter-spacing:-.015em; color:var(--gal-ink); margin:0 0 22px; }
+  .ex-line{ font-family:var(--gal-serif); font-style:italic; font-size:clamp(1.12rem,2.3vw,1.5rem);
+    line-height:1.5; color:var(--gal-ink-2); margin:0 0 clamp(38px,5vw,54px); max-width:44rem; }
+  .ex-statement{ max-width:37rem; }
+  .ex-statement p{ font-family:var(--gal-serif); font-size:1.03rem; line-height:1.82;
+    color:var(--gal-ink-2); margin:0 0 1.25em; }
+  .ex-statement p:last-child{ margin-bottom:0; }
+  .ex-statement em{ color:var(--gal-ink); font-style:italic; }
+  .ex-facts{ display:flex; flex-wrap:wrap; gap:10px 34px; margin:clamp(38px,5vw,54px) 0 0;
+    padding-top:22px; border-top:1px solid var(--gal-line-soft); }
+  .ex-facts div{ display:block; }
+  .ex-facts dt{ font-family:var(--gal-sans); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gal-ink-3); margin:0 0 5px; }
+  .ex-facts dd{ font-family:var(--gal-serif); font-size:.95rem; color:var(--gal-ink-2); margin:0; }
+
+  /* ── Movements ── each register introduced as a small series ── */
+  .ex-movement{ padding:clamp(44px,5vw,68px) 0; border-top:1px solid var(--gal-line-soft);
+    scroll-margin-top:calc(var(--nav-h,76px) + 16px); }
+  .ex-mv-head{ display:grid; grid-template-columns:auto 1fr; gap:0 clamp(20px,3vw,40px);
+    align-items:start; margin-bottom:clamp(30px,4vw,46px); }
+  .ex-numeral{ font-family:var(--gal-serif); font-size:clamp(1.5rem,3vw,2.1rem); line-height:1;
+    color:var(--accent); opacity:.9; padding-top:.12em; min-width:1.6em; }
+  .ex-mv-meta{ min-width:0; }
+  .ex-mv-title{ font-family:var(--gal-serif); font-weight:400; font-size:clamp(1.7rem,3.6vw,2.5rem);
+    line-height:1.1; color:var(--gal-ink); margin:9px 0 0; }
+  .ex-mv-note{ font-family:var(--gal-serif); font-size:1rem; line-height:1.72; color:var(--gal-ink-2);
+    margin:14px 0 0; max-width:34rem; }
+  .ex-mv-rule{ height:1px; background:linear-gradient(90deg, rgba(var(--accent-rgb),0.55), transparent 62%);
+    border:0; margin:18px 0 0; }
+
+  .ex-colophon{ padding:clamp(56px,7vw,92px) 0 clamp(72px,9vw,120px); border-top:1px solid var(--gal-line-soft); }
+  .ex-colophon p{ font-family:var(--gal-serif); font-size:.97rem; line-height:1.8; color:var(--gal-ink-2);
+    margin:18px 0 0; max-width:37rem; }
+  .ex-colophon a{ color:var(--gal-ink); text-decoration:none; border-bottom:1px solid var(--gal-line); }
+  .ex-colophon a:hover{ border-bottom-color:var(--gal-ink); }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
+      <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="nav-cross" width="128" height="128" loading="lazy">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="has-dropdown">
+        <a href="/#arsenal">The Arsenal</a>
+        <ul class="nav-dropdown">
+          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
+          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
+          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
+          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
+        </ul>
+      </li>
+      <li><a href="/gallery.html">The Gallery</a></li>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/#enlist" class="btn btn-primary btn-sm">Take the Post</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="/">Home</a>
+  <div class="mobile-nav-section">The Arsenal</div>
+  <a href="/products/veil-os.html">Veil Studio</a>
+  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
+  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
+  <a href="/products/ai-investment-app.html">Vantage Edge</a>
+  <a href="/gallery.html">The Gallery</a>
+  <a href="/about.html">The Manifesto</a>
+  <a href="/contact.html">Enlist</a>
+</div>
+<main>
+  <!-- ── COLLECTION STATEMENT ── the work is introduced before it is shown ── -->
+  <header class="ex-masthead">
+    <div class="ex-wrap">
+      <p class="ex-collection">Collection 01</p>
+      <h1 class="ex-title">Illuminated Engravings</h1>
+      <p class="ex-line">Old plates, struck again &mdash; and nothing added that the passage did not already say.</p>
+      <div class="ex-statement">
+        <p>Fifteen engravings taken out of the public domain &mdash; Gustave Dor&eacute;&rsquo;s 1866 Bible, and one plate cut by D&uuml;rer in 1513 &mdash; and re-lit. The line work is left exactly where the engraver put it. What changes is the light: each plate is washed down to ash, then lit from a single source, one colour, chosen for the passage it has to carry.</p>
+        <p>That colour is the register. Five run through the collection, and each is a claim about the text rather than a decoration &mdash; <em>ember</em> for wrath and judgment, <em>signal</em> for the vigil, <em>verdant</em> for mercy and life, <em>ashen</em> for glory, <em>royal</em> for kingship. Three plates to a register. A piece belongs to one because of what the scene is doing, not because of how it happened to look.</p>
+        <p>Every piece carries scripture, set verbatim in the King James Version and cited. Nothing is paraphrased and nothing is trimmed to fit the composition. The display line above the verse is ours. The verse is not.</p>
+      </div>
+      <dl class="ex-facts">
+        <div><dt>Works</dt><dd>Fifteen</dd></div>
+        <div><dt>Registers</dt><dd>Five</dd></div>
+        <div><dt>Source plates</dt><dd>Dor&eacute; 1866 &middot; D&uuml;rer 1513</dd></div>
+        <div><dt>Scripture</dt><dd>King James, verbatim</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="ex-movement" id="ember" style="--accent:#f2762f;--accent-rgb:242,118,47;" aria-labelledby="mv-ember">
+    <div class="ex-wrap">
+      <div class="ex-mv-head">
+        <div class="ex-numeral" aria-hidden="true">I</div>
+        <div class="ex-mv-meta">
+          <p class="ex-label">Register &middot; Wrath & Judgment</p>
+          <h2 class="ex-mv-title" id="mv-ember">Ember</h2>
+          <hr class="ex-mv-rule">
+          <p class="ex-mv-note">The fire that falls. Judgment, the last act, the hand that no army stops — lit in forge-ember red.</p>
+        </div>
+      </div>
+      <div class="ex-grid">
+      <a class="ex-plate" href="/gallery/struck-in-the-night.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/struck-in-the-night-600.webp" width="600" height="749" loading="lazy" decoding="async" alt="Struck in the Night — dark gothic Christian wall art, ember colorway, with Isaiah 37:36 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Struck in the Night</span>
+          <span class="ex-cap-ref">Isaiah 37:36&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/stand-therefore.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/stand-therefore-600.webp" width="600" height="770" loading="lazy" decoding="async" alt="Stand Therefore — dark gothic Christian wall art, ember colorway, with Ephesians 6:11 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Stand Therefore</span>
+          <span class="ex-cap-ref">Ephesians 6:11&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/let-me-die-with-them.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/let-me-die-with-them-600.webp" width="600" height="753" loading="lazy" decoding="async" alt="Let Me Die With Them — dark gothic Christian wall art, ember colorway, with Judges 16:30 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Let Me Die With Them</span>
+          <span class="ex-cap-ref">Judges 16:30&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      </div>
+    </div>
+  </section>
+  <section class="ex-movement" id="signal" style="--accent:#25d3d8;--accent-rgb:37,211,216;" aria-labelledby="mv-signal">
+    <div class="ex-wrap">
+      <div class="ex-mv-head">
+        <div class="ex-numeral" aria-hidden="true">II</div>
+        <div class="ex-mv-meta">
+          <p class="ex-label">Register &middot; The Vigil</p>
+          <h2 class="ex-mv-title" id="mv-signal">Signal</h2>
+          <hr class="ex-mv-rule">
+          <p class="ex-mv-note">The watch that does not sleep. Cold signal teal on the gate, the ascent, and the war behind the war.</p>
+        </div>
+      </div>
+      <div class="ex-grid">
+      <a class="ex-plate" href="/gallery/the-light-shines-on.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/the-light-shines-on-600.webp" width="600" height="759" loading="lazy" decoding="async" alt="The Light Shines On — dark gothic Christian wall art, signal colorway, with John 1:5 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">The Light Shines On</span>
+          <span class="ex-cap-ref">John 1:5&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/he-keeps-the-gate.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/he-keeps-the-gate-600.webp" width="600" height="849" loading="lazy" decoding="async" alt="He Keeps the Gate — dark gothic Christian wall art, signal colorway, with Psalm 121:8 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">He Keeps the Gate</span>
+          <span class="ex-cap-ref">Psalm 121:8&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/not-flesh-not-blood.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/not-flesh-not-blood-600.webp" width="600" height="403" loading="lazy" decoding="async" alt="Not Flesh, Not Blood — dark gothic Christian wall art, signal colorway, with Ephesians 6:12 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Not Flesh, Not Blood</span>
+          <span class="ex-cap-ref">Ephesians 6:12&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      </div>
+    </div>
+  </section>
+  <section class="ex-movement" id="verdant" style="--accent:#3fd97a;--accent-rgb:63,217,122;" aria-labelledby="mv-verdant">
+    <div class="ex-wrap">
+      <div class="ex-mv-head">
+        <div class="ex-numeral" aria-hidden="true">III</div>
+        <div class="ex-mv-meta">
+          <p class="ex-label">Register &middot; Mercy & Life</p>
+          <h2 class="ex-mv-title" id="mv-verdant">Verdant</h2>
+          <hr class="ex-mv-rule">
+          <p class="ex-mv-note">Breath returning to what was finished. The road crossed, the valley of bones, the father who ran.</p>
+        </div>
+      </div>
+      <div class="ex-grid">
+      <a class="ex-plate" href="/gallery/he-had-compassion.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/he-had-compassion-600.webp" width="600" height="774" loading="lazy" decoding="async" alt="He Had Compassion — dark gothic Christian wall art, verdant colorway, with Luke 10:33 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">He Had Compassion</span>
+          <span class="ex-cap-ref">Luke 10:33&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/these-bones-shall-live.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/these-bones-shall-live-600.webp" width="600" height="743" loading="lazy" decoding="async" alt="These Bones Shall Live — dark gothic Christian wall art, verdant colorway, with Ezekiel 37:5 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">These Bones Shall Live</span>
+          <span class="ex-cap-ref">Ezekiel 37:5&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/his-father-saw-him.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/his-father-saw-him-600.webp" width="600" height="736" loading="lazy" decoding="async" alt="His Father Saw Him — dark gothic Christian wall art, verdant colorway, with Luke 15:20 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">His Father Saw Him</span>
+          <span class="ex-cap-ref">Luke 15:20&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      </div>
+    </div>
+  </section>
+  <section class="ex-movement" id="ashen" style="--accent:#efc880;--accent-rgb:239,200,128;" aria-labelledby="mv-ashen">
+    <div class="ex-wrap">
+      <div class="ex-mv-head">
+        <div class="ex-numeral" aria-hidden="true">IV</div>
+        <div class="ex-mv-meta">
+          <p class="ex-label">Register &middot; Glory</p>
+          <h2 class="ex-mv-title" id="mv-ashen">Ashen</h2>
+          <hr class="ex-mv-rule">
+          <p class="ex-mv-note">Glory with nothing burning in it. Pale gold and white radiance on the empty tomb, the ascending cloud, and the feed trough.</p>
+        </div>
+      </div>
+      <div class="ex-grid">
+      <a class="ex-plate" href="/gallery/he-is-risen.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/he-is-risen-600.webp" width="600" height="757" loading="lazy" decoding="async" alt="He Is Risen — dark gothic Christian wall art, ashen colorway, with Matthew 28:6 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">He Is Risen</span>
+          <span class="ex-cap-ref">Matthew 28:6&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/a-cloud-received-him.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/a-cloud-received-him-600.webp" width="600" height="740" loading="lazy" decoding="async" alt="A Cloud Received Him — dark gothic Christian wall art, ashen colorway, with Acts 1:9 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">A Cloud Received Him</span>
+          <span class="ex-cap-ref">Acts 1:9&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/unto-you-is-born.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/unto-you-is-born-600.webp" width="600" height="741" loading="lazy" decoding="async" alt="Unto You Is Born — dark gothic Christian wall art, ashen colorway, with Luke 2:11 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Unto You Is Born</span>
+          <span class="ex-cap-ref">Luke 2:11&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      </div>
+    </div>
+  </section>
+  <section class="ex-movement" id="royal" style="--accent:#b788f2;--accent-rgb:183,136,242;" aria-labelledby="mv-royal">
+    <div class="ex-wrap">
+      <div class="ex-mv-head">
+        <div class="ex-numeral" aria-hidden="true">V</div>
+        <div class="ex-mv-meta">
+          <p class="ex-label">Register &middot; Kingship & Majesty</p>
+          <h2 class="ex-mv-title" id="mv-royal">Royal</h2>
+          <hr class="ex-mv-rule">
+          <p class="ex-mv-note">Majesty that answers to no one. Deep purple on the throne, the colt, and the city coming down.</p>
+        </div>
+      </div>
+      <div class="ex-grid">
+      <a class="ex-plate" href="/gallery/wisdom.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/wisdom-600.webp" width="600" height="899" loading="lazy" decoding="async" alt="Wisdom — dark gothic Christian wall art, royal colorway, with 1 Kings 3:12 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Wisdom</span>
+          <span class="ex-cap-ref">1 Kings 3:12&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/behold.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/behold-600.webp" width="600" height="929" loading="lazy" decoding="async" alt="Behold — dark gothic Christian wall art, royal colorway, with Matthew 21:9 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">Behold</span>
+          <span class="ex-cap-ref">Matthew 21:9&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      <a class="ex-plate" href="/gallery/the-holy-city.html">
+        <span class="ex-plate-field">
+          <img src="/assets/gallery/the-holy-city-600.webp" width="600" height="744" loading="lazy" decoding="async" alt="The Holy City — dark gothic Christian wall art, royal colorway, with Revelation 21:2 KJV">
+        </span>
+        <span class="ex-cap">
+          <span class="ex-cap-title">The Holy City</span>
+          <span class="ex-cap-ref">Revelation 21:2&nbsp;&middot;&nbsp;KJV</span>
+        </span>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ex-colophon">
+    <div class="ex-wrap">
+      <p class="ex-label">Colophon</p>
+      <p>Source plates are public domain. Treatment, composition, colour and typography are by Watchman Forge, produced with AI-assisted digital work under original creative direction. Every display line is our own language; anything carrying a citation is quoted exactly.</p>
+      <p>Collection 02 is on the bench. <a href="/#enlist">Take the post</a> and you will hear when it lands.</p>
+    </div>
+  </section>
+</main>
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
+        <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="footer-cross" width="128" height="128" loading="lazy">
+      </a>
+      <p>Tools for the Watchman&rsquo;s mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
+      <div class="footer-contact">
+        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+        <span>Forged in Faith. Built for the Future.</span>
+      </div>
+    </div>
+    <div class="footer-col"><h4>The Arsenal</h4><ul>
+      <li><a href="/products/veil-os.html">Veil Studio</a></li>
+      <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
+      <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
+      <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>The Movement</h4><ul>
+      <li><a href="/gallery.html">The Gallery</a></li>
+      <li><a href="/about.html">The Manifesto</a></li>
+      <li><a href="/contact.html">Enlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul>
+      <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/terms-of-service.html">Terms of Service</a></li>
+    </ul></div>
+  </div>
+  <hr class="hr-neon">
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.js?v=v4"></script>
+<script src="/js/watchman-fx.js?v=v2"></script>
+</body>
+</html>

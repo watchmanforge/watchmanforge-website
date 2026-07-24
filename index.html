@@ -320,6 +320,26 @@
   .product-card .hud-bracket{ display:none; }
   .product-card::after{ display:none; }
 
+  /* ═══════════ The Gallery teaser ═══════════
+     Each tile carries its own --tile-rgb (the piece's colorway register)
+     so the hover glow matches the light in the artwork. Full grid lives
+     in gallery.html. */
+  .gal-teaser-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .gal-teaser-grid { grid-template-columns: 1fr; } }
+  .gal-teaser-tile { position: relative; display: block; border: 1px solid var(--border-faint);
+    border-radius: 12px; overflow: hidden; background: #05050b;
+    transition: border-color .24s ease, transform .24s ease, box-shadow .24s ease; }
+  .gal-teaser-tile:hover { border-color: rgba(var(--tile-rgb), 0.55); transform: translateY(-5px);
+    box-shadow: 0 20px 54px rgba(0,0,0,0.55), 0 0 44px rgba(var(--tile-rgb), 0.14); }
+  .gal-teaser-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4/5;
+    object-fit: contain; background: #05050b; }
+  .gal-teaser-meta { padding: 14px 16px 16px; border-top: 1px solid var(--border-faint); }
+  .gal-teaser-name { font-family: var(--font-heading); font-weight: 600; font-size: 1.06rem;
+    line-height: 1.2; margin: 0 0 6px; color: var(--text-primary); }
+  .gal-teaser-ref { font-family: var(--font-display); font-size: 0.6rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgb(var(--tile-rgb)); }
+  .gal-teaser-actions { display: flex; justify-content: center; margin-top: 40px; }
+
   /* ═══════════ Enlist — email capture ═══════════ */
   .enlist-form{ max-width:540px; margin:6px auto 0; }
   .enlist-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
@@ -382,6 +402,7 @@
           <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
         </ul>
       </li>
+      <li><a href="/gallery.html">The Gallery</a></li>
       <li><a href="/about.html">The Manifesto</a></li>
       <li><a href="/contact.html">Enlist</a></li>
     </ul>
@@ -402,6 +423,7 @@
   <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
   <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
   <a href="/products/ai-investment-app.html">Vantage Edge</a>
+  <a href="/gallery.html">The Gallery</a>
   <a href="/about.html">The Manifesto</a>
   <a href="/contact.html">Enlist</a>
 </div>
@@ -614,6 +636,49 @@
 
   <div class="tech-bar"></div>
 
+  <!-- ── The Gallery teaser ─────────────────────────────────── -->
+  <section class="section" id="gallery-teaser">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">The Gallery</div>
+        <h2 class="section-title reveal reveal-delay-1">Collection 01:<br>Illuminated Engravings</h2>
+        <p class="section-sub reveal reveal-delay-2">Fifteen prints pulled out of the public domain &mdash; Dor&eacute;, D&uuml;rer &mdash; washed down to ash and bone, then lit from a single source. The display line is ours. The scripture is verbatim King James, and it is cited.</p>
+      </div>
+      <div class="gal-teaser-grid">
+
+        <a class="gal-teaser-tile card-corner reveal" href="/gallery/he-keeps-the-gate.html" style="--tile-rgb:37,211,216;">
+          <img src="/assets/gallery/he-keeps-the-gate-600.webp" width="600" height="849" loading="lazy" decoding="async" alt="He Keeps the Gate — dark gothic Christian wall art, signal colorway, with Psalm 121:8 KJV">
+          <div class="gal-teaser-meta">
+            <h3 class="gal-teaser-name">He Keeps the Gate</h3>
+            <div class="gal-teaser-ref">Psalm 121:8&nbsp;&middot;&nbsp;Signal</div>
+          </div>
+        </a>
+
+        <a class="gal-teaser-tile card-corner reveal reveal-delay-1" href="/gallery/stand-therefore.html" style="--tile-rgb:242,118,47;">
+          <img src="/assets/gallery/stand-therefore-600.webp" width="600" height="770" loading="lazy" decoding="async" alt="Stand Therefore — dark gothic Christian wall art, ember colorway, with Ephesians 6:11 KJV">
+          <div class="gal-teaser-meta">
+            <h3 class="gal-teaser-name">Stand Therefore</h3>
+            <div class="gal-teaser-ref">Ephesians 6:11&nbsp;&middot;&nbsp;Ember</div>
+          </div>
+        </a>
+
+        <a class="gal-teaser-tile card-corner reveal reveal-delay-2" href="/gallery/struck-in-the-night.html" style="--tile-rgb:242,118,47;">
+          <img src="/assets/gallery/struck-in-the-night-600.webp" width="600" height="749" loading="lazy" decoding="async" alt="Struck in the Night — dark gothic Christian wall art, ember colorway, with Isaiah 37:36 KJV">
+          <div class="gal-teaser-meta">
+            <h3 class="gal-teaser-name">Struck in the Night</h3>
+            <div class="gal-teaser-ref">Isaiah 37:36&nbsp;&middot;&nbsp;Ember</div>
+          </div>
+        </a>
+
+      </div>
+      <div class="gal-teaser-actions reveal reveal-delay-3">
+        <a href="/gallery.html" class="btn btn-outline btn-lg">See All 15 Pieces &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="tech-bar"></div>
+
   <!-- ── Who We Are ─────────────────────────────────────────── -->
   <section class="section">
     <div class="container">
@@ -707,6 +772,7 @@
     <div class="footer-col">
       <h4>The Movement</h4>
       <ul>
+        <li><a href="/gallery.html">The Gallery</a></li>
         <li><a href="/about.html">The Manifesto</a></li>
         <li><a href="/contact.html">Enlist</a></li>
       </ul>

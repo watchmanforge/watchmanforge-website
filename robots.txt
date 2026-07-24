@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.watchmanforge.com/sitemap.xml
+Sitemap: https://watchmanforge.com/sitemap.xml

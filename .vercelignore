@@ -1,0 +1,5 @@
+# Build/authoring utilities — never deployed, never publicly served.
+# tools/ regenerates gallery.html, gallery/*.html and sitemap.xml from
+# tools/gallery_data.py. The generated HTML is what ships.
+tools/
+BUILD_LOG.md
