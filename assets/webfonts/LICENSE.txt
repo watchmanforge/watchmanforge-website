@@ -1,0 +1,8 @@
+Orbitron — Copyright 2018 The Orbitron Project Authors (https://github.com/theleagueof/orbitron)
+Inter — Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+
+Both fonts are licensed under the SIL Open Font License, Version 1.1:
+https://openfontlicense.org/open-font-license-official-text/
+
+Files here are the Latin subsets of the variable fonts, as served by Google Fonts,
+self-hosted so visitors' browsers never contact Google.

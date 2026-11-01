@@ -31,6 +31,8 @@ from gallery_data import (  # noqa: E402
     PIECES, REGISTERS, REGISTER_ORDER, COLLECTION, SITE,
     DEFAULT_SOURCE, HOMEPAGE_FEATURED, in_register,
 )
+from chrome import NAV as CHROME_NAV, FOOTER as CHROME_FOOTER, block  # noqa: E402
+import sync_chrome  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SIZES = json.load(open(os.path.join(ROOT, "assets", "gallery", "sizes.json")))
@@ -38,82 +40,13 @@ SIZES = json.load(open(os.path.join(ROOT, "assets", "gallery", "sizes.json")))
 ROMAN = ["I", "II", "III", "IV", "V"]
 
 # ── Shared chrome ────────────────────────────────────────────────────────────
-NAV = """<nav id="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-      <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="nav-cross" width="128" height="128" loading="lazy">
-    </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li class="has-dropdown">
-        <a href="/#arsenal">The Arsenal</a>
-        <ul class="nav-dropdown">
-          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-        </ul>
-      </li>
-      <li><a href="/gallery.html">The Gallery</a></li>
-      <li><a href="/about.html">The Manifesto</a></li>
-      <li><a href="/contact.html">Enlist</a></li>
-    </ul>
-    <div class="nav-right">
-      <a href="/#enlist" class="btn btn-primary btn-sm">Take the Post</a>
-    </div>
-    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div class="mobile-nav">
-  <a href="/">Home</a>
-  <div class="mobile-nav-section">The Arsenal</div>
-  <a href="/products/veil-os.html">Veil Studio</a>
-  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-  <a href="/products/ai-investment-app.html">Vantage Edge</a>
-  <a href="/gallery.html">The Gallery</a>
-  <a href="/about.html">The Manifesto</a>
-  <a href="/contact.html">Enlist</a>
-</div>"""
-
-FOOTER = """<footer id="footer">
-  <div class="footer-main">
-    <div class="footer-brand">
-      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
-        <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="footer-cross" width="128" height="128" loading="lazy">
-      </a>
-      <p>Tools for the Watchman&rsquo;s mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-      <div class="footer-contact">
-        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
-        <span>Forged in Faith. Built for the Future.</span>
-      </div>
-    </div>
-    <div class="footer-col"><h4>The Arsenal</h4><ul>
-      <li><a href="/products/veil-os.html">Veil Studio</a></li>
-      <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
-      <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
-      <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>The Movement</h4><ul>
-      <li><a href="/gallery.html">The Gallery</a></li>
-      <li><a href="/about.html">The Manifesto</a></li>
-      <li><a href="/contact.html">Enlist</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Legal</h4><ul>
-      <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="/terms-of-service.html">Terms of Service</a></li>
-    </ul></div>
-  </div>
-  <hr class="hr-neon">
-  <div class="footer-bottom">
-    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-    <div class="footer-bottom-links">
-      <a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a>
-    </div>
-  </div>
-</footer>
-<script src="/js/main.js?v=v4"></script>
-<script src="/js/watchman-fx.js?v=v2"></script>
+# Nav and footer come from tools/chrome.py (the one copy for the whole site).
+# The ?v= stamps on main.css / main.js / watchman-fx.js are written by
+# tools/sync_chrome.py, which main() runs after the pages are written.
+NAV = block("nav", CHROME_NAV)
+FOOTER = block("footer", CHROME_FOOTER) + """
+<script src="/js/main.js"></script>
+<script src="/js/watchman-fx.js"></script>
 </body>
 </html>"""
 
@@ -330,8 +263,8 @@ HEAD_TMPL = """<!DOCTYPE html>
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/main.css?v=v6">
-<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css">
 <style>
   :root{{ --accent:{accent}; --accent-rgb:{accent_rgb}; }}
 {css}
@@ -365,7 +298,7 @@ def plate(p):
     sz = SIZES[p["slug"]]
     note = ('\n        <span class="ex-cap-note">Artwork pending</span>'
             if sz["pending"] else "")
-    return f"""      <a class="ex-plate" href="/gallery/{p['slug']}.html">
+    return f"""      <a class="ex-plate" href="/gallery/{p['slug']}">
         <span class="ex-plate-field">
           <img src="/assets/gallery/{p['slug']}-600.webp" width="{sz['grid'][0]}" height="{sz['grid'][1]}" loading="lazy" decoding="async" alt="{art_alt(p)}">
         </span>
@@ -388,7 +321,7 @@ def build_index():
         desc=esc_attr(desc),
         ogtitle="Collection 01: Illuminated Engravings | Watchman Forge",
         ogtype="website",
-        url=f"{SITE}/gallery.html",
+        url=f"{SITE}/gallery",
         ogimg=f"{SITE}/assets/gallery/{hero_piece['slug']}-1400.webp",
         ogw=hsz["detail"][0], ogh=hsz["detail"][1],
         ogalt=art_alt(hero_piece),
@@ -450,7 +383,7 @@ def build_index():
     <div class="ex-wrap">
       <p class="ex-label">Colophon</p>
       <p>Source plates are public domain. Treatment, composition, colour and typography are by Watchman Forge, produced with AI-assisted digital work under original creative direction. Every display line is our own language; anything carrying a citation is quoted exactly.</p>
-      <p>Collection 02 is on the bench. <a href="/#enlist">Take the post</a> and you will hear when it lands.</p>
+      <p>Collection 02 is on the bench. <a href="/#join">Join the list</a> and you will hear when it lands.</p>
     </div>
   </section>
 </main>
@@ -465,7 +398,7 @@ def build_piece(p):
     sz = SIZES[p["slug"]]
     pending = sz["pending"]
     landscape = sz["detail"][0] > sz["detail"][1]
-    url = f"{SITE}/gallery/{p['slug']}.html"
+    url = f"{SITE}/gallery/{p['slug']}"
     detail_img = f"{SITE}/assets/gallery/{p['slug']}-1400.webp"
 
     desc = plain(f"{p['title']} — dark gothic Christian wall art from Collection 01: "
@@ -485,7 +418,7 @@ def build_piece(p):
                     "url": SITE + "/"},
         "isPartOf": {"@type": "CreativeWorkSeries",
                      "name": plain(COLLECTION),
-                     "url": f"{SITE}/gallery.html"},
+                     "url": f"{SITE}/gallery"},
         "description": desc,
         "citation": f"{plain(p['ref'])} (King James Version)",
     }, indent=2)
@@ -533,7 +466,7 @@ def build_piece(p):
   <article class="work">
     <div class="ex-wrap">
       <nav class="work-crumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>/</span><a href="/gallery.html">The Gallery</a><span>/</span>{p['title']}
+        <a href="/">Home</a><span>/</span><a href="/gallery">The Gallery</a><span>/</span>{p['title']}
       </nav>
 
       <figure class="work-plate{' is-landscape' if landscape else ''}">
@@ -586,7 +519,7 @@ def build_piece(p):
           <p class="ex-label">{reg['name']} Register &middot; {plain(reg['theme'])}</p>
           <h2 class="work-more-title">The other two plates</h2>
         </div>
-        <a class="work-back" href="/gallery.html">All fifteen works</a>
+        <a class="work-back" href="/gallery">All fifteen works</a>
       </div>
       <div class="ex-grid">
 {sib_plates}
@@ -603,15 +536,11 @@ def build_piece(p):
 def build_sitemap():
     static = [
         ("/", "1.0", "weekly"),
-        ("/gallery.html", "0.9", "weekly"),
-        ("/about.html", "0.7", "monthly"),
-        ("/contact.html", "0.7", "monthly"),
-        ("/products/veil-os.html", "0.8", "monthly"),
-        ("/products/pathfinder.html", "0.8", "monthly"),
-        ("/products/unified-bt-led-controller.html", "0.8", "monthly"),
-        ("/products/ai-investment-app.html", "0.8", "monthly"),
-        ("/privacy-policy.html", "0.3", "yearly"),
-        ("/terms-of-service.html", "0.3", "yearly"),
+        ("/gallery", "0.9", "weekly"),
+        ("/about", "0.7", "monthly"),
+        ("/contact", "0.5", "monthly"),
+        ("/privacy-policy", "0.3", "yearly"),
+        ("/terms-of-service", "0.3", "yearly"),
     ]
     rows = "".join(
         f"  <url>\n    <loc>{SITE}{path}</loc>\n"
@@ -619,7 +548,7 @@ def build_sitemap():
         f"    <priority>{pri}</priority>\n  </url>\n"
         for path, pri, freq in static)
     rows += "".join(
-        f"  <url>\n    <loc>{SITE}/gallery/{p['slug']}.html</loc>\n"
+        f"  <url>\n    <loc>{SITE}/gallery/{p['slug']}</loc>\n"
         f"    <changefreq>monthly</changefreq>\n"
         f"    <priority>0.8</priority>\n"
         f"    <image:image>\n"
@@ -647,6 +576,7 @@ def main():
         build_piece(p)
     build_sitemap()
     print(f"\n  {len(PIECES)} piece pages + gallery.html + sitemap.xml")
+    sync_chrome.main()
     missing = [p["slug"] for p in PIECES if SIZES[p["slug"]]["pending"]]
     if missing:
         print(f"  artwork pending: {', '.join(missing)}")

@@ -1,36 +1,34 @@
 /* ════════════════════════════════════════════════════════════════
    Watchman Forge — watchman-fx.js
-   Boot sequence · hidden scripture (everywhere) · The Watch scene
-   Reusable across the site. Sound the trumpet.
+   Hidden scripture · The Watch scene (stars)
+   The faith is the root, kept deep: nothing here is in the way of a
+   first-time visitor. It is there for the ones who look.
    ════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var D = document, root = D.documentElement;
+  var D = document;
 
-  /* ---------- The scripture pool (carry this to every page) ---------- */
+  /* ---------- The scripture pool — King James Version, verbatim ---------- */
   var VERSES = [
-    ['EZK 33:6',  'If the watchman sees the sword coming and does not blow the trumpet, I will hold the watchman accountable.'],
-    ['EZK 33:7',  'Son of man, I have made you a watchman for the house of Israel.'],
-    ['HAB 2:1',   'I will stand at my watch and station myself on the ramparts.'],
-    ['ISA 62:6',  'I have posted watchmen on your walls, Jerusalem; they will never be silent.'],
-    ['ISA 21:6',  'Go, post a lookout and have him report what he sees.'],
-    ['PS 121:8',  'The Lord will watch over your coming and going both now and forevermore.'],
-    ['PS 127:1',  'Unless the Lord watches over the city, the watchmen stand guard in vain.'],
-    ['PS 130:6',  'My soul waits for the Lord more than watchmen wait for the morning.'],
-    ['JN 1:5',    'The light shines in the darkness, and the darkness has not overcome it.'],
-    ['MATT 5:14', 'You are the light of the world. A city on a hill cannot be hidden.'],
-    ['ROM 13:11', 'The hour has already come for you to wake up from your slumber.'],
-    ['ROM 13:12', 'The night is nearly over; the day is almost here. Put on the armor of light.'],
-    ['EPH 6:11',  'Put on the full armor of God, that you may take your stand.'],
-    ['2TIM 1:7',  'God gave us a spirit not of fear, but of power, love and self-discipline.'],
-    ['PROV 4:23', 'Above all else, guard your heart, for everything you do flows from it.'],
-    ['REV 19:16', 'On his robe and on his thigh he has a name written: KING OF KINGS.'],
-    ['MARK 13:37','What I say to you, I say to everyone: Watch!'],
-    ['JOSH 1:9',  'Be strong and courageous. The Lord your God will be with you wherever you go.'],
-    ['1TH 5:6', 'Therefore let us not sleep, as do others; but let us watch and be sober.'],
-    ['MK 13:37', 'And what I say unto you I say unto all, Watch.'],
-    ['MIC 7:7', 'Therefore I will look unto the Lord; I will wait for the God of my salvation: my God will hear me.'],
-    ['MATT 5:16', 'Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.']
+    ['EZK 33:6',  'But if the watchman see the sword come, and blow not the trumpet, and the people be not warned…'],
+    ['EZK 33:7',  'So thou, O son of man, I have set thee a watchman unto the house of Israel.'],
+    ['HAB 2:1',   'I will stand upon my watch, and set me upon the tower.'],
+    ['ISA 62:6',  'I have set watchmen upon thy walls, O Jerusalem, which shall never hold their peace day nor night.'],
+    ['ISA 21:6',  'Go, set a watchman, let him declare what he seeth.'],
+    ['PS 121:8',  'The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore.'],
+    ['PS 127:1',  'Except the LORD keep the city, the watchman waketh but in vain.'],
+    ['PS 130:6',  'My soul waiteth for the Lord more than they that watch for the morning.'],
+    ['PS 119:105','Thy word is a lamp unto my feet, and a light unto my path.'],
+    ['PROV 24:16','For a just man falleth seven times, and riseth up again.'],
+    ['JN 1:5',    'And the light shineth in darkness; and the darkness comprehended it not.'],
+    ['MATT 5:14', 'Ye are the light of the world. A city that is set on an hill cannot be hid.'],
+    ['ROM 13:12', 'The night is far spent, the day is at hand: let us therefore cast off the works of darkness, and let us put on the armour of light.'],
+    ['EPH 6:11',  'Put on the whole armour of God, that ye may be able to stand against the wiles of the devil.'],
+    ['2TIM 1:7',  'For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.'],
+    ['PROV 4:23', 'Keep thy heart with all diligence; for out of it are the issues of life.'],
+    ['MK 13:37',  'And what I say unto you I say unto all, Watch.'],
+    ['1TH 5:6',   'Therefore let us not sleep, as do others; but let us watch and be sober.'],
+    ['MIC 7:7',   'Therefore I will look unto the LORD; I will wait for the God of my salvation: my God will hear me.']
   ];
   function vByRef(ref){ for (var i=0;i<VERSES.length;i++) if (VERSES[i][0]===ref) return VERSES[i]; return null; }
   function randV(){ return VERSES[(Math.random()*VERSES.length)|0]; }
@@ -41,21 +39,23 @@
     console.log('%c✝ WATCHMAN FORGE %c the watch is never off duty.',
       'background:#00d4ff;color:#010104;font-weight:700;padding:2px 7px;border-radius:3px;',
       'color:#9fb6c9;');
-    console.log('%c' + cv[0] + '  %c\u201C' + cv[1] + '\u201D',
+    console.log('%c' + cv[0] + '  %c“' + cv[1] + '”',
       'color:#00d4ff;font-weight:700;', 'color:#7da0b5;font-style:italic;');
   } catch (e) {}
 
-  /* ---------- 2. Hover-reveal scripture tooltips ---------- */
+  /* ---------- 2. Hover-reveal scripture on [data-vref] ---------- */
   var tip = null;
-  function ensureTip(){ if (!tip){ tip = D.createElement('div'); tip.className = 'wf-verse-tip'; D.body.appendChild(tip);} return tip; }
+  function ensureTip(){ if (!tip){ tip = D.createElement('div'); tip.className = 'wf-verse-tip'; tip.setAttribute('aria-hidden','true'); D.body.appendChild(tip);} return tip; }
   function measureH(t){ t.style.visibility='hidden'; t.classList.add('show'); var h=t.offsetHeight; t.classList.remove('show'); t.style.visibility=''; return h; }
   function showTip(el){
     var v = vByRef(el.getAttribute('data-vref')) || randV();
     var t = ensureTip();
-    t.innerHTML = '<span class="vref">' + v[0] + '</span>\u201C' + v[1] + '\u201D';
+    t.innerHTML = '';
+    var ref = D.createElement('span'); ref.className = 'vref'; ref.textContent = v[0];
+    t.appendChild(ref); t.appendChild(D.createTextNode('“' + v[1] + '”'));
     var r = el.getBoundingClientRect();
-    var left = r.left + r.width/2 - 130;
-    left = Math.min(Math.max(12, left), window.innerWidth - 272);
+    var left = r.left + r.width/2 - 140;
+    left = Math.min(Math.max(12, left), window.innerWidth - 292);
     t.style.left = left + 'px';
     var top = r.top - 12 - measureH(t);
     if (top < 10) top = r.bottom + 12;
@@ -63,161 +63,46 @@
     requestAnimationFrame(function(){ t.classList.add('show'); });
   }
   function hideTip(){ if (tip) tip.classList.remove('show'); }
-  function wireVerse(el, ref){
-    if (!el || el.classList.contains('wf-has-verse')) return;
-    if (ref) el.setAttribute('data-vref', ref);
-    el.classList.add('wf-has-verse');
-    el.addEventListener('mouseenter', function(){ showTip(el); });
-    el.addEventListener('mouseleave', hideTip);
-    el.addEventListener('focus', function(){ showTip(el); });
-    el.addEventListener('blur', hideTip);
-  }
   function seedVerses(){
-    // Product cards get thematically-matched verses (Veil, Pathfinder, ChromaForge, Vantage)
-    var cardVerses = ['MATT 5:14','PS 121:8','JN 1:5','PROV 4:23'];
-    D.querySelectorAll('.products-grid .product-card').forEach(function(c,i){
-      wireVerse(c.querySelector('.app-icon-wrap') || c, cardVerses[i % cardVerses.length]);
+    // Pointer-only: a touch visitor never gets a tooltip they didn't ask for.
+    if (!window.matchMedia || !matchMedia('(hover: hover)').matches) return;
+    D.querySelectorAll('[data-vref]').forEach(function(el){
+      el.classList.add('wf-has-verse');
+      el.addEventListener('mouseenter', function(){ showTip(el); });
+      el.addEventListener('mouseleave', hideTip);
     });
-    // Crosses, stats, the quote mark, and any tagged element get rotating verses
-    var pool = ['EZK 33:7','HAB 2:1','PS 127:1','ISA 21:6','ROM 13:12','REV 19:16','JOSH 1:9','MARK 13:37','2TIM 1:7','PS 130:6'], pi = 0;
-    D.querySelectorAll('.nav-cross,.footer-cross,.stat-block,.scripture-mark,[data-vref]').forEach(function(el){
-      wireVerse(el, el.getAttribute('data-vref') || pool[pi++ % pool.length]);
-    });
+    window.addEventListener('scroll', hideTip, { passive: true });
   }
 
-  /* ---------- 3. Faint cycling corner whisper ---------- */
-  function whisper(){
-    var w = D.createElement('div'); w.id = 'wf-whisper'; w.setAttribute('aria-hidden','true'); D.body.appendChild(w);
-    (function cycle(){
-      w.textContent = '> ' + randV()[0];
-      w.style.opacity = '0.22';
-      setTimeout(function(){ w.style.opacity = '0'; }, 5200);
-      setTimeout(cycle, 9200);
-    })();
-  }
-
-  /* ---------- 4. The Watch — stars + skyline generation ---------- */
+  /* ---------- 3. The Watch — stars over the tower ---------- */
   function buildWatch(){
+    // Desktop sees the full seascape; phones get a tower-focused crop.
+    // viewBox is an attribute, not CSS, so it swaps here.
+    var svg = D.querySelector('.wt-svg');
+    if (svg && window.matchMedia){
+      var mq = matchMedia('(max-width: 760px)');
+      var frame = function(){ svg.setAttribute('viewBox', mq.matches ? '640 0 560 460' : '0 0 1200 460'); };
+      frame();
+      if (mq.addEventListener) mq.addEventListener('change', frame);
+    }
     var stars = D.getElementById('wt-stars');
-    if (stars){
-      var n = (window.matchMedia && matchMedia('(max-width:760px)').matches) ? 34 : 62;
-      var frag = D.createDocumentFragment();
-      for (var i=0;i<n;i++){
-        var s = D.createElement('span'); s.className = 'wt-star';
-        s.style.left = (Math.random()*100) + '%';
-        s.style.top  = (Math.random()*60) + '%';
-        var sz = (Math.random()*1.6 + 0.6).toFixed(2);
-        s.style.width = s.style.height = sz + 'px';
-        s.style.animationDelay = (Math.random()*4).toFixed(2) + 's';
-        s.style.animationDuration = (2.6 + Math.random()*3).toFixed(2) + 's';
-        frag.appendChild(s);
-      }
-      stars.appendChild(frag);
+    if (!stars) return;
+    var n = (window.matchMedia && matchMedia('(max-width:760px)').matches) ? 34 : 62;
+    var frag = D.createDocumentFragment();
+    for (var i=0;i<n;i++){
+      var s = D.createElement('span'); s.className = 'wt-star';
+      s.style.left = (Math.random()*100) + '%';
+      s.style.top  = (Math.random()*60) + '%';
+      var sz = (Math.random()*1.6 + 0.6).toFixed(2);
+      s.style.width = s.style.height = sz + 'px';
+      s.style.animationDelay = (Math.random()*4).toFixed(2) + 's';
+      s.style.animationDuration = (2.6 + Math.random()*3).toFixed(2) + 's';
+      frag.appendChild(s);
     }
-    var g = D.getElementById('wt-buildings');
-    if (g){
-      var NS = 'http://www.w3.org/2000/svg', x = 0, seed = 7;
-      function rnd(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }
-      while (x < 1200){
-        var w = 42 + ((rnd()*72)|0);
-        var underTower = (x < 660 && x + w > 558);   // leave a gap for the central watchtower
-        if (!underTower){
-          var top = 400 + ((rnd()*140)|0);
-          var b = D.createElementNS(NS,'rect');
-          b.setAttribute('x', x); b.setAttribute('y', top);
-          b.setAttribute('width', w - 6); b.setAttribute('height', 600 - top);
-          b.setAttribute('fill', '#04050b');
-          g.appendChild(b);
-          if (rnd() > 0.5){                            // a few window lights
-            var dot = D.createElementNS(NS,'rect');
-            dot.setAttribute('x', x + (w-6)/2 - 2);
-            dot.setAttribute('y', top + 14 + ((rnd()*((600-top)/2))|0));
-            dot.setAttribute('width', 3); dot.setAttribute('height', 3);
-            dot.setAttribute('fill', rnd() > 0.72 ? '#00d4ff' : '#ffcf8a');
-            dot.setAttribute('opacity', '0.5');
-            g.appendChild(dot);
-          }
-        }
-        x += w;
-      }
-    }
-  }
-
-  /* ---------- 5. Boot sequence (first visit per session) ---------- */
-  function boot(){
-    var ov = D.getElementById('wf-boot');
-    if (!root.classList.contains('wf-booting') || !ov){ if (ov && ov.parentNode) ov.parentNode.removeChild(ov); return; }
-    var log = D.getElementById('wf-boot-log'), done = false;
-    var lightRefs = ['EZK 33:6','EZK 33:7','HAB 2:1','ISA 62:6','ISA 21:6','PS 121:8','PS 127:1','PS 130:6','JN 1:5','MATT 5:14','ROM 13:11','ROM 13:12','EPH 6:11','2TIM 1:7','PROV 4:23','REV 19:16','MARK 13:37','1TH 5:6','MK 13:37','MIC 7:7','MATT 5:16'];
-    var bv = vByRef(lightRefs[(Math.random()*lightRefs.length)|0]);
-    var lines = [
-      ['> WATCHMAN_FORGE :: GRID OS  v3.3', 'sys'],
-      ['> opening uplink to the User ......... ', 'tag', 'LINKED', 'ok'],
-      ['> writing identity disc .............. ', 'tag', '"YOU ARE KNOWN"', 'hl'],
-      ['> routing light to the dark sectors .. ', 'tag', 'FLOWING', 'ok'],
-      ['> derez fear and doubt ............... ', 'tag', 'CLEARED', 'ok'],
-      ['> arming the trumpet ................. ', 'tag', 'ARMED', 'ok'],
-      ['', 'gap'],
-      ['> \u201C' + bv[1] + '\u201D \u2014 ' + bv[0], 'vs'],
-      ['', 'gap'],
-      ['> PROGRAM:WATCHMAN   STATUS:ONLINE   THE USER IS WATCHING', 'hl2'],
-      ['> the hour is late. stand your post.', 'cur']
-    ];
-    function finish(){
-      if (done) return; done = true;
-      try { sessionStorage.setItem('wf_booted','1'); } catch (e) {}
-      ov.classList.add('wf-done');
-      setTimeout(function(){ root.classList.remove('wf-booting'); if (ov.parentNode) ov.parentNode.removeChild(ov); }, 950);
-    }
-    ['keydown','click','touchstart','wheel'].forEach(function(ev){ window.addEventListener(ev, finish, { once:true, passive:true }); });
-
-    function type(el, text, cb){ var i=0; (function tick(){ el.textContent = text.slice(0, i++); if (i <= text.length) setTimeout(tick, 6 + Math.random()*12); else cb && cb(); })(); }
-    var li = 0;
-    (function nextLine(){
-      if (li >= lines.length){ setTimeout(finish, 900); return; }
-      var row = lines[li++], text = row[0], kind = row[1], el = D.createElement('div');
-      log.appendChild(el);
-      if (kind === 'gap'){ el.innerHTML = '&nbsp;'; setTimeout(nextLine, 60); return; }
-      if (kind === 'vs') el.className = 'vs';
-      if (kind === 'hl2') el.className = 'hl2';
-      type(el, text, function(){
-        if (kind === 'tag'){ var t=D.createElement('span'); t.className=row[3]||'ok'; t.textContent=' ['+row[2]+']'; el.appendChild(t); }
-        if (kind === 'cur'){ var c=D.createElement('span'); c.className='cursor'; c.textContent='\u2588'; el.appendChild(c); }
-        setTimeout(nextLine, kind === 'tag' ? 60 : 110);
-      });
-    })();
-  }
-
-  /* ---------- enlist / email capture ---------- */
-  function wireEnlist(){
-    var f = D.getElementById('enlist-form'); if (!f) return;
-    var input = f.querySelector('.enlist-input');
-    var btn = f.querySelector('.enlist-submit');
-    var status = D.getElementById('enlist-status');
-    var btnLabel = btn ? btn.textContent : '';
-    function setStatus(msg, cls){ if (!status) return; status.textContent = msg || ''; status.className = 'enlist-status' + (msg ? ' show ' + (cls||'') : ''); }
-    f.addEventListener('submit', function(e){
-      e.preventDefault();
-      var hp = f.querySelector('input[name="_gotcha"]');
-      var email = (input && input.value || '').trim();
-      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!valid){ if (input){ input.classList.add('invalid'); input.focus(); } setStatus('That email doesn\u2019t look right \u2014 check it and try again.', 'err'); return; }
-      if (input) input.classList.remove('invalid');
-      if (hp && hp.value){ setStatus('',''); f.classList.add('done'); return; }   // honeypot tripped: drop bots, don't send
-      var action = f.getAttribute('action') || '';
-      setStatus('Taking your post\u2026', '');
-      if (window.fetch){
-        // POST the email to the Google Sheet (Apps Script). no-cors sidesteps the CORS wall; the row still lands.
-        fetch(action, { method:'POST', mode:'no-cors', body:new URLSearchParams({ email: email }) })
-          .then(function(){ setStatus('',''); f.classList.add('done'); })
-          .catch(function(){ setStatus('Something went wrong \u2014 try again, or email us directly below.', 'err'); });
-      } else {
-        f.submit();   // very old browser fallback: native POST to the script
-      }
-    });
+    stars.appendChild(frag);
   }
 
   /* ---------- go ---------- */
-  function init(){ boot(); seedVerses(); whisper(); buildWatch(); wireEnlist(); }
+  function init(){ seedVerses(); buildWatch(); }
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();

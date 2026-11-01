@@ -3,581 +3,497 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Watchman Forge — Sound the Trumpet</title>
-<meta name="description" content="Watchman Forge is not a company — it is a movement. A remnant called to stand on the wall and sound the trumpet before the King of Kings returns. Take the post. Forged in Faith. Built for the Future.">
-<meta name="keywords" content="Watchman Forge, the watchman, Ezekiel 33:6, sound the trumpet, faith movement, Veil Studio, Pathfinder The Grid, ChromaForge, Vantage Edge">
-<meta property="og:title" content="Watchman Forge — Sound the Trumpet">
-<meta property="og:description" content="This is not a purchase. It is an enlistment. Stand on the wall. Forged in Faith. Built for the Future.">
+<title>Watchman Forge — Stop starting. Start finishing.</title>
+<meta name="description" content="Watchman Forge is a daily accountability app for people who keep starting side projects and not finishing them. A short daily list, a real phone call, and one rule: never miss twice. Join the early-access waitlist.">
+<meta property="og:title" content="Watchman Forge — Stop starting. Start finishing.">
+<meta property="og:description" content="A daily accountability app for people with a day job and a pile of unfinished side projects. One rule: never miss twice. Join the early-access waitlist.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://watchmanforge.com/">
+<meta property="og:url" content="https://www.watchmanforge.com/">
 <meta property="og:site_name" content="Watchman Forge">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<meta property="og:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Watchman Forge — Forged in Faith. Built for the Future.">
+<meta property="og:image:alt" content="Watchman Forge — Stop starting. Start finishing. A daily accountability app.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Watchman Forge — Sound the Trumpet">
-<meta name="twitter:description" content="Not a company — a movement. A remnant called to stand on the wall and sound the trumpet. Forged in Faith. Built for the Future.">
-<meta name="twitter:image" content="https://watchmanforge.com/assets/images/og-image.png">
+<meta name="twitter:title" content="Watchman Forge — Stop starting. Start finishing.">
+<meta name="twitter:description" content="A daily accountability app for people with a day job and a pile of unfinished side projects. Join the early-access waitlist.">
+<meta name="twitter:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
 <meta name="theme-color" content="#010104">
 <meta name="p:domain_verify" content="52a8229ad7361127029b3b662c8bc34d"/>
-<link rel="canonical" href="https://watchmanforge.com/">
+<link rel="canonical" href="https://www.watchmanforge.com/">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/main.css?v=v6">
-<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<link rel="preload" href="/assets/webfonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css?v=0a0c75ab78">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Watchman Forge",
+  "url": "https://www.watchmanforge.com/",
+  "logo": "https://www.watchmanforge.com/assets/images/apple-touch-icon.png",
+  "email": "watchmanforge@gmail.com",
+  "slogan": "Stop starting. Start finishing."
+}
+</script>
 <style>
   /* ════════════════════════════════════════════════════════════
      HOME — page-specific layout. Tokens & components come from
-     main.css / gtr.css. This block only handles flow + the hero.
+     main.css. Phone first: every block is built at 375px and
+     widened from there.
      ════════════════════════════════════════════════════════════ */
 
-  /* Quality floor */
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  a:focus-visible, .btn:focus-visible, button:focus-visible {
-    outline: 2px solid var(--neon-blue);
-    outline-offset: 3px;
-  }
-
-  /* ── Section dividers / blends (from your system) ── */
   .tech-bar {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border-mid), var(--neon-blue), var(--border-mid), transparent);
-    margin: 0;
     box-shadow: 0 0 16px rgba(0,212,255,0.22);
   }
-  .sect-fade-down { height: 80px; background: linear-gradient(to bottom, transparent, var(--bg-void)); pointer-events: none; margin: 0; }
+  .bg-void { background: var(--bg-void); }
+  .statement {
+    font-weight: 800;
+    font-size: clamp(1.7rem, 4.4vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.58rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 3px;
+    border: 1px solid var(--border-mid);
+    color: var(--neon-blue);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
 
-  /* ════════════════════════════════════════════════════════════
-     HERO — single GTR. Full-bleed burnout, text overlaid bottom-left.
-     ════════════════════════════════════════════════════════════ */
+  /* ── Hero ─────────────────────────────────────────────────── */
   .hero {
     position: relative;
-    min-height: 92vh;
-    min-height: 92svh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-    background: var(--bg-void);
-    isolation: isolate;
-  }
-  .hero-canvas {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 1.1s ease;
-  }
-  .hero-ready .hero-canvas { opacity: 1; }
-  /* Legibility scrim: dark at bottom + left, clears toward upper-right so the car & city read */
-  .hero-scrim {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background:
-      linear-gradient(to top, var(--bg-void) 1%, rgba(1,1,4,0.74) 20%, rgba(1,1,4,0.30) 46%, rgba(1,1,4,0) 70%),
-      linear-gradient(to right, rgba(1,1,4,0.80) 0%, rgba(1,1,4,0.32) 34%, rgba(1,1,4,0) 64%);
-  }
-  .hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(54px, 8vh, 112px); }
-  .hero-inner { max-width: 640px; }
-  .hero-title { margin: 14px 0 18px; text-shadow: 0 2px 36px rgba(0,0,0,0.55); }
-  .hero-sub {
-    color: var(--text-secondary);
-    font-size: clamp(1.02rem, 1.5vw, 1.22rem);
-    line-height: 1.6;
-    max-width: 44ch;
-    margin-bottom: 30px;
-    text-shadow: 0 1px 20px rgba(0,0,0,0.5);
-  }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .hero-readout {
-    margin-top: 32px;
-    display: flex; flex-wrap: wrap; gap: 8px 22px;
-    font-family: var(--font-display, ui-monospace, monospace);
-    font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--neon-blue); opacity: 0.68;
-  }
-
-  @media (max-width: 760px) {
-    .hero { min-height: 80vh; min-height: 80svh; }
-    .hero-canvas { object-position: 50% 46%; }
-    .hero-scrim {
-      background: linear-gradient(to top, var(--bg-void) 3%, rgba(1,1,4,0.84) 30%, rgba(1,1,4,0.40) 60%, rgba(1,1,4,0) 84%);
-    }
-    .hero-content { padding-bottom: clamp(44px, 7vh, 76px); }
-    .hero-sub { font-size: 1.02rem; }
-    .hero-actions { gap: 12px; }
-    .hero-actions .btn { flex: 1 1 auto; text-align: center; }
-    .hero-readout { gap: 6px 16px; font-size: 0.6rem; }
-  }
-
-  /* Keep the whole burnout visible on portrait / narrow screens.
-     The car art is a fixed 1536x1024 landscape frame. object-fit:cover fills the
-     box and crops the overflow, which on a tall screen lops off the front & rear
-     wheels (you end up seeing only the middle). Below a 7:5 viewport we switch to
-     contain so the entire car scales to fit the width; wider/landscape screens keep
-     the full-bleed cover above. Nudge the object-position % to raise/lower the car. */
-  @media (max-aspect-ratio: 7/5) {
-    .hero-canvas { object-fit: contain; object-position: 50% 30%; }
-  }
-
-  /* ── Scroll-forged burnout: the hero pins, your scroll feeds the fire ── */
-  .hero-pin { height: 260vh; }
-  .hero { position: sticky; top: 0; height: 85vh; min-height: 0; }
-  .hero-ignite {
-    position: absolute; left: 0; right: 0; bottom: 16px; z-index: 2;
-    text-align: center; pointer-events: none;
-    font-family: var(--font-display, ui-monospace, monospace);
-    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--neon-blue); opacity: 0.75; transition: opacity 0.3s ease;
-  }
-  @media (max-width: 760px), (max-aspect-ratio: 7/5) {
-    .hero-pin { height: auto; }
-    .hero { position: relative; height: auto; min-height: 80svh; }
-    .hero-ignite { display: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-pin { height: auto; }
-    .hero { position: relative; height: auto; min-height: 85vh; }
-    .hero-ignite { display: none; }
-  }
-
-  /* ── Scripture band ── */
-  .scripture {
-    position: relative;
-    padding: clamp(70px, 11vw, 140px) var(--pad-x);
-    text-align: center;
-    background:
-      radial-gradient(ellipse 70% 80% at 50% 50%, rgba(144,0,255,0.10) 0%, transparent 70%),
-      var(--bg-void);
+    padding: calc(var(--nav-h) + clamp(28px, 6vw, 80px)) 0 clamp(48px, 7vw, 96px);
     overflow: hidden;
   }
-  .scripture-verse {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: clamp(1.5rem, 3.5vw, 2.9rem);
-    line-height: 1.4;
-    max-width: 18ch;
-    margin: 0 auto 28px;
-    color: var(--text-primary);
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 50% at 78% 42%, rgba(144,0,255,0.16), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(0,212,255,0.08), transparent 70%);
   }
-  .scripture-verse .accent { color: var(--neon-blue); text-shadow: var(--glow-sm); }
-  .scripture-ref {
-    font-family: var(--font-display);
-    font-size: 0.78rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--neon-purple);
-  }
-  .scripture-mark {
-    font-family: var(--font-display);
-    font-size: clamp(6rem, 16vw, 13rem);
-    line-height: 0.6;
-    color: rgba(0,212,255,0.04);
-    position: absolute;
-    top: 8%; left: 50%; transform: translateX(-50%);
-    pointer-events: none; user-select: none;
-  }
-
-  /* ── The Charge (3 pillars) ── */
-  .charge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
-  @media (max-width: 820px) { .charge-grid { grid-template-columns: 1fr; gap: 16px; } }
-  .charge-cell {
-    padding: clamp(28px, 4vw, 48px);
-    border: 1px solid var(--border-faint);
-    background: var(--grad-card-bg);
+  .hero-grid {
     position: relative;
-  }
-  .charge-cell::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 14px; height: 14px;
-    border-top: 1px solid var(--neon-blue);
-    border-left: 1px solid var(--neon-blue);
-    opacity: 0.4;
-  }
-  .charge-not {
-    font-family: var(--font-display);
-    font-size: 0.70rem; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--text-muted); margin-bottom: 12px;
-  }
-  .charge-not s { color: var(--text-muted); opacity: 0.7; }
-  .charge-is {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-    letter-spacing: 0.04em;
-    background: var(--grad-silver);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 12px;
-  }
-  .charge-cell p { color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; }
-
-  /* ── The Arsenal (products) ── */
-  .products-section { background: var(--bg-void); }
-  .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr; } }
-  .product-mission {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.02rem;
-    color: var(--neon-blue);
-    letter-spacing: 0.01em;
-    margin: 2px 0 12px;
-  }
-
-  /* ── Manifesto teaser ── */
-  .about-teaser {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 6vw, 100px);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(36px, 5vw, 80px);
     align-items: center;
   }
-  @media (max-width: 760px) { .about-teaser { grid-template-columns: 1fr; } }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 7.2vw, 4rem);
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    margin: 4px 0 20px;
+  }
+  .hero-title span { display: block; }
+  @media (min-width: 901px) { .hero-title span { white-space: nowrap; } }
+  .hero-sub {
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    color: var(--text-secondary);
+    max-width: 34em;
+    margin-bottom: 26px;
+  }
+  .hero-sub strong { color: var(--text-primary); font-weight: 600; }
+  @media (min-width: 901px) { .hero-title { font-size: clamp(2rem, 3.3vw, 3.1rem); } }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
 
-  /* ═══════════ App icon tiles — fill the squircle, iOS-style ═══════════ */
-  .app-icon-wrap{ border-radius:22%; overflow:hidden; padding:0; aspect-ratio:1/1;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.07), 0 8px 26px rgba(0,0,0,0.5); }
-  .app-icon-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  /* ── Phone illustration (stand-in until real screenshots) ── */
+  .phone { margin: 0 auto; width: 100%; max-width: 300px; }
+  .phone-body {
+    aspect-ratio: 9 / 18.6;
+    border-radius: 40px;
+    padding: 9px;
+    background: linear-gradient(160deg, #1d2436 0%, #0a0c16 60%, #12162a 100%);
+    border: 1px solid rgba(255,255,255,0.09);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.75), 0 0 70px rgba(0,212,255,0.12), inset 0 0 0 1px rgba(0,212,255,0.06);
+  }
+  .phone-screen {
+    position: relative;
+    height: 100%;
+    border-radius: 32px;
+    overflow: hidden;
+    padding: 40px 14px 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    background:
+      radial-gradient(ellipse 90% 40% at 50% 0%, rgba(0,212,255,0.12), transparent 70%),
+      #04050c;
+  }
+  .phone-screen::before {
+    content: ''; position: absolute; top: 11px; left: 50%;
+    width: 84px; height: 22px; transform: translateX(-50%);
+    background: #000; border-radius: 12px;
+  }
+  .pw-kicker { font-family: var(--font-display); font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon-blue); }
+  .pw-date { font-weight: 700; font-size: 1.15rem; line-height: 1.2; }
+  .pw-list { display: flex; flex-direction: column; gap: 7px; }
+  .pw-item {
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 8px;
+    padding: 9px 10px; border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .pw-name { font-weight: 600; font-size: 0.82rem; }
+  .pw-levels { grid-column: 1 / 2; font-size: 0.64rem; color: var(--text-muted); line-height: 1.4; }
+  .pw-state {
+    grid-row: 1 / 3; grid-column: 2;
+    font-family: var(--font-display); font-size: 0.5rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 5px 7px; border-radius: 4px;
+  }
+  .pw-state.is-conquered { background: var(--grad-primary); color: var(--bg-void); }
+  .pw-state.is-held { border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+  .pw-state.is-open { border: 1px dashed rgba(255,255,255,0.2); color: var(--text-muted); }
+  .pw-rule {
+    text-align: center; padding: 8px; border-radius: 8px;
+    font-family: var(--font-display); font-size: 0.56rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-primary); background: rgba(144,0,255,0.14); border: 1px solid rgba(144,0,255,0.35);
+  }
+  .pw-call {
+    margin-top: auto;
+    display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 10px;
+    padding: 11px 12px; border-radius: 14px;
+    background: linear-gradient(160deg, rgba(0,212,255,0.14), rgba(144,0,255,0.12));
+    border: 1px solid var(--border-mid);
+  }
+  .pw-avatar {
+    grid-row: 1 / 3; width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(0,0,0,0.5); border: 1px solid var(--neon-blue); color: var(--neon-blue);
+  }
+  .pw-avatar svg { width: 18px; height: 18px; }
+  .pw-call-who { font-weight: 700; font-size: 0.82rem; line-height: 1.2; }
+  .pw-call-what { font-size: 0.64rem; color: var(--text-secondary); line-height: 1.3; }
+  .pw-call-btns { grid-column: 1 / -1; display: flex; justify-content: space-around; margin-top: 8px; }
+  .pw-btn { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; }
+  .pw-btn svg { width: 16px; height: 16px; }
+  .pw-btn.no { background: #e5484d; }
+  .pw-btn.yes { background: #30a46c; }
+  .phone figcaption { margin-top: 14px; text-align: center; font-size: 0.74rem; color: var(--text-muted); }
 
-  /* ═══════════ Hidden scripture ═══════════ */
-  .wf-has-verse{ cursor:help; }
-  .wf-verse-tip{ position:fixed; z-index:9998; pointer-events:none; max-width:260px; padding:9px 12px;
-    background:rgba(4,6,12,0.97); border:1px solid var(--border-mid, rgba(0,212,255,0.32));
-    box-shadow:0 0 18px rgba(0,212,255,0.18); font-family:var(--font-display, ui-monospace, monospace);
-    font-size:0.72rem; line-height:1.5; color:var(--text-secondary,#9fb6c9);
-    opacity:0; transform:translateY(4px); transition:opacity .18s ease, transform .18s ease; }
-  .wf-verse-tip.show{ opacity:1; transform:translateY(0); }
-  .wf-verse-tip .vref{ display:block; color:var(--neon-blue,#00d4ff); letter-spacing:.12em; font-size:.62rem; margin-bottom:4px; }
-  #wf-whisper{ position:fixed; left:16px; bottom:14px; z-index:50; font-family:var(--font-display, ui-monospace, monospace);
-    font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--neon-blue,#00d4ff);
-    opacity:0; transition:opacity 1.3s ease; pointer-events:none; user-select:none; mix-blend-mode:screen; }
-  @media (max-width:760px){ #wf-whisper{ font-size:.54rem; left:12px; bottom:10px; } }
+  /* ── The struggle ─────────────────────────────────────────── */
+  .loop {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+    margin: 30px 0 28px;
+    font-family: var(--font-display); font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .loop-step { padding: 9px 13px; border: 1px solid var(--border-subtle); border-radius: 999px; color: var(--text-secondary); }
+  .loop-step.again { border-style: dashed; }
+  .loop-arr { color: var(--neon-blue); }
+  .struggle-kicker { font-size: clamp(1.08rem, 2vw, 1.3rem); max-width: 32em; color: var(--text-primary); }
+  .struggle-kicker strong { color: var(--neon-blue); font-weight: 700; }
 
-  /* ═══════════ Boot sequence — THE GRID ═══════════ */
-  #wf-boot{ display:none; }
-  html.wf-booting{ overflow:hidden; }
-  html.wf-booting #wf-boot{ display:flex; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center;
-    overflow:hidden; background:radial-gradient(ellipse 120% 85% at 50% 36%, #03141f 0%, #010a13 46%, #00040a 100%);
-    transition:opacity .6s ease; }
-  html.wf-booting #wf-boot::after{ content:''; position:absolute; left:-60%; right:-60%; bottom:-12%; height:72%; z-index:0;
-    background-image:linear-gradient(rgba(0,212,255,0.20) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.12) 1px, transparent 1px);
-    background-size:48px 48px; transform:perspective(360px) rotateX(64deg); transform-origin:center bottom;
-    -webkit-mask-image:linear-gradient(to top,#000 4%,transparent 72%); mask-image:linear-gradient(to top,#000 4%,transparent 72%);
-    animation:wf-grid 6s linear infinite; opacity:.85; pointer-events:none; }
-  @keyframes wf-grid{ from{ background-position:0 0; } to{ background-position:0 48px; } }
-  #wf-boot.wf-done{ pointer-events:none; animation:wf-bootout .9s ease forwards; }
-  @keyframes wf-bootout{ 0%{ opacity:1; transform:scale(1); filter:brightness(1); }
-    12%{ opacity:1; transform:scale(1.004); filter:brightness(1.65); }
-    32%{ opacity:1; filter:brightness(1); }
-    100%{ opacity:0; transform:scale(1.07); filter:brightness(1); } }
-  #wf-boot.wf-done::before{ content:''; position:absolute; inset:0; z-index:3; pointer-events:none;
-    background:radial-gradient(circle at 50% 45%, rgba(190,243,255,.92), rgba(0,212,255,.22) 42%, transparent 72%);
-    animation:wf-flash .55s ease forwards; }
-  @keyframes wf-flash{ 0%{ opacity:0; } 16%{ opacity:.9; } 100%{ opacity:0; } }
-  .wf-boot-inner{ position:relative; z-index:2; width:min(680px,92vw); padding:0 22px; }
-  #wf-boot-log{ margin:0; font-family:var(--font-display, ui-monospace, monospace); font-size:clamp(.7rem,1.6vw,.92rem);
-    line-height:1.8; color:#7fe9ff; white-space:pre-wrap; min-height:13em;
-    text-shadow:0 0 10px rgba(0,212,255,.6), 0 0 2px rgba(0,212,255,.9); }
-  #wf-boot-log .ok{ color:#00ffc8; }
-  #wf-boot-log .hl{ color:#eafdff; text-shadow:0 0 12px rgba(120,230,255,.95); }
-  #wf-boot-log .hl2{ color:#bff3ff; letter-spacing:.04em; }
-  #wf-boot-log .vs{ color:#9fb6c9; text-shadow:none; }
-  #wf-boot-log .cursor{ color:#eafdff; animation:wf-blink 1s steps(1) infinite; }
-  @keyframes wf-blink{ 50%{ opacity:0; } }
-  .wf-boot-skip{ position:relative; z-index:2; margin-top:22px; font-family:var(--font-display, ui-monospace, monospace); font-size:.58rem;
-    letter-spacing:.22em; text-transform:uppercase; color:#3f6173; }
+  /* ── The idea (The Watch: lighthouse scene) ───────────────── */
+  .watchtower { position: relative; overflow: hidden; min-height: clamp(480px, 66vh, 680px);
+    background: linear-gradient(to bottom, #0a1430 0%, #0c1c34 34%, #0a1426 52%, #060c18 64%, var(--bg-void) 100%);
+    display: flex; align-items: flex-start; }
+  .wt-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .wt-stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .wt-star { position: absolute; background: #cfe9ff; border-radius: 50%; opacity: .5; animation: wt-tw 3s ease-in-out infinite; }
+  @keyframes wt-tw { 0%,100% { opacity: .16; } 50% { opacity: .9; } }
+  .wt-content { position: relative; z-index: 3; width: 100%; padding-top: clamp(56px, 9vh, 104px); padding-bottom: 48px; }
+  .wt-inner { max-width: 560px; }
+  .wt-inner .section-title { margin-bottom: 16px; }
+  .motto { margin-top: 22px; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.15rem, 2.2vw, 1.4rem); color: var(--gold); }
+  .wt-beam { transform-box: view-box; transform-origin: 840px 96px; animation: wt-sweep 7.5s ease-in-out infinite alternate; }
+  @keyframes wt-sweep { 0% { transform: rotate(-11deg); } 100% { transform: rotate(10deg); } }
+  .wt-lantern-glow { transform-box: view-box; transform-origin: 840px 96px; animation: wt-lglow 3.4s ease-in-out infinite; }
+  @keyframes wt-lglow { 0%,100% { opacity: .6; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
+  .wt-lantern-core { animation: wt-lcore 3.4s ease-in-out infinite; }
+  @keyframes wt-lcore { 0%,100% { opacity: .85; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .wt-beam, .wt-lantern-glow, .wt-lantern-core, .wt-star { animation: none !important; } }
+  @media (max-width: 760px) {
+    /* Phones: copy first, then the tower-focused scene below it (watchman-fx.js
+       narrows the viewBox). No overlap at any text length. */
+    .watchtower { min-height: 0; flex-direction: column; }
+    .wt-content { order: 1; padding-top: 56px; padding-bottom: 8px; }
+    .wt-svg { order: 2; position: relative; inset: auto; height: 300px; flex: none; }
+  }
 
-  /* ═══════════ The Watch (lighthouse scene) ═══════════ */
-  .watchtower{ position:relative; overflow:hidden; min-height:clamp(480px,66vh,700px);
-    background:linear-gradient(to bottom, #0a1430 0%, #0c1c34 34%, #0a1426 52%, #060c18 64%, var(--bg-void,#010104) 100%);
-    display:flex; align-items:flex-start; }
-  .wt-svg{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
-  .wt-stars{ position:absolute; inset:0; z-index:1; pointer-events:none; }
-  .wt-star{ position:absolute; background:#cfe9ff; border-radius:50%; opacity:.5; animation:wt-tw 3s ease-in-out infinite; }
-  @keyframes wt-tw{ 0%,100%{opacity:.16;} 50%{opacity:.9;} }
-  .wt-content{ position:relative; z-index:3; width:100%; padding-top:clamp(48px,8vh,92px); }
-  .wt-inner{ max-width:560px; }
-  .watchtower .section-title{ margin:12px 0 16px; }
-  .wt-beam{ transform-box:view-box; transform-origin:840px 96px; animation:wt-sweep 7.5s ease-in-out infinite alternate; }
-  @keyframes wt-sweep{ 0%{ transform:rotate(-11deg);} 100%{ transform:rotate(10deg);} }
-  .wt-lantern-glow{ transform-box:view-box; transform-origin:840px 96px; animation:wt-lglow 3.4s ease-in-out infinite; }
-  @keyframes wt-lglow{ 0%,100%{ opacity:.6; transform:scale(.94);} 50%{ opacity:1; transform:scale(1.08);} }
-  .wt-lantern-core{ animation:wt-lcore 3.4s ease-in-out infinite; }
-  @keyframes wt-lcore{ 0%,100%{ opacity:.85;} 50%{ opacity:1;} }
-  .wt-ship{ animation:wt-shipb 5s ease-in-out infinite; }
-  @keyframes wt-shipb{ 0%,100%{ opacity:.25;} 50%{ opacity:.7;} }
-  @media (prefers-reduced-motion:reduce){ .wt-beam,.wt-lantern-glow,.wt-lantern-core,.wt-ship,.wt-star{ animation:none !important; } }
+  /* ── One day in the Forge ─────────────────────────────────── */
+  .day { position: relative; max-width: 760px; list-style: none; }
+  .day::before {
+    content: ''; position: absolute; left: 11px; top: 10px; bottom: 26px; width: 1px;
+    background: linear-gradient(var(--neon-blue), var(--neon-purple));
+    opacity: .55;
+  }
+  .day-step { position: relative; padding: 0 0 36px 46px; }
+  .day-step::before {
+    content: ''; position: absolute; left: 4px; top: 4px;
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 2px solid var(--neon-blue); background: var(--bg-primary);
+    box-shadow: var(--glow-sm);
+  }
+  .day-when { font-family: var(--font-display); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon-blue); }
+  .day-step h3 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); margin: 6px 0 8px; }
+  .day-step p { color: var(--text-secondary); max-width: 34em; }
+  .day-step .tag { margin-left: 4px; }
+  .temper { display: flex; align-items: center; gap: 7px; margin-top: 14px; }
+  .temper-pip { width: 10px; height: 10px; border-radius: 50%; background: var(--neon-blue); box-shadow: 0 0 8px rgba(0,212,255,0.7); }
+  .temper-arr { color: var(--text-muted); font-size: 0.9rem; margin: 0 2px; }
+  .temper-armor { width: 30px; height: 30px; color: var(--gold); filter: drop-shadow(0 0 8px rgba(232,197,109,0.6)); }
+  .temper-label { font-family: var(--font-display); font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
 
-  /* Product cards: kill the stray vertical line on hover. The card has
-     BOTH .product-card and .card-corner, which each define ::after — they
-     collide into one misplaced cyan corner whose right border reads as a
-     vertical tick above the icon on hover. Drop ::after (and the brackets)
-     on the cards; the top-line accent + lift + icon glow remain. */
-  .product-card .hud-bracket{ display:none; }
-  .product-card::after{ display:none; }
+  .how-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 1000px) {
+    .how-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 56px; align-items: start; }
+    .how-side { position: sticky; top: calc(var(--nav-h) + 32px); }
+    .how-side .rule-text { font-size: clamp(2rem, 3.4vw, 3.2rem); }
+  }
+  .rule-band {
+    margin-top: 12px;
+    padding: clamp(30px, 5vw, 52px) clamp(20px, 4vw, 48px);
+    border: 1px solid var(--border-mid); border-radius: 8px;
+    background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(0,212,255,0.13), transparent 70%), var(--grad-card-bg);
+    text-align: center;
+  }
+  .rule-kicker { font-family: var(--font-display); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--neon-blue); }
+  .rule-text {
+    margin: 10px 0 0;
+    font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+    font-size: clamp(2rem, 8vw, 4.2rem); line-height: 1.04; letter-spacing: 0.02em;
+  }
+  .rule-sub { color: var(--text-secondary); max-width: 34em; margin: 16px auto 0; }
+  .adhd-line { margin: 28px auto 0; max-width: 40em; text-align: center; color: var(--text-secondary); }
+  .adhd-line strong { color: var(--text-primary); }
 
-  /* ═══════════ The Gallery teaser ═══════════
-     Each tile carries its own --tile-rgb (the piece's colorway register)
-     so the hover glow matches the light in the artwork. Full grid lives
-     in gallery.html. */
-  .gal-teaser-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  @media (max-width: 900px) { .gal-teaser-grid { grid-template-columns: 1fr; } }
-  .gal-teaser-tile { position: relative; display: block; border: 1px solid var(--border-faint);
-    border-radius: 12px; overflow: hidden; background: #05050b;
-    transition: border-color .24s ease, transform .24s ease, box-shadow .24s ease; }
-  .gal-teaser-tile:hover { border-color: rgba(var(--tile-rgb), 0.55); transform: translateY(-5px);
-    box-shadow: 0 20px 54px rgba(0,0,0,0.55), 0 0 44px rgba(var(--tile-rgb), 0.14); }
-  .gal-teaser-tile img { display: block; width: 100%; height: auto; aspect-ratio: 4/5;
-    object-fit: contain; background: #05050b; }
-  .gal-teaser-meta { padding: 14px 16px 16px; border-top: 1px solid var(--border-faint); }
-  .gal-teaser-name { font-family: var(--font-heading); font-weight: 600; font-size: 1.06rem;
-    line-height: 1.2; margin: 0 0 6px; color: var(--text-primary); }
-  .gal-teaser-ref { font-family: var(--font-display); font-size: 0.6rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: rgb(var(--tile-rgb)); }
-  .gal-teaser-actions { display: flex; justify-content: center; margin-top: 40px; }
+  /* ── The rest of your life ────────────────────────────────── */
+  .more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+  .more-card {
+    padding: 22px 20px; border: 1px solid var(--border-faint); border-radius: 8px;
+    background: var(--grad-card-bg);
+  }
+  .more-card svg { width: 26px; height: 26px; color: var(--neon-blue); margin-bottom: 14px; }
+  .more-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+  .more-card p { color: var(--text-secondary); font-size: 0.95rem; }
+  @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } }
 
-  /* ═══════════ Enlist — email capture ═══════════ */
-  .enlist-form{ max-width:540px; margin:6px auto 0; }
-  .enlist-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-  .enlist-input{ flex:1 1 290px; min-width:0; padding:15px 18px; border-radius:12px; color:var(--text-primary,#e8f1f8);
-    background:rgba(0,0,0,.42); border:1px solid var(--border-mid,#22303c);
-    font-family:var(--font-display, ui-monospace, monospace); font-size:1rem; letter-spacing:.02em; transition:border-color .2s, box-shadow .2s; }
-  .enlist-input::placeholder{ color:var(--text-muted,#5a6b7a); }
-  .enlist-input:focus{ outline:none; border-color:var(--neon-blue,#00d4ff); box-shadow:0 0 0 3px rgba(0,212,255,.16); }
-  .enlist-input.invalid{ border-color:#ff5a78; box-shadow:0 0 0 3px rgba(255,90,120,.15); }
-  .enlist-submit{ flex:0 0 auto; }
-  .enlist-note{ margin:14px 0 0; font-size:.76rem; color:var(--text-muted,#5a6b7a); text-align:center; letter-spacing:.01em; cursor:help; }
-  .enlist-status{ margin:12px 0 0; min-height:1.1em; text-align:center; opacity:0; transition:opacity .25s;
-    font-family:var(--font-display, ui-monospace, monospace); font-size:.84rem; letter-spacing:.02em; }
-  .enlist-status.show{ opacity:1; }
-  .enlist-status.ok{ color:var(--neon-blue,#00d4ff); }
-  .enlist-status.err{ color:#ff6b86; }
-  .enlist-alt{ margin:18px 0 0; text-align:center; font-size:.82rem; color:var(--text-muted,#5a6b7a); }
-  .enlist-alt a{ color:var(--text-secondary,#9fb6c9); }
-  .enlist-done{ display:none; }
-  .enlist-form.done{ display:none; }
-  .enlist-form.done ~ .enlist-done{ display:block; }
-  @media (max-width:600px){ .enlist-row{ flex-direction:column; } .enlist-input{ flex:0 0 auto; width:100%; } .enlist-submit{ width:100%; } }
+  /* ── The Order ────────────────────────────────────────────── */
+  .knights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .knight {
+    padding: 28px 24px;
+    border: 1px solid var(--border-subtle); border-radius: 6px;
+    background: var(--grad-card-bg);
+  }
+  .knight-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: grid; place-items: center; margin-bottom: 18px;
+    border: 1px solid var(--border-mid); color: var(--neon-blue);
+    background: radial-gradient(circle, rgba(0,212,255,0.12), transparent 70%);
+  }
+  .knight-icon svg { width: 24px; height: 24px; }
+  .knight-rank { font-family: var(--font-display); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  .knight-rank b { color: var(--neon-blue); font-weight: 700; }
+  .knight h3 { font-family: var(--font-display); font-size: 1.12rem; letter-spacing: 0.06em; text-transform: uppercase; margin: 6px 0 10px; }
+  .knight p:last-child { color: var(--text-secondary); }
+  .order-more { margin-top: 24px; color: var(--text-secondary); }
+  @media (max-width: 900px) { .knights { grid-template-columns: 1fr; } }
+
+  /* ── Privacy ──────────────────────────────────────────────── */
+  .privacy-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+  .vows { display: grid; gap: 14px; }
+  .vow { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; padding: 18px 18px; border: 1px solid var(--border-faint); border-radius: 8px; background: rgba(255,255,255,0.015); }
+  .vow svg { grid-row: 1 / 3; width: 22px; height: 22px; color: var(--neon-blue); margin-top: 2px; }
+  .vow h3 { font-size: 1.05rem; }
+  .vow p { color: var(--text-secondary); font-size: 0.95rem; }
+  .vow a { text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 900px) { .privacy-grid { grid-template-columns: 1fr; } }
+
+  /* ── Founder ──────────────────────────────────────────────── */
+  .founder-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .founder-photo {
+    aspect-ratio: 4 / 5; border-radius: 8px;
+    display: grid; place-items: center; text-align: center; padding: 20px;
+    border: 1px dashed rgba(255,204,102,0.5); background: rgba(255,204,102,0.04);
+    color: #ffcc66; font-family: var(--font-display); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .founder-copy > * + * { margin-top: 16px; }
+  .founder-copy .story { color: var(--text-secondary); font-size: 1.05rem; }
+  .founder-copy h2 .ph { display: inline-block; }
+  /* [FOUNDER TO WRITE] placeholders are loud on purpose so none can ship unnoticed. */
+  .ph { color: #ffcc66 !important; background: rgba(255,204,102,0.06); border: 1px dashed rgba(255,204,102,0.45); border-radius: 4px; padding: 6px 10px; }
+  .watchlog { padding: 18px 18px 8px; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--grad-card-bg); }
+  .watchlog-title { font-family: var(--font-display); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon-blue); margin-bottom: 10px; }
+  .watchlog li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding: 10px 0; border-top: 1px solid var(--border-faint); }
+  .watchlog-day { font-family: var(--font-display); font-size: 0.66rem; letter-spacing: 0.12em; color: var(--text-muted); min-width: 64px; }
+  .tag.missed { color: #ff8aa0; border-color: rgba(255,138,160,0.5); }
+  .tag.conquered { background: var(--grad-primary); color: var(--bg-void); border-color: transparent; }
+  .founder-sign { font-family: var(--font-serif); font-style: italic; font-size: 1.2rem; }
+  @media (max-width: 760px) {
+    .founder-grid { grid-template-columns: 1fr; }
+    .founder-photo { max-width: 280px; }
+  }
+
+  /* ── FAQ ──────────────────────────────────────────────────── */
+  .faq { max-width: 780px; }
+  .faq details { border-bottom: 1px solid var(--border-subtle); }
+  .faq details:first-child { border-top: 1px solid var(--border-subtle); }
+  .faq summary {
+    list-style: none; cursor: pointer; position: relative;
+    padding: 20px 40px 20px 0; font-weight: 600; font-size: 1.08rem;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: '+'; position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    font-family: var(--font-display); font-size: 1.3rem; color: var(--neon-blue);
+  }
+  .faq details[open] summary::after { content: '\2212'; }
+  .faq summary:hover { color: var(--neon-blue); }
+  .faq details p { padding: 0 0 22px; color: var(--text-secondary); max-width: 40em; }
+
+  /* ── Join ─────────────────────────────────────────────────── */
+  .join-box {
+    position: relative;
+    max-width: 760px; margin: 0 auto;
+    padding: clamp(36px, 6vw, 64px) clamp(20px, 5vw, 56px);
+    border: 1px solid var(--border-subtle); border-radius: 6px;
+    background: radial-gradient(ellipse 70% 80% at 50% 0%, rgba(144,0,255,0.12), transparent 70%), var(--grad-card-bg);
+    text-align: center;
+  }
+  .join-box .section-sub { margin: 16px auto 28px; }
+  .join-box .wl-form, .join-box .wl-done { margin: 0 auto; text-align: left; }
+  .join-box .wl-fine { text-align: center; }
 </style>
-<script>
-(function(){try{
-  if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
-  window.addEventListener('load',function(){ try{ window.scrollTo(0,0); }catch(e){} });
-  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  if(sessionStorage.getItem('wf_booted'))return;
-  document.documentElement.classList.add('wf-booting');
-  setTimeout(function(){document.documentElement.classList.remove('wf-booting');},9000);
-}catch(e){}})();
-</script>
 </head>
 <body>
-<!-- "My soul waits for the Lord more than watchmen wait for the morning." — Psalm 130:6  ·  you're reading the source. good. the remnant pays attention. -->
+<!-- "Except the LORD keep the city, the watchman waketh but in vain." — Psalm 127:1  ·  you're reading the source. good. a watchman pays attention. -->
 
-<!-- ── Boot sequence (first visit per session; skippable) ───── -->
-<div id="wf-boot" aria-hidden="true">
-  <div class="wf-boot-inner">
-    <div id="wf-boot-log"></div>
-    <div class="wf-boot-skip">▸ press any key or tap to skip</div>
-  </div>
-</div>
-
-<!-- ── Navigation ─────────────────────────────────────────── -->
-<nav id="nav">
+<!-- chrome:nav -->
+<a class="skip-link" href="#main">Skip to content</a>
+<nav id="nav" aria-label="Main">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-      <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="nav-cross">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge home">
+      <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" class="nav-wordmark" width="330" height="96">
     </a>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li class="has-dropdown">
-        <a href="#arsenal">The Arsenal</a>
-        <ul class="nav-dropdown">
-          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-        </ul>
-      </li>
-      <li><a href="/gallery.html">The Gallery</a></li>
-      <li><a href="/about.html">The Manifesto</a></li>
-      <li><a href="/contact.html">Enlist</a></li>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">Gallery</a></li>
     </ul>
     <div class="nav-right">
-      <a href="#enlist" class="btn btn-primary btn-sm">Take the Post</a>
+      <a href="/#join" class="btn btn-primary btn-sm nav-cta">Join<span class="nav-cta-more"> the waitlist</span></a>
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
     </div>
-    <button class="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
-
-<!-- Mobile Nav -->
-<div class="mobile-nav">
-  <a href="/">Home</a>
-  <div class="mobile-nav-section">The Arsenal</div>
-  <a href="/products/veil-os.html">Veil Studio</a>
-  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-  <a href="/products/ai-investment-app.html">Vantage Edge</a>
-  <a href="/gallery.html">The Gallery</a>
-  <a href="/about.html">The Manifesto</a>
-  <a href="/contact.html">Enlist</a>
+<div class="mobile-nav" id="mobile-nav" hidden>
+  <a href="/#how">How it works</a>
+  <a href="/#order">The Order</a>
+  <a href="/#privacy">Privacy</a>
+  <a href="/about">Why Watchman</a>
+  <a href="/gallery">The Gallery</a>
+  <a href="/contact">Contact</a>
+  <a href="/#join" class="btn btn-primary mobile-nav-cta">Join the waitlist</a>
 </div>
+<!-- /chrome:nav -->
 
-<main>
+<main id="main">
 
-  <!-- ── HERO — one GTR, the burnout ──────────────────────── -->
-  <div class="hero-pin">
-<section class="hero">
-    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
-    <div class="hero-scrim"></div>
-    <div class="hero-content">
-      <div class="container">
-        <div class="hero-inner">
-          <div class="eyebrow">A remnant is rising · Ezekiel 33:6</div>
-          <h1 class="display-xl hero-title glitch-text">
-            Forged in Faith.<br>
-            <span class="text-silver">Built for the Future.</span>
-          </h1>
-          <p class="hero-sub">
-            Not a company — a remnant. Every tool we forge is a trumpet; every product, a weapon for the watch.
-          </p>
-          <div class="hero-actions">
-            <a href="#enlist" class="btn btn-primary btn-lg">Take the Post →</a>
-            <a href="#arsenal" class="btn btn-outline btn-lg">See the Arsenal</a>
-          </div>
-          <div class="hero-readout">
-            <span>// SYS:WATCHMAN_FORGE_OS</span>
-            <span>// STATUS:ACTIVE</span>
-            <span>// EZK 33:6 · NODE:ALPHA</span>
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Early access &middot; Android</p>
+        <h1 id="hero-title" class="hero-title"><span class="text-silver">Stop starting.</span> <span class="text-gradient">Start finishing.</span></h1>
+        <p class="hero-sub">Watchman Forge is a daily accountability app for people with a day job and a pile of unfinished side projects. A short list, a phone call, and one rule: <strong>never miss twice.</strong></p>
+        <div class="wl">
+          <form class="wl-form" data-waitlist action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" novalidate>
+            <input type="hidden" name="embed" value="1">
+            <label class="sr-only" for="wl-email-hero">Email address</label>
+            <div class="wl-row">
+              <input class="wl-input" id="wl-email-hero" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com">
+              <button class="btn btn-primary wl-submit" type="submit">Join the waitlist</button>
+            </div>
+            <p class="wl-status" aria-live="polite"></p>
+            <p class="wl-fine">The Watch is free. Forever. No spam, and we never sell your email.</p>
+          </form>
+          <div class="wl-done" role="status" hidden>
+            <p class="wl-done-title">Almost there</p>
+            <p>Check your inbox and tap the confirmation link. Then you&rsquo;re on the list.</p>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hero-ignite" aria-hidden="true">&#9656; scroll to ignite</div>
-  </section>
-</div>
 
-  <!-- ── Scripture band ──────────────────────────────────────── -->
-  <section class="scripture">
-    <div class="scripture-mark">&ldquo;</div>
-    <p class="scripture-verse">
-      But if the watchman sees the sword coming and does <span class="accent">not blow the trumpet</span>&hellip; I will hold the watchman accountable.
-    </p>
-    <div class="scripture-ref">Ezekiel 33:6</div>
+      <div class="hero-visual">
+        <figure class="phone">
+          <div class="phone-body" role="img" aria-label="Illustration of the app: today's Daily Watch with one item Conquered, one Held and one still open, the never-miss-twice rule, and an incoming check-in call from the Scribe.">
+            <div class="phone-screen" aria-hidden="true">
+              <div>
+                <p class="pw-kicker">The Daily Watch</p>
+                <p class="pw-date">Tuesday</p>
+              </div>
+              <ul class="pw-list">
+                <li class="pw-item">
+                  <span class="pw-name">Side project</span>
+                  <span class="pw-levels">Held: open the file &middot; Conquered: ship one feature</span>
+                  <span class="pw-state is-conquered">Conquered</span>
+                </li>
+                <li class="pw-item">
+                  <span class="pw-name">Write</span>
+                  <span class="pw-levels">Held: one paragraph &middot; Conquered: the chapter</span>
+                  <span class="pw-state is-held">Held</span>
+                </li>
+                <li class="pw-item">
+                  <span class="pw-name">Move</span>
+                  <span class="pw-levels">Held: 5-minute walk &middot; Conquered: 30 minutes</span>
+                  <span class="pw-state is-open">Open</span>
+                </li>
+              </ul>
+              <p class="pw-rule">Never miss twice</p>
+              <div class="pw-call">
+                <span class="pw-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3c-7 1-12 6-13 13l-1 5"/><path d="M20 3c0 7-5 12-12 13"/><path d="M8 16l5-5"/></svg></span>
+                <span class="pw-call-who">The Scribe</span>
+                <span class="pw-call-what">Calling for your check-in &middot; 8:00 PM</span>
+                <span class="pw-call-btns">
+                  <span class="pw-btn no"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+                  <span class="pw-btn yes"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Illustration. Real app screens coming soon.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <div class="tech-bar"></div>
 
-  <!-- ── The Charge (mission first) ─────────────────────────── -->
-  <section class="section">
+  <!-- ── THE STRUGGLE ─────────────────────────────────────────── -->
+  <section class="section bg-void" aria-labelledby="struggle-title">
     <div class="container">
-      <div class="section-header">
-        <div class="eyebrow reveal">The Charge</div>
-        <h2 class="section-title reveal reveal-delay-1">You Are Not a Customer.<br>You Are Called.</h2>
-        <p class="section-sub reveal reveal-delay-2">When you stand with Watchman Forge — carry the mark, wield the tools, sound the trumpet — you don't buy a product. You accept a post. You become a Watchman.</p>
-      </div>
-      <div class="charge-grid">
-        <div class="charge-cell reveal">
-          <div class="charge-not">This is not <s>a company</s></div>
-          <div class="charge-is">A Movement</div>
-          <p>A people awakened. Romans 13:11 — "The hour has already come for you to wake up from your slumber." We are not building a brand. We are gathering the awake.</p>
-        </div>
-        <div class="charge-cell reveal reveal-delay-1">
-          <div class="charge-not">This is not <s>a purchase</s></div>
-          <div class="charge-is">An Enlistment</div>
-          <p>Habakkuk 2:1 — "I will stand at my watch and station myself on the ramparts." To join is to take up the watch. The post is real. The accountability is yours.</p>
-        </div>
-        <div class="charge-cell reveal reveal-delay-2">
-          <div class="charge-not">This is not <s>a logo</s></div>
-          <div class="charge-is">An Identity</div>
-          <p>Isaiah 62:6 — "I have posted watchmen on your walls, Jerusalem." You do not wear a name. You answer to one. You become what you were made to be.</p>
-        </div>
-      </div>
+      <p class="eyebrow reveal">Sound familiar?</p>
+      <h2 id="struggle-title" class="statement reveal reveal-delay-1">The job gets your best hours.<br><span class="text-gradient">The dream gets what&rsquo;s left.</span></h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin-top:18px;">You start strong on Sunday. By Wednesday the job has eaten the week, the project has gone quiet, and you&rsquo;re already eyeing a new one.</p>
+      <p class="loop reveal reveal-delay-2" aria-label="Start, stall, feel bad, start something new, and around again.">
+        <span class="loop-step" aria-hidden="true">Start</span><span class="loop-arr" aria-hidden="true">&rarr;</span>
+        <span class="loop-step" aria-hidden="true">Stall</span><span class="loop-arr" aria-hidden="true">&rarr;</span>
+        <span class="loop-step" aria-hidden="true">Feel bad</span><span class="loop-arr" aria-hidden="true">&rarr;</span>
+        <span class="loop-step again" aria-hidden="true">Start something new &#8635;</span>
+      </p>
+      <p class="struggle-kicker reveal reveal-delay-3">That&rsquo;s not a character flaw. It&rsquo;s a loop. <strong>The Forge is built to break it.</strong></p>
     </div>
   </section>
 
-  <div class="tech-bar"></div>
-
-  <!-- ── The Arsenal (products) ─────────────────────────────── -->
-  <section class="section products-section" id="arsenal">
-    <div class="container">
-      <div class="section-header">
-        <div class="eyebrow reveal">The Arsenal</div>
-        <h2 class="section-title reveal reveal-delay-1">Tools Forged for the Watch</h2>
-        <p class="section-sub reveal reveal-delay-2">Four instruments, one mission — equip the Watchman to see clearly, move surely, and sound the trumpet at scale.</p>
-      </div>
-      <div class="products-grid">
-
-        <div class="product-card card-corner hud-frame reveal">
-          <div class="hud-bracket hud-bracket-tl"></div>
-          <div class="hud-bracket hud-bracket-tr"></div>
-          <div class="cs-badge">Coming Soon</div>
-          <div class="app-icon-wrap"><img src="/assets/images/veil-logo.png" alt="Veil Studio"></div>
-          <div class="product-card-name">Veil Studio</div>
-          <div class="product-mission">&ldquo;Sound the trumpet at scale.&rdquo;</div>
-          <p class="product-card-desc">An AI-driven media engine that turns conviction into content — generate visuals, synthesize video, and produce voice at professional quality, so the message reaches the wall faster than the sword.</p>
-          <div class="product-card-footer">
-            <a href="/products/veil-os.html" class="btn btn-outline btn-sm">Learn More →</a>
-            <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Web</span>
-          </div>
-        </div>
-
-        <div class="product-card card-corner hud-frame reveal reveal-delay-1">
-          <div class="hud-bracket hud-bracket-tl"></div>
-          <div class="hud-bracket hud-bracket-tr"></div>
-          <div class="cs-badge">Coming Soon</div>
-          <div class="app-icon-wrap"><img src="/assets/images/pathfinder-logo.png" alt="Pathfinder: The Grid"></div>
-          <div class="product-card-name">Pathfinder: The Grid</div>
-          <div class="product-mission">&ldquo;Know the territory.&rdquo;</div>
-          <p class="product-card-desc">A next-generation navigation and exploration app that turns every journey into a mission — gamified waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it.</p>
-          <div class="product-card-footer">
-            <a href="/products/pathfinder.html" class="btn btn-outline btn-sm">Learn More →</a>
-            <span style="font-size:0.72rem;color:var(--text-muted);">iOS</span>
-          </div>
-        </div>
-
-        <div class="product-card card-corner hud-frame reveal reveal-delay-2">
-          <div class="hud-bracket hud-bracket-tl"></div>
-          <div class="hud-bracket hud-bracket-tr"></div>
-          <div class="cs-badge">Coming Soon</div>
-          <div class="app-icon-wrap"><img src="/assets/images/chromaforge-logo.png" alt="ChromaForge"></div>
-          <div class="product-card-name">ChromaForge</div>
-          <div class="product-mission">&ldquo;Light up the darkness.&rdquo;</div>
-          <p class="product-card-desc">The universal Bluetooth LED controller — command multi-brand lighting from a single iOS app with 16M colors, custom sequences, and scene programming. Because the Watchman doesn't curse the dark. He floods it with light.</p>
-          <div class="product-card-footer">
-            <a href="/products/unified-bt-led-controller.html" class="btn btn-outline btn-sm">Learn More →</a>
-            <span style="font-size:0.72rem;color:var(--text-muted);">iOS · Hardware</span>
-          </div>
-        </div>
-
-        <div class="product-card card-corner hud-frame reveal reveal-delay-3">
-          <div class="hud-bracket hud-bracket-tl"></div>
-          <div class="hud-bracket hud-bracket-tr"></div>
-          <div class="cs-badge">Coming Soon</div>
-          <div class="app-icon-wrap" style="background:linear-gradient(145deg,rgba(18,8,30,0.98),rgba(8,4,18,0.98));"><img src="/assets/images/vantage-sword.png" alt="Vantage Edge"></div>
-          <div class="product-card-name">Vantage Edge</div>
-          <div class="product-mission">&ldquo;See what others can&rsquo;t.&rdquo;</div>
-          <p class="product-card-desc">An AI-powered financial co-pilot — portfolio analysis, real-time market signals, and risk modeling that gives the Watchman the high ground over his resources. Stewardship, sharpened.</p>
-          <div class="product-card-footer">
-            <a href="/products/ai-investment-app.html" class="btn btn-outline btn-sm">Learn More →</a>
-            <span style="font-size:0.72rem;color:var(--text-muted);">iOS</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="tech-bar"></div>
-
-  <!-- ── The Watch ──────────────────────────────────────────── -->
-  <section class="watchtower" id="the-watch" aria-label="The Watch">
+  <!-- ── THE IDEA ─────────────────────────────────────────────── -->
+  <section class="watchtower" id="idea" aria-labelledby="idea-title">
     <svg class="wt-svg" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <linearGradient id="wtSkyB" x1="0" y1="0" x2="0" y2="1">
@@ -628,189 +544,292 @@
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
       <div class="wt-inner">
-        <div class="eyebrow reveal">The Watch</div>
-        <h2 class="section-title reveal reveal-delay-1">We Hold the Light<br>Till Morning Comes.</h2>
-        <p class="section-sub reveal reveal-delay-2" data-vref="PS 130:6">The watch was never about watching you. It's about watching <em>for</em> you — a fixed light on the rocks, holding steady through the dark so the ones still out there can find their way home. And the morning always comes.</p>
+        <p class="eyebrow reveal">The idea</p>
+        <h2 id="idea-title" class="section-title reveal reveal-delay-1">Be your own watchman.</h2>
+        <p class="section-sub reveal reveal-delay-2">A watchman stands on the wall and keeps an eye on what matters. Here, the one you&rsquo;re watching is you. The Forge is where you get shaped, one day at a time.</p>
+        <p class="motto reveal reveal-delay-3" data-vref="HAB 2:1">Keep watch. Forge yourself. Finish the work.</p>
       </div>
     </div>
   </section>
 
   <div class="tech-bar"></div>
 
-  <!-- ── The Gallery teaser ─────────────────────────────────── -->
-  <section class="section" id="gallery-teaser">
+  <!-- ── HOW A DAY WORKS ──────────────────────────────────────── -->
+  <section class="section" id="how" aria-labelledby="how-title">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow reveal">The Gallery</div>
-        <h2 class="section-title reveal reveal-delay-1">Collection 01:<br>Illuminated Engravings</h2>
-        <p class="section-sub reveal reveal-delay-2">Fifteen prints pulled out of the public domain &mdash; Dor&eacute;, D&uuml;rer &mdash; washed down to ash and bone, then lit from a single source. The display line is ours. The scripture is verbatim King James, and it is cited.</p>
+        <p class="eyebrow reveal">How it works</p>
+        <h2 id="how-title" class="section-title reveal reveal-delay-1">One day in the Forge</h2>
+        <p class="section-sub reveal reveal-delay-2">A few minutes, spread across the day. Built for the tired days too.</p>
       </div>
-      <div class="gal-teaser-grid">
 
-        <a class="gal-teaser-tile card-corner reveal" href="/gallery/he-keeps-the-gate.html" style="--tile-rgb:37,211,216;">
-          <img src="/assets/gallery/he-keeps-the-gate-600.webp" width="600" height="849" loading="lazy" decoding="async" alt="He Keeps the Gate — dark gothic Christian wall art, signal colorway, with Psalm 121:8 KJV">
-          <div class="gal-teaser-meta">
-            <h3 class="gal-teaser-name">He Keeps the Gate</h3>
-            <div class="gal-teaser-ref">Psalm 121:8&nbsp;&middot;&nbsp;Signal</div>
+      <div class="how-grid">
+      <ol class="day">
+        <li class="day-step reveal">
+          <span class="day-when">Morning</span>
+          <h3>Pick today&rsquo;s watch</h3>
+          <p>A short list of what matters today. Not your whole life. Just today.</p>
+        </li>
+        <li class="day-step reveal">
+          <span class="day-when">During the day</span>
+          <h3>Held or Conquered</h3>
+          <p>Every item has a minimum and a full version. Do the minimum and it&rsquo;s <strong>Held</strong>. Do the whole thing and it&rsquo;s <strong>Conquered</strong>. Both count.</p>
+        </li>
+        <li class="day-step reveal">
+          <span class="day-when">At the time you pick</span>
+          <h3>Your phone rings</h3>
+          <p>The Scribe calls and runs your check-in by voice. You just answer and talk. <span class="tag">Free</span> <span class="tag">Android</span></p>
+        </li>
+        <li class="day-step reveal" data-vref="PS 130:6">
+          <span class="day-when">Evening</span>
+          <h3>The nightly replay</h3>
+          <p>Look back at the day as a spectator watching the player, not a judge handing down a sentence.</p>
+        </li>
+        <li class="day-step reveal" data-vref="EPH 6:11">
+          <span class="day-when">Over the weeks</span>
+          <h3>Habits become armor</h3>
+          <p>Hold a habit five times and it&rsquo;s tempered into a piece of armor in your Armory. Slip, and it dulls, but it&rsquo;s never deleted. Three holds re-temper it.</p>
+          <div class="temper" aria-hidden="true">
+            <span class="temper-pip"></span><span class="temper-pip"></span><span class="temper-pip"></span><span class="temper-pip"></span><span class="temper-pip"></span>
+            <span class="temper-arr">&rarr;</span>
+            <svg class="temper-armor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M12 6v12M8 10h8"/></svg>
+            <span class="temper-label">Tempered</span>
           </div>
-        </a>
+        </li>
+      </ol>
 
-        <a class="gal-teaser-tile card-corner reveal reveal-delay-1" href="/gallery/stand-therefore.html" style="--tile-rgb:242,118,47;">
-          <img src="/assets/gallery/stand-therefore-600.webp" width="600" height="770" loading="lazy" decoding="async" alt="Stand Therefore — dark gothic Christian wall art, ember colorway, with Ephesians 6:11 KJV">
-          <div class="gal-teaser-meta">
-            <h3 class="gal-teaser-name">Stand Therefore</h3>
-            <div class="gal-teaser-ref">Ephesians 6:11&nbsp;&middot;&nbsp;Ember</div>
-          </div>
-        </a>
-
-        <a class="gal-teaser-tile card-corner reveal reveal-delay-2" href="/gallery/struck-in-the-night.html" style="--tile-rgb:242,118,47;">
-          <img src="/assets/gallery/struck-in-the-night-600.webp" width="600" height="749" loading="lazy" decoding="async" alt="Struck in the Night — dark gothic Christian wall art, ember colorway, with Isaiah 37:36 KJV">
-          <div class="gal-teaser-meta">
-            <h3 class="gal-teaser-name">Struck in the Night</h3>
-            <div class="gal-teaser-ref">Isaiah 37:36&nbsp;&middot;&nbsp;Ember</div>
-          </div>
-        </a>
-
+      <div class="how-side">
+      <div class="rule-band reveal" data-vref="PROV 24:16">
+        <p class="rule-kicker">The one rule</p>
+        <p class="rule-text text-silver">Never miss<br>twice.</p>
+        <p class="rule-sub">Missing a day happens. Missing two is how projects quietly die. The whole app is built around that one line.</p>
       </div>
-      <div class="gal-teaser-actions reveal reveal-delay-3">
-        <a href="/gallery.html" class="btn btn-outline btn-lg">See All 15 Pieces &rarr;</a>
+      <p class="adhd-line reveal"><strong>ADHD-friendly by design, not by label.</strong> Short lists. A real call instead of one more notification. Room to slip without losing everything.</p>
       </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE REST OF YOUR LIFE ────────────────────────────────── -->
+  <section class="section bg-void" aria-labelledby="more-title">
+    <div class="container">
+      <p class="eyebrow reveal">Also in the Forge</p>
+      <h2 id="more-title" class="statement reveal reveal-delay-1">It keeps the rest of your life, too.</h2>
+      <ul class="more-grid">
+        <li class="more-card reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8v3H8z"/><path d="M7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9l1-3z"/><path d="M9 12h6v5H9z"/></svg>
+          <h3>The Pantry</h3>
+          <p>Your food, with photos of the labels.</p>
+        </li>
+        <li class="more-card reveal reveal-delay-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M9 13v8"/><path d="M17 21V3c-2 1-3 4-3 7s1 3 3 3"/></svg>
+          <h3>Restaurants</h3>
+          <p>Your list of places to eat, kept in one spot.</p>
+        </li>
+        <li class="more-card reveal reveal-delay-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M3 12h18M5 4v8M9 6v6M13 4v8M17 7l3 5M5 14v6M10 14v6M15 15l3 5"/></svg>
+          <h3>Shelves</h3>
+          <p>Films, fragrances, collectibles and places to go.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
   <div class="tech-bar"></div>
 
-  <!-- ── Who We Are ─────────────────────────────────────────── -->
-  <section class="section">
+  <!-- ── THE ORDER ────────────────────────────────────────────── -->
+  <section class="section" id="order" aria-labelledby="order-title">
     <div class="container">
-      <div class="about-teaser">
-        <div class="reveal">
-          <div class="eyebrow">Who We Are</div>
-          <h2 class="section-title" style="margin-bottom:20px;background:var(--grad-silver);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">The Work<br>Is the Watch.</h2>
-          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">Watchman Forge builds technology for a people with a purpose. We are makers and believers who refuse to let the most powerful tools of this age belong only to those who would use them for less. Every line of code is consecrated to a mission older than any of us.</p>
-          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:36px;">We stand at our watch before the King of Kings — Revelation 19:16 — and we forge for the day His name is on every wall. This is the work. This is the watch.</p>
-          <a href="/about.html" class="btn btn-outline">Read the Manifesto →</a>
+      <div class="section-header">
+        <p class="eyebrow reveal">The Order</p>
+        <h2 id="order-title" class="section-title reveal reveal-delay-1">You don&rsquo;t hold the wall alone.</h2>
+        <p class="section-sub reveal reveal-delay-2">The Order is a band of AI knights inside the Forge. They do real work, not just chat.</p>
+      </div>
+      <ul class="knights">
+        <li class="knight hud-frame reveal">
+          <span class="hud-bracket hud-bracket-tl"></span><span class="hud-bracket hud-bracket-br"></span>
+          <div class="knight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3c-7 1-12 6-13 13l-1 5"/><path d="M20 3c0 7-5 12-12 13"/><path d="M8 16l5-5"/></svg></div>
+          <p class="knight-rank">The first knight &middot; <b>Free</b></p>
+          <h3>The Scribe</h3>
+          <p>Calls your phone at the time you set and runs your check-in by voice. On Android.</p>
+        </li>
+        <li class="knight hud-frame reveal reveal-delay-1">
+          <span class="hud-bracket hud-bracket-tl"></span><span class="hud-bracket hud-bracket-br"></span>
+          <div class="knight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7 14h3M14 14h3M7 17h3"/></svg></div>
+          <p class="knight-rank">Knight</p>
+          <h3>The Seneschal</h3>
+          <p>Plans your week, so Monday doesn&rsquo;t ambush you.</p>
+        </li>
+        <li class="knight hud-frame reveal reveal-delay-2">
+          <span class="hud-bracket hud-bracket-tl"></span><span class="hud-bracket hud-bracket-br"></span>
+          <div class="knight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l8-6 8 6v10H4z"/><circle cx="12" cy="13" r="2"/><path d="M12 15v3"/></svg></div>
+          <p class="knight-rank">The vault</p>
+          <h3>The Reliquary</h3>
+          <p>Your encrypted second brain: a place for notes, ideas and the things worth keeping.</p>
+        </li>
+      </ul>
+      <p class="order-more reveal">More knights scout products and help keep the shop, for those who sell.</p>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY ──────────────────────────────────────────────── -->
+  <section class="section bg-void" id="privacy" aria-labelledby="privacy-title">
+    <div class="container privacy-grid">
+      <div>
+        <p class="eyebrow reveal">Privacy</p>
+        <h2 id="privacy-title" class="section-title reveal reveal-delay-1">Your records stay yours.</h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin-top:16px;">An accountability app sees your real days. You deserve a straight answer about where they go.</p>
+      </div>
+      <ul class="vows">
+        <li class="vow reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          <h3>We never sell your data.</h3>
+          <p>Not to advertisers. Not to anyone.</p>
+        </li>
+        <li class="vow reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          <h3>No ads in what you pay for.</h3>
+          <p>Pay for a plan and it&rsquo;s ad-free.</p>
+        </li>
+        <li class="vow reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          <h3>Outside lookups go through the Forge.</h3>
+          <p>When the Forge looks something up for you, the request goes out through us, so the outside service deals with the Forge, not with you.</p>
+        </li>
+        <li class="vow reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+          <h3>This site practices it too.</h3>
+          <p>No cookies, no analytics, no ad pixels. The waitlist never touches Google. <a href="/privacy-policy">Read the plain-words privacy policy</a>.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="tech-bar"></div>
+
+  <!-- ── THE FOUNDER ──────────────────────────────────────────── -->
+  <!-- Every [FOUNDER TO WRITE] below is a placeholder for the founder's own words. Do not ship them. -->
+  <section class="section" id="founder" aria-labelledby="founder-title">
+    <div class="container founder-grid">
+      <div class="founder-photo reveal" data-placeholder>[Founder photo]</div>
+      <div class="founder-copy">
+        <p class="eyebrow reveal">The founder</p>
+        <h2 id="founder-title" class="statement reveal"><span class="ph" data-placeholder>[FOUNDER TO WRITE: headline]</span></h2>
+        <p class="story ph reveal" data-placeholder>[FOUNDER TO WRITE: who you are and what the day job is, in two or three sentences.]</p>
+        <p class="story ph reveal" data-placeholder>[FOUNDER TO WRITE: the projects you started and didn&rsquo;t finish. Real ones. Humor welcome.]</p>
+        <p class="story ph reveal" data-placeholder>[FOUNDER TO WRITE: why you built the Forge, and what changed once you started keeping the watch.]</p>
+        <div class="watchlog reveal">
+          <p class="watchlog-title">From my own Watch</p>
+          <ul>
+            <li><span class="watchlog-day">Day [__]</span><span class="tag missed">Missed</span><span class="ph" data-placeholder>[FOUNDER TO WRITE: what happened]</span></li>
+            <li><span class="watchlog-day">Day [__]</span><span class="tag">Held</span><span class="ph" data-placeholder>[FOUNDER TO WRITE: the minimum that kept it alive]</span></li>
+            <li><span class="watchlog-day">Day [__]</span><span class="tag conquered">Conquered</span><span class="ph" data-placeholder>[FOUNDER TO WRITE: a real win]</span></li>
+          </ul>
         </div>
-        <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
-          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:4px 0 0 0;">
-            <div class="hud-bracket hud-bracket-tl"></div>
-            <div class="stat-number">33:6</div>
-            <div class="stat-label">The Charge</div>
-          </div>
-          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-radius:0 4px 0 0;border-left:none;">
-            <div class="hud-bracket hud-bracket-tr"></div>
-            <div class="stat-number">4</div>
-            <div class="stat-label">Tools Forged</div>
-          </div>
-          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-radius:0 0 0 4px;">
-            <div class="hud-bracket hud-bracket-bl"></div>
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">On the Wall</div>
-          </div>
-          <div class="stat-block hud-frame" style="border:1px solid var(--border-faint);border-top:none;border-left:none;border-radius:0 0 4px 0;">
-            <div class="hud-bracket hud-bracket-br"></div>
-            <div class="stat-number">1</div>
-            <div class="stat-label">King of Kings</div>
-          </div>
-        </div>
+        <p class="founder-sign reveal"><span class="ph" data-placeholder>[FOUNDER NAME]</span></p>
+        <p class="reveal"><a href="/about" class="btn btn-outline">Why the name Watchman? &rarr;</a></p>
       </div>
     </div>
   </section>
 
-  <!-- ── Enlist CTA ─────────────────────────────────────────── -->
-  <section class="cta-section section" id="enlist">
+  <!-- ── FAQ ──────────────────────────────────────────────────── -->
+  <section class="section bg-void" id="faq" aria-labelledby="faq-title">
     <div class="container">
-      <div class="cta-box hud-frame reveal">
-        <div class="hud-bracket hud-bracket-tl"></div>
-        <div class="hud-bracket hud-bracket-tr"></div>
-        <div class="hud-bracket hud-bracket-bl"></div>
-        <div class="hud-bracket hud-bracket-br"></div>
-        <div class="eyebrow" style="justify-content:center;">Join the Forge</div>
-        <h2 class="section-title">The Hour Has Come<br>to Wake From Slumber.</h2>
-        <p class="section-sub">The wall needs watchmen. Leave your email and take your post — we'll sound the trumpet the moment the gates open. No spam, no noise. Just the call when it comes.</p>
-        <form class="enlist-form" id="enlist-form" action="https://script.google.com/macros/s/AKfycbwxXKjZml9-Bq1e2pL7T1mZpD9j8tivUxoMmyac8G9vSsqYnok4y-2qO-Aw7jktUBs_/exec" method="POST" novalidate>
-          <div class="enlist-row">
-            <input class="enlist-input" type="email" name="email" inputmode="email" autocomplete="email" required placeholder="you@watchman.com" aria-label="Email address">
-            <button class="btn btn-primary btn-lg enlist-submit" type="submit">Take the Post →</button>
+      <div class="section-header">
+        <p class="eyebrow reveal">Questions</p>
+        <h2 id="faq-title" class="section-title reveal reveal-delay-1">Straight answers</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>Is it on iPhone?</summary>
+          <p>Not yet. Watchman Forge is Android first. Join the waitlist and we&rsquo;ll tell you when there&rsquo;s news on iPhone.</p>
+        </details>
+        <details>
+          <summary>What does it cost?</summary>
+          <p>The Watch is free. Forever. The Scribe&rsquo;s call is free too. Paid plans come later, and Founding Knights hear about them first.</p>
+        </details>
+        <details>
+          <summary>Is this an ADHD app?</summary>
+          <p>It&rsquo;s an app for finishing what you start. It&rsquo;s ADHD-friendly by design, not by label: short lists, a real call instead of one more notification, and room to slip without losing everything. It isn&rsquo;t a medical product and it doesn&rsquo;t treat anything.</p>
+        </details>
+        <details>
+          <summary>Do you sell my data?</summary>
+          <p>No. Your records stay yours. We don&rsquo;t sell data, and there are no ads in anything you pay for. The <a href="/privacy-policy">privacy policy</a> has the details in plain words.</p>
+        </details>
+        <details>
+          <summary>What&rsquo;s a Founding Knight?</summary>
+          <p>One of the first 100 people to join the waitlist and confirm their email. You get in first, and you hear the founding offer before anyone else.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── JOIN ─────────────────────────────────────────────────── -->
+  <section class="section" id="join" aria-labelledby="join-title">
+    <div class="container">
+      <div class="join-box hud-frame reveal">
+        <span class="hud-bracket hud-bracket-tl"></span><span class="hud-bracket hud-bracket-tr"></span>
+        <span class="hud-bracket hud-bracket-bl"></span><span class="hud-bracket hud-bracket-br"></span>
+        <p class="eyebrow">Founding Knights</p>
+        <h2 id="join-title" class="section-title">Take your post early.</h2>
+        <p class="section-sub">Join the waitlist for early access. The first 100 become Founding Knights: you get in first, and you hear the founding offer before anyone else.</p>
+        <div class="wl">
+          <form class="wl-form" data-waitlist action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" novalidate>
+            <input type="hidden" name="embed" value="1">
+            <label class="sr-only" for="wl-email-join">Email address</label>
+            <div class="wl-row">
+              <input class="wl-input" id="wl-email-join" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com">
+              <button class="btn btn-primary wl-submit" type="submit">Join the waitlist</button>
+            </div>
+            <p class="wl-status" aria-live="polite"></p>
+            <p class="wl-fine">We&rsquo;ll email you when your spot opens, plus the odd note from the forge. Unsubscribe in one click. We never sell or share your email. <a href="/privacy-policy">Privacy policy</a>.</p>
+          </form>
+          <div class="wl-done" role="status" hidden>
+            <p class="wl-done-title">Almost there</p>
+            <p>Check your inbox and tap the confirmation link. Then you&rsquo;re on the list.</p>
           </div>
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
-          <p class="enlist-note" data-vref="EZK 33:6">Ezekiel 33:6 — the watchman who sees the sword coming and sounds the trumpet.</p>
-          <p class="enlist-status" id="enlist-status" role="status" aria-live="polite"></p>
-        </form>
-        <div class="enlist-done" aria-hidden="true">
-          <div class="eyebrow" style="justify-content:center;color:var(--neon-blue);">// POST TAKEN</div>
-          <p class="section-sub" style="margin:10px 0 0;">You're on the wall. Watch your inbox — when the trumpet sounds, you'll be among the first to hear it.</p>
         </div>
-        <p class="enlist-alt">Prefer to reach us directly? <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a></p>
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ── Footer ──────────────────────────────────────────────── -->
+<!-- chrome:footer -->
 <footer id="footer">
   <div class="footer-main">
     <div class="footer-brand">
-      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
-        <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="footer-cross">
+      <a href="/" class="footer-logo" aria-label="Watchman Forge home">
+        <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" width="330" height="96" loading="lazy">
       </a>
-      <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-      <div class="footer-contact">
-        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
-        <span>Forged in Faith. Built for the Future.</span>
-      </div>
+      <p class="footer-motto">Keep watch. Forge yourself. Finish the work.</p>
+      <p>A daily accountability app for people who keep starting things and want to finish them.</p>
+      <a class="footer-email" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
     </div>
-    <div class="footer-col">
-      <h4>The Arsenal</h4>
-      <ul>
-        <li><a href="/products/veil-os.html">Veil Studio</a></li>
-        <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
-        <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
-        <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>The Movement</h4>
-      <ul>
-        <li><a href="/gallery.html">The Gallery</a></li>
-        <li><a href="/about.html">The Manifesto</a></li>
-        <li><a href="/contact.html">Enlist</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="/terms-of-service.html">Terms of Service</a></li>
-      </ul>
-    </div>
+    <div class="footer-col"><h2>The app</h2><ul>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/#join">Join the waitlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>The Forge</h2><ul>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">The Gallery</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>Legal</h2><ul>
+      <li><a href="/privacy-policy">Privacy policy</a></li>
+      <li><a href="/terms-of-service">Terms of service</a></li>
+    </ul></div>
   </div>
-  <hr class="hr-neon">
   <div class="footer-bottom">
-    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-    <div class="footer-bottom-links">
-      <a href="/privacy-policy.html">Privacy</a>
-      <a href="/terms-of-service.html">Terms</a>
-      <a href="/contact.html">Enlist</a>
-    </div>
+    <p>&copy; 2026 Watchman Forge &middot; Forged in Faith. Built for the Future.</p>
+    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" loading="lazy" data-vref="PS 127:1">
   </div>
 </footer>
+<!-- /chrome:footer -->
 
-<script src="/js/main.js?v=v4"></script>
-<script src="/js/watchman-fx.js?v=v2"></script>
-<script src="/js/hero-burnout.js?v=v8"></script>
-<script>
-/* The Watch: desktop sees the full seascape; phones get a tower-focused crop.
-   viewBox is an attribute, not CSS — so it swaps here. */
-(function(){
-  var svg = document.querySelector('.wt-svg');
-  if(!svg) return;
-  var mq = window.matchMedia('(max-width: 760px)');
-  function apply(){ svg.setAttribute('viewBox', mq.matches ? '640 0 560 460' : '0 0 1200 460'); }
-  apply();
-  if (mq.addEventListener) mq.addEventListener('change', apply); else if (mq.addListener) mq.addListener(apply);
-})();
-</script>
+<script src="/js/main.js?v=305321c33f"></script>
+<script src="/js/watchman-fx.js?v=959ecbed26"></script>
 </body>
 </html>

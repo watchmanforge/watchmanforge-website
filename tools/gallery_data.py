@@ -12,7 +12,7 @@ NOTE: gallery.html and gallery/*.html are GENERATED. Hand-edits to them are lost
 on the next build — change the template in build_gallery.py or the copy here.
 """
 
-SITE = "https://watchmanforge.com"
+SITE = "https://www.watchmanforge.com"
 
 # Root of the master artwork vault (Windows-side OneDrive, via WSL).
 MASTER_ROOT = ("/mnt/c/Users/sirdo/OneDrive/Claude/Brain Vault/"

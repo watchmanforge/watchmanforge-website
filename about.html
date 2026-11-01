@@ -1,316 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Manifesto — Watchman Forge</title>
-  <meta name="description" content="The Watchman Forge manifesto. We are not a company — we are a remnant called to stand on the wall and sound the trumpet before the King of Kings returns. Read the calling. Forged in Faith. Built for the Future.">
-  <meta property="og:title" content="The Manifesto — Watchman Forge">
-  <meta property="og:description" content="We are the Watchmen. This is not a company bio. It is a calling. Forged in Faith. Built for the Future.">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://watchmanforge.com/about.html">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css?v=v6">
-  <style>
-    /* Manifesto pull-quote band */
-    .manifesto-band {
-      position: relative;
-      padding: clamp(44px, 6vw, 78px) var(--pad-x);
-      text-align: center;
-      background:
-        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(144,0,255,0.10) 0%, transparent 70%),
-        var(--bg-void);
-    }
-    .manifesto-statement {
-      font-family: var(--font-display);
-      font-weight: 800;
-      /* 16ch forced a 66-char sentence into 5 giant lines that ate the whole
-         viewport. Wider measure + smaller cap = the header and the verse read together. */
-      font-size: clamp(1.45rem, 3.2vw, 2.6rem);
-      line-height: 1.22;
-      letter-spacing: 0.01em;
-      max-width: 28ch;
-      margin: 0 auto;
-      background: var(--grad-text);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .manifesto-statement .plain { -webkit-text-fill-color: var(--text-primary); }
-    .verse-ref {
-      font-family: var(--font-display);
-      font-size: 0.78rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--neon-purple);
-      margin-top: 18px;
-    }
-    /* Manifesto prose verse inline emphasis */
-    .lead-verse {
-      border-left: 2px solid var(--neon-blue);
-      padding: 4px 0 4px 22px;
-      margin: 0 0 26px;
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 1.15rem;
-      line-height: 1.6;
-      color: var(--text-primary);
-    }
-    .lead-verse span { display:block; font-family: var(--font-display); font-size:0.72rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--neon-blue); margin-top:8px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Watchman — Watchman Forge</title>
+<meta name="description" content="Why the app is called Watchman Forge: a watchman on the wall, a forge where things get shaped, and the faith at the root of it all.">
+<meta property="og:title" content="Why Watchman — Watchman Forge">
+<meta property="og:description" content="A watchman on the wall, a forge where things get shaped, and the faith at the root of it all.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.watchmanforge.com/about">
+<meta property="og:site_name" content="Watchman Forge">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Watchman Forge — Stop starting. Start finishing.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why Watchman — Watchman Forge">
+<meta name="twitter:description" content="A watchman on the wall, a forge where things get shaped, and the faith at the root of it all.">
+<meta name="twitter:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
+<meta name="theme-color" content="#010104">
+<link rel="canonical" href="https://www.watchmanforge.com/about">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/webfonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css?v=0a0c75ab78">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  /* ════════════════════════════════════════════════════════════
+     WHY WATCHMAN — the deeper layer. The homepage sells the app;
+     this page says where the name and the faith come from.
+     Scripture is King James, verbatim, as in the Gallery.
+     ════════════════════════════════════════════════════════════ */
+  .bg-void { background: var(--bg-void); }
+  .statement { font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.14; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .prose p:not(.eyebrow) { color: var(--text-secondary); font-size: 1.06rem; line-height: 1.8; max-width: 36em; }
+  .prose p:not(.eyebrow) + p { margin-top: 16px; }
+  .split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+
+  .verse {
+    position: relative;
+    padding: clamp(24px, 4vw, 40px);
+    border: 1px solid var(--border-subtle); border-radius: 6px;
+    background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(144,0,255,0.12), transparent 70%), var(--grad-card-bg);
+  }
+  .verse blockquote p {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .verse cite {
+    display: block; margin-top: 16px; font-style: normal;
+    font-family: var(--font-display); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--neon-violet);
+  }
+  .verses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 36px; }
+  .verses .verse blockquote p { font-size: clamp(1.05rem, 1.6vw, 1.2rem); }
+  @media (max-width: 860px) { .verses { grid-template-columns: 1fr; } }
+
+  .creed { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .creed li { padding: 26px 22px; border: 1px solid var(--border-faint); border-radius: 6px; background: var(--grad-card-bg); }
+  .creed-num { font-family: var(--font-display); font-size: 0.62rem; letter-spacing: 0.2em; color: var(--neon-blue); }
+  .creed h3 { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 10px 0 10px; }
+  .creed p { color: var(--text-secondary); font-size: 0.97rem; }
+  @media (max-width: 960px) { .creed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .creed { grid-template-columns: 1fr; } }
+
+  .close { text-align: center; }
+  .close .statement { margin-bottom: 12px; }
+  .close .section-sub { margin: 0 auto 28px; }
+  .close .wl-form, .close .wl-done { margin: 0 auto; text-align: left; }
+  .close .wl-fine { text-align: center; }
+  .close-link { margin-top: 22px; font-size: 0.95rem; }
+</style>
 </head>
 <body>
+<!-- "I will stand upon my watch, and set me upon the tower." — Habakkuk 2:1 -->
 
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-        <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="nav-cross">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li class="has-dropdown"><a href="/#arsenal">The Arsenal</a>
-          <ul class="nav-dropdown">
-            <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-            <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-            <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-            <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-          </ul>
-        </li>
-        <li><a href="/gallery.html">The Gallery</a></li>
-        <li><a href="/about.html">The Manifesto</a></li>
-        <li><a href="/contact.html">Enlist</a></li>
-      </ul>
-      <div class="nav-right"><a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a></div>
-      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+<!-- chrome:nav -->
+<a class="skip-link" href="#main">Skip to content</a>
+<nav id="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge home">
+      <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" class="nav-wordmark" width="330" height="96">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/#join" class="btn btn-primary btn-sm nav-cta">Join<span class="nav-cta-more"> the waitlist</span></a>
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
     </div>
-  </nav>
-
-  <div class="mobile-nav">
-    <a href="/">Home</a>
-    <div class="mobile-nav-section">The Arsenal</div>
-    <a href="/products/veil-os.html">Veil Studio</a>
-    <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-    <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-    <a href="/products/ai-investment-app.html">Vantage Edge</a>
-    <a href="/gallery.html">The Gallery</a>
-    <a href="/about.html">The Manifesto</a>
-    <a href="/contact.html">Enlist</a>
   </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav" hidden>
+  <a href="/#how">How it works</a>
+  <a href="/#order">The Order</a>
+  <a href="/#privacy">Privacy</a>
+  <a href="/about">Why Watchman</a>
+  <a href="/gallery">The Gallery</a>
+  <a href="/contact">Contact</a>
+  <a href="/#join" class="btn btn-primary mobile-nav-cta">Join the waitlist</a>
+</div>
+<!-- /chrome:nav -->
 
-  <main>
+<main id="main">
 
-    <!-- ── Page Hero ─────────────────────────────────────────── -->
-    <section class="page-hero" style="padding-bottom:60px;">
-      <div class="page-hero-glow" style="background:radial-gradient(circle,rgba(144,0,255,0.10) 0%,transparent 70%);"></div>
-      <div class="page-hero-content">
-        <div class="breadcrumb">
-          <a href="/">Home</a><span class="breadcrumb-sep">/</span><span>The Manifesto</span>
-        </div>
-        <div class="eyebrow" style="margin-bottom:20px;">The Manifesto</div>
-        <h1 class="display-lg" style="margin-bottom:20px;">
-          <span class="text-gradient">We Are the Watchmen</span>
-        </h1>
-        <p style="font-size:clamp(1rem,2.2vw,1.25rem);color:var(--text-secondary);max-width:680px;line-height:1.8;">
-          This is not a company bio. It is a calling. Watchman Forge exists for one reason — to put the sharpest tools of this age into the hands of those willing to stand on the wall and sound the trumpet.
-        </p>
-      </div>
-    </section>
-
-    <!-- ── Manifesto statement band ──────────────────────────── -->
-    <section class="manifesto-band">
-      <p class="manifesto-statement">
-        A watchman who <span class="plain">sees the sword</span> and stays silent has already failed.
-      </p>
-      <div class="verse-ref">Ezekiel 33:6</div>
-    </section>
-
-    <div class="tech-bar" style="height:1px;background:linear-gradient(90deg,transparent,var(--border-mid),var(--neon-blue),var(--border-mid),transparent);box-shadow:0 0 16px rgba(0,212,255,0.25);"></div>
-
-    <!-- ── Why We Forge ───────────────────────────────────────── -->
-    <section class="section" style="background:var(--bg-void);">
-      <div class="container">
-        <div class="about-split">
-          <div class="reveal">
-            <div class="eyebrow">Why We Forge</div>
-            <h2 class="section-title" style="margin-bottom:24px;">Tools Are Not<br>Neutral.</h2>
-            <div class="neon-line"></div>
-            <p class="lead-verse">
-              "Son of man, I have made you a watchman for the people of Israel; so hear the word I speak and give them warning from me."
-              <span>Ezekiel 33:7</span>
-            </p>
-            <p style="color:var(--text-secondary);line-height:1.85;margin-bottom:20px;">
-              The most powerful technology ever created is being built right now — and most of it is aimed at distraction, deception, and the slow theft of human attention. We refuse to let those tools belong only to the people who would use them for less.
-            </p>
-            <p style="color:var(--text-secondary);line-height:1.85;margin-bottom:20px;">
-              Watchman Forge builds the same caliber of technology — AI, hardware, software that competes with anything on earth — and consecrates it to a different end. Every product is a trumpet. Every release is a warning blown over the wall. We are not chasing a market. We are answering a charge.
-            </p>
-            <p style="color:var(--text-secondary);line-height:1.85;">
-              When you stand with us, you are not a customer. You take the post. You become a Watchman.
-            </p>
-          </div>
-          <div class="reveal reveal-delay-2" style="display:flex;flex-direction:column;gap:20px;">
-            <div class="value-card">
-              <div class="product-icon icon-blue" style="width:44px;height:44px;margin-bottom:12px;">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"><path d="M3 17V7l7-4 7 4v10M3 17h14M8 17v-5h4v5"/></svg>
-              </div>
-              <h3>The Wall</h3>
-              <p>"I have posted watchmen on your walls, Jerusalem; they will never be silent day or night." — Isaiah 62:6. We hold the position. We do not abandon the watch.</p>
-            </div>
-            <div class="value-card">
-              <div class="product-icon icon-purple" style="width:44px;height:44px;margin-bottom:12px;">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M2 12c4-1 6-6 12-8 0 6-3 11-9 12l-3-4z"/><path d="M5 16l-2 2"/></svg>
-              </div>
-              <h3>The Trumpet</h3>
-              <p>"I will stand at my watch and station myself on the ramparts." — Habakkuk 2:1. We sound the warning. Our tools carry the message further and faster.</p>
-            </div>
-            <div class="value-card">
-              <div class="product-icon icon-cyan" style="width:44px;height:44px;margin-bottom:12px;">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><path d="M14 16v-1a3 3 0 00-3-3H6a3 3 0 00-3 3v1"/><circle cx="8.5" cy="6" r="3"/><path d="M16 11l2 2 3-3"/></svg>
-              </div>
-              <h3>The Remnant</h3>
-              <p>"The hour has already come for you to wake up from your slumber." — Romans 13:11. We are the awake, gathering the awake. You are not alone on the wall.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── The Watch (recast facts) ──────────────────────────── -->
-    
-
-    <!-- ── The Arsenal ────────────────────────────────────────── -->
-    <section class="section" style="background:var(--bg-void);">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow reveal">The Arsenal</div>
-          <h2 class="section-title reveal reveal-delay-1">Every Tool a Trumpet</h2>
-          <p class="section-sub reveal reveal-delay-2">Four instruments forged for the watch — each one built to professional caliber, each one aimed at the mission.</p>
-        </div>
-        <div class="grid-2">
-          <div class="card reveal" style="display:flex;gap:24px;align-items:flex-start;">
-            <div class="product-icon icon-purple" style="flex-shrink:0;width:64px;height:64px;border-radius:14px;overflow:hidden;border:1px solid rgba(0,212,255,.22);"><img src="/assets/images/veil-logo.png" alt="" width="64" height="64" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-            <div>
-              <div style="font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:#cc88ff;margin-bottom:8px;">Veil Studio — "Sound the trumpet at scale."</div>
-              <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px;">AI media engine for iOS and web. Turn conviction into content — visuals, video, and voice at professional quality, so the message outruns the sword.</p>
-              <a href="/products/veil-os.html" class="btn btn-ghost btn-sm">Learn More →</a>
-            </div>
-          </div>
-          <div class="card reveal reveal-delay-1" style="display:flex;gap:24px;align-items:flex-start;">
-            <div class="product-icon icon-blue" style="flex-shrink:0;width:64px;height:64px;border-radius:14px;overflow:hidden;border:1px solid rgba(0,212,255,.22);"><img src="/assets/images/pathfinder-logo.png" alt="" width="64" height="64" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-            <div>
-              <div style="font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--neon-blue);margin-bottom:8px;">Pathfinder: The Grid — "Know the territory."</div>
-              <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px;">Navigation and exploration for iOS. Waypoints, real-time routing, and offline capability for the Watchman who must know the ground before he walks it.</p>
-              <a href="/products/pathfinder.html" class="btn btn-ghost btn-sm">Learn More →</a>
-            </div>
-          </div>
-          <div class="card reveal" style="display:flex;gap:24px;align-items:flex-start;">
-            <div class="product-icon icon-cyan" style="flex-shrink:0;width:64px;height:64px;border-radius:14px;overflow:hidden;border:1px solid rgba(0,212,255,.22);"><img src="/assets/images/chromaforge-logo.png" alt="" width="64" height="64" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-            <div>
-              <div style="font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:#00ffc8;margin-bottom:8px;">ChromaForge — "Light up the darkness."</div>
-              <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px;">Universal Bluetooth LED control — every brand, one iOS app. The Watchman doesn't curse the dark. He floods it with light.</p>
-              <a href="/products/unified-bt-led-controller.html" class="btn btn-ghost btn-sm">Learn More →</a>
-            </div>
-          </div>
-          <div class="card reveal reveal-delay-1" style="display:flex;gap:24px;align-items:flex-start;">
-            <div class="product-icon icon-pink" style="flex-shrink:0;width:64px;height:64px;border-radius:14px;overflow:hidden;border:1px solid rgba(0,212,255,.22);"><img src="/assets/images/vantage-sword.png" alt="" width="64" height="64" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-            <div>
-              <div style="font-family:var(--font-display);font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;color:#ff66dd;margin-bottom:8px;">Vantage Edge — "See what others can't."</div>
-              <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.65;margin-bottom:12px;">AI financial co-pilot for iOS — portfolio analysis, market signals, and risk modeling. Stewardship, sharpened. Coming 2026.</p>
-              <a href="/products/ai-investment-app.html" class="btn btn-ghost btn-sm">Learn More →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── The Watchman's Creed ──────────────────────────────── -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <div class="eyebrow reveal">The Watchman's Creed</div>
-          <h2 class="section-title reveal reveal-delay-1">What We Stand For</h2>
-        </div>
-        <div class="grid-3">
-          <div class="value-card reveal">
-            <div class="product-icon icon-blue" style="width:48px;height:48px;">
-              <svg viewBox="0 0 20 20" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <h3>Faith First</h3>
-            <p>Every tool is consecrated before it is shipped. We build for the King of Kings — Revelation 19:16 — not for the algorithm and not for applause.</p>
-          </div>
-          <div class="value-card reveal reveal-delay-1">
-            <div class="product-icon icon-purple" style="width:48px;height:48px;">
-              <svg viewBox="0 0 20 20" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M10 2l2 5h5l-4 3 1.5 5L10 13l-4.5 2L7 10 3 7h5L10 2z"/></svg>
-            </div>
-            <h3>Excellence as Worship</h3>
-            <p>Good enough dishonors the calling. We engineer to the highest caliber because the work itself is an offering — every pixel, every byte of firmware.</p>
-          </div>
-          <div class="value-card reveal reveal-delay-2">
-            <div class="product-icon icon-cyan" style="width:48px;height:48px;">
-              <svg viewBox="0 0 20 20" fill="none" stroke="#00ffc8" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
-            </div>
-            <h3>The Hour Is Late</h3>
-            <p>"The hour has already come for you to wake up." — Romans 13:11. We move with urgency. Slumber is not an option when the sword is on the horizon.</p>
-          </div>
-          <div class="value-card reveal">
-            <div class="product-icon icon-pink" style="width:48px;height:48px;">
-              <svg viewBox="0 0 20 20" fill="none" stroke="#ff00cc" stroke-width="1.5" stroke-linecap="round"><path d="M2 10s3-7 8-7 8 7 8 7-3 7-8 7-8-7-8-7z"/><circle cx="10" cy="10" r="3"/></svg>
-            </div>
-            <h3>Watchfulness</h3>
-            <p>We see what others miss and warn before the harm. Discernment over hype. Truth over trend. The watch is only as good as its eyes.</p>
-          </div>
-          <div class="value-card reveal reveal-delay-1">
-            <div class="product-icon icon-blue" style="width:48px;height:48px;">
-              <svg viewBox="0 0 20 20" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            </div>
-            <h3>Shoulder to Shoulder</h3>
-            <p>We are stronger on the wall together. Watchman Forge is a people, not a product line — a brotherhood and sisterhood of the called.</p>
-          </div>
-          <div class="value-card reveal reveal-delay-2">
-            <div class="product-icon icon-purple" style="width:48px;height:48px;">
-              <svg viewBox="0 0 20 20" fill="none" stroke="#9000ff" stroke-width="1.5" stroke-linecap="round"><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.9 4.9l2.8 2.8M12.3 12.3l2.8 2.8M15.1 4.9l-2.8 2.8M7.7 12.3l-2.8 2.8"/></svg>
-            </div>
-            <h3>Accountability</h3>
-            <p>"I will hold the watchman accountable." The charge is serious. We keep our word to the people we equip and the One we answer to.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── CTA ───────────────────────────────────────────────── -->
-    <section class="cta-section section" style="background:var(--bg-void);">
-      <div class="container">
-        <div class="cta-box reveal">
-          <div class="eyebrow" style="justify-content:center;">Join the Forge</div>
-          <h2 class="section-title">Will You Take the Post?</h2>
-          <p class="section-sub">The wall is long and the watchmen are few. If this stirs something in you, it is not an accident. Answer it.</p>
-          <div class="cta-actions">
-            <a href="/contact.html" class="btn btn-primary btn-lg">Take the Post</a>
-            <a href="/#arsenal" class="btn btn-outline btn-lg">See the Arsenal</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="footer">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo"><img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="footer-cross"></a>
-        <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-        <div class="footer-contact"><a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a><span>Forged in Faith. Built for the Future.</span></div>
-      </div>
-      <div class="footer-col"><h4>The Arsenal</h4><ul><li><a href="/products/veil-os.html">Veil Studio</a></li><li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li><li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li><li><a href="/products/ai-investment-app.html">Vantage Edge</a></li></ul></div>
-      <div class="footer-col"><h4>The Movement</h4><ul><li><a href="/gallery.html">The Gallery</a></li><li><a href="/about.html">The Manifesto</a></li><li><a href="/contact.html">Enlist</a></li></ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-service.html">Terms of Service</a></li></ul></div>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Why Watchman</p>
+      <h1 class="display-lg">The name is older<br><span class="text-gradient">than the app.</span></h1>
+      <p class="lead">Watchman Forge is a daily accountability app. The idea behind it comes from an old post on a city wall, and from the fire where iron gets its shape.</p>
     </div>
-    <hr class="hr-neon">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-      <div class="footer-bottom-links"><a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a></div>
-    </div>
-  </footer>
+  </section>
 
-  <script src="/js/main.js?v=v4"></script>
+  <section class="section bg-void">
+    <div class="container split">
+      <div class="prose">
+        <p class="eyebrow reveal">The watchman</p>
+        <h2 class="statement reveal">A watchman kept the wall.</h2>
+        <p class="reveal">In the old cities, a watchman stood on the wall day and night. His job was simple and heavy: see what was coming, and sound the trumpet. If he saw trouble and stayed quiet, that was on him.</p>
+        <p class="reveal">The app takes that post and turns it inward. You&rsquo;re on the wall, and the one you&rsquo;re watching is you: what you said you&rsquo;d do today, and whether you did it. An honest look, every day.</p>
+      </div>
+      <figure class="verse reveal reveal-delay-1">
+        <blockquote><p>&ldquo;But if the watchman see the sword come, and blow not the trumpet, and the people be not warned&hellip;&rdquo;</p></blockquote>
+        <cite>Ezekiel 33:6 &middot; King James Version</cite>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <p class="eyebrow reveal">The forge</p>
+      <h2 class="statement reveal">And a forge is where things get shaped.</h2>
+      <p class="reveal">Iron doesn&rsquo;t get strong by being told it&rsquo;s strong. It gets heated, struck and cooled, again and again. Habits work the same way: small strikes every day, and a miss now and then that doesn&rsquo;t end anything.</p>
+      <p class="reveal">That&rsquo;s why the app turns a habit you keep into armor, lets it dull when you slip, and never throws it away. Keep watch. Forge yourself. Finish the work.</p>
+    </div>
+  </section>
+
+  <section class="section bg-void">
+    <div class="container">
+      <div class="prose">
+        <p class="eyebrow reveal">The root</p>
+        <h2 class="statement reveal">Forged in faith.</h2>
+        <p class="reveal">The faith is the root of this brand. We&rsquo;d rather show it than preach it, so this is the page where we say it plainly. The watch, the wall and the way we build all come from here.</p>
+      </div>
+      <div class="verses">
+        <figure class="verse reveal">
+          <blockquote><p>&ldquo;I have set watchmen upon thy walls, O Jerusalem, which shall never hold their peace day nor night.&rdquo;</p></blockquote>
+          <cite>Isaiah 62:6</cite>
+        </figure>
+        <figure class="verse reveal reveal-delay-1">
+          <blockquote><p>&ldquo;I will stand upon my watch, and set me upon the tower&hellip;&rdquo;</p></blockquote>
+          <cite>Habakkuk 2:1</cite>
+        </figure>
+        <figure class="verse reveal reveal-delay-2">
+          <blockquote><p>&ldquo;&hellip;now it is high time to awake out of sleep.&rdquo;</p></blockquote>
+          <cite>Romans 13:11</cite>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow reveal">The Watchman&rsquo;s Creed</p>
+        <h2 class="section-title reveal reveal-delay-1">What we stand for</h2>
+      </div>
+      <ol class="creed">
+        <li class="reveal">
+          <span class="creed-num">I</span>
+          <h3>Faith first</h3>
+          <p>We build for the King of Kings (Revelation 19:16), not for the algorithm and not for applause.</p>
+        </li>
+        <li class="reveal reveal-delay-1">
+          <span class="creed-num">II</span>
+          <h3>Excellence as worship</h3>
+          <p>Good enough dishonors the calling. The work itself is an offering, down to the last pixel and the last line of code.</p>
+        </li>
+        <li class="reveal reveal-delay-2">
+          <span class="creed-num">III</span>
+          <h3>The hour is late</h3>
+          <p>&ldquo;Now it is high time to awake out of sleep.&rdquo; We move with urgency, and we build for people who are done waiting.</p>
+        </li>
+        <li class="reveal">
+          <span class="creed-num">IV</span>
+          <h3>Watchfulness</h3>
+          <p>See what others miss and speak up before the harm. Discernment over hype. Truth over trend.</p>
+        </li>
+        <li class="reveal reveal-delay-1">
+          <span class="creed-num">V</span>
+          <h3>Shoulder to shoulder</h3>
+          <p>Nobody holds the wall alone. Watchman Forge is a people, not a product line.</p>
+        </li>
+        <li class="reveal reveal-delay-2">
+          <span class="creed-num">VI</span>
+          <h3>Accountability</h3>
+          <p>A watchman answers for what he sees. We keep our word to the people who trust us, and to the One we answer to.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section bg-void close" id="join" aria-labelledby="close-title">
+    <div class="container">
+      <h2 id="close-title" class="statement reveal">You&rsquo;re not a customer here.</h2>
+      <p class="section-sub reveal">You&rsquo;re a watchman on your own wall. The Forge helps you keep the post. Join the waitlist for early access; the first 100 become Founding Knights.</p>
+      <div class="wl reveal">
+        <form class="wl-form" data-waitlist action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" novalidate>
+          <input type="hidden" name="embed" value="1">
+          <label class="sr-only" for="wl-email-about">Email address</label>
+          <div class="wl-row">
+            <input class="wl-input" id="wl-email-about" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com">
+            <button class="btn btn-primary wl-submit" type="submit">Join the waitlist</button>
+          </div>
+          <p class="wl-status" aria-live="polite"></p>
+          <p class="wl-fine">The Watch is free. Forever. No spam, and we never sell your email. <a href="/privacy-policy">Privacy policy</a>.</p>
+        </form>
+        <div class="wl-done" role="status" hidden>
+          <p class="wl-done-title">Almost there</p>
+          <p>Check your inbox and tap the confirmation link. Then you&rsquo;re on the list.</p>
+        </div>
+      </div>
+      <p class="close-link reveal"><a href="/#how">See how the app works &rarr;</a></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- chrome:footer -->
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo" aria-label="Watchman Forge home">
+        <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" width="330" height="96" loading="lazy">
+      </a>
+      <p class="footer-motto">Keep watch. Forge yourself. Finish the work.</p>
+      <p>A daily accountability app for people who keep starting things and want to finish them.</p>
+      <a class="footer-email" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+    </div>
+    <div class="footer-col"><h2>The app</h2><ul>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/#join">Join the waitlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>The Forge</h2><ul>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">The Gallery</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>Legal</h2><ul>
+      <li><a href="/privacy-policy">Privacy policy</a></li>
+      <li><a href="/terms-of-service">Terms of service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge &middot; Forged in Faith. Built for the Future.</p>
+    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" loading="lazy" data-vref="PS 127:1">
+  </div>
+</footer>
+<!-- /chrome:footer -->
+
+<script src="/js/main.js?v=305321c33f"></script>
+<script src="/js/watchman-fx.js?v=959ecbed26"></script>
 </body>
 </html>

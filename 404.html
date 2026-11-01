@@ -3,132 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — Off the Grid — Watchman Forge</title>
-<meta name="description" content="This page isn't on the grid. Find your way back to Watchman Forge.">
-<meta name="theme-color" content="#010104">
+<title>Page not found — Watchman Forge</title>
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#010104">
+<link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/css/main.css?v=v6">
-<link rel="stylesheet" href="/css/gtr.css?v=v2-premium">
+<link rel="preload" href="/assets/webfonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css?v=0a0c75ab78">
 <style>
-  html{ scroll-behavior:smooth; }
-  a:focus-visible, .btn:focus-visible, button:focus-visible{ outline:2px solid var(--neon-blue); outline-offset:3px; }
-  .e404{ position:relative; min-height:78vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; padding:120px 0 80px; }
-  .e404::before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:
-      radial-gradient(58% 50% at 50% 38%, rgba(0,212,255,0.16), transparent 64%),
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px) 0 0/100% 44px,
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px) 0 0/44px 100%;
-    -webkit-mask-image:radial-gradient(120% 100% at 50% 30%, #000 36%, transparent 84%);
-    mask-image:radial-gradient(120% 100% at 50% 30%, #000 36%, transparent 84%); }
-  .e404-inner{ position:relative; z-index:1; max-width:640px; padding:0 24px; }
-  .e404-eyebrow{ font-family:var(--font-display, ui-monospace, monospace); font-size:.74rem; letter-spacing:.32em; color:var(--neon-blue); text-transform:uppercase; margin-bottom:26px; }
-  .e404-code{ font-family:var(--font-display, ui-monospace, monospace); font-weight:700; font-size:clamp(5.5rem, 22vw, 11rem); line-height:.9; letter-spacing:.02em; margin:0 0 8px;
-    color:#eaf8ff; text-shadow:0 0 28px rgba(0,212,255,0.55), 0 0 2px rgba(0,212,255,0.9), 3px 0 0 rgba(144,0,255,0.55), -3px 0 0 rgba(0,212,255,0.35);
-    animation:e404-flicker 5.5s linear infinite; }
-  @keyframes e404-flicker{ 0%,100%{ opacity:1; } 48%{ opacity:1; } 49%{ opacity:.72; } 50%{ opacity:1; } 71%{ opacity:1; } 72%{ opacity:.85; } 73%{ opacity:1; } }
-  @media (prefers-reduced-motion:reduce){ .e404-code{ animation:none; } html{ scroll-behavior:auto; } }
-  .e404-title{ font-family:var(--font-heading); font-size:clamp(1.6rem, 4vw, 2.4rem); line-height:1.12; color:var(--text-primary,#e8f1f8); margin:0 0 16px; }
-  .e404-sub{ font-size:1.04rem; line-height:1.62; color:var(--text-secondary,#9fb6c9); max-width:480px; margin:0 auto 26px; }
-  .e404-verse{ font-family:var(--font-display, ui-monospace, monospace); font-size:.82rem; letter-spacing:.04em; color:var(--text-muted,#5a6b7a); font-style:italic; margin:0 auto 30px; max-width:440px; }
-  .e404-verse b{ display:block; font-style:normal; letter-spacing:.18em; font-size:.64rem; color:var(--neon-purple,#9000ff); margin-bottom:7px; }
-  .e404-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .lost { min-height: 78vh; display: flex; align-items: center; text-align: center; }
+  .lost .container { width: 100%; }
+  .lost-code {
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(5rem, 22vw, 11rem); line-height: 0.9;
+    background: var(--grad-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .lost .eyebrow { justify-content: center; margin-top: 18px; }
+  .lost h1 { margin: 6px 0 14px; }
+  .lost .lead { margin: 0 auto 30px; }
+  .lost-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 </style>
 </head>
 <body>
-<nav id="nav">
+
+<!-- chrome:nav -->
+<a class="skip-link" href="#main">Skip to content</a>
+<nav id="nav" aria-label="Main">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-      <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="nav-cross">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge home">
+      <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" class="nav-wordmark" width="330" height="96">
     </a>
     <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li class="has-dropdown">
-        <a href="/#arsenal">The Arsenal</a>
-        <ul class="nav-dropdown">
-          <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-          <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-          <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-          <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-        </ul>
-      </li>
-      <li><a href="/gallery.html">The Gallery</a></li>
-      <li><a href="/about.html">The Manifesto</a></li>
-      <li><a href="/contact.html">Enlist</a></li>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">Gallery</a></li>
     </ul>
     <div class="nav-right">
-      <a href="/#enlist" class="btn btn-primary btn-sm">Take the Post</a>
+      <a href="/#join" class="btn btn-primary btn-sm nav-cta">Join<span class="nav-cta-more"> the waitlist</span></a>
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
     </div>
-    <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-<div class="mobile-nav">
-  <a href="/">Home</a>
-  <div class="mobile-nav-section">The Arsenal</div>
-  <a href="/products/veil-os.html">Veil Studio</a>
-  <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-  <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-  <a href="/products/ai-investment-app.html">Vantage Edge</a>
-  <a href="/gallery.html">The Gallery</a>
-  <a href="/about.html">The Manifesto</a>
-  <a href="/contact.html">Enlist</a>
+<div class="mobile-nav" id="mobile-nav" hidden>
+  <a href="/#how">How it works</a>
+  <a href="/#order">The Order</a>
+  <a href="/#privacy">Privacy</a>
+  <a href="/about">Why Watchman</a>
+  <a href="/gallery">The Gallery</a>
+  <a href="/contact">Contact</a>
+  <a href="/#join" class="btn btn-primary mobile-nav-cta">Join the waitlist</a>
 </div>
+<!-- /chrome:nav -->
 
-<main>
-  <section class="e404">
-    <div class="e404-inner">
-      <div class="e404-eyebrow">// SIGNAL LOST</div>
-      <div class="e404-code">404</div>
-      <h1 class="e404-title">This post is unmanned.</h1>
-      <p class="e404-sub">The page you're after isn't on the grid &mdash; moved, retired, or never here. Even a watchman loses the path sometimes. The way back is always lit.</p>
-      <p class="e404-verse"><b>PSALM 119:105</b>Your word is a lamp to my feet, and a light for my path.</p>
-      <div class="e404-actions">
-        <a href="/" class="btn btn-primary btn-lg">← Back to the Wall</a>
-        <a href="/#arsenal" class="btn btn-outline btn-lg">The Arsenal</a>
+<main id="main">
+  <section class="page-hero lost">
+    <div class="container">
+      <p class="lost-code" aria-hidden="true">404</p>
+      <p class="eyebrow">Signal lost</p>
+      <h1 class="section-title">This post is unmanned.</h1>
+      <p class="lead" data-vref="PS 119:105">The page you&rsquo;re after isn&rsquo;t here. It may have moved or been retired. The way back is always lit.</p>
+      <div class="lost-actions">
+        <a href="/" class="btn btn-primary">Back to the home page</a>
+        <a href="/#how" class="btn btn-outline">How the app works</a>
       </div>
     </div>
   </section>
 </main>
 
+<!-- chrome:footer -->
 <footer id="footer">
   <div class="footer-main">
     <div class="footer-brand">
-      <a href="/" class="nav-logo" style="text-decoration:none;" aria-label="Watchman Forge">
-        <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="footer-cross">
+      <a href="/" class="footer-logo" aria-label="Watchman Forge home">
+        <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" width="330" height="96" loading="lazy">
       </a>
-      <p>Tools for the Watchman&rsquo;s mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-      <div class="footer-contact">
-        <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
-        <span>Forged in Faith. Built for the Future.</span>
-      </div>
+      <p class="footer-motto">Keep watch. Forge yourself. Finish the work.</p>
+      <p>A daily accountability app for people who keep starting things and want to finish them.</p>
+      <a class="footer-email" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
     </div>
-    <div class="footer-col"><h4>The Arsenal</h4><ul>
-      <li><a href="/products/veil-os.html">Veil Studio</a></li>
-      <li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li>
-      <li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li>
-      <li><a href="/products/ai-investment-app.html">Vantage Edge</a></li>
+    <div class="footer-col"><h2>The app</h2><ul>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/#join">Join the waitlist</a></li>
     </ul></div>
-    <div class="footer-col"><h4>The Movement</h4><ul>
-      <li><a href="/gallery.html">The Gallery</a></li>
-      <li><a href="/about.html">The Manifesto</a></li>
-      <li><a href="/contact.html">Enlist</a></li>
+    <div class="footer-col"><h2>The Forge</h2><ul>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">The Gallery</a></li>
+      <li><a href="/contact">Contact</a></li>
     </ul></div>
-    <div class="footer-col"><h4>Legal</h4><ul>
-      <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-      <li><a href="/terms-of-service.html">Terms of Service</a></li>
+    <div class="footer-col"><h2>Legal</h2><ul>
+      <li><a href="/privacy-policy">Privacy policy</a></li>
+      <li><a href="/terms-of-service">Terms of service</a></li>
     </ul></div>
   </div>
-  <hr class="hr-neon">
   <div class="footer-bottom">
-    <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-    <div class="footer-bottom-links">
-      <a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a>
-    </div>
+    <p>&copy; 2026 Watchman Forge &middot; Forged in Faith. Built for the Future.</p>
+    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" loading="lazy" data-vref="PS 127:1">
   </div>
 </footer>
+<!-- /chrome:footer -->
 
-<script src="/js/main.js?v=v4"></script>
+<script src="/js/main.js?v=305321c33f"></script>
+<script src="/js/watchman-fx.js?v=959ecbed26"></script>
 </body>
 </html>

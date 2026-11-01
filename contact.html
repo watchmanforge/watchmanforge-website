@@ -1,208 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enlist — Watchman Forge</title>
-  <meta name="description" content="Take the post. Join the remnant standing on the wall. This is your enlistment in Watchman Forge — not a signup form. Reach us at watchmanforge@gmail.com. Forged in Faith. Built for the Future.">
-  <meta property="og:title" content="Enlist — Watchman Forge">
-  <meta property="og:description" content="The wall is long and the watchmen are few. Take the post.">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://watchmanforge.com/contact.html">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300d4ff'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%23010104' font-weight='900' font-family='monospace'>W</text></svg>">
-  <link rel="stylesheet" href="/css/main.css?v=v6">
-  <style>
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: clamp(40px, 6vw, 80px);
-      align-items: start;
-    }
-    @media(max-width:860px){ .contact-layout { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Watchman Forge</title>
+<meta name="description" content="Questions about Watchman Forge, early access, press or partnerships? Email watchmanforge@gmail.com.">
+<meta property="og:title" content="Contact — Watchman Forge">
+<meta property="og:description" content="Questions about Watchman Forge, early access, press or partnerships? Write to us.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.watchmanforge.com/contact">
+<meta property="og:site_name" content="Watchman Forge">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Watchman Forge — Stop starting. Start finishing.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Watchman Forge">
+<meta name="twitter:description" content="Questions about Watchman Forge, early access, press or partnerships? Write to us.">
+<meta name="twitter:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
+<meta name="theme-color" content="#010104">
+<link rel="canonical" href="https://www.watchmanforge.com/contact">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/webfonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/main.css?v=0a0c75ab78">
+<style>
+  /* CONTACT — email only. No form, so nothing you send passes through a form service. */
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+  .mail-card {
+    position: relative;
+    padding: clamp(26px, 4vw, 40px);
+    border: 1px solid var(--border-subtle); border-radius: 6px;
+    background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(0,212,255,0.1), transparent 70%), var(--grad-card-bg);
+  }
+  .mail-label { font-family: var(--font-display); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .mail-addr {
+    display: inline-block; margin: 10px 0 14px;
+    font-weight: 700; font-size: clamp(1.15rem, 4.6vw, 1.7rem);
+    word-break: break-all;
+  }
+  .mail-note { color: var(--text-secondary); }
+  .reasons h2 { font-family: var(--font-display); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon-blue); margin-bottom: 14px; }
+  .reasons li { padding: 12px 0 12px 22px; position: relative; color: var(--text-secondary); border-bottom: 1px solid var(--border-faint); }
+  .reasons li::before { content: '\2192'; position: absolute; left: 0; color: var(--neon-blue); }
+  .reasons li a { text-decoration: underline; text-underline-offset: 2px; }
+  .early { margin-top: 28px; padding: 20px 22px; border: 1px solid var(--border-mid); border-radius: 6px; }
+  .early p { color: var(--text-secondary); margin-bottom: 14px; }
+</style>
 </head>
 <body>
 
-  <nav id="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Watchman Forge Home">
-        <img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="nav-cross">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li class="has-dropdown"><a href="/#arsenal">The Arsenal</a>
-          <ul class="nav-dropdown">
-            <li><a href="/products/veil-os.html"><span class="nav-dropdown-icon icon-purple"><svg viewBox="0 0 16 16" fill="none" stroke="#9000ff" stroke-width="1.5"><ellipse cx="8" cy="8" rx="6" ry="4"/><circle cx="8" cy="8" r="2" fill="#9000ff" stroke="none"/></svg></span>Veil Studio</a></li>
-            <li><a href="/products/pathfinder.html"><span class="nav-dropdown-icon icon-blue"><svg viewBox="0 0 16 16" fill="none" stroke="#00d4ff" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5l2 3-2 1-2-1 2-3z" fill="#00d4ff" stroke="none"/></svg></span>Pathfinder: The Grid</a></li>
-            <li><a href="/products/unified-bt-led-controller.html"><span class="nav-dropdown-icon icon-cyan"><svg viewBox="0 0 16 16" fill="none" stroke="#00ffc8" stroke-width="1.5"><path d="M8 2v12M5 5l3-3 3 3M5 11l3 3 3-3"/></svg></span>ChromaForge</a></li>
-            <li><a href="/products/ai-investment-app.html"><span class="nav-dropdown-icon icon-pink"><svg viewBox="0 0 16 16" fill="none" stroke="#ff00cc" stroke-width="1.5"><polyline points="2,12 6,8 9,10 14,4"/><path d="M11 4h3v3"/></svg></span>Vantage Edge</a></li>
-          </ul>
-        </li>
-        <li><a href="/gallery.html">The Gallery</a></li>
-        <li><a href="/about.html">The Manifesto</a></li>
-        <li><a href="/contact.html">Enlist</a></li>
-      </ul>
-      <div class="nav-right"><a href="/contact.html" class="btn btn-primary btn-sm">Take the Post</a></div>
-      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+<!-- chrome:nav -->
+<a class="skip-link" href="#main">Skip to content</a>
+<nav id="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Watchman Forge home">
+      <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" class="nav-wordmark" width="330" height="96">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="/#join" class="btn btn-primary btn-sm nav-cta">Join<span class="nav-cta-more"> the waitlist</span></a>
+      <button class="hamburger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
     </div>
-  </nav>
-
-  <div class="mobile-nav">
-    <a href="/">Home</a>
-    <div class="mobile-nav-section">The Arsenal</div>
-    <a href="/products/veil-os.html">Veil Studio</a>
-    <a href="/products/pathfinder.html">Pathfinder: The Grid</a>
-    <a href="/products/unified-bt-led-controller.html">ChromaForge</a>
-    <a href="/products/ai-investment-app.html">Vantage Edge</a>
-    <a href="/gallery.html">The Gallery</a>
-    <a href="/about.html">The Manifesto</a>
-    <a href="/contact.html">Enlist</a>
   </div>
+</nav>
+<div class="mobile-nav" id="mobile-nav" hidden>
+  <a href="/#how">How it works</a>
+  <a href="/#order">The Order</a>
+  <a href="/#privacy">Privacy</a>
+  <a href="/about">Why Watchman</a>
+  <a href="/gallery">The Gallery</a>
+  <a href="/contact">Contact</a>
+  <a href="/#join" class="btn btn-primary mobile-nav-cta">Join the waitlist</a>
+</div>
+<!-- /chrome:nav -->
 
-  <main>
+<main id="main">
 
-    <section class="page-hero" style="padding-bottom:60px;">
-      <div class="page-hero-glow" style="background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 70%);"></div>
-      <div class="page-hero-content">
-        <div class="breadcrumb">
-          <a href="/">Home</a><span class="breadcrumb-sep">/</span><span>Enlist</span>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1 class="display-lg">Write to us.</h1>
+      <p class="lead">Questions about the app, early access, press or partnerships: email is the fastest way to reach us.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container contact-grid">
+      <div>
+        <div class="mail-card hud-frame">
+          <span class="hud-bracket hud-bracket-tl"></span><span class="hud-bracket hud-bracket-br"></span>
+          <p class="mail-label">Email</p>
+          <a class="mail-addr" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+          <p class="mail-note">We usually reply within 48 hours.</p>
         </div>
-        <div class="eyebrow" style="margin-bottom:20px;">Join the Forge</div>
-        <h1 class="display-lg" style="margin-bottom:20px;"><span class="text-gradient">Take the Post</span></h1>
-        <p style="font-size:clamp(1rem,2vw,1.2rem);color:var(--text-secondary);max-width:600px;line-height:1.8;">This is not a signup form. It is an enlistment. The wall is long and the watchmen are few — tell us you're answering, and we'll bring you in.</p>
-      </div>
-    </section>
-
-    <section class="section" style="background:var(--bg-void);padding-top:0;">
-      <div class="container">
-        <div class="contact-layout">
-
-          <!-- The Oath / info column -->
-          <div class="reveal">
-            <div class="contact-info-item">
-              <div class="contact-info-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M4 4h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="2,6 10,11 18,6"/>
-                </svg>
-              </div>
-              <div class="contact-info-body">
-                <h4>The Line</h4>
-                <a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-info-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round">
-                  <path d="M3 17V7l7-4 7 4v10M3 17h14M8 17v-5h4v5"/>
-                </svg>
-              </div>
-              <div class="contact-info-body">
-                <h4>The Post</h4>
-                <p>Wherever you are. The wall has no borders.</p>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-info-icon">
-                <svg viewBox="0 0 20 20" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round">
-                  <circle cx="10" cy="10" r="8"/>
-                  <path d="M10 6v4l3 2"/>
-                </svg>
-              </div>
-              <div class="contact-info-body">
-                <h4>The Answer</h4>
-                <p>We respond within 24–48 hours.</p>
-              </div>
-            </div>
-
-            <div style="margin-top:40px;padding:28px;border:1px solid var(--border-faint);border-radius:6px;background:var(--bg-card);">
-              <h3 style="font-family:var(--font-display);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--neon-blue);margin-bottom:16px;">Why You Might Be Here</h3>
-              <ul style="display:flex;flex-direction:column;gap:10px;">
-                <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text-secondary);"><span style="color:var(--neon-blue);flex-shrink:0;">→</span> You feel the call and want to take the post</li>
-                <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text-secondary);"><span style="color:var(--neon-blue);flex-shrink:0;">→</span> You want to carry the tools (apps &amp; hardware)</li>
-                <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text-secondary);"><span style="color:var(--neon-blue);flex-shrink:0;">→</span> You want to partner in the mission</li>
-                <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text-secondary);"><span style="color:var(--neon-blue);flex-shrink:0;">→</span> Press &amp; media seeking the story</li>
-                <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text-secondary);"><span style="color:var(--neon-blue);flex-shrink:0;">→</span> Prayer, testimony, or encouragement</li>
-                <li style="display:flex;gap:10px;align-items:flex-start;font-size:0.88rem;color:var(--text-secondary);"><span style="color:var(--neon-blue);flex-shrink:0;">→</span> Something else on your heart</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Enlistment form column -->
-          <div class="reveal reveal-delay-1">
-            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;padding:40px;position:relative;overflow:hidden;">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad-primary);"></div>
-
-              <form id="contact-form" action="https://script.google.com/macros/s/AKfycbwxXKjZml9-Bq1e2pL7T1mZpD9j8tivUxoMmyac8G9vSsqYnok4y-2qO-Aw7jktUBs_/exec" method="POST">
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" name="first_name" class="form-control" placeholder="Your name" required autocomplete="given-name">
-                  </div>
-                  <div class="form-group">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="last_name" class="form-control" placeholder="Your surname" required autocomplete="family-name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com" required autocomplete="email">
-                </div>
-                <div class="form-group">
-                  <label for="subject">Why You're Answering</label>
-                  <select id="subject" name="subject" class="form-control">
-                    <option value="">Choose your post...</option>
-                    <option value="enlist">I'm answering the call — enlist me</option>
-                    <option value="tools">I want to carry the tools</option>
-                    <option value="partnership">Partner in the mission</option>
-                    <option value="press">Press / Media</option>
-                    <option value="prayer">Prayer &amp; encouragement</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="message">Your Word</label>
-                  <textarea id="message" name="message" class="form-control" placeholder="Tell us what's stirring in you, and where you want to stand..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Take the Post</button>
-              </form>
-
-              <div id="form-success" style="display:none;text-align:center;padding:40px 20px;">
-                <div style="font-size:3rem;margin-bottom:16px;">🎺</div>
-                <h3 style="font-family:var(--font-display);font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--neon-blue);margin-bottom:10px;">Welcome to the Wall</h3>
-                <p style="color:var(--text-secondary);">Your message is on its way. We'll answer within 24–48 hours. Stand watch, Watchman.</p>
-              </div>
-            </div>
-
-            <p style="margin-top:16px;font-size:0.8rem;color:var(--text-muted);text-align:center;">
-              Or sound the trumpet directly: <a href="mailto:watchmanforge@gmail.com" style="color:var(--neon-blue);">watchmanforge@gmail.com</a>
-            </p>
-          </div>
-
+        <div class="early">
+          <p>Want in early? The waitlist is the way. The first 100 become Founding Knights.</p>
+          <a href="/#join" class="btn btn-primary">Join the waitlist</a>
         </div>
       </div>
-    </section>
-
-  </main>
-
-  <footer id="footer">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="/" class="nav-logo"><img src="/assets/images/cross-transparent.webp" alt="Watchman Forge" class="footer-cross"></a>
-        <p>Tools for the Watchman's mission. A remnant standing on the wall, sounding the trumpet before the King of Kings returns.</p>
-        <div class="footer-contact"><a href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a><span>Forged in Faith. Built for the Future.</span></div>
+      <div class="reasons">
+        <h2>Good reasons to write</h2>
+        <ul>
+          <li>A question about Watchman Forge or early access</li>
+          <li>Press, podcasts and interviews</li>
+          <li>Partnerships</li>
+          <li>Prints from <a href="/gallery">the Gallery</a> (orders go through Etsy)</li>
+          <li>A privacy request: see, export or delete what we hold about you</li>
+          <li>Anything else on your mind</li>
+        </ul>
       </div>
-      <div class="footer-col"><h4>The Arsenal</h4><ul><li><a href="/products/veil-os.html">Veil Studio</a></li><li><a href="/products/pathfinder.html">Pathfinder: The Grid</a></li><li><a href="/products/unified-bt-led-controller.html">ChromaForge</a></li><li><a href="/products/ai-investment-app.html">Vantage Edge</a></li></ul></div>
-      <div class="footer-col"><h4>The Movement</h4><ul><li><a href="/gallery.html">The Gallery</a></li><li><a href="/about.html">The Manifesto</a></li><li><a href="/contact.html">Enlist</a></li></ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/terms-of-service.html">Terms of Service</a></li></ul></div>
     </div>
-    <hr class="hr-neon">
-    <div class="footer-bottom">
-      <p>&copy; 2026 Watchman Forge. Forged in Faith. Built for the Future.</p>
-      <div class="footer-bottom-links"><a href="/privacy-policy.html">Privacy</a><a href="/terms-of-service.html">Terms</a><a href="/contact.html">Enlist</a></div>
-    </div>
-  </footer>
+  </section>
 
-  <script src="/js/main.js?v=v4"></script>
+</main>
+
+<!-- chrome:footer -->
+<footer id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo" aria-label="Watchman Forge home">
+        <img src="/assets/images/wordmark-96.webp" alt="Watchman Forge" width="330" height="96" loading="lazy">
+      </a>
+      <p class="footer-motto">Keep watch. Forge yourself. Finish the work.</p>
+      <p>A daily accountability app for people who keep starting things and want to finish them.</p>
+      <a class="footer-email" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
+    </div>
+    <div class="footer-col"><h2>The app</h2><ul>
+      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#order">The Order</a></li>
+      <li><a href="/#privacy">Privacy</a></li>
+      <li><a href="/#join">Join the waitlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>The Forge</h2><ul>
+      <li><a href="/about">Why Watchman</a></li>
+      <li><a href="/gallery">The Gallery</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>Legal</h2><ul>
+      <li><a href="/privacy-policy">Privacy policy</a></li>
+      <li><a href="/terms-of-service">Terms of service</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Watchman Forge &middot; Forged in Faith. Built for the Future.</p>
+    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" loading="lazy" data-vref="PS 127:1">
+  </div>
+</footer>
+<!-- /chrome:footer -->
+
+<script src="/js/main.js?v=305321c33f"></script>
+<script src="/js/watchman-fx.js?v=959ecbed26"></script>
 </body>
 </html>
