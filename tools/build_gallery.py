@@ -244,7 +244,7 @@ HEAD_TMPL = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#010104">
+<meta name="theme-color" content="#0a0a0b">
 <meta property="og:title" content="{ogtitle}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="{ogtype}">
@@ -260,8 +260,9 @@ HEAD_TMPL = """<!DOCTYPE html>
 <meta name="twitter:description" content="{desc}">
 <meta name="twitter:image" content="{ogimg}">
 <link rel="canonical" href="{url}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/assets/images/icon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/main.css">
