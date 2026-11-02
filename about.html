@@ -24,9 +24,8 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="preload" href="/assets/webfonts/orbitron-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=0a0c75ab78">
+<link rel="stylesheet" href="/css/main.css?v=6f816c984a">
 <script>document.documentElement.classList.add('js')</script>
 <style>
   /* ════════════════════════════════════════════════════════════
@@ -34,8 +33,8 @@
      this page says where the name and the faith come from.
      Scripture is King James, verbatim, as in the Gallery.
      ════════════════════════════════════════════════════════════ */
-  .bg-void { background: var(--bg-void); }
-  .statement { font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.14; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .bg-raised { background: var(--bg-raised); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .statement { font-size: clamp(1.8rem, 4.4vw, 2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
   .prose p:not(.eyebrow) { color: var(--text-secondary); font-size: 1.06rem; line-height: 1.8; max-width: 36em; }
   .prose p:not(.eyebrow) + p { margin-top: 16px; }
   .split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
@@ -44,8 +43,8 @@
   .verse {
     position: relative;
     padding: clamp(24px, 4vw, 40px);
-    border: 1px solid var(--border-subtle); border-radius: 6px;
-    background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(144,0,255,0.12), transparent 70%), var(--grad-card-bg);
+    border: 1px solid var(--line); border-radius: var(--radius-lg);
+    background: radial-gradient(80% 70% at 50% 0%, var(--brand-soft), transparent 70%), var(--surface);
   }
   .verse blockquote p {
     font-family: var(--font-serif);
@@ -55,17 +54,17 @@
   }
   .verse cite {
     display: block; margin-top: 16px; font-style: normal;
-    font-family: var(--font-display); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--neon-violet);
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--brand);
   }
   .verses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 36px; }
   .verses .verse blockquote p { font-size: clamp(1.05rem, 1.6vw, 1.2rem); }
   @media (max-width: 860px) { .verses { grid-template-columns: 1fr; } }
 
   .creed { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .creed li { padding: 26px 22px; border: 1px solid var(--border-faint); border-radius: 6px; background: var(--grad-card-bg); }
-  .creed-num { font-family: var(--font-display); font-size: 0.62rem; letter-spacing: 0.2em; color: var(--neon-blue); }
-  .creed h3 { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 10px 0 10px; }
+  .creed li { padding: 28px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .creed-num { font-family: var(--font-serif); font-size: 1.1rem; color: var(--brand); }
+  .creed h3 { font-size: 1.2rem; margin: 8px 0 8px; }
   .creed p { color: var(--text-secondary); font-size: 0.97rem; }
   @media (max-width: 960px) { .creed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 600px) { .creed { grid-template-columns: 1fr; } }
@@ -75,7 +74,8 @@
   .close .section-sub { margin: 0 auto 28px; }
   .close .wl-form, .close .wl-done { margin: 0 auto; text-align: left; }
   .close .wl-fine { text-align: center; }
-  .close-link { margin-top: 22px; font-size: 0.95rem; }
+  .close-link { margin-top: 24px; font-size: 1rem; }
+  .close-link a { color: var(--brand); }
 </style>
 </head>
 <body>
@@ -122,7 +122,7 @@
     </div>
   </section>
 
-  <section class="section bg-void">
+  <section class="section bg-raised">
     <div class="container split">
       <div class="prose">
         <p class="eyebrow reveal">The watchman</p>
@@ -146,7 +146,7 @@
     </div>
   </section>
 
-  <section class="section bg-void">
+  <section class="section bg-raised">
     <div class="container">
       <div class="prose">
         <p class="eyebrow reveal">The root</p>
@@ -211,7 +211,7 @@
     </div>
   </section>
 
-  <section class="section bg-void close" id="join" aria-labelledby="close-title">
+  <section class="section bg-raised close" id="join" aria-labelledby="close-title">
     <div class="container">
       <h2 id="close-title" class="statement reveal">You&rsquo;re not a customer here.</h2>
       <p class="section-sub reveal">You&rsquo;re a watchman on your own wall. The Forge helps you keep the post. Join the waitlist for early access; the first 100 become Founding Knights.</p>
@@ -266,7 +266,7 @@
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 Watchman Forge &middot; Forged in Faith. Built for the Future.</p>
-    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" loading="lazy" data-vref="PS 127:1">
+    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" data-vref="PS 127:1">
   </div>
 </footer>
 <!-- /chrome:footer -->
