@@ -92,6 +92,11 @@
         input.focus();
         return;
       }
+      // Not wired to a list yet (tools/chrome.py still has the placeholder): say so, send nothing.
+      if (form.action.indexOf('BUTTONDOWN_USERNAME') !== -1) {
+        say('Preview only: the waitlist isn’t connected yet, so nothing was sent.');
+        return;
+      }
       const label = button.innerHTML;
       button.disabled = true;
       button.textContent = 'Sending…';
