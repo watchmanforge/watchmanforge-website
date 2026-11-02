@@ -11,6 +11,10 @@ crops deliberately leave out: the phone's status bar (notifications), the
 "Today's orders" list (internal to-dos), journal text inside replays, and the
 screens that show a restaurant's address, brand-name products or film posters.
 
+Also cuts the demo-data rebuilds of three more screens (Collections > Films,
+The Watchman's List, The Pantry) rendered by tools/demo-screens/shoot.js; every
+name and number in those is made up ("Movie One", "Restaurant One").
+
 Writes assets/app/<name>-<width>.webp at 480 and 960 px wide, plus sizes.json
 with the intrinsic size of each so every <img> gets width/height.
 """
@@ -32,14 +36,22 @@ CROPS = {
     # Order of the Watchmen: the cathedral and the knights, nothing else
     "order":   ("Screenshot_20261101_211528.jpg", (0, 700, 1216, 2075)),
 }
+DEMO = os.path.join(ROOT, "tools", "demo-screens", "out")
+DEMO_CROPS = {   # 1215x2688 renders; from the screen title down, past the app header
+    "films":  ("demo-films.png",  (0, 290, 1215, 1640)),
+    "list":   ("demo-list.png",   (0, 290, 1215, 1640)),
+    "pantry": ("demo-pantry.png", (0, 290, 1215, 1640)),
+}
 WIDTHS = (480, 960)
 
 
 def main():
     os.makedirs(OUT, exist_ok=True)
     sizes = {}
-    for name, (fn, box) in CROPS.items():
-        im = Image.open(os.path.join(SRC, fn)).convert("RGB").crop(box)
+    jobs = [(n, os.path.join(SRC, f), b) for n, (f, b) in CROPS.items()]
+    jobs += [(n, os.path.join(DEMO, f), b) for n, (f, b) in DEMO_CROPS.items()]
+    for name, src, box in jobs:
+        im = Image.open(src).convert("RGB").crop(box)
         sizes[name] = {}
         for w in WIDTHS:
             h = round(im.height * w / im.width)

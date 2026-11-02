@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Demo screens — Watchman Forge app (marketing only, demo data)</title>
+<!--
+  Rebuilds of real app screens (Collections > Films, The Watchman's List,
+  The Pantry) with made-up data, for the launch site. Layout, type and colour
+  follow the founder's screenshots of 2026-11-01; every name, number and
+  poster here is fake. Rendered by tools/demo-screens/shoot.js.
+  Not deployed (tools/ is in .vercelignore).
+-->
+<style>
+  @font-face { font-family: 'Inter'; font-weight: 400 700; src: url(../../assets/webfonts/inter-latin-var.woff2) format('woff2'); }
+  @font-face { font-family: 'UnifrakturMaguntia'; src: url(../../assets/webfonts/unifraktur-maguntia-latin.woff2) format('woff2'); }
+  :root {
+    --bg: #05060b; --card: #0c131d; --card-2: #101a26; --line: #1e2a36;
+    --text: #eef2f7; --text-2: #96a2b4; --text-3: #6f7b8e;
+    --teal: #3cb0b4; --gold: #f0c666; --ember: #e4723c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #333; font-family: 'Inter', sans-serif; font-feature-settings: 'zero' 1; -webkit-font-smoothing: antialiased; padding: 20px; display: flex; gap: 20px; align-items: flex-start; }
+  .screen { width: 405px; height: 896px; position: relative; overflow: hidden; color: var(--text);
+    background: radial-gradient(130% 55% at 50% 0%, #0a1424 0%, #05060b 62%); }
+  .status { height: 36px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px 0 24px; font-size: 15px; font-weight: 600; }
+  .status svg { height: 13px; width: auto; }
+  .header { display: flex; align-items: center; padding: 8px 17px 0; }
+  .circle { width: 43px; height: 43px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; background: rgba(255,255,255,.015); color: var(--text-2); flex: none; }
+  .circle svg { width: 20px; height: 20px; }
+  .ledger { font-family: 'UnifrakturMaguntia'; color: var(--gold); font-size: 27px; margin-left: 12px; flex: 1; }
+  .title { font-family: 'UnifrakturMaguntia'; font-size: 41px; line-height: 1.12; padding: 0 17px; margin-top: 20px; }
+  .title.gold { background: linear-gradient(100deg, #b98a3b 0%, #f0c666 45%, #f7da94 60%, #c99a45 100%); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 50px; }
+  .sub { color: var(--text-2); font-size: 15.5px; line-height: 1.5; margin-top: 6px; }
+  .pad { padding: 0 17px; }
+  .label { font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 47px; padding: 0 19px; border-radius: 12px; font-weight: 700; font-size: 16.5px; }
+  .btn.teal { background: var(--teal); color: #031a1c; }
+  .btn.dark { background: var(--card); border: 1px solid var(--line); color: var(--text); }
+  .btn.gold-line { border: 1.5px solid rgba(240,198,102,.55); color: #f7e3b5; background: rgba(240,198,102,.04); border-radius: 999px; height: 44px; font-size: 15.5px; }
+  .tabbar { position: absolute; left: 0; right: 0; bottom: 0; height: 88px; background: #04060a; border-top: 1px solid #0e1621;
+    display: grid; grid-template-columns: repeat(5, 1fr); padding-top: 9px; z-index: 5; }
+  .tab { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--text-2); }
+  .tab svg { width: 22px; height: 22px; }
+  .tab.on { color: #fff; }
+  .tab.on::before { content: ''; position: absolute; top: -10px; width: 34px; height: 3px; border-radius: 2px; background: var(--teal); }
+  .tab.col { color: var(--gold); }
+  .tab.col.on::before { background: var(--gold); }
+  .home-ind { position: absolute; bottom: 7px; left: 50%; width: 120px; height: 4px; margin-left: -60px; border-radius: 3px; background: #c9ced6; opacity: .85; z-index: 6; }
+
+  /* Collections */
+  .renown { display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 17px; border-radius: 999px; border: 1px solid rgba(240,198,102,.35); background: rgba(240,198,102,.05); font-size: 13px; letter-spacing: .12em; color: var(--text-2); flex: none; }
+  .renown b { color: #f7e3b5; font-size: 17px; letter-spacing: 0; }
+  .ach { display: flex; justify-content: space-between; margin-top: 12px; }
+  .ach span { width: 39px; height: 39px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); display: grid; place-items: center; color: var(--text-2); }
+  .ach span svg { width: 17px; height: 17px; }
+  .ach .full { border: 3px solid var(--gold); color: var(--gold); }
+  .ach .lit { background: radial-gradient(circle, #f7d98c, #d9a648); border: 0; color: #2a1c05; box-shadow: 0 0 14px rgba(240,198,102,.45); }
+  .ach .part { box-shadow: inset 0 0 0 0 transparent; background: conic-gradient(var(--gold) 0 30%, transparent 30%) border-box; border: 2px solid transparent; position: relative; }
+  .ach .part::after { content: ''; position: absolute; inset: 2px; border-radius: 50%; background: var(--card); }
+  .ach .part svg { position: relative; z-index: 1; }
+  .seg { display: grid; grid-template-columns: .9fr .85fr 1.15fr 1.25fr; border: 1px solid var(--line); border-radius: 13px; overflow: hidden; margin-top: 16px; background: var(--card); }
+  .seg span { height: 46px; display: grid; place-items: center; font-size: 15px; color: var(--text-2); border-right: 1px solid var(--line); }
+  .seg span:last-child { border: 0; }
+  .seg .on { background: #23261f; color: #f7e3b5; font-weight: 700; }
+  .row { display: flex; align-items: center; justify-content: space-between; }
+  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 10px; }
+  .slot { height: 76px; border: 1px dashed #26323f; border-radius: 10px; padding: 9px; font-size: 13.5px; color: var(--text-2); display: flex; align-items: center; }
+  .slot.filled { border-style: solid; border-color: var(--line); background: var(--card); gap: 8px; align-items: center; }
+  .slot.filled i { width: 30px; height: 44px; border-radius: 4px; flex: none; background: linear-gradient(160deg, #6b3fa0, #1b0f2c); }
+  .slot.filled b { font-size: 12.5px; color: var(--text); line-height: 1.25; }
+  .assist { height: 56px; margin-top: 10px; border-radius: 13px; border: 1.5px solid rgba(240,198,102,.5); background: #16140f; display: grid; place-items: center; font-weight: 700; font-size: 17px; color: #f7e3b5; }
+  .posters { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .poster { position: relative; height: 250px; border-radius: 13px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; padding: 52px 14px 14px; }
+  .poster .rank { position: absolute; top: 9px; left: 9px; width: 31px; height: 31px; border-radius: 50%; background: rgba(5,6,11,.75); border: 1px solid rgba(240,198,102,.5); display: grid; place-items: center; color: #f7e3b5; font-weight: 700; font-size: 14px; }
+  .poster small { font-size: 9px; letter-spacing: .3em; color: rgba(255,255,255,.7); }
+  .poster strong { font-size: 25px; line-height: .95; letter-spacing: .02em; font-weight: 700; text-transform: uppercase; color: #fff; margin-top: 4px; }
+  .p1 { background: radial-gradient(120% 80% at 70% 15%, #3cb0b4 0%, #0b3b47 35%, #06121a 75%); }
+  .p2 { background: radial-gradient(120% 80% at 30% 20%, #f3a35c 0%, #8c3a1c 40%, #1c0a06 80%); }
+  .p1::after, .p2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.35), transparent 60%); }
+  .poster > * { position: relative; z-index: 1; }
+
+  /* The Watchman's List */
+  .place { margin-top: 18px; border: 1.5px solid rgba(240,198,102,.4); border-radius: 18px; background: var(--card); padding: 18px 20px 6px; }
+  .stars { color: var(--gold); letter-spacing: 1px; font-size: 17px; white-space: nowrap; }
+  .meta { color: var(--text-2); font-size: 15px; line-height: 1.55; margin-top: 4px; }
+  .meal { display: flex; justify-content: space-between; gap: 12px; padding: 15px 0; border-top: 1px solid var(--line); font-size: 16.5px; }
+  .meal span:last-child { color: var(--text-2); }
+
+  /* The Pantry */
+  .seg2 { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 16px; }
+  .seg2 span { height: 50px; display: grid; place-items: center; font-size: 16px; color: var(--text-2); }
+  .seg2 .on { background: #0a1820; color: #fff; font-weight: 700; border-right: 1px solid var(--line); }
+  .find { flex: 1; height: 50px; border: 1px solid var(--line); border-radius: 12px; display: flex; align-items: center; padding: 0 14px; color: var(--text-3); font-size: 16px; }
+  .food { display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding: 14px 16px; margin-top: 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+  .thumb { position: relative; width: 70px; height: 70px; border-radius: 8px; overflow: hidden; }
+  .thumb svg { width: 100%; height: 100%; display: block; }
+  .cam { position: absolute; right: -6px; bottom: -6px; width: 30px; height: 30px; border-radius: 50%; background: #0c1a24; border: 1px solid #1e3440; display: grid; place-items: center; }
+  .cam svg { width: 15px; height: 15px; }
+  .food b { font-size: 18px; letter-spacing: -.01em; }
+  .food p { color: var(--text-2); font-size: 14.5px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- shared bits are repeated per screen so each screen is self-contained to shoot -->
+
+<!-- ═══ Collections › Films ═══ -->
+<div class="screen" id="films">
+  <div class="status"><span>9:41</span><svg viewBox="0 0 64 13" fill="#eef2f7"><rect x="0" y="8" width="3" height="5" rx="1"/><rect x="5" y="5.5" width="3" height="7.5" rx="1"/><rect x="10" y="3" width="3" height="10" rx="1"/><rect x="15" y="0.5" width="3" height="12.5" rx="1"/><path d="M27 4.5a10 10 0 0 1 13 0l-1.6 1.7a7.6 7.6 0 0 0-9.8 0zM29.6 7.3a6.2 6.2 0 0 1 7.8 0L35.8 9a3.9 3.9 0 0 0-4.6 0zM33.5 12.5l-1.8-2a2.6 2.6 0 0 1 3.6 0z"/><rect x="45" y="1" width="16" height="11" rx="3" fill="none" stroke="#eef2f7" stroke-width="1.2"/><rect x="47" y="3" width="10" height="7" rx="1.5"/><rect x="62" y="4.5" width="1.6" height="4" rx=".8"/></svg></div>
+  <div class="header">
+    <span class="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span>
+    <span class="ledger">The Ledger</span>
+    <span class="circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span>
+  </div>
+  <div class="title gold">Collections</div>
+  <div class="pad">
+    <div class="row" style="margin-top:2px;align-items:center;gap:14px;">
+      <p class="sub" style="margin:0;">What you love, kept where you can see it.</p>
+      <span class="renown"><b>12</b>RENOWN</span>
+    </div>
+    <div class="row" style="margin-top:20px;"><span class="label">Achievements</span><span style="color:var(--text-2);font-size:14px;">tap one</span></div>
+    <div class="ach">
+      <span class="full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 3c-7 1-12 6-13 13l-1 5M20 3c0 7-5 12-12 13"/></svg></span>
+      <span class="lit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="9" r="3"/><path d="M10 3v1.5M4 9h1.5M5.8 4.8l1 1M14.2 4.8l-1 1M8 20h9a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.4 1.5A2.8 2.8 0 0 0 8 20z"/></svg></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></span>
+      <span class="part"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/></svg></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+    </div>
+    <div class="seg"><span>Places</span><span class="on">Films</span><span>Fragrances</span><span>Collectibles</span></div>
+    <div class="row" style="margin-top:26px;"><span class="title" style="padding:0;margin:0;font-size:39px;color:#f7e3b5;">Films</span><span class="btn gold-line">+ Add a film</span></div>
+    <p class="label" style="margin-top:14px;">Up next · three at most</p>
+    <div class="slots">
+      <div class="slot filled"><i></i><b>Movie Four</b></div>
+      <div class="slot">Empty slot</div>
+      <div class="slot">Empty slot</div>
+    </div>
+    <div class="assist">&#10022; Ask the movie assistant</div>
+    <p class="label" style="margin-top:20px;">Your ranking</p>
+    <div class="posters">
+      <div class="poster p1"><span class="rank">1</span><small>A FILM</small><strong>Movie<br>One</strong></div>
+      <div class="poster p2"><span class="rank">2</span><small>A FILM</small><strong>Movie<br>Two</strong></div>
+    </div>
+  </div>
+  <nav class="tabbar">
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9"/></svg>Check-in</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/><path d="M10 9l5 3-5 3z"/></svg>Replays</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>The List</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3h8v3H8zM7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg>Pantry</span>
+    <span class="tab col on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>Collections</span>
+  </nav>
+  <span class="home-ind"></span>
+</div>
+
+<!-- ═══ The Watchman's List ═══ -->
+<div class="screen" id="list">
+  <div class="status"><span>9:41</span><svg viewBox="0 0 64 13" fill="#eef2f7"><rect x="0" y="8" width="3" height="5" rx="1"/><rect x="5" y="5.5" width="3" height="7.5" rx="1"/><rect x="10" y="3" width="3" height="10" rx="1"/><rect x="15" y="0.5" width="3" height="12.5" rx="1"/><path d="M27 4.5a10 10 0 0 1 13 0l-1.6 1.7a7.6 7.6 0 0 0-9.8 0zM29.6 7.3a6.2 6.2 0 0 1 7.8 0L35.8 9a3.9 3.9 0 0 0-4.6 0zM33.5 12.5l-1.8-2a2.6 2.6 0 0 1 3.6 0z"/><rect x="45" y="1" width="16" height="11" rx="3" fill="none" stroke="#eef2f7" stroke-width="1.2"/><rect x="47" y="3" width="10" height="7" rx="1.5"/><rect x="62" y="4.5" width="1.6" height="4" rx=".8"/></svg></div>
+  <div class="header">
+    <span class="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span>
+    <span class="ledger">The Ledger</span>
+    <span class="circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span>
+  </div>
+  <div class="title">The Watchman&rsquo;s List</div>
+  <div class="pad">
+    <p class="sub">Your top restaurants, and nowhere else. Every visit gets 1&ndash;5 stars for the whole experience; every meal gets a score out of 10.</p>
+    <div style="display:flex;gap:10px;margin-top:16px;"><span class="btn teal" style="padding:0 24px;">+ Add a place</span><span class="btn dark">Edit</span></div>
+    <div class="place">
+      <div class="row" style="align-items:flex-start;gap:12px;"><b style="font-size:20px;line-height:1.3;">Restaurant One</b><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span style="font-weight:600;margin-left:4px;">5</span></span></div>
+      <div class="row" style="justify-content:flex-start;gap:22px;margin-top:14px;"><span style="color:var(--text-2);font-size:15px;">Your rating</span><span class="stars" style="font-size:27px;letter-spacing:9px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+      <p class="meta" style="margin-top:8px;">Visits average 4.8 (4 rated)</p>
+      <p class="meta">Italian &middot; Downtown</p>
+      <p class="meta" style="margin-bottom:12px;">4 visits &middot; last Sat, Oct 31 &middot; 4 rated</p>
+      <div class="meal"><span>House Pasta</span><span>9/10</span></div>
+      <div class="meal"><span>Margherita Pizza</span><span>8/10</span></div>
+      <div class="meal"><span>Tiramisu</span><span>10/10</span></div>
+      <div class="meal"><span>Burrata</span><span>not scored</span></div>
+      <div class="meal"><span>Garlic Knots</span><span>8/10</span></div>
+    </div>
+  </div>
+  <nav class="tabbar">
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9"/></svg>Check-in</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/><path d="M10 9l5 3-5 3z"/></svg>Replays</span>
+    <span class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>The List</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3h8v3H8zM7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg>Pantry</span>
+    <span class="tab col"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>Collections</span>
+  </nav>
+  <span class="home-ind"></span>
+</div>
+
+<!-- ═══ The Pantry ═══ -->
+<div class="screen" id="pantry">
+  <div class="status"><span>9:41</span><svg viewBox="0 0 64 13" fill="#eef2f7"><rect x="0" y="8" width="3" height="5" rx="1"/><rect x="5" y="5.5" width="3" height="7.5" rx="1"/><rect x="10" y="3" width="3" height="10" rx="1"/><rect x="15" y="0.5" width="3" height="12.5" rx="1"/><path d="M27 4.5a10 10 0 0 1 13 0l-1.6 1.7a7.6 7.6 0 0 0-9.8 0zM29.6 7.3a6.2 6.2 0 0 1 7.8 0L35.8 9a3.9 3.9 0 0 0-4.6 0zM33.5 12.5l-1.8-2a2.6 2.6 0 0 1 3.6 0z"/><rect x="45" y="1" width="16" height="11" rx="3" fill="none" stroke="#eef2f7" stroke-width="1.2"/><rect x="47" y="3" width="10" height="7" rx="1.5"/><rect x="62" y="4.5" width="1.6" height="4" rx=".8"/></svg></div>
+  <div class="header">
+    <span class="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span>
+    <span class="ledger">The Ledger</span>
+    <span class="circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span>
+  </div>
+  <div class="title">The Pantry</div>
+  <div class="pad">
+    <p class="sub">What you eat again and again, recorded once. Log it by count and the numbers come from here, with no guessing.</p>
+    <div class="seg2"><span class="on">Foods</span><span>Diary</span></div>
+    <div style="display:flex;gap:10px;margin-top:14px;"><span class="btn teal" style="height:50px;">+ Add a food</span><span class="find">Find a food</span></div>
+    <div class="food">
+      <div class="thumb"><svg viewBox="0 0 70 70"><defs><linearGradient id="t1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9d2c5"/><stop offset="1" stop-color="#8f877b"/></linearGradient><linearGradient id="c1" x1="0" x2="1"><stop offset="0" stop-color="#1f6f7a"/><stop offset=".45" stop-color="#5fc3c8"/><stop offset="1" stop-color="#1a5d66"/></linearGradient></defs><rect width="70" height="70" fill="url(#t1)"/><rect x="22" y="12" width="26" height="48" rx="5" fill="url(#c1)"/><rect x="24" y="10" width="22" height="4" rx="2" fill="#b8c2c6"/><rect x="22" y="30" width="26" height="9" fill="#e8f4f3" opacity=".85"/></svg><span class="cam"><svg viewBox="0 0 24 24" fill="none" stroke="#9fb2bd" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span></div>
+      <div><b>Sparkling Water</b><p>1 can</p><p>0 kcal &middot; 0 g protein per can</p><p>Eaten 4 times</p></div>
+    </div>
+    <div class="food">
+      <div class="thumb"><svg viewBox="0 0 70 70"><defs><linearGradient id="t2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9b79c"/><stop offset="1" stop-color="#7d6a52"/></linearGradient></defs><rect width="70" height="70" fill="url(#t2)"/><path d="M18 24h34l-4 32a4 4 0 0 1-4 3H26a4 4 0 0 1-4-3z" fill="#f4f1ea"/><rect x="16" y="19" width="38" height="7" rx="3" fill="#e3ddd1"/><rect x="21" y="35" width="28" height="10" fill="#3db1b5" opacity=".8"/></svg><span class="cam"><svg viewBox="0 0 24 24" fill="none" stroke="#9fb2bd" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span></div>
+      <div><b>Greek Yogurt</b><p>1 cup (170 g)</p><p>100 kcal &middot; 17 g protein per cup</p><p>Eaten 6 times</p></div>
+    </div>
+    <div class="food">
+      <div class="thumb"><svg viewBox="0 0 70 70"><defs><linearGradient id="t3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bfb3a3"/><stop offset="1" stop-color="#6e6458"/></linearGradient><linearGradient id="w3" x1="0" x2="1"><stop offset="0" stop-color="#3a2a1c"/><stop offset=".5" stop-color="#7a5532"/><stop offset="1" stop-color="#3a2a1c"/></linearGradient></defs><rect width="70" height="70" fill="url(#t3)"/><g transform="rotate(-18 35 35)"><rect x="10" y="27" width="50" height="17" rx="3" fill="url(#w3)"/><rect x="25" y="29" width="20" height="13" rx="2" fill="#e4723c"/></g></svg><span class="cam"><svg viewBox="0 0 24 24" fill="none" stroke="#9fb2bd" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span></div>
+      <div><b>Protein Bar</b><p>1 bar</p><p>200 kcal &middot; 20 g protein per bar</p><p>Eaten 3 times</p></div>
+    </div>
+  </div>
+  <nav class="tabbar">
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9"/></svg>Check-in</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/><path d="M10 9l5 3-5 3z"/></svg>Replays</span>
+    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>The List</span>
+    <span class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3h8v3H8zM7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg>Pantry</span>
+    <span class="tab col"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>Collections</span>
+  </nav>
+  <span class="home-ind"></span>
+</div>
+
+</body>
+</html>

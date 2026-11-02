@@ -170,10 +170,12 @@
 
   /* ── The rest of your life ────────────────────────────────── */
   .more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
-  .more-card { padding: 26px 24px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
-  .more-card svg { width: 24px; height: 24px; color: var(--brand); margin-bottom: 18px; }
-  .more-card h3 { font-family: var(--font-black); font-weight: 400; letter-spacing: 0; font-size: 1.65rem; color: var(--gold); margin-bottom: 8px; }
-  .more-card p { color: var(--text-2); font-size: 0.98rem; }
+  .more-card { border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
+  .more-shot { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .more-shot img { width: 100%; aspect-ratio: 960 / 900; object-fit: cover; object-position: top; }
+  .more-body { padding: 20px 22px 24px; }
+  .more-body p { color: var(--text-2); font-size: 0.98rem; }
+  .demo-note { margin-top: 14px; font-size: 0.82rem; color: var(--text-3); }
   @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } }
 
   /* ── The Order ────────────────────────────────────────────── */
@@ -442,21 +444,28 @@
       <h2 id="more-title" class="statement reveal reveal-delay-1">It keeps the rest of your life, too.</h2>
       <ul class="more-grid">
         <li class="more-card reveal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8v3H8z"/><path d="M7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9l1-3z"/><path d="M9 12h6v5H9z"/></svg>
-          <h3>The Pantry</h3>
-          <p>What you eat again and again, recorded once, with a photo of the label.</p>
+          <figure class="more-shot"><img src="/assets/app/pantry-960.webp" srcset="/assets/app/pantry-480.webp 480w, /assets/app/pantry-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="The Pantry screen in the app, shown with demo foods: sparkling water, Greek yogurt and a protein bar, each with a label photo, calories, protein and how often it was eaten."></figure>
+          <div class="more-body">
+            <h3 class="sr-only">The Pantry</h3>
+            <p>What you eat again and again, recorded once, with a photo of the label.</p>
+          </div>
         </li>
         <li class="more-card reveal reveal-delay-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V3M9 13v8"/><path d="M17 21V3c-2 1-3 4-3 7s1 3 3 3"/></svg>
-          <h3>The Watchman&rsquo;s List</h3>
-          <p>Your top restaurants, and nowhere else. Stars for every visit, a score for every meal.</p>
+          <figure class="more-shot"><img src="/assets/app/list-960.webp" srcset="/assets/app/list-480.webp 480w, /assets/app/list-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="The Watchman's List screen in the app, shown with a demo restaurant: five stars for the visit and a score out of 10 for each meal."></figure>
+          <div class="more-body">
+            <h3 class="sr-only">The Watchman&rsquo;s List</h3>
+            <p>Your top restaurants, and nowhere else. Stars for every visit, a score for every meal.</p>
+          </div>
         </li>
         <li class="more-card reveal reveal-delay-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M3 12h18M5 4v8M9 6v6M13 4v8M17 7l3 5M5 14v6M10 14v6M15 15l3 5"/></svg>
-          <h3>Collections</h3>
-          <p>What you love, kept where you can see it: places, films, fragrances and collectibles.</p>
+          <figure class="more-shot"><img src="/assets/app/films-960.webp" srcset="/assets/app/films-480.webp 480w, /assets/app/films-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="Collections in the app, on the Films shelf with demo titles: an up-next queue, the movie assistant and a ranked list starting with Movie One and Movie Two."></figure>
+          <div class="more-body">
+            <h3 class="sr-only">Collections</h3>
+            <p>What you love, kept where you can see it: places, films, fragrances and collectibles.</p>
+          </div>
         </li>
       </ul>
+      <p class="demo-note reveal">Screens shown with demo data.</p>
     </div>
   </section>
 
