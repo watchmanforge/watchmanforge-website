@@ -244,7 +244,7 @@ HEAD_TMPL = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="#05060b">
 <meta property="og:title" content="{ogtitle}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="{ogtype}">

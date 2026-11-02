@@ -1,8 +1,8 @@
 /* ============================================================
    WATCHMAN FORGE — Main Stylesheet
-   Quiet, premium, dark. One accent (antique gold, from the
-   knights' lamplight), one typeface (Inter), a serif for the
-   brand voice, a mono for small machine labels. No glows.
+   Matches the app: deep navy-black, teal for actions, gold for
+   titles and scores, ember for lit days. Inter for reading, the
+   app's blackletter for titles, a mono for small machine labels.
 
    PALETTE: every colour lives in the tokens below (the gold is
    --brand, not --accent: the gallery owns --accent for its
@@ -10,7 +10,7 @@
    the app, change the tokens; nothing else hard-codes colour.
    ============================================================ */
 
-/* Inter — self-hosted (OFL, see /assets/webfonts/LICENSE.txt). One file, 48 KB. */
+/* Self-hosted (OFL, see /assets/webfonts/LICENSE.txt): Inter 48 KB, blackletter 26 KB. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -18,30 +18,45 @@
   font-display: swap;
   src: url(/assets/webfonts/inter-latin-var.woff2) format('woff2');
 }
+@font-face {
+  font-family: 'UnifrakturMaguntia';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/assets/webfonts/unifraktur-maguntia-latin.woff2) format('woff2');
+}
 
 /* ============================================================
    Tokens
    ============================================================ */
 :root {
-  /* surfaces — warm near-black, not blue-black */
-  --bg:          #0a0a0b;
-  --bg-raised:   #0f0f11;
-  --surface:     #141416;
-  --surface-2:   #1b1b1e;
-  --line:        rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
+  /* surfaces — the app's navy-black (sampled from its screens) */
+  --bg:          #05060b;
+  --bg-raised:   #080c14;
+  --surface:     #0c131d;
+  --surface-2:   #121b27;
+  --line:        rgba(130, 155, 190, 0.14);
+  --line-strong: rgba(140, 165, 200, 0.26);
 
-  /* text — bone, not pure white */
-  --text:   #f3efe8;
-  --text-2: #b3ada4;   /* 9:1 on --bg */
-  --text-3: #857f77;   /* 5:1 on --bg */
+  /* text */
+  --text:   #eef2f7;
+  --text-2: #96a2b4;   /* 7.5:1 on --bg */
+  --text-3: #737f92;   /* 5:1 on --bg */
 
-  /* the one accent */
-  --brand:      #e2b45c;
-  --brand-hi:   #f0c977;
-  --brand-ink:  #16110a;              /* text on accent */
-  --brand-soft: rgba(226, 180, 92, 0.12);
-  --brand-line: rgba(226, 180, 92, 0.35);
+  /* teal: every action (buttons, links, focus) */
+  --brand:      #3db1b5;
+  --brand-hi:   #5cc5c8;
+  --brand-ink:  #031a1c;              /* text on teal */
+  --brand-soft: rgba(61, 177, 181, 0.12);
+  --brand-line: rgba(61, 177, 181, 0.40);
+
+  /* gold: titles, scores, the accent line of a headline */
+  --gold:      #f0c666;
+  --gold-soft: rgba(240, 198, 102, 0.12);
+  --gold-line: rgba(240, 198, 102, 0.35);
+
+  /* ember: lit days, as on the check-in screen */
+  --ember: #e4723c;
 
   /* states (phone UI, form errors) */
   --ok:   #3ec27b;
@@ -50,6 +65,7 @@
 
   --font-body:  'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  --font-black: 'UnifrakturMaguntia', 'Iowan Old Style', Georgia, serif;
   --font-mono:  ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   --radius-sm: 10px;
@@ -153,19 +169,22 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
   max-width: 34em;
   line-height: 1.6;
 }
-.text-gradient { color: var(--brand); }   /* legacy name: the accent line of a headline */
+.text-gradient { color: var(--gold); }    /* legacy name: the accent line of a headline */
 .text-silver   { color: var(--text); }
 .text-dim      { color: var(--text-3); }
 .serif { font-family: var(--font-serif); }
+.blackletter { font-family: var(--font-black); font-weight: 400; letter-spacing: 0; }
 
+/* Section kicker, set like the app's screen titles ("The Ledger", "The Forge"). */
 .eyebrow {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand);
-  margin-bottom: 18px;
+  font-family: var(--font-black);
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: var(--gold);
+  margin-bottom: 14px;
 }
 
 /* ============================================================
@@ -210,13 +229,13 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   height: var(--nav-h);
   display: flex; align-items: center;
-  background: rgba(10, 10, 11, 0.6);
+  background: rgba(5, 6, 11, 0.6);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   border-bottom: 1px solid transparent;
   transition: background-color .2s ease, border-color .2s ease;
 }
-#nav.scrolled { background: rgba(10, 10, 11, 0.86); border-bottom-color: var(--line); }
+#nav.scrolled { background: rgba(5, 6, 11, 0.88); border-bottom-color: var(--line); }
 .nav-inner {
   max-width: var(--max-w); width: 100%; margin: 0 auto; padding: 0 var(--pad-x);
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
@@ -258,6 +277,7 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
 }
 @media (max-width: 900px) { .nav-wordmark { height: 26px; } }
 .nav-cta { gap: 0; }
+.nav-cta-more { margin-left: 0.28em; }
 @media (max-width: 560px) {
   .nav-cta-more { display: none; }
 }

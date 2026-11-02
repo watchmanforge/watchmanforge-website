@@ -1,7 +1,9 @@
 Inter — Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+UnifrakturMaguntia — © the UnifrakturMaguntia project authors (https://fonts.google.com/specimen/UnifrakturMaguntia/about)
 
-Licensed under the SIL Open Font License, Version 1.1:
+Both licensed under the SIL Open Font License, Version 1.1:
 https://openfontlicense.org/open-font-license-official-text/
 
-inter-latin-var.woff2 is the Latin subset of the variable font, as served by
-Google Fonts, self-hosted so visitors' browsers never contact Google.
+Both files are the Latin subsets served by Google Fonts, self-hosted so
+visitors' browsers never contact Google. UnifrakturMaguntia is the blackletter
+the app uses for its screen titles.

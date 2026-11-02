@@ -24,7 +24,7 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = ("/mnt/c/Users/sirdo/OneDrive/Claude/Brain Vault/Logos/Watchman Forge/"
        "watchman-forge-logo-metal")
-BG = (10, 10, 11, 255)   # --bg in css/main.css
+BG = (5, 6, 11, 255)   # --bg in css/main.css
 
 
 def main():
