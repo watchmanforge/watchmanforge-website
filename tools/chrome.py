@@ -77,7 +77,7 @@ FOOTER = """<footer id="footer">
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 Watchman Forge &middot; Forged in Faith. Built for the Future.</p>
-    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" data-vref="PS 127:1">
+    <img src="/assets/images/cross-transparent.webp" alt="" class="footer-cross" width="128" height="128" data-vref="PS 121:8">
   </div>
 </footer>"""
 
