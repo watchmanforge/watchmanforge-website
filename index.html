@@ -188,7 +188,9 @@
   /* ── The idea (the Watchman on the wall) ───────────────────── */
   .watchtower { position: relative; overflow: hidden; min-height: clamp(500px, 68vh, 680px); display: flex; align-items: flex-start;
     background: linear-gradient(to bottom, #05060b 0%, #0b1424 55%, var(--bg) 100%); }
-  .wt-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .wt-art { position: absolute; inset: 0; z-index: 0; }
+  .wt-art img, .wt-fx { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .wt-art img { object-fit: cover; }
   .wt-stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
   .wt-star { position: absolute; background: #dfe9f5; border-radius: 50%; opacity: .45; animation: wt-tw 3s ease-in-out infinite; }
   @keyframes wt-tw { 0%,100% { opacity: .12; } 50% { opacity: .7; } }
@@ -196,17 +198,33 @@
   .wt-inner { max-width: 540px; }
   .wt-inner .section-sub { margin-top: 20px; }
   .motto { margin-top: 26px; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.2rem, 2.2vw, 1.45rem); color: var(--gold); }
-  .wt-lantern-glow { transform-box: view-box; transform-origin: 871px 308px; animation: wt-lglow 3.4s ease-in-out infinite; }
-  @keyframes wt-lglow { 0%,100% { opacity: .7; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.05); } }
-  .wt-torch { transform-box: view-box; transform-origin: 1009px 329px; animation: wt-flick 1.7s ease-in-out infinite; }
-  @keyframes wt-flick { 0%,100% { opacity: .75; transform: scale(.9); } 40% { opacity: 1; transform: scale(1.08); } 70% { opacity: .85; } }
-  @media (prefers-reduced-motion: reduce) { .wt-lantern-glow, .wt-torch, .wt-star { animation: none !important; } }
+  /* What moves in the painting; paused until the section is on screen (watchman-fx.js adds .is-live) */
+  .wt-fx * { animation-play-state: paused; }
+  .watchtower.is-live .wt-fx * { animation-play-state: running; }
+  .wt-lens { opacity: .75; transform-box: fill-box; transform-origin: center; animation: wt-breathe 3.6s ease-in-out infinite; }
+  @keyframes wt-breathe { 0%,100% { opacity: .55; transform: scale(.92); } 50% { opacity: .95; transform: scale(1.06); } }
+  .wt-beacon { opacity: .6; transform-box: fill-box; transform-origin: center; animation: wt-signal-light 4.8s ease-out infinite; }
+  @keyframes wt-signal-light { 0%,100% { opacity: .15; transform: scale(.7); } 10% { opacity: 1; transform: scale(1.15); } 36% { opacity: .25; transform: scale(.85); } }
+  .wt-blink { animation: wt-blink 2.4s steps(1) infinite; }
+  @keyframes wt-blink { 0% { opacity: 1; } 9% { opacity: 0; } }
+  .wt-torch { transform-box: fill-box; transform-origin: center; animation: wt-flick 1.7s ease-in-out infinite; }
+  @keyframes wt-flick { 0%,100% { opacity: .7; transform: scale(.9); } 40% { opacity: 1; transform: scale(1.1); } 70% { opacity: .8; } }
+  .wt-motes circle { fill: #fff1cf; opacity: 0; animation: wt-mote 9s linear infinite; }
+  @keyframes wt-mote { 0% { opacity: 0; transform: translate(0, 0); } 25%, 70% { opacity: .8; } 100% { opacity: 0; transform: translate(-6px, 8px); } }
+  .wt-signal { fill: none; stroke: #b9f4f2; stroke-width: 1; stroke-linecap: round; stroke-dasharray: 5 95; stroke-dashoffset: 5;
+    opacity: .9; animation: wt-up 5.5s cubic-bezier(.45, 0, .2, 1) infinite; }
+  @keyframes wt-up { 0% { stroke-dashoffset: 5; opacity: 0; } 8% { opacity: .9; } 55% { stroke-dashoffset: -95; opacity: .9; } 60%, 100% { stroke-dashoffset: -95; opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .wt-fx * { animation: none !important; }
+    .wt-motes, .wt-signal { display: none; }
+    .wt-star { animation: none !important; }
+  }
   @media (max-width: 760px) {
     /* Phones: copy first, then the scene below it, cropped on the Watchman (watchman-fx.js narrows the viewBox). */
-    .watchtower { min-height: 0; flex-direction: column; }
+    .watchtower { min-height: 0; flex-direction: column; background: var(--bg); }
     .wt-content { order: 1; padding-bottom: 8px; }
-    .wt-svg { order: 2; position: relative; inset: auto; height: auto; aspect-ratio: 540 / 360; flex: none;
-      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%); mask-image: linear-gradient(to bottom, transparent, #000 28%); }
+    .wt-art { order: 2; position: relative; inset: auto; width: 100%; aspect-ratio: 440 / 404; flex: none;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
   }
 
   /* ── One day in the Forge ─────────────────────────────────── */
@@ -418,90 +436,41 @@
 
   <!-- ── THE IDEA ─────────────────────────────────────────────── -->
   <section class="watchtower" id="idea" aria-labelledby="idea-title">
-    <svg class="wt-svg" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <!-- The Watchman on the wall: lantern up, watching the Ranger come in along the road. -->
-      <defs>
-        <linearGradient id="wtSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#05060b"/><stop offset=".55" stop-color="#0a1322"/><stop offset=".7" stop-color="#0f1b2e"/><stop offset="1" stop-color="#0a1120"/>
-        </linearGradient>
-        <radialGradient id="wtHorizon" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#1d3150" stop-opacity=".55"/><stop offset="1" stop-color="#1d3150" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="wtLamp" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#fff1cf" stop-opacity=".95"/><stop offset=".18" stop-color="#f0c666" stop-opacity=".55"/><stop offset=".5" stop-color="#f0c666" stop-opacity=".14"/><stop offset="1" stop-color="#f0c666" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="wtSpill" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#f0c666" stop-opacity=".22"/><stop offset="1" stop-color="#f0c666" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="wtTorch" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#ffd2a0"/><stop offset=".25" stop-color="#e4723c" stop-opacity=".6"/><stop offset="1" stop-color="#e4723c" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="wtMoon" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#dfe9f5" stop-opacity=".22"/><stop offset="1" stop-color="#dfe9f5" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="wtWall" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0d1420"/><stop offset="1" stop-color="#05070c"/>
-        </linearGradient>
-        <linearGradient id="wtRim" x1="0" y1="0" x2="1" y2="0">
-          <stop offset=".45" stop-color="#f0c666" stop-opacity="0"/><stop offset="1" stop-color="#f0c666" stop-opacity=".75"/>
-        </linearGradient>
-        <linearGradient id="wtFadeL" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#05060b" stop-opacity=".9"/><stop offset=".45" stop-color="#05060b" stop-opacity="0"/>
-        </linearGradient>
-        <mask id="wtMoonCut"><rect width="1200" height="460" fill="#fff"/><circle cx="1012" cy="134" r="17" fill="#000"/></mask>
-      </defs>
-      <rect width="1200" height="460" fill="url(#wtSky)"/>
-      <ellipse cx="860" cy="318" rx="560" ry="80" fill="url(#wtHorizon)"/>
-      <g fill="#eae4d6">
-        <circle cx="120" cy="70" r="1" opacity=".5"/><circle cx="245" cy="132" r="1.2" opacity=".35"/>
-        <circle cx="380" cy="52" r="1" opacity=".45"/><circle cx="512" cy="110" r="1" opacity=".3"/>
-        <circle cx="1080" cy="150" r="1.2" opacity=".5"/><circle cx="1120" cy="60" r="1" opacity=".35"/>
-        <circle cx="905" cy="40" r="1" opacity=".4"/><circle cx="662" cy="66" r="1" opacity=".35"/>
-        <circle cx="760" cy="150" r="1" opacity=".3"/><circle cx="1170" cy="200" r="1" opacity=".4"/>
-      </g>
-      <!-- a thin moon -->
-      <circle cx="1000" cy="140" r="60" fill="url(#wtMoon)"/>
-      <circle cx="1000" cy="140" r="18" fill="#efe6cf" opacity=".85" mask="url(#wtMoonCut)"/>
-      <!-- far hills, the field, and the road home -->
-      <path d="M0 322C110 314 210 308 320 312S520 322 640 316S850 302 975 309S1120 318 1200 312V460H0z" fill="#0a111d"/>
-      <path d="M0 336C160 330 330 334 470 338S760 332 900 330S1100 334 1200 330V460H0z" fill="#070c15"/>
-      <path d="M884 352Q940 346 984 340T1044 326Q1056 322 1064 318L1067 318Q1060 323 1049 327T992 341Q950 348 910 352z" fill="#16222f" opacity=".85"/>
-      <!-- the Ranger, coming in with a torch -->
-      <circle class="wt-torch" cx="1009" cy="329" r="22" fill="url(#wtTorch)"/>
-      <g fill="#04060a">
-        <circle cx="1005" cy="330.6" r="1.6"/>
-        <path d="M1003.4 332.6h3.2l1.6 7.4h-6.4z"/>
-      </g>
-      <path d="M1006.4 334.2l2.8-4.6" stroke="#2a1c10" stroke-width="1" stroke-linecap="round"/>
-      <circle cx="1009.3" cy="329.2" r="1.5" fill="#ffd9a6"/>
-      <!-- the tower -->
-      <path d="M698 232h86v134h-86z" fill="#0b111c" stroke="#18222f" stroke-width="1"/>
-      <path d="M696 220h15v12h-15zM720 220h15v12h-15zM744 220h15v12h-15zM768 220h15v12h-15z" fill="#0b111c" stroke="#18222f" stroke-width="1"/>
-      <path d="M694 232h94v5h-94z" fill="#101824"/>
-      <path d="M737 268a4 4 0 0 1 8 0v16h-8z" fill="#f0c666" opacity=".55"/>
-      <path d="M737 312a4 4 0 0 1 8 0v14h-8z" fill="#f0c666" opacity=".22"/>
-      <!-- lantern glow, behind the Watchman -->
-      <circle class="wt-lantern-glow" cx="871" cy="308" r="78" fill="url(#wtLamp)"/>
-      <!-- the Watchman: hooded, spear in one hand, lantern held out toward the road -->
-      <g transform="translate(838 378)">
-        <path d="M-15 6V-148" stroke="#04060a" stroke-width="2.4"/>
-        <path d="M-15-163l3.6 13-3.6 4-3.6-4z" fill="#04060a" stroke="url(#wtRim)" stroke-width=".8"/>
-        <path d="M-9-90C-12-100-9-110-1-112C6-113 11-107 11-99L12.5-94C12.5-91 10.5-89 8-88ZM-11-89C-15-70-18-45-22-20C-25-8-30-2-35 2H17C15-20 13-50 12-76C12-83 11-88 8-89ZM6-86C14-82 24-74 32-67L29-62C21-68 12-74 5-77Z" fill="#04060a" stroke="url(#wtRim)" stroke-width="1.2" stroke-linejoin="round"/>
-        <circle cx="-14" cy="-68" r="3.2" fill="#04060a"/>
-        <path d="M31-65v6" stroke="#04060a" stroke-width="1.4"/>
-        <path d="M26-59h10l-5-4z" fill="#0b0f16"/>
-        <rect x="27" y="-59" width="8" height="11" rx="1" fill="#ffe2a3"/>
-        <path d="M27-53.5h8M31-59v11" stroke="#7a5a26" stroke-width=".8"/>
-        <path d="M26-48h10v2h-10z" fill="#0b0f16"/>
-      </g>
-      <!-- the wall, and the lantern's light on it -->
-      <path d="M0 366H1200V460H0z" fill="url(#wtWall)"/>
-      <path d="M-8 352h28v14h-28zM36 352h28v14h-28zM80 352h28v14h-28zM124 352h28v14h-28zM168 352h28v14h-28zM212 352h28v14h-28zM256 352h28v14h-28zM300 352h28v14h-28zM344 352h28v14h-28zM388 352h28v14h-28zM432 352h28v14h-28zM476 352h28v14h-28zM520 352h28v14h-28zM564 352h28v14h-28zM608 352h28v14h-28zM652 352h28v14h-28zM696 352h28v14h-28zM740 352h28v14h-28zM784 352h28v14h-28zM828 352h28v14h-28zM872 352h28v14h-28zM916 352h28v14h-28zM960 352h28v14h-28zM1004 352h28v14h-28zM1048 352h28v14h-28zM1092 352h28v14h-28zM1136 352h28v14h-28zM1180 352h28v14h-28z" fill="#0d1420"/>
-      <path d="M0 366H1200" stroke="#1c2838" stroke-width="1"/>
-      <path d="M0 398H1200M0 430H1200M40 366v32M150 366v32M260 366v32M370 366v32M480 366v32M590 366v32M700 366v32M810 366v32M920 366v32M1030 366v32M1140 366v32M95 398v32M205 398v32M315 398v32M425 398v32M535 398v32M645 398v32M755 398v32M865 398v32M975 398v32M1085 398v32" stroke="#0f1724" stroke-width="1"/>
-      <ellipse cx="872" cy="366" rx="150" ry="46" fill="url(#wtSpill)"/>
-      <rect width="1200" height="460" fill="url(#wtFadeL)"/>
-    </svg>
+    <div class="wt-art" aria-hidden="true">
+      <!-- The watchtower: painted by tools/watchtower/paint.py. The SVG on top is only what moves, in the painting's coordinates. -->
+      <picture>
+        <source media="(max-width: 760px)" srcset="/assets/images/watchtower-phone-660.webp 660w, /assets/images/watchtower-phone-1100.webp 1100w" sizes="100vw">
+        <img src="/assets/images/watchtower-1500.webp" srcset="/assets/images/watchtower-1500.webp 1500w, /assets/images/watchtower-2400.webp 2400w" sizes="100vw" alt="" width="2400" height="920" loading="lazy" decoding="async">
+      </picture>
+      <svg class="wt-fx" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id="wtGold"><stop offset="0" stop-color="#fff3d6" stop-opacity=".9"/><stop offset=".3" stop-color="#f0c666" stop-opacity=".35"/><stop offset="1" stop-color="#f0c666" stop-opacity="0"/></radialGradient>
+          <radialGradient id="wtEmber"><stop offset="0" stop-color="#ffc38a"/><stop offset=".35" stop-color="#e4723c" stop-opacity=".55"/><stop offset="1" stop-color="#e4723c" stop-opacity="0"/></radialGradient>
+          <clipPath id="wtBeam"><polygon points="823.4,114.8 830.4,108.3 1053.3,310.9 1006.0,354.3"/></clipPath>
+        </defs>
+        <path class="wt-signal" d="M808.89 380L804.34 170" pathLength="100"/>
+        <g class="wt-motes" clip-path="url(#wtBeam)">
+          <circle cx="852.6" cy="134.4" r="0.49" style="animation-duration:7.8s;animation-delay:-0.8s"/>
+          <circle cx="860.8" cy="155.1" r="0.63" style="animation-duration:10.8s;animation-delay:-2.7s"/>
+          <circle cx="879.9" cy="165.1" r="0.41" style="animation-duration:7.5s;animation-delay:-2.6s"/>
+          <circle cx="890.9" cy="188.7" r="0.63" style="animation-duration:11.0s;animation-delay:-2.3s"/>
+          <circle cx="897.7" cy="191.7" r="0.61" style="animation-duration:11.3s;animation-delay:-10.6s"/>
+          <circle cx="907.2" cy="201.8" r="0.59" style="animation-duration:9.5s;animation-delay:-2.1s"/>
+          <circle cx="931.3" cy="213.3" r="0.68" style="animation-duration:11.3s;animation-delay:-6.6s"/>
+          <circle cx="928.8" cy="235.6" r="0.55" style="animation-duration:11.4s;animation-delay:-10.2s"/>
+          <circle cx="951.3" cy="244.2" r="0.56" style="animation-duration:9.2s;animation-delay:-1.9s"/>
+          <circle cx="953.7" cy="261.4" r="0.37" style="animation-duration:7.2s;animation-delay:-7.5s"/>
+          <circle cx="970.6" cy="269.6" r="0.51" style="animation-duration:8.7s;animation-delay:-12.0s"/>
+          <circle cx="984.1" cy="279.3" r="0.42" style="animation-duration:10.2s;animation-delay:-3.3s"/>
+          <circle cx="990.8" cy="301.3" r="0.46" style="animation-duration:9.8s;animation-delay:-10.9s"/>
+          <circle cx="1015.5" cy="296.7" r="0.43" style="animation-duration:10.8s;animation-delay:-7.4s"/>
+        </g>
+        <circle class="wt-lens" cx="826.9" cy="111.5" r="16" fill="url(#wtGold)"/>
+        <circle class="wt-beacon" cx="1058.0" cy="232.6" r="9" fill="url(#wtGold)"/>
+        <circle class="wt-blink" cx="747.0" cy="51" r="3" fill="url(#wtEmber)"/>
+        <circle class="wt-torch" cx="1023.3" cy="322.6" r="3.4" fill="url(#wtEmber)"/>
+      </svg>
+    </div>
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
       <div class="wt-inner">
@@ -802,6 +771,6 @@
 <!-- /chrome:footer -->
 
 <script src="/js/main.js?v=397547b940"></script>
-<script src="/js/watchman-fx.js?v=e88c6b4c25"></script>
+<script src="/js/watchman-fx.js?v=1a2373d7af"></script>
 </body>
 </html>

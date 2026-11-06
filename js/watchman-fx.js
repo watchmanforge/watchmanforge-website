@@ -74,25 +74,36 @@
     window.addEventListener('scroll', hideTip, { passive: true });
   }
 
-  /* ---------- 3. The Watch — stars over the wall ---------- */
+  /* ---------- 3. The Watch — the watchtower painting, and stars over it ---------- */
   function buildWatch(){
-    // Desktop sees the whole wall; phones get a crop on the tower, the Watchman and the road.
+    var section = D.querySelector('.watchtower');
+    // Desktop sees the whole painting; phones get the crop on the tower (tools/watchtower/paint.py, PHONE).
+    // The moving lights sit in the painting's coordinates, so their viewBox follows the picture.
     // viewBox is an attribute, not CSS, so it swaps here.
-    var svg = D.querySelector('.wt-svg');
-    if (svg && window.matchMedia){
-      var mq = matchMedia('(max-width: 760px)');
-      var frame = function(){ svg.setAttribute('viewBox', mq.matches ? '600 100 540 360' : '0 0 1200 460'); };
+    var fx = D.querySelector('.wt-fx');
+    var mq = window.matchMedia ? matchMedia('(max-width: 760px)') : null;
+    if (fx && mq){
+      var frame = function(){ fx.setAttribute('viewBox', mq.matches ? '676 14 440 404' : '0 0 1200 460'); };
       frame();
       if (mq.addEventListener) mq.addEventListener('change', frame);
     }
+    // Only animate while the scene is on screen.
+    if (section && 'IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        es.forEach(function(e){ section.classList.toggle('is-live', e.isIntersecting); });
+      }).observe(section);
+    } else if (section) section.classList.add('is-live');
+
     var stars = D.getElementById('wt-stars');
     if (!stars) return;
-    var n = (window.matchMedia && matchMedia('(max-width:760px)').matches) ? 34 : 62;
+    // On desktop the stars stay in the clear sky over the copy, away from the clouds and the beam.
+    var phone = mq && mq.matches;
+    var n = phone ? 34 : 54;
     var frag = D.createDocumentFragment();
     for (var i=0;i<n;i++){
       var s = D.createElement('span'); s.className = 'wt-star';
-      s.style.left = (Math.random()*100) + '%';
-      s.style.top  = (Math.random()*60) + '%';
+      s.style.left = (Math.random()*(phone ? 100 : 58)) + '%';
+      s.style.top  = (Math.random()*(phone ? 50 : 46)) + '%';
       var sz = (Math.random()*1.6 + 0.6).toFixed(2);
       s.style.width = s.style.height = sz + 'px';
       s.style.animationDelay = (Math.random()*4).toFixed(2) + 's';
