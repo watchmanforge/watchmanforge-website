@@ -74,14 +74,14 @@
     window.addEventListener('scroll', hideTip, { passive: true });
   }
 
-  /* ---------- 3. The Watch — stars over the tower ---------- */
+  /* ---------- 3. The Watch — stars over the wall ---------- */
   function buildWatch(){
-    // Desktop sees the full seascape; phones get a tower-focused crop.
+    // Desktop sees the whole wall; phones get a crop on the tower, the Watchman and the road.
     // viewBox is an attribute, not CSS, so it swaps here.
     var svg = D.querySelector('.wt-svg');
     if (svg && window.matchMedia){
       var mq = matchMedia('(max-width: 760px)');
-      var frame = function(){ svg.setAttribute('viewBox', mq.matches ? '640 0 560 460' : '0 0 1200 460'); };
+      var frame = function(){ svg.setAttribute('viewBox', mq.matches ? '600 100 540 360' : '0 0 1200 460'); };
       frame();
       if (mq.addEventListener) mq.addEventListener('change', frame);
     }

@@ -1,6 +1,6 @@
 /* ============================================================
    WATCHMAN FORGE — Main JavaScript
-   Nav · mobile menu · scroll reveal · waitlist forms
+   Nav · mobile menu · scroll reveal · app-screen dates · waitlist forms
    ============================================================ */
 
 (function () {
@@ -65,6 +65,25 @@
       reveals.forEach(el => el.classList.add('visible'));
     }
   }
+
+  /* ── App screens: today's date ──────────────────────────────
+     The app screens on the homepage carry demo data, but their dates
+     follow the visitor's own calendar. data-day is days from today;
+     data-fmt="long" is the Ledger's "Friday, the 6th of November",
+     the default is the app's "Fri, Nov 6, 2026". */
+  const DAYS   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                  'August', 'September', 'October', 'November', 'December'];
+  const nth = (n) => n + ((n > 3 && n < 21) ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th'));
+  const FORMATS = {
+    long:  (d) => `${DAYS[d.getDay()]}, the ${nth(d.getDate())} of ${MONTHS[d.getMonth()]}`,
+    short: (d) => `${DAYS[d.getDay()].slice(0, 3)}, ${MONTHS[d.getMonth()].slice(0, 3)} ${d.getDate()}, ${d.getFullYear()}`,
+  };
+  document.querySelectorAll('[data-day]').forEach(el => {
+    const d = new Date();
+    d.setDate(d.getDate() + Number(el.dataset.day));
+    el.textContent = (FORMATS[el.dataset.fmt] || FORMATS.short)(d);
+  });
 
   /* ── Waitlist forms ─────────────────────────────────────────
      Plain HTML forms that POST to Buttondown (our email list host).

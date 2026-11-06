@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <title>Demo screens — Watchman Forge app (marketing only, demo data)</title>
 <!--
-  Rebuilds of real app screens (Collections > Films, The Watchman's List,
-  The Pantry) with made-up data, for the launch site. Layout, type and colour
+  Rebuilds of real app screens (Collections > Films, The Pantry) with
+  made-up data, for the launch site. (The Watchman's List, the Ledger and the
+  Forge are live HTML on the homepage instead, so their dates stay current.) Layout, type and colour
   follow the founder's screenshots of 2026-11-01; every name, number and
   poster here is fake. Rendered by tools/demo-screens/shoot.js.
   Not deployed (tools/ is in .vercelignore).
@@ -79,13 +80,6 @@
   .p1::after, .p2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.35), transparent 60%); }
   .poster > * { position: relative; z-index: 1; }
 
-  /* The Watchman's List */
-  .place { margin-top: 18px; border: 1.5px solid rgba(240,198,102,.4); border-radius: 18px; background: var(--card); padding: 18px 20px 6px; }
-  .stars { color: var(--gold); letter-spacing: 1px; font-size: 17px; white-space: nowrap; }
-  .meta { color: var(--text-2); font-size: 15px; line-height: 1.55; margin-top: 4px; }
-  .meal { display: flex; justify-content: space-between; gap: 12px; padding: 15px 0; border-top: 1px solid var(--line); font-size: 16.5px; }
-  .meal span:last-child { color: var(--text-2); }
-
   /* The Pantry */
   .seg2 { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 16px; }
   .seg2 span { height: 50px; display: grid; place-items: center; font-size: 16px; color: var(--text-2); }
@@ -150,41 +144,6 @@
     <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>The List</span>
     <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3h8v3H8zM7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg>Pantry</span>
     <span class="tab col on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>Collections</span>
-  </nav>
-  <span class="home-ind"></span>
-</div>
-
-<!-- ═══ The Watchman's List ═══ -->
-<div class="screen" id="list">
-  <div class="status"><span>9:41</span><svg viewBox="0 0 64 13" fill="#eef2f7"><rect x="0" y="8" width="3" height="5" rx="1"/><rect x="5" y="5.5" width="3" height="7.5" rx="1"/><rect x="10" y="3" width="3" height="10" rx="1"/><rect x="15" y="0.5" width="3" height="12.5" rx="1"/><path d="M27 4.5a10 10 0 0 1 13 0l-1.6 1.7a7.6 7.6 0 0 0-9.8 0zM29.6 7.3a6.2 6.2 0 0 1 7.8 0L35.8 9a3.9 3.9 0 0 0-4.6 0zM33.5 12.5l-1.8-2a2.6 2.6 0 0 1 3.6 0z"/><rect x="45" y="1" width="16" height="11" rx="3" fill="none" stroke="#eef2f7" stroke-width="1.2"/><rect x="47" y="3" width="10" height="7" rx="1.5"/><rect x="62" y="4.5" width="1.6" height="4" rx=".8"/></svg></div>
-  <div class="header">
-    <span class="circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span>
-    <span class="ledger">The Ledger</span>
-    <span class="circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span>
-  </div>
-  <div class="title">The Watchman&rsquo;s List</div>
-  <div class="pad">
-    <p class="sub">Your top restaurants, and nowhere else. Every visit gets 1&ndash;5 stars for the whole experience; every meal gets a score out of 10.</p>
-    <div style="display:flex;gap:10px;margin-top:16px;"><span class="btn teal" style="padding:0 24px;">+ Add a place</span><span class="btn dark">Edit</span></div>
-    <div class="place">
-      <div class="row" style="align-items:flex-start;gap:12px;"><b style="font-size:20px;line-height:1.3;">Restaurant One</b><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span style="font-weight:600;margin-left:4px;">5</span></span></div>
-      <div class="row" style="justify-content:flex-start;gap:22px;margin-top:14px;"><span style="color:var(--text-2);font-size:15px;">Your rating</span><span class="stars" style="font-size:27px;letter-spacing:9px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
-      <p class="meta" style="margin-top:8px;">Visits average 4.8 (4 rated)</p>
-      <p class="meta">Italian &middot; Downtown</p>
-      <p class="meta" style="margin-bottom:12px;">4 visits &middot; last Sat, Oct 31 &middot; 4 rated</p>
-      <div class="meal"><span>House Pasta</span><span>9/10</span></div>
-      <div class="meal"><span>Margherita Pizza</span><span>8/10</span></div>
-      <div class="meal"><span>Tiramisu</span><span>10/10</span></div>
-      <div class="meal"><span>Burrata</span><span>not scored</span></div>
-      <div class="meal"><span>Garlic Knots</span><span>8/10</span></div>
-    </div>
-  </div>
-  <nav class="tabbar">
-    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9"/></svg>Check-in</span>
-    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/><path d="M10 9l5 3-5 3z"/></svg>Replays</span>
-    <span class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>The List</span>
-    <span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3h8v3H8zM7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg>Pantry</span>
-    <span class="tab col"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>Collections</span>
   </nav>
   <span class="home-ind"></span>
 </div>

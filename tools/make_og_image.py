@@ -4,7 +4,10 @@
 make_og_image.py — the 1200x630 share card (link previews on iMessage, X, Facebook...).
 
   python3 tools/make_og_image.py                       # text + brand mark
-  python3 tools/make_og_image.py assets/app/checkin-960.webp   # text + a real app screen
+  python3 tools/make_og_image.py tools/demo-screens/out/og-ledger.png   # text + the app's Ledger
+
+The Ledger panel is the homepage's own live screen, shot without its date row
+(an image can't keep today's date): cd tools/demo-screens && node shoot.js og
 
 Writes assets/images/og-image.jpg. Colours match the tokens in css/main.css.
 """

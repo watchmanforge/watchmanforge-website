@@ -26,6 +26,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/webfonts/unifraktur-maguntia-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/main.css?v=dbdae495fa">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
@@ -90,13 +91,90 @@
   .shot-front { width: min(100%, 440px); margin: 0 auto; z-index: 2; }
   .shot-back { display: none; }
   @media (min-width: 901px) {
-    .hero-visual { min-height: 560px; display: flex; align-items: center; }
+    .hero-visual { min-height: 560px; display: flex; flex-direction: column; justify-content: center; }
     .shot-front { width: 400px; margin: 0; }
     .shot-back { display: block; position: absolute; width: 300px; right: -10px; top: 0; z-index: 1;
       transform: rotate(4deg); opacity: .55; filter: saturate(.9); }
   }
   .shot-side { margin-bottom: 20px; max-width: 460px; }
-  .shot-side .shot-img { max-height: 520px; object-fit: cover; object-position: top; }
+  .shot-note { margin-top: 14px; font-size: 0.8rem; color: var(--text-3); text-align: center; }
+  @media (min-width: 901px) { .shot-note { width: 400px; } }
+
+  /* ── Live app screens ─────────────────────────────────────
+     The Ledger, the Forge and the Watchman's List, rebuilt in HTML from
+     the founder's screenshots so their dates are always the visitor's
+     today (js/main.js fills [data-day]). Demo data. Sizes are design px
+     of the 405px-wide phone: --u is one of them, scaled to the panel. ── */
+  .shot, .more-shot { container-type: inline-size; }
+  .app { --u: 0.95px; position: relative; overflow: hidden; color: #eef2f7; text-align: left;
+    font-size: calc(var(--u) * 15.5); line-height: 1.5; font-feature-settings: 'zero' 1;
+    background: radial-gradient(130% 55% at 50% 0%, #0a1424 0%, #05060b 62%); }
+  @supports (width: 1cqw) { .app { --u: calc(100cqw / 405); } }
+  .app-head { display: flex; align-items: center; padding: calc(var(--u) * 12) calc(var(--u) * 17) 0; }
+  .app-circle { flex: none; display: grid; place-items: center; width: calc(var(--u) * 43); height: calc(var(--u) * 43);
+    border-radius: 50%; border: 1px solid #1e2a36; background: rgba(255,255,255,.015); color: #96a2b4; }
+  .app-circle svg { width: 46%; height: 46%; }
+  .app-circle.is-off { opacity: .4; }
+  .app-ledger-name { flex: 1; margin-left: calc(var(--u) * 12); font-family: var(--font-black); font-size: calc(var(--u) * 27); line-height: 1; color: #f0c666; }
+  .app-title { padding: 0 calc(var(--u) * 17); margin-top: calc(var(--u) * 22); font-family: var(--font-black); font-size: calc(var(--u) * 41); line-height: 1.12; }
+  .app-sub { padding: 0 calc(var(--u) * 17); margin-top: calc(var(--u) * 6); color: #96a2b4; }
+  .app-pad { padding: 0 calc(var(--u) * 17); }
+  .app-btns { display: flex; gap: calc(var(--u) * 7); margin-top: calc(var(--u) * 14); }
+  .app-btn { display: inline-flex; align-items: center; gap: calc(var(--u) * 8); height: calc(var(--u) * 44); padding: 0 calc(var(--u) * 15);
+    border-radius: calc(var(--u) * 12); font-weight: 700; font-size: calc(var(--u) * 16.5); white-space: nowrap; }
+  .app-btn svg { width: calc(var(--u) * 19); height: calc(var(--u) * 19); }
+  .app-btn-teal { background: #3cb0b4; color: #031a1c; }
+  .app-btn-dark { background: #0c131d; border: 1px solid #1e2a36; color: #3cb0b4; }
+  .app-btn-plain { background: #0c131d; border: 1px solid #1e2a36; color: #eef2f7; }
+
+  /* The Ledger: today's watch */
+  .app-ledger { padding-bottom: calc(var(--u) * 19); }
+  .app-daynav { display: flex; align-items: center; gap: calc(var(--u) * 6); padding: calc(var(--u) * 20) calc(var(--u) * 17) 0; }
+  .app-daynav .app-circle { width: calc(var(--u) * 46); height: calc(var(--u) * 46); }
+  .app-daynav-mid { flex: 1; text-align: center; }
+  .app-date { height: calc(var(--u) * 60); display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-black); font-size: calc(var(--u) * 30); line-height: 1; color: #eef2f7; }
+  .app-watch { margin-top: calc(var(--u) * 6); color: #96a2b4; }
+  .app-dots { display: flex; justify-content: center; gap: calc(var(--u) * 10.6); margin-top: calc(var(--u) * 20); }
+  .app-dots i { width: calc(var(--u) * 24); height: calc(var(--u) * 24); border-radius: 50%; border: calc(var(--u) * 2.4) dashed #e4723c; }
+  .app-dots .lit { border: 0; background: #e4723c; box-shadow: 0 0 calc(var(--u) * 12) rgba(228,114,60,.55); }
+  .app-dots .won { border: 0; background: #3cb0b4; box-shadow: 0 0 0 calc(var(--u) * 4) rgba(60,176,180,.16); }
+  .app-left { margin-top: calc(var(--u) * 9); text-align: center; color: #96a2b4; }
+  .app-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 10); padding: 0 calc(var(--u) * 17); margin-top: calc(var(--u) * 22); }
+  .app-stats div { height: calc(var(--u) * 79); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 1px solid #1e2a36; border-radius: calc(var(--u) * 14); background: #0c131d; }
+  .app-stats b { font-size: calc(var(--u) * 24); line-height: 1.2; font-weight: 700; }
+  .app-stats span { margin-top: calc(var(--u) * 4); font-size: calc(var(--u) * 15); color: #96a2b4; }
+
+  /* The Forge: the replay log, newest first */
+  .app-forge { aspect-ratio: 405 / 590; }
+  .shot-side .app-forge { aspect-ratio: 405 / 700; }
+  .app-forge::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(5,6,11,0), #05060b 92%); }
+  .app-replays { list-style: none; margin: calc(var(--u) * 15) 0 0; padding: 0; display: grid; gap: calc(var(--u) * 12); }
+  .app-replay { padding: calc(var(--u) * 22) calc(var(--u) * 16) calc(var(--u) * 14); border: 1px solid #1e2a36; border-radius: calc(var(--u) * 18); background: #0c131d; }
+  .app-replay-top { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 12); }
+  .app-replay-date { font-size: calc(var(--u) * 20); font-weight: 700; letter-spacing: -0.01em; }
+  .app-score { font-family: var(--font-serif); font-size: calc(var(--u) * 38); line-height: 1; color: #f0c666; letter-spacing: -0.02em; }
+  .app-replay-meta { margin-top: calc(var(--u) * 14); color: #96a2b4; }
+  .app-replay-note { margin-top: calc(var(--u) * 12); color: #96a2b4; }
+  .app-link { display: block; margin-top: calc(var(--u) * 7); color: #3cb0b4; text-decoration: underline; text-underline-offset: 0.18em; }
+  .app-link-play::before { content: '\25B6'; display: inline-block; margin-right: 0.35em; font-size: .8em; text-decoration: none; }
+
+  /* The Watchman's List */
+  .app-list { aspect-ratio: 960 / 900; }
+  .app-list .app-title { margin-top: calc(var(--u) * 10); }
+  .app-place { margin-top: calc(var(--u) * 18); padding: calc(var(--u) * 18) calc(var(--u) * 20) calc(var(--u) * 6);
+    border: calc(var(--u) * 1.5) solid rgba(240,198,102,.4); border-radius: calc(var(--u) * 18); background: #0c131d; }
+  .app-place-top { display: flex; align-items: flex-start; justify-content: space-between; gap: calc(var(--u) * 12); }
+  .app-place-top b { font-size: calc(var(--u) * 20); line-height: 1.3; }
+  .app-stars { color: #f0c666; white-space: nowrap; font-size: calc(var(--u) * 17); letter-spacing: 1px; }
+  .app-rate { display: flex; align-items: center; gap: calc(var(--u) * 22); margin-top: calc(var(--u) * 14); color: #96a2b4; font-size: calc(var(--u) * 15); }
+  .app-rate .app-stars { font-size: calc(var(--u) * 27); letter-spacing: calc(var(--u) * 9); }
+  .app-meta { margin-top: calc(var(--u) * 4); color: #96a2b4; font-size: calc(var(--u) * 15); line-height: 1.55; }
+  .app-meal { display: flex; justify-content: space-between; gap: calc(var(--u) * 12); padding: calc(var(--u) * 15) 0; border-top: 1px solid #1e2a36; font-size: calc(var(--u) * 16.5); }
+  .app-meal span:last-child { color: #96a2b4; }
+  .app-meta + .app-meal { margin-top: calc(var(--u) * 12); }
 
   /* ── The struggle ─────────────────────────────────────────── */
   .struggle .section-sub { margin-top: 22px; }
@@ -107,7 +185,7 @@
   .struggle-kicker { font-size: clamp(1.18rem, 2vw, 1.4rem); font-weight: 500; letter-spacing: -0.015em; max-width: 30em; }
   .struggle-kicker strong { color: var(--gold); font-weight: 600; }
 
-  /* ── The idea (the watchtower scene) ──────────────────────── */
+  /* ── The idea (the Watchman on the wall) ───────────────────── */
   .watchtower { position: relative; overflow: hidden; min-height: clamp(500px, 68vh, 680px); display: flex; align-items: flex-start;
     background: linear-gradient(to bottom, #05060b 0%, #0b1424 55%, var(--bg) 100%); }
   .wt-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
@@ -118,16 +196,17 @@
   .wt-inner { max-width: 540px; }
   .wt-inner .section-sub { margin-top: 20px; }
   .motto { margin-top: 26px; font-family: var(--font-serif); font-style: italic; font-size: clamp(1.2rem, 2.2vw, 1.45rem); color: var(--gold); }
-  .wt-beam { transform-box: view-box; transform-origin: 840px 96px; animation: wt-sweep 7.5s ease-in-out infinite alternate; }
-  @keyframes wt-sweep { 0% { transform: rotate(-11deg); } 100% { transform: rotate(10deg); } }
-  .wt-lantern-glow { transform-box: view-box; transform-origin: 840px 96px; animation: wt-lglow 3.4s ease-in-out infinite; }
-  @keyframes wt-lglow { 0%,100% { opacity: .55; transform: scale(.94); } 50% { opacity: .9; transform: scale(1.06); } }
-  @media (prefers-reduced-motion: reduce) { .wt-beam, .wt-lantern-glow, .wt-star { animation: none !important; } }
+  .wt-lantern-glow { transform-box: view-box; transform-origin: 871px 308px; animation: wt-lglow 3.4s ease-in-out infinite; }
+  @keyframes wt-lglow { 0%,100% { opacity: .7; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.05); } }
+  .wt-torch { transform-box: view-box; transform-origin: 1009px 329px; animation: wt-flick 1.7s ease-in-out infinite; }
+  @keyframes wt-flick { 0%,100% { opacity: .75; transform: scale(.9); } 40% { opacity: 1; transform: scale(1.08); } 70% { opacity: .85; } }
+  @media (prefers-reduced-motion: reduce) { .wt-lantern-glow, .wt-torch, .wt-star { animation: none !important; } }
   @media (max-width: 760px) {
-    /* Phones: copy first, then the tower-focused scene below it (watchman-fx.js narrows the viewBox). */
+    /* Phones: copy first, then the scene below it, cropped on the Watchman (watchman-fx.js narrows the viewBox). */
     .watchtower { min-height: 0; flex-direction: column; }
     .wt-content { order: 1; padding-bottom: 8px; }
-    .wt-svg { order: 2; position: relative; inset: auto; height: 300px; flex: none; }
+    .wt-svg { order: 2; position: relative; inset: auto; height: auto; aspect-ratio: 540 / 360; flex: none;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%); mask-image: linear-gradient(to bottom, transparent, #000 28%); }
   }
 
   /* ── One day in the Forge ─────────────────────────────────── */
@@ -290,13 +369,33 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="Screens from the Watchman Forge app">
-        <figure class="shot shot-back">
-          <img class="shot-img" src="/assets/app/replays-960.webp" srcset="/assets/app/replays-480.webp 480w, /assets/app/replays-960.webp 960w" sizes="(max-width: 900px) 0px, 340px" width="960" height="1399" loading="lazy" decoding="async" alt="The Forge screen in the app: tonight's replay and two days scored 10 out of 10.">
+      <div class="hero-visual">
+        <figure class="shot shot-back" aria-hidden="true">
+          <div class="app app-forge" aria-hidden="true">
+            <div class="app-head"><span class="app-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span><span class="app-ledger-name">The Ledger</span><span class="app-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span></div>
+            <p class="app-title">The Forge</p>
+            <p class="app-sub">Every night the Watchman watched the day back. Newest first.</p>
+            <div class="app-pad">
+            <div class="app-btns"><span class="app-btn app-btn-teal">Tonight&rsquo;s replay</span><span class="app-btn app-btn-dark"><svg viewBox="0 0 24 24"><path d="M7 4h10.5A2.5 2.5 0 0 1 20 6.5V18a2 2 0 0 0 2 2H9.5A2.5 2.5 0 0 1 7 17.5z" fill="#f3dfb0"/><path d="M4.5 4A2.5 2.5 0 0 0 2 6.5V8h5V6.5A2.5 2.5 0 0 0 4.5 4z" fill="#d6b06a"/><path d="M10 9h7M10 12h7M10 15h5" stroke="#a9813f" stroke-width="1.4" stroke-linecap="round"/></svg>The Scribe</span></div>
+            <ul class="app-replays">
+            <li class="app-replay"><div class="app-replay-top"><span class="app-replay-date" data-day="0">Fri, Nov 6, 2026</span><span class="app-score">9/10</span></div><p class="app-replay-meta">4 wins &middot; 1 loss &middot; 1 patch &middot; 3 of 3 missions done</p><span class="app-link app-link-play">Watch the day back</span><span class="app-link">Edit this replay</span></li>
+            <li class="app-replay"><div class="app-replay-top"><span class="app-replay-date" data-day="-1">Thu, Nov 5, 2026</span><span class="app-score">10/10</span></div><p class="app-replay-meta">3 wins &middot; 0 losses &middot; 0 patches &middot; 3 of 3 missions done</p><span class="app-link app-link-play">Watch the day back</span><span class="app-link">Edit this replay</span></li>
+            </ul>
+            </div>
+          </div>
         </figure>
         <figure class="shot shot-front">
-          <img class="shot-img" src="/assets/app/checkin-960.webp" srcset="/assets/app/checkin-480.webp 480w, /assets/app/checkin-960.webp 960w" sizes="(max-width: 900px) 92vw, 420px" width="960" height="857" fetchpriority="high" decoding="async" alt="The Ledger screen in the app: today's watch with lit days, 7 of 16 points today and 37% this week.">
+          <div class="app app-ledger" role="img" aria-label="The Ledger in the app, shown with demo data: today&rsquo;s watch, 23 days unbroken, 11 of 16 points today and 82% this week.">
+            <div class="app-head"><span class="app-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span><span class="app-ledger-name">The Ledger</span><span class="app-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span></div>
+            <div class="app-daynav"><span class="app-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span>
+              <div class="app-daynav-mid"><p class="app-date" data-day="0" data-fmt="long">Friday, the 6th of November</p><p class="app-watch">Today&rsquo;s watch</p></div>
+              <span class="app-circle is-off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.5 6l6 6-6 6"/></svg></span></div>
+            <div class="app-dots"><i class="lit"></i><i class="lit"></i><i class="won"></i><i class="lit"></i><i class="lit"></i><i class="lit"></i><i></i><i></i></div>
+            <p class="app-left">2 left to light.</p>
+            <div class="app-stats"><div><b>23</b><span>days unbroken</span></div><div><b>11/16</b><span>points today</span></div><div><b>82%</b><span>this week</span></div></div>
+          </div>
         </figure>
+        <p class="shot-note">Screens from the app, shown with demo data.</p>
       </div>
     </div>
   </section>
@@ -320,51 +419,88 @@
   <!-- ── THE IDEA ─────────────────────────────────────────────── -->
   <section class="watchtower" id="idea" aria-labelledby="idea-title">
     <svg class="wt-svg" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- The Watchman on the wall: lantern up, watching the Ranger come in along the road. -->
       <defs>
-        <linearGradient id="wtSkyB" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#05060b"/><stop offset=".62" stop-color="#0c1626"/><stop offset="1" stop-color="#070c16"/>
+        <linearGradient id="wtSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#05060b"/><stop offset=".55" stop-color="#0a1322"/><stop offset=".7" stop-color="#0f1b2e"/><stop offset="1" stop-color="#0a1120"/>
         </linearGradient>
-        <linearGradient id="wtBeamB" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#e8c56d" stop-opacity=".55"/><stop offset=".35" stop-color="#e8c56d" stop-opacity=".16"/><stop offset="1" stop-color="#e8c56d" stop-opacity="0"/>
-        </linearGradient>
-        <radialGradient id="wtLampB" cx=".5" cy=".5" r=".5">
-          <stop offset="0" stop-color="#fdf3d8"/><stop offset=".35" stop-color="#e8c56d" stop-opacity=".9"/><stop offset="1" stop-color="#e8c56d" stop-opacity="0"/>
+        <radialGradient id="wtHorizon" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#1d3150" stop-opacity=".55"/><stop offset="1" stop-color="#1d3150" stop-opacity="0"/>
         </radialGradient>
-        <linearGradient id="wtSeaB" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#0c1626"/><stop offset="1" stop-color="#05060b"/>
+        <radialGradient id="wtLamp" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#fff1cf" stop-opacity=".95"/><stop offset=".18" stop-color="#f0c666" stop-opacity=".55"/><stop offset=".5" stop-color="#f0c666" stop-opacity=".14"/><stop offset="1" stop-color="#f0c666" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="wtSpill" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#f0c666" stop-opacity=".22"/><stop offset="1" stop-color="#f0c666" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="wtTorch" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#ffd2a0"/><stop offset=".25" stop-color="#e4723c" stop-opacity=".6"/><stop offset="1" stop-color="#e4723c" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="wtMoon" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#dfe9f5" stop-opacity=".22"/><stop offset="1" stop-color="#dfe9f5" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="wtWall" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0d1420"/><stop offset="1" stop-color="#05070c"/>
         </linearGradient>
+        <linearGradient id="wtRim" x1="0" y1="0" x2="1" y2="0">
+          <stop offset=".45" stop-color="#f0c666" stop-opacity="0"/><stop offset="1" stop-color="#f0c666" stop-opacity=".75"/>
+        </linearGradient>
+        <linearGradient id="wtFadeL" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#05060b" stop-opacity=".9"/><stop offset=".45" stop-color="#05060b" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="wtMoonCut"><rect width="1200" height="460" fill="#fff"/><circle cx="1012" cy="134" r="17" fill="#000"/></mask>
       </defs>
-      <rect width="1200" height="460" fill="url(#wtSkyB)"/>
+      <rect width="1200" height="460" fill="url(#wtSky)"/>
+      <ellipse cx="860" cy="318" rx="560" ry="80" fill="url(#wtHorizon)"/>
       <g fill="#eae4d6">
         <circle cx="120" cy="70" r="1" opacity=".5"/><circle cx="245" cy="132" r="1.2" opacity=".35"/>
         <circle cx="380" cy="52" r="1" opacity=".45"/><circle cx="512" cy="110" r="1" opacity=".3"/>
-        <circle cx="1020" cy="60" r="1.2" opacity=".5"/><circle cx="1120" cy="150" r="1" opacity=".35"/>
-        <circle cx="948" cy="40" r="1" opacity=".4"/><circle cx="662" cy="66" r="1" opacity=".35"/>
-        <circle cx="80" cy="180" r="1" opacity=".3"/><circle cx="1170" cy="96" r="1" opacity=".4"/>
+        <circle cx="1080" cy="150" r="1.2" opacity=".5"/><circle cx="1120" cy="60" r="1" opacity=".35"/>
+        <circle cx="905" cy="40" r="1" opacity=".4"/><circle cx="662" cy="66" r="1" opacity=".35"/>
+        <circle cx="760" cy="150" r="1" opacity=".3"/><circle cx="1170" cy="200" r="1" opacity=".4"/>
       </g>
-      <rect y="330" width="1200" height="130" fill="url(#wtSeaB)"/>
-      <path d="M0 330h1200" stroke="#3c5878" stroke-opacity=".35" stroke-width="1"/>
-      <path d="M60 356h90M210 372h60M420 362h110M980 368h80M660 380h70" stroke="#3c5878" stroke-opacity=".14" stroke-width="1"/>
-      <g class="wt-beam">
-        <polygon points="840,96 1200,28 1200,190" fill="url(#wtBeamB)"/>
+      <!-- a thin moon -->
+      <circle cx="1000" cy="140" r="60" fill="url(#wtMoon)"/>
+      <circle cx="1000" cy="140" r="18" fill="#efe6cf" opacity=".85" mask="url(#wtMoonCut)"/>
+      <!-- far hills, the field, and the road home -->
+      <path d="M0 322C110 314 210 308 320 312S520 322 640 316S850 302 975 309S1120 318 1200 312V460H0z" fill="#0a111d"/>
+      <path d="M0 336C160 330 330 334 470 338S760 332 900 330S1100 334 1200 330V460H0z" fill="#070c15"/>
+      <path d="M884 352Q940 346 984 340T1044 326Q1056 322 1064 318L1067 318Q1060 323 1049 327T992 341Q950 348 910 352z" fill="#16222f" opacity=".85"/>
+      <!-- the Ranger, coming in with a torch -->
+      <circle class="wt-torch" cx="1009" cy="329" r="22" fill="url(#wtTorch)"/>
+      <g fill="#04060a">
+        <circle cx="1005" cy="330.6" r="1.6"/>
+        <path d="M1003.4 332.6h3.2l1.6 7.4h-6.4z"/>
       </g>
-      <circle class="wt-lantern-glow" cx="840" cy="96" r="52" fill="url(#wtLampB)"/>
-      <path d="M700 460V400c26-18 54-24 84-30 34-7 62-4 92 6 26 9 46 24 56 42v42z" fill="#080d17"/>
-      <path d="M735 402c18-9 40-13 62-15" stroke="#16202e" stroke-width="1.4" fill="none"/>
-      <g>
-        <path d="M822 380l6-232h24l6 232z" fill="#0c131d" stroke="#1e2a36" stroke-width="1"/>
-        <path d="M818 148h44l-4-10h-36z" fill="#0e1622" stroke="#1e2a36" stroke-width="1"/>
-        <rect x="829" y="112" width="22" height="26" fill="#0c1420" stroke="#c9a24b" stroke-opacity=".55" stroke-width="1"/>
-        <rect x="833" y="117" width="14" height="16" fill="#e8c56d" opacity=".92"/>
-        <path d="M826 112l14-16 14 16z" fill="#0e1622" stroke="#1e2a36" stroke-width="1"/>
-        <path d="M840 96v-8M836.6 91.4h6.8" stroke="#c9a24b" stroke-width="1.4" stroke-linecap="round"/>
-        <path d="M824 152h32" stroke="#1e2a36" stroke-width="2"/>
-        <rect x="835" y="342" width="10" height="18" fill="#e8c56d" opacity=".5"/>
-        <path d="M827 210h26M826 260h28M824 310h32" stroke="#16202e" stroke-width="1"/>
+      <path d="M1006.4 334.2l2.8-4.6" stroke="#2a1c10" stroke-width="1" stroke-linecap="round"/>
+      <circle cx="1009.3" cy="329.2" r="1.5" fill="#ffd9a6"/>
+      <!-- the tower -->
+      <path d="M698 232h86v134h-86z" fill="#0b111c" stroke="#18222f" stroke-width="1"/>
+      <path d="M696 220h15v12h-15zM720 220h15v12h-15zM744 220h15v12h-15zM768 220h15v12h-15z" fill="#0b111c" stroke="#18222f" stroke-width="1"/>
+      <path d="M694 232h94v5h-94z" fill="#101824"/>
+      <path d="M737 268a4 4 0 0 1 8 0v16h-8z" fill="#f0c666" opacity=".55"/>
+      <path d="M737 312a4 4 0 0 1 8 0v14h-8z" fill="#f0c666" opacity=".22"/>
+      <!-- lantern glow, behind the Watchman -->
+      <circle class="wt-lantern-glow" cx="871" cy="308" r="78" fill="url(#wtLamp)"/>
+      <!-- the Watchman: hooded, spear in one hand, lantern held out toward the road -->
+      <g transform="translate(838 378)">
+        <path d="M-15 6V-148" stroke="#04060a" stroke-width="2.4"/>
+        <path d="M-15-163l3.6 13-3.6 4-3.6-4z" fill="#04060a" stroke="url(#wtRim)" stroke-width=".8"/>
+        <path d="M-9-90C-12-100-9-110-1-112C6-113 11-107 11-99L12.5-94C12.5-91 10.5-89 8-88ZM-11-89C-15-70-18-45-22-20C-25-8-30-2-35 2H17C15-20 13-50 12-76C12-83 11-88 8-89ZM6-86C14-82 24-74 32-67L29-62C21-68 12-74 5-77Z" fill="#04060a" stroke="url(#wtRim)" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="-14" cy="-68" r="3.2" fill="#04060a"/>
+        <path d="M31-65v6" stroke="#04060a" stroke-width="1.4"/>
+        <path d="M26-59h10l-5-4z" fill="#0b0f16"/>
+        <rect x="27" y="-59" width="8" height="11" rx="1" fill="#ffe2a3"/>
+        <path d="M27-53.5h8M31-59v11" stroke="#7a5a26" stroke-width=".8"/>
+        <path d="M26-48h10v2h-10z" fill="#0b0f16"/>
       </g>
-      <circle class="wt-lantern-core" cx="840" cy="125" r="6.5" fill="#fff3d6"/>
-      <path d="M840 330v96" stroke="#e8c56d" stroke-opacity=".18" stroke-width="3"/>
-      <path d="M840 330v60" stroke="#e8c56d" stroke-opacity=".14" stroke-width="9"/>
+      <!-- the wall, and the lantern's light on it -->
+      <path d="M0 366H1200V460H0z" fill="url(#wtWall)"/>
+      <path d="M-8 352h28v14h-28zM36 352h28v14h-28zM80 352h28v14h-28zM124 352h28v14h-28zM168 352h28v14h-28zM212 352h28v14h-28zM256 352h28v14h-28zM300 352h28v14h-28zM344 352h28v14h-28zM388 352h28v14h-28zM432 352h28v14h-28zM476 352h28v14h-28zM520 352h28v14h-28zM564 352h28v14h-28zM608 352h28v14h-28zM652 352h28v14h-28zM696 352h28v14h-28zM740 352h28v14h-28zM784 352h28v14h-28zM828 352h28v14h-28zM872 352h28v14h-28zM916 352h28v14h-28zM960 352h28v14h-28zM1004 352h28v14h-28zM1048 352h28v14h-28zM1092 352h28v14h-28zM1136 352h28v14h-28zM1180 352h28v14h-28z" fill="#0d1420"/>
+      <path d="M0 366H1200" stroke="#1c2838" stroke-width="1"/>
+      <path d="M0 398H1200M0 430H1200M40 366v32M150 366v32M260 366v32M370 366v32M480 366v32M590 366v32M700 366v32M810 366v32M920 366v32M1030 366v32M1140 366v32M95 398v32M205 398v32M315 398v32M425 398v32M535 398v32M645 398v32M755 398v32M865 398v32M975 398v32M1085 398v32" stroke="#0f1724" stroke-width="1"/>
+      <ellipse cx="872" cy="366" rx="150" ry="46" fill="url(#wtSpill)"/>
+      <rect width="1200" height="460" fill="url(#wtFadeL)"/>
     </svg>
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
@@ -423,8 +559,21 @@
 
       <div class="how-side">
       <figure class="shot shot-side reveal">
-        <img class="shot-img" src="/assets/app/replays-960.webp" srcset="/assets/app/replays-480.webp 480w, /assets/app/replays-960.webp 960w" sizes="(max-width: 1000px) 92vw, 440px" width="960" height="1399" loading="lazy" decoding="async" alt="The Forge screen in the app: every night the Watchman watched the day back, with tonight's replay and the Scribe.">
-        <figcaption>The nightly replay, in the app.</figcaption>
+        <div class="app app-forge" role="img" aria-label="The Forge in the app, shown with demo data: a replay for every night this week, newest first, each scored out of 10 with its wins, losses and patches.">
+          <div class="app-head"><span class="app-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span><span class="app-ledger-name">The Ledger</span><span class="app-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span></div>
+          <p class="app-title">The Forge</p>
+          <p class="app-sub">Every night the Watchman watched the day back. Newest first.</p>
+          <div class="app-pad">
+          <div class="app-btns"><span class="app-btn app-btn-teal">Tonight&rsquo;s replay</span><span class="app-btn app-btn-dark"><svg viewBox="0 0 24 24"><path d="M7 4h10.5A2.5 2.5 0 0 1 20 6.5V18a2 2 0 0 0 2 2H9.5A2.5 2.5 0 0 1 7 17.5z" fill="#f3dfb0"/><path d="M4.5 4A2.5 2.5 0 0 0 2 6.5V8h5V6.5A2.5 2.5 0 0 0 4.5 4z" fill="#d6b06a"/><path d="M10 9h7M10 12h7M10 15h5" stroke="#a9813f" stroke-width="1.4" stroke-linecap="round"/></svg>The Scribe</span></div>
+          <ul class="app-replays">
+          <li class="app-replay"><div class="app-replay-top"><span class="app-replay-date" data-day="0">Fri, Nov 6, 2026</span><span class="app-score">9/10</span></div><p class="app-replay-meta">4 wins &middot; 1 loss &middot; 1 patch &middot; 3 of 3 missions done</p><span class="app-link app-link-play">Watch the day back</span><span class="app-link">Edit this replay</span></li>
+          <li class="app-replay"><div class="app-replay-top"><span class="app-replay-date" data-day="-1">Thu, Nov 5, 2026</span><span class="app-score">10/10</span></div><p class="app-replay-meta">3 wins &middot; 0 losses &middot; 0 patches &middot; 3 of 3 missions done</p><span class="app-link app-link-play">Watch the day back</span><span class="app-link">Edit this replay</span></li>
+          <li class="app-replay"><div class="app-replay-top"><span class="app-replay-date" data-day="-2">Wed, Nov 4, 2026</span><span class="app-score">8/10</span></div><p class="app-replay-note">&ldquo;Long day at the job. Did the minimum on the project and kept the watch. Patch: when I get home, laptop open before dinner.&rdquo;</p><span class="app-link app-link-play">Watch the day back</span><span class="app-link">Edit this replay</span></li>
+          <li class="app-replay"><div class="app-replay-top"><span class="app-replay-date" data-day="-3">Tue, Nov 3, 2026</span><span class="app-score">10/10</span></div><p class="app-replay-meta">5 wins &middot; 0 losses &middot; 0 patches &middot; 3 of 3 missions done</p><span class="app-link app-link-play">Watch the day back</span><span class="app-link">Edit this replay</span></li>
+          </ul>
+          </div>
+        </div>
+        <figcaption>The nightly replay, in the app. Demo data.</figcaption>
       </figure>
       <div class="rule-band reveal" data-vref="PROV 24:16">
         <p class="rule-kicker">The one rule</p>
@@ -451,7 +600,25 @@
           </div>
         </li>
         <li class="more-card reveal reveal-delay-1">
-          <figure class="more-shot"><img src="/assets/app/list-960.webp" srcset="/assets/app/list-480.webp 480w, /assets/app/list-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="The Watchman's List screen in the app, shown with a demo restaurant: five stars for the visit and a score out of 10 for each meal."></figure>
+          <figure class="more-shot">
+            <div class="app app-list" role="img" aria-label="The Watchman&rsquo;s List in the app, shown with a demo restaurant: five stars for the visit and a score out of 10 for each meal.">
+              <p class="app-title">The Watchman&rsquo;s List</p>
+              <p class="app-sub">Your top restaurants, and nowhere else. Every visit gets 1&ndash;5 stars for the whole experience; every meal gets a score out of 10.</p>
+              <div class="app-pad">
+                <div class="app-btns"><span class="app-btn app-btn-teal">+ Add a place</span><span class="app-btn app-btn-plain">Edit</span></div>
+                <div class="app-place">
+                  <div class="app-place-top"><b>Restaurant One</b><span class="app-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 5</span></div>
+                  <div class="app-rate">Your rating <span class="app-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p class="app-meta">Visits average 4.8 (4 rated)</p>
+                  <p class="app-meta">Italian &middot; Downtown</p>
+                  <p class="app-meta">4 visits &middot; last <span data-day="-3">Tue, Nov 3, 2026</span> &middot; 4 rated</p>
+                  <div class="app-meal"><span>House Pasta</span><span>9/10</span></div>
+                  <div class="app-meal"><span>Margherita Pizza</span><span>8/10</span></div>
+                  <div class="app-meal"><span>Tiramisu</span><span>10/10</span></div>
+                </div>
+              </div>
+            </div>
+          </figure>
           <div class="more-body">
             <h3 class="sr-only">The Watchman&rsquo;s List</h3>
             <p>Your top restaurants, and nowhere else. Stars for every visit, a score for every meal.</p>
@@ -634,7 +801,7 @@
 </footer>
 <!-- /chrome:footer -->
 
-<script src="/js/main.js?v=3d6814940d"></script>
-<script src="/js/watchman-fx.js?v=959ecbed26"></script>
+<script src="/js/main.js?v=397547b940"></script>
+<script src="/js/watchman-fx.js?v=e88c6b4c25"></script>
 </body>
 </html>
