@@ -1,9 +1,12 @@
 Inter — Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
 UnifrakturMaguntia — © the UnifrakturMaguntia project authors (https://fonts.google.com/specimen/UnifrakturMaguntia/about)
+Cinzel — Copyright 2020 The Cinzel Project Authors (https://github.com/NDISCOVER/Cinzel)
 
-Both licensed under the SIL Open Font License, Version 1.1:
+All three licensed under the SIL Open Font License, Version 1.1:
 https://openfontlicense.org/open-font-license-official-text/
 
-Both files are the Latin subsets served by Google Fonts, self-hosted so
-visitors' browsers never contact Google. UnifrakturMaguntia is the blackletter
-the app uses for its screen titles.
+Inter and UnifrakturMaguntia are the Latin subsets served by Google Fonts;
+Cinzel is subset from the Google Fonts source to Latin (variable weight).
+All are self-hosted so visitors' browsers never contact Google.
+UnifrakturMaguntia is the blackletter the app uses for its screen titles;
+Cinzel sets the site's headlines.

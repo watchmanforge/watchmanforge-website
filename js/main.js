@@ -1,6 +1,6 @@
 /* ============================================================
    WATCHMAN FORGE — Main JavaScript
-   Nav · mobile menu · scroll reveal · app-screen dates · waitlist forms
+   Nav · mobile menu · app-screen dates · waitlist forms
    ============================================================ */
 
 (function () {
@@ -47,24 +47,6 @@
       a.setAttribute('aria-current', 'page');
     }
   });
-
-  /* ── Scroll Reveal ──────────────────────────────────────── */
-  const reveals = document.querySelectorAll('.reveal');
-  if (reveals.length) {
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      reveals.forEach(el => observer.observe(el));
-    } else {
-      reveals.forEach(el => el.classList.add('visible'));
-    }
-  }
 
   /* ── App screens: today's date ──────────────────────────────
      The app screens on the homepage carry demo data, but their dates

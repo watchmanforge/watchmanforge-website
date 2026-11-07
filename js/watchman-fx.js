@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════════════
    Watchman Forge — watchman-fx.js
-   Hidden scripture · The Watch scene (stars)
+   Hidden scripture · The Watch scene (stars) · scenes that move on screen
    The faith is the root, kept deep: nothing here is in the way of a
    first-time visitor. It is there for the ones who look.
    ════════════════════════════════════════════════════════════════ */
@@ -76,7 +76,6 @@
 
   /* ---------- 3. The Watch — the watchtower painting, and stars over it ---------- */
   function buildWatch(){
-    var section = D.querySelector('.watchtower');
     // Desktop sees the whole painting; phones get the crop on the tower (tools/watchtower/paint.py, PHONE).
     // The moving lights sit in the painting's coordinates, so their viewBox follows the picture.
     // viewBox is an attribute, not CSS, so it swaps here.
@@ -87,12 +86,6 @@
       frame();
       if (mq.addEventListener) mq.addEventListener('change', frame);
     }
-    // Only animate while the scene is on screen.
-    if (section && 'IntersectionObserver' in window){
-      new IntersectionObserver(function(es){
-        es.forEach(function(e){ section.classList.toggle('is-live', e.isIntersecting); });
-      }).observe(section);
-    } else if (section) section.classList.add('is-live');
 
     var stars = D.getElementById('wt-stars');
     if (!stars) return;
@@ -113,7 +106,17 @@
     stars.appendChild(frag);
   }
 
+  /* ---------- 4. Scenes that move only while on screen ([data-live]: the watchtower, the hall) ---------- */
+  function liveScenes(){
+    var scenes = D.querySelectorAll('[data-live]');
+    if (!('IntersectionObserver' in window)){ scenes.forEach(function(el){ el.classList.add('is-live'); }); return; }
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.target.classList.toggle('is-live', e.isIntersecting); });
+    });
+    scenes.forEach(function(el){ io.observe(el); });
+  }
+
   /* ---------- go ---------- */
-  function init(){ seedVerses(); buildWatch(); }
+  function init(){ seedVerses(); buildWatch(); liveScenes(); }
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', init); else init();
 })();

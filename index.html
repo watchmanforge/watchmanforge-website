@@ -27,7 +27,7 @@
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/unifraktur-maguntia-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=dbdae495fa">
+<link rel="stylesheet" href="/css/main.css?v=208cc538c9">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -45,8 +45,8 @@
      HOME — page layout. Tokens & components come from main.css.
      Phone first: every block is built at 375px and widened.
      ════════════════════════════════════════════════════════════ */
-  .bg-raised { background: var(--bg-raised); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .statement { font-size: clamp(1.95rem, 5.2vw, 3.3rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.032em; }
+  .bg-raised { background: var(--bg-raised); }
+  .statement { font-size: clamp(1.7rem, 4vw, 2.55rem); line-height: 1.14; }
   .tag {
     display: inline-flex; align-items: center; vertical-align: middle; white-space: nowrap;
     font-size: 0.75rem; font-weight: 600; line-height: 1;
@@ -55,7 +55,7 @@
   }
 
   /* ── Hero ─────────────────────────────────────────────────── */
-  .hero { position: relative; overflow: hidden; padding: calc(var(--nav-h) + clamp(36px, 7vw, 100px)) 0 clamp(72px, 9vw, 128px); }
+  .hero { position: relative; overflow: hidden; padding: calc(var(--nav-h) + clamp(40px, 7vw, 96px)) 0 clamp(24px, 3vw, 40px); }
   .hero::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
     -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
@@ -64,19 +64,11 @@
       radial-gradient(50% 50% at 78% 42%, rgba(61,177,181,0.13), transparent 70%),
       radial-gradient(40% 40% at 90% 80%, rgba(240,198,102,0.07), transparent 70%);
   }
-  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(56px, 6vw, 96px); align-items: center; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 6px 14px 6px 10px; margin-bottom: 26px;
-    border: 1px solid var(--line-strong); border-radius: 999px;
-    font-size: 0.88rem; font-weight: 500; color: var(--text-2);
-  }
-  .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft); }
-  .hero-title { font-size: clamp(2.55rem, 10.6vw, 5rem); line-height: 1.0; letter-spacing: -0.045em; margin-bottom: 24px; }
+  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(48px, 6vw, 96px); align-items: center; }
+  .hero-title { font-size: clamp(2.1rem, 8.4vw, 3.55rem); line-height: 1.06; margin-bottom: 26px; }
   .hero-title span { display: block; }
   .hero-sub { font-size: clamp(1.1rem, 1.7vw, 1.28rem); line-height: 1.55; color: var(--text-2); max-width: 30em; margin-bottom: 34px; }
   .hero-sub strong { color: var(--text); }
-  @media (min-width: 901px) { .hero-title { font-size: clamp(3rem, 5.4vw, 4.9rem); } }
   @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
 
   /* ── Real app screens ─────────────────────────────────────
@@ -91,10 +83,12 @@
   .shot-front { width: min(100%, 440px); margin: 0 auto; z-index: 2; }
   .shot-back { display: none; }
   @media (min-width: 901px) {
-    .hero-visual { min-height: 560px; display: flex; flex-direction: column; justify-content: center; }
+    .hero-visual { min-height: 500px; display: flex; flex-direction: column; justify-content: center; }
     .shot-front { width: 400px; margin: 0; }
-    .shot-back { display: block; position: absolute; width: 300px; right: -10px; top: 0; z-index: 1;
-      transform: rotate(4deg); opacity: .55; filter: saturate(.9); }
+    /* The Forge, standing behind the Ledger and out of focus, like a second screen further back */
+    .shot-back { display: block; position: absolute; width: 330px; right: -28px; top: -6px; z-index: 1;
+      opacity: .5; filter: blur(2.5px) saturate(.85); transform: scale(.94); transform-origin: top right;
+      -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 88%); mask-image: linear-gradient(to bottom, #000 45%, transparent 88%); }
   }
   .shot-side { margin-bottom: 20px; max-width: 460px; }
   .shot-note { margin-top: 14px; font-size: 0.8rem; color: var(--text-3); text-align: center; }
@@ -176,14 +170,30 @@
   .app-meal span:last-child { color: #96a2b4; }
   .app-meta + .app-meal { margin-top: calc(var(--u) * 12); }
 
-  /* ── The struggle ─────────────────────────────────────────── */
+  /* ── The struggle, and the loop ──────────────────────────── */
+  .struggle-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
   .struggle .section-sub { margin-top: 22px; }
-  .loop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 34px 0 32px; font-size: 0.95rem; font-weight: 500; }
-  .loop-step { padding: 8px 15px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--text-2); }
-  .loop-step.again { border-style: dashed; border-color: var(--line-strong); }
-  .loop-arr { color: var(--text-3); }
-  .struggle-kicker { font-size: clamp(1.18rem, 2vw, 1.4rem); font-weight: 500; letter-spacing: -0.015em; max-width: 30em; }
+  .struggle-kicker { margin-top: 28px; font-size: clamp(1.15rem, 2vw, 1.35rem); font-weight: 500; letter-spacing: -0.015em; max-width: 30em; }
   .struggle-kicker strong { color: var(--gold); font-weight: 600; }
+  .loopfig { max-width: 460px; justify-self: center; width: 100%; }
+  .loop-svg { width: 100%; height: auto; overflow: visible; }
+  .loop-ring { fill: none; stroke: var(--ember); stroke-width: 2.6; stroke-dasharray: 1 9; stroke-linecap: round; opacity: .7; }
+  .loop-arrows path { fill: none; stroke: var(--ember); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+  .loop-node { fill: var(--bg); stroke: var(--ember); stroke-width: 2.2; stroke-dasharray: 3.2 3; }
+  .loop-node.lit { fill: var(--ember); stroke: none; filter: drop-shadow(0 0 6px rgba(228,114,60,.6)); }
+  .loop-node.dim { opacity: .55; }
+  .loop-runner { fill: #ffb487; filter: drop-shadow(0 0 5px rgba(228,114,60,.9)); }
+  .loop-label { font: 500 16.5px var(--font-body); fill: var(--text-2); }
+  .loop-out-groove { fill: none; stroke: #020407; stroke-width: 6; stroke-linecap: round; }
+  .loop-out { fill: none; stroke: var(--brand-hi); stroke-width: 2.2; stroke-linecap: round; filter: drop-shadow(0 0 5px rgba(92,197,200,.75)); }
+  .loop-out-pulse { fill: none; stroke: #f2fffe; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 10 90; stroke-dashoffset: 10; opacity: 0;
+    animation: loop-out 4.5s cubic-bezier(.45, 0, .2, 1) infinite; }
+  @keyframes loop-out { 0% { stroke-dashoffset: 10; opacity: 0; } 10% { opacity: 1; } 55% { stroke-dashoffset: -90; opacity: 1; } 62%, 100% { stroke-dashoffset: -90; opacity: 0; } }
+  .loop-forge { font: 600 11px var(--font-body); letter-spacing: .18em; text-transform: uppercase; fill: var(--brand-hi); }
+  .loop-finish path { fill: var(--gold); filter: drop-shadow(0 0 8px rgba(240,198,102,.75)); }
+  .loop-done { font: 700 17px var(--font-title); letter-spacing: .04em; fill: var(--gold); }
+  @media (prefers-reduced-motion: reduce) { .loop-runner { display: none; } .loop-out-pulse { animation: none; } }
+  @media (max-width: 900px) { .struggle-grid { grid-template-columns: 1fr; } .loopfig { max-width: 400px; } }
 
   /* ── The idea (the Watchman on the wall) ───────────────────── */
   .watchtower { position: relative; overflow: hidden; min-height: clamp(500px, 68vh, 680px); display: flex; align-items: flex-start;
@@ -228,23 +238,25 @@
       -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%); mask-image: linear-gradient(to bottom, transparent, #000 14%); }
   }
 
-  /* ── One day in the Forge ─────────────────────────────────── */
-  .how-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  /* ── One day in the Forge ─────────────────────────────────
+     The rail runs from dawn to night: gold morning, teal day, ember in
+     the field, night-blue replay, gold again for the Armory. ── */
+  .how-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
   @media (min-width: 1000px) {
     .how-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; align-items: start; }
-    .how-side { position: sticky; top: calc(var(--nav-h) + 40px); }
-    .how-side .rule-text { font-size: clamp(2.2rem, 3.4vw, 3.1rem); }
+    .how-side { position: sticky; top: calc(var(--nav-h) + 32px); }
   }
   .day { position: relative; max-width: 620px; }
-  .day::before { content: ''; position: absolute; left: 6px; top: 12px; bottom: 34px; width: 1px; background: var(--line-strong); }
-  .day-step { position: relative; padding: 0 0 44px 40px; }
+  .day::before { content: ''; position: absolute; left: 6px; top: 14px; bottom: 40px; width: 2px; border-radius: 2px;
+    background: linear-gradient(to bottom, var(--gold) 0%, var(--brand) 30%, var(--ember) 52%, #6f8fc4 76%, var(--gold) 100%); opacity: .55; }
+  .day-step { position: relative; padding: 0 0 40px 42px; }
+  .day-step:last-child { padding-bottom: 0; }
   .day-step::before {
-    content: ''; position: absolute; left: 0; top: 7px;
-    width: 13px; height: 13px; border-radius: 50%;
-    background: var(--bg); border: 2px solid var(--brand);
+    content: ''; position: absolute; left: 1px; top: 6px; width: 12px; height: 12px; transform: rotate(45deg);
+    background: var(--bg); border: 2px solid var(--c, var(--brand)); box-shadow: 0 0 10px color-mix(in srgb, var(--c, var(--brand)) 55%, transparent);
   }
-  .day-when { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-3); }
-  .day-step h3 { font-size: clamp(1.35rem, 2.6vw, 1.65rem); margin: 6px 0 10px; }
+  .day-when { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c, var(--brand)); }
+  .day-step h3 { font-family: var(--font-title); font-weight: 700; letter-spacing: 0.01em; font-size: clamp(1.3rem, 2.4vw, 1.55rem); margin: 8px 0 10px; }
   .day-step p { color: var(--text-2); max-width: 32em; }
   .day-step p strong { color: var(--text); }
   .day-step .tag { margin-left: 2px; }
@@ -252,56 +264,90 @@
   .temper-pip { width: 10px; height: 10px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 10px rgba(228,114,60,0.45); }
   .temper-arr { color: var(--text-3); margin: 0 3px; }
   .temper-armor { width: 26px; height: 26px; color: var(--gold); }
-  .temper-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); }
+  .temper-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
 
-  .rule-band {
-    padding: clamp(36px, 5vw, 56px) clamp(24px, 4vw, 48px);
-    border: 1px solid var(--line); border-radius: var(--radius-lg);
-    background: radial-gradient(90% 70% at 50% 0%, var(--brand-soft), transparent 70%), var(--surface);
-    text-align: center;
-  }
-  .rule-kicker { font-family: var(--font-black); font-size: 1.6rem; line-height: 1; color: var(--gold); }
-  .rule-text { margin-top: 14px; font-size: clamp(2.6rem, 9.5vw, 4.4rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.05em; }
-  .rule-sub { color: var(--text-2); max-width: 26em; margin: 18px auto 0; }
-  .adhd-line { margin-top: 24px; padding: 20px 22px; border-radius: var(--radius); border: 1px solid var(--line); color: var(--text-2); }
-  .adhd-line strong { display: block; color: var(--text); margin-bottom: 4px; }
+  /* The one rule, set across the page with the app's own day dots */
+  .rule-band { margin-top: clamp(56px, 8vw, 96px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center;
+    padding: clamp(34px, 5vw, 60px) clamp(24px, 4.5vw, 60px); border-radius: var(--radius-lg); border: 1px solid var(--line);
+    background: radial-gradient(70% 90% at 0% 0%, rgba(228,114,60,.09), transparent 60%), radial-gradient(60% 80% at 100% 100%, var(--brand-soft), transparent 60%), var(--surface); }
+  .rule-text { font-family: var(--font-title); font-size: clamp(2.2rem, 6.4vw, 3.7rem); font-weight: 700; line-height: 1.02; }
+  .rule-sub { color: var(--text-2); max-width: 26em; margin-top: 16px; }
+  .rule-days { display: grid; gap: 16px; }
+  .rule-dots { display: grid; grid-template-columns: repeat(7, 26px); gap: 14px 14px; }
+  .rule-dots i { aspect-ratio: 1; border-radius: 50%; background: var(--ember); box-shadow: 0 0 12px rgba(228,114,60,.45); }
+  .rule-dots i.won { background: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft); }
+  .rule-dots i.miss { background: none; box-shadow: none; border: 2px dashed var(--ember); opacity: .85; }
+  .rule-days figcaption { color: var(--text-2); font-size: 0.95rem; max-width: 26em; }
+  .rule-days figcaption b { color: var(--text); font-weight: 600; }
+  .adhd-line { margin-top: 22px; color: var(--text-2); max-width: 46em; }
+  .adhd-line strong { color: var(--text); }
+  @media (max-width: 760px) { .rule-band { grid-template-columns: 1fr; } }
 
   /* ── The rest of your life ────────────────────────────────── */
-  .more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
-  .more-card { border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
-  .more-shot { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .more-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 24px 64px; align-items: end; }
+  .more-head .section-sub { margin-bottom: 4px; }
+  .more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: clamp(36px, 5vw, 56px); align-items: start; }
+  .more-card { border-radius: var(--radius-lg); background: var(--bg); border: 1px solid var(--line-strong); overflow: hidden;
+    box-shadow: 0 30px 60px -34px rgba(0,0,0,.9); }
+  @media (min-width: 761px) { .more-card:nth-child(2) { margin-top: 44px; } }
+  .more-shot { position: relative; background: var(--bg); }
   .more-shot img { width: 100%; aspect-ratio: 960 / 900; object-fit: cover; object-position: top; }
-  .more-body { padding: 20px 22px 24px; }
-  .more-body p { color: var(--text-2); font-size: 0.98rem; }
-  .demo-note { margin-top: 14px; font-size: 0.82rem; color: var(--text-3); }
-  @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } }
+  .more-shot::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 18%; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(5,6,11,0), #05060b); }
+  .demo-note { margin-top: 18px; font-size: 0.82rem; color: var(--text-3); }
+  @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } .more-head { grid-template-columns: 1fr; } }
 
-  /* ── The Order ────────────────────────────────────────────── */
-  .order-grid { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 20px; align-items: stretch; }
+  /* ── The Order: the cathedral, and the roster ───────────────── */
+  .order-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; }
+  .shot-order { isolation: isolate; }
   .shot-order .shot-img { height: 100%; object-fit: cover; }
-  .knights { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  .knight { padding: 24px 24px; border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--line); }
-  .knight-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 22px; color: var(--brand); background: var(--brand-soft); border: 1px solid var(--brand-line); }
-  .knight-icon svg { width: 22px; height: 22px; }
-  .knight-rank { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); }
-  .knight h3 { font-family: var(--font-black); font-weight: 400; letter-spacing: 0; font-size: 2rem; color: var(--gold); margin: 6px 0 8px; }
+  /* The hall moves as it does in the app: the rose window breathes, light falls, motes rise, the altar flame burns */
+  .order-fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
+  .order-fx * { animation-play-state: paused; }
+  .shot-order.is-live .order-fx * { animation-play-state: running; }
+  .o-rose, .o-pool, .o-shaft { transform-box: fill-box; transform-origin: center; }
+  .o-rose { animation: o-breathe 6s ease-in-out infinite; }
+  .o-pool { animation: o-breathe 6s ease-in-out -1.2s infinite; }
+  .o-shaft { animation: o-shaft 6s ease-in-out -.6s infinite; }
+  @keyframes o-breathe { 0%,100% { opacity: .45; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
+  @keyframes o-shaft { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+  .o-flame { transform-box: fill-box; transform-origin: center; animation: o-flick 1.6s ease-in-out infinite; }
+  @keyframes o-flick { 0%,100% { opacity: .75; transform: scale(.9); } 35% { opacity: 1; transform: scale(1.12); } 60% { opacity: .85; transform: scale(.98); } }
+  .o-motes circle { fill: #d7f1ff; opacity: 0; animation: o-mote 11s linear infinite; }
+  @keyframes o-mote { 0% { opacity: 0; transform: translate(0, 0); } 15% { opacity: .9; } 75% { opacity: .7; } 100% { opacity: 0; transform: translate(6px, -120px); } }
+  .o-scan { animation: o-scan 9s linear infinite; }
+  @keyframes o-scan { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(1206px); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .order-fx * { animation: none !important; } .o-motes, .o-scan { display: none; } }
+
+  .roster { display: grid; align-content: center; border-top: 1px solid var(--gold-line); }
+  .knight { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 22px; align-items: start; padding: 26px 4px; border-bottom: 1px solid var(--line); }
+  .knight:last-child { border-bottom-color: var(--gold-line); }
+  .sigil { width: 76px; height: 76px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.6)); }
+  .knight-rank { display: flex; align-items: center; gap: 10px; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
+  .knight h3 { font-family: var(--font-black); font-weight: 400; letter-spacing: 0; font-size: 2.05rem; line-height: 1.05; color: var(--gold); margin: 6px 0 8px; }
   .knight p:last-child { color: var(--text-2); }
   .order-more { margin-top: 28px; color: var(--text-2); }
-  @media (max-width: 900px) { .order-grid { grid-template-columns: 1fr; } .shot-order { max-height: 420px; } }
+  @media (max-width: 900px) { .order-grid { grid-template-columns: 1fr; } .shot-order { max-height: 460px; } }
+  @media (max-width: 420px) { .knight { grid-template-columns: 60px minmax(0, 1fr); gap: 16px; } .sigil { width: 60px; height: 60px; } }
 
-  /* ── Privacy ──────────────────────────────────────────────── */
-  .privacy-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(36px, 6vw, 88px); align-items: start; }
+  /* ── Privacy: four vows ───────────────────────────────────── */
+  .privacy-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(36px, 6vw, 80px); align-items: start; }
   .privacy-grid .section-sub { margin-top: 20px; }
-  .vows { display: grid; gap: 0; border-top: 1px solid var(--line); }
-  .vow { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
-  .vow svg { grid-row: 1 / 3; width: 22px; height: 22px; color: var(--brand); margin-top: 2px; }
-  .vow h3 { font-size: 1.12rem; }
-  .vow p { color: var(--text-2); }
+  @media (min-width: 901px) { .privacy-head { position: sticky; top: calc(var(--nav-h) + 32px); } }
+  .vows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .vow { position: relative; padding: 26px 24px 26px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+  .vow::before { content: ''; position: absolute; left: 24px; right: 24px; top: -1px; height: 1px; background: linear-gradient(90deg, var(--gold-line), transparent); }
+  .vow-num { display: block; font-family: var(--font-title); font-weight: 700; font-size: 1.5rem; line-height: 1; color: var(--gold); margin-bottom: 16px; }
+  .vow h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .vow p { color: var(--text-2); font-size: 0.98rem; }
   .vow a { text-decoration: underline; text-decoration-color: var(--brand-line); text-underline-offset: 3px; }
   @media (max-width: 900px) { .privacy-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .vows { grid-template-columns: 1fr; } }
 
   /* ── FAQ ──────────────────────────────────────────────────── */
-  .faq { max-width: 760px; border-top: 1px solid var(--line); }
+  .faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 6vw, 80px); align-items: start; }
+  @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+  .faq { border-top: 1px solid var(--line); }
   .faq details { border-bottom: 1px solid var(--line); }
   .faq summary { list-style: none; cursor: pointer; position: relative; padding: 22px 44px 22px 0; font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em; }
   .faq summary::-webkit-details-marker { display: none; }
@@ -367,7 +413,6 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="hero-badge"><span class="hero-badge-dot" aria-hidden="true"></span>Early access &middot; Android first</p>
         <h1 id="hero-title" class="hero-title"><span class="text-silver">Stop starting.</span> <span class="text-gradient">Start finishing.</span></h1>
         <p class="hero-sub">Watchman Forge is a daily accountability app for people with a day job and a pile of unfinished side projects. A short list, a phone call, and one rule: <strong>never miss twice.</strong></p>
         <div class="wl">
@@ -379,7 +424,7 @@
               <button class="btn btn-primary wl-submit" type="submit">Join the waitlist</button>
             </div>
             <p class="wl-status" aria-live="polite"></p>
-            <p class="wl-fine">The Watch is free. Forever. No spam, and we never sell your email.</p>
+            <p class="wl-fine">Early access, Android first. The Watch is free. Forever. No spam, and we never sell your email.</p>
           </form>
           <div class="wl-done" role="status" hidden>
             <p class="wl-done-title">Almost there</p>
@@ -421,22 +466,39 @@
 
   <!-- ── THE STRUGGLE ─────────────────────────────────────────── -->
   <section class="section struggle" aria-labelledby="struggle-title">
-    <div class="container">
-      <p class="eyebrow reveal">What are you building on the side?</p>
-      <h2 id="struggle-title" class="statement reveal reveal-delay-1">The job gets your best hours.<br><span class="text-gradient">The dream gets what&rsquo;s left.</span></h2>
-      <p class="section-sub reveal reveal-delay-2">You start strong on Sunday. By Wednesday the job has eaten the week, the project has gone quiet, and you&rsquo;re already eyeing a new one.</p>
-      <p class="loop reveal reveal-delay-2" aria-label="Start, stall, feel bad, start something new, and around again.">
-        <span class="loop-step" aria-hidden="true">Start</span><span class="loop-arr" aria-hidden="true">&rarr;</span>
-        <span class="loop-step" aria-hidden="true">Stall</span><span class="loop-arr" aria-hidden="true">&rarr;</span>
-        <span class="loop-step" aria-hidden="true">Feel bad</span><span class="loop-arr" aria-hidden="true">&rarr;</span>
-        <span class="loop-step again" aria-hidden="true">Start something new &#8635;</span>
-      </p>
-      <p class="struggle-kicker reveal reveal-delay-3">That&rsquo;s not a character flaw. It&rsquo;s a loop. <strong>The Forge is built to break it.</strong></p>
+    <div class="container struggle-grid">
+      <div>
+        <p class="eyebrow">What are you building on the side?</p>
+        <h2 id="struggle-title" class="statement">The job gets your best hours.<br><span class="text-gradient">The dream gets what&rsquo;s left.</span></h2>
+        <p class="section-sub">You start strong on Sunday. By Wednesday the job has eaten the week, the project has gone quiet, and you&rsquo;re already eyeing a new one.</p>
+        <p class="struggle-kicker">That&rsquo;s not a character flaw. It&rsquo;s a loop. <strong>The Forge is built to break it.</strong></p>
+      </div>
+      <figure class="loopfig" role="img" aria-label="The loop: start, stall, feel bad, start something new, and around again. The Forge breaks out of it at the stall, and leads to finished.">
+        <svg viewBox="0 0 420 380" class="loop-svg" aria-hidden="true">
+          <circle class="loop-ring" cx="190" cy="190" r="118"/>
+          <g class="loop-arrows"><path d="M-5 -4.5L1.5 0L-5 4.5" transform="translate(273.4 106.6) rotate(45)"/><path d="M-5 -4.5L1.5 0L-5 4.5" transform="translate(273.4 273.4) rotate(135)"/><path d="M-5 -4.5L1.5 0L-5 4.5" transform="translate(106.6 273.4) rotate(225)"/><path d="M-5 -4.5L1.5 0L-5 4.5" transform="translate(106.6 106.6) rotate(-45)"/></g>
+          <path class="loop-out-groove" d="M308 190C346 190 374 160 382 112"/>
+          <path class="loop-out" d="M308 190C346 190 374 160 382 112"/>
+          <path class="loop-out-pulse" d="M308 190C346 190 374 160 382 112" pathLength="100"/>
+          <circle class="loop-node lit" cx="190" cy="72" r="9"/>
+          <circle class="loop-node" cx="308" cy="190" r="9"/>
+          <circle class="loop-node dim" cx="190" cy="308" r="9"/>
+          <circle class="loop-node" cx="72" cy="190" r="9"/>
+          <circle class="loop-runner" r="5"><animateMotion dur="9s" repeatCount="indefinite" path="M190 72a118 118 0 1 1 0 236a118 118 0 1 1 0-236"/></circle>
+          <g class="loop-finish"><path transform="translate(370.35 82.38) scale(0.1346)" d="M 92.95 175.33 C 92.91 175.23 92.65 174.57 92.37 173.84 C 91.28 171.05 90.42 169.08 89.25 166.73 C 87.04 162.33 84.71 158.96 81.38 155.36 C 79.76 153.6 76.77 150.92 74.38 149.06 C 74.05 148.81 73.63 148.46 73.45 148.29 C 73.12 147.97 72.75 147.5 72.75 147.39 C 72.75 147.24 73.51 146.36 74.59 145.25 C 75.25 144.58 75.86 143.93 75.96 143.81 L 76.12 143.58 L 76.22 142.46 C 76.27 141.85 76.34 140.64 76.37 139.78 C 76.41 138.92 76.48 137.84 76.53 137.38 C 76.59 136.91 76.66 135.95 76.69 135.25 C 76.72 134.55 76.79 133.12 76.84 132.09 C 76.89 131.06 76.98 129.18 77.03 127.91 C 77.08 126.63 77.14 125.44 77.16 125.25 C 77.24 124.33 77.52 116.39 77.62 112.06 C 77.66 110.5 77.72 108.22 77.75 107 C 77.78 105.78 77.84 103.49 77.88 101.91 C 77.91 100.33 77.97 98.16 78 97.09 C 78.04 96.03 78.06 93.24 78.06 90.91 L 78.06 86.66 L 77.97 84.09 C 77.81 79.5 77.58 77.21 77.17 75.94 C 76.99 75.35 76.74 74.9 76.3 74.31 L 75.92 73.8 L 75.55 73.53 C 74.72 72.92 73.12 72.27 71.62 71.95 L 70.84 71.78 L 69 71.78 L 67.16 71.78 L 66.16 71.96 C 64.9 72.18 63.69 72.49 63 72.75 C 62.71 72.86 61.99 73.2 61.41 73.5 L 60.34 74.04 L 59.5 74.6 C 59.04 74.91 58.43 75.35 58.16 75.58 C 57.88 75.81 57.65 75.98 57.64 75.97 C 57.63 75.97 57.6 75.53 57.56 75 C 57.41 72.68 57.14 71.71 56.17 69.88 C 54.98 67.64 53.71 65.9 52.08 64.31 C 50.01 62.28 47.97 60.87 44.91 59.37 L 43.54 58.69 L 43.77 58.6 C 43.89 58.54 44.01 58.5 44.03 58.5 C 44.09 58.5 46.24 57.23 47.18 56.64 C 53.68 52.56 56.34 49.33 57.75 43.78 C 57.88 43.27 58.04 42.58 58.1 42.27 C 58.16 41.95 58.24 41.69 58.27 41.69 C 58.3 41.69 58.48 41.81 58.68 41.96 C 60.49 43.34 62.65 44.22 65.84 44.88 L 66.53 45.03 L 68.53 45.03 L 70.53 45.03 L 71.12 44.95 C 72.32 44.78 73.74 44.36 75.12 43.75 C 76.85 42.99 77.8 41.83 78.56 39.58 C 78.88 38.62 79 37.94 79.05 36.83 C 79.16 34.68 78.83 32.12 78.21 30.25 C 77.92 29.4 77.67 28.91 77.13 28.17 C 76.89 27.84 76.71 27.55 76.74 27.54 C 76.76 27.52 77.18 27.36 77.66 27.19 C 78.86 26.74 79.82 26.3 80.82 25.73 C 83.19 24.4 85.05 22.96 87.29 20.72 L 88.6 19.41 L 89.41 18.44 C 90.57 17.03 91.31 16.02 92.72 13.91 C 93.41 12.88 94 12.04 94.03 12.03 C 94.07 12.03 94.66 12.88 95.34 13.91 C 96.75 16.02 97.49 17.03 98.66 18.44 L 99.46 19.41 L 100.78 20.72 C 103.98 23.91 106.93 25.89 110.4 27.19 C 110.89 27.36 111.3 27.52 111.32 27.54 C 111.35 27.55 111.17 27.84 110.93 28.17 C 110.39 28.91 110.14 29.4 109.85 30.25 C 109.23 32.12 108.9 34.68 109.01 36.83 C 109.06 37.94 109.19 38.62 109.5 39.58 C 110.26 41.83 111.21 42.99 112.94 43.75 C 114.32 44.36 115.74 44.78 116.94 44.95 L 117.53 45.03 L 119.53 45.03 L 121.53 45.03 L 122.22 44.88 C 125.41 44.22 127.57 43.34 129.39 41.96 C 129.58 41.81 129.76 41.69 129.79 41.69 C 129.82 41.69 129.9 41.95 129.96 42.27 C 130.03 42.58 130.18 43.27 130.31 43.78 C 131.72 49.33 134.38 52.56 140.89 56.64 C 141.82 57.23 143.97 58.5 144.03 58.5 C 144.05 58.5 144.17 58.54 144.3 58.6 L 144.53 58.69 L 143.15 59.37 C 140.1 60.87 138.05 62.28 135.98 64.31 C 134.35 65.9 133.08 67.64 131.89 69.88 C 130.92 71.71 130.66 72.68 130.5 75 C 130.47 75.53 130.43 75.97 130.42 75.97 C 130.41 75.98 130.18 75.81 129.91 75.58 C 129.63 75.35 129.03 74.91 128.56 74.6 L 127.72 74.04 L 126.66 73.5 C 126.07 73.2 125.35 72.86 125.06 72.75 C 124.37 72.49 123.16 72.18 121.91 71.96 L 120.91 71.78 L 119.06 71.78 L 117.22 71.78 L 116.44 71.95 C 114.95 72.27 113.34 72.92 112.51 73.53 L 112.15 73.8 L 111.76 74.31 C 111.32 74.9 111.08 75.35 110.89 75.94 C 110.48 77.21 110.26 79.5 110.09 84.09 L 110 86.66 L 110 90.91 C 110 93.24 110.03 96.03 110.06 97.09 C 110.09 98.16 110.15 100.33 110.19 101.91 C 110.22 103.49 110.28 105.78 110.31 107 C 110.35 108.22 110.4 110.5 110.44 112.06 C 110.54 116.39 110.82 124.33 110.91 125.25 C 110.92 125.44 110.98 126.63 111.03 127.91 C 111.08 129.18 111.17 131.06 111.22 132.09 C 111.27 133.12 111.34 134.55 111.37 135.25 C 111.41 135.95 111.48 136.91 111.53 137.38 C 111.58 137.84 111.65 138.92 111.69 139.78 C 111.72 140.64 111.79 141.85 111.84 142.46 L 111.94 143.58 L 112.11 143.81 C 112.2 143.93 112.81 144.58 113.47 145.25 C 114.55 146.36 115.31 147.24 115.31 147.39 C 115.31 147.5 114.95 147.97 114.61 148.29 C 114.43 148.46 114.01 148.81 113.69 149.06 C 110.45 151.57 107.5 154.33 105.13 157.09 C 104.34 158.01 102.67 160.2 102.02 161.19 C 99.71 164.65 97.69 168.69 95.69 173.84 C 95.41 174.57 95.14 175.24 95.1 175.34 Z"/></g>
+          <text class="loop-label" x="190" y="104" text-anchor="middle">Start</text>
+          <text class="loop-label" x="282" y="195" text-anchor="end">Stall</text>
+          <text class="loop-label" x="190" y="284" text-anchor="middle">Feel bad</text>
+          <text class="loop-label" x="98" y="186">Start</text><text class="loop-label" x="98" y="205">something new</text>
+          <text class="loop-forge" x="356" y="214">The Forge</text>
+          <text class="loop-done" x="383" y="72" text-anchor="middle">Finished</text>
+        </svg>
+      </figure>
     </div>
   </section>
 
   <!-- ── THE IDEA ─────────────────────────────────────────────── -->
-  <section class="watchtower" id="idea" aria-labelledby="idea-title">
+  <section class="watchtower" id="idea" aria-labelledby="idea-title" data-live>
     <div class="wt-art" aria-hidden="true">
       <!-- The watchtower: painted by tools/watchtower/paint.py. The SVG on top is only what moves, in the painting's coordinates. -->
       <picture>
@@ -478,10 +540,10 @@
     <div class="wt-stars" id="wt-stars" aria-hidden="true"></div>
     <div class="wt-content container">
       <div class="wt-inner">
-        <p class="eyebrow reveal">The Watchman</p>
-        <h2 id="idea-title" class="section-title reveal reveal-delay-1">Be your own Watchman.</h2>
-        <p class="section-sub reveal reveal-delay-2">By day you&rsquo;re the <strong>Ranger</strong>: in the field, doing today&rsquo;s mission. On the wall you&rsquo;re the <strong>Watchman</strong>: watching your Ranger, filtering what matters from the noise. You watch yourself, and you forge yourself, one day at a time.</p>
-        <p class="motto reveal reveal-delay-3" data-vref="HAB 2:1">Keep watch. Forge yourself. Finish the work.</p>
+        <p class="eyebrow">The Watchman</p>
+        <h2 id="idea-title" class="section-title">Be your own Watchman.</h2>
+        <p class="section-sub">By day you&rsquo;re the <strong>Ranger</strong>: in the field, doing today&rsquo;s mission. On the wall you&rsquo;re the <strong>Watchman</strong>: watching your Ranger, filtering what matters from the noise. You watch yourself, and you forge yourself, one day at a time.</p>
+        <p class="motto" data-vref="HAB 2:1">Keep watch. Forge yourself. Finish the work.</p>
       </div>
     </div>
   </section>
@@ -490,34 +552,34 @@
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="container">
       <div class="section-header">
-        <p class="eyebrow reveal">How it works</p>
-        <h2 id="how-title" class="section-title reveal reveal-delay-1">One day in the Forge</h2>
-        <p class="section-sub reveal reveal-delay-2">A few minutes, spread across the day. Built for the tired days too.</p>
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title" class="section-title">One day in the Forge</h2>
+        <p class="section-sub">A few minutes, spread across the day. Built for the tired days too.</p>
       </div>
 
       <div class="how-grid">
       <ol class="day">
-        <li class="day-step reveal">
+        <li class="day-step" style="--c: var(--gold)">
           <span class="day-when">Morning &middot; the Ranger goes out</span>
           <h3>Pick today&rsquo;s watch</h3>
           <p>A short list of what matters today. Not your whole life. Just today.</p>
         </li>
-        <li class="day-step reveal">
+        <li class="day-step" style="--c: var(--brand)">
           <span class="day-when">During the day</span>
           <h3>Held or Conquered</h3>
           <p>Bad day? Do the minimum and it&rsquo;s <strong>Held</strong>. Good day? Go all the way and it&rsquo;s <strong>Conquered</strong>. Either way, the day counts.</p>
         </li>
-        <li class="day-step reveal">
+        <li class="day-step" style="--c: var(--ember)">
           <span class="day-when">In the field &middot; set times, or by surprise</span>
           <h3>Your phone rings</h3>
           <p>&ldquo;Status report, Ranger.&rdquo; The Scribe calls and takes your report down by voice, like dictation. No app to open, no form to fill. <span class="tag">Free</span> <span class="tag">Android</span></p>
         </li>
-        <li class="day-step reveal" data-vref="PS 130:6">
+        <li class="day-step" style="--c: #8fa9d8" data-vref="PS 130:6">
           <span class="day-when">Night &middot; the Ranger comes in</span>
           <h3>The replay, in the Forge</h3>
           <p>From the wall, the Watchman watches the day back. Not a judge handing down a sentence. Whatever went wrong gets hammered into a <strong>patch</strong>: a when-then fix for next time.</p>
         </li>
-        <li class="day-step reveal" data-vref="EPH 6:11">
+        <li class="day-step" style="--c: var(--gold)" data-vref="EPH 6:11">
           <span class="day-when">Over the weeks &middot; the Armory</span>
           <h3>Patches become armor</h3>
           <p>A patch that holds five times is tempered into a piece in your Armory. Slip, and it dulls, but nothing is ever deleted: <strong>Reforge</strong> it, and three holds bring it back.</p>
@@ -531,7 +593,7 @@
       </ol>
 
       <div class="how-side">
-      <figure class="shot shot-side reveal">
+      <figure class="shot shot-side">
         <div class="app app-forge" role="img" aria-label="The Forge in the app, shown with demo data: a replay for every night this week, newest first, each scored out of 10 with its wins, losses and patches.">
           <div class="app-head"><span class="app-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.5 6l-6 6 6 6"/></svg></span><span class="app-ledger-name">The Ledger</span><span class="app-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span></div>
           <p class="app-title">The Forge</p>
@@ -548,31 +610,40 @@
         </div>
         <figcaption>The nightly replay, in the app. Demo data.</figcaption>
       </figure>
-      <div class="rule-band reveal" data-vref="PROV 24:16">
-        <p class="rule-kicker">The one rule</p>
-        <p class="rule-text">Never miss<br>twice.</p>
-        <p class="rule-sub">Missing a day happens. Missing two is how projects quietly die. The whole app is built around that one line.</p>
-      </div>
-      <p class="adhd-line reveal"><strong>ADHD-friendly by design, not by label.</strong> Short lists. A real call instead of one more notification. Room to slip without losing everything.</p>
       </div>
       </div>
+      <div class="rule-band" data-vref="PROV 24:16">
+        <div>
+          <p class="eyebrow">The one rule</p>
+          <p class="rule-text">Never miss twice.</p>
+          <p class="rule-sub">Missing a day happens. Missing two is how projects quietly die. The whole app is built around that one line.</p>
+        </div>
+        <figure class="rule-days" role="img" aria-label="Two weeks of days, every one kept but two, and never two missed in a row.">
+          <div class="rule-dots" aria-hidden="true"><i></i><i></i><i class="won"></i><i></i><i class="miss"></i><i></i><i></i><i></i><i class="won"></i><i></i><i></i><i class="miss"></i><i></i><i class="won"></i></div>
+          <figcaption><b>Missed one? It happens.</b> The next day you&rsquo;re back on the wall, and the run goes on.</figcaption>
+        </figure>
+      </div>
+      <p class="adhd-line"><strong>ADHD-friendly by design, not by label.</strong> Short lists. A real call instead of one more notification. Room to slip without losing everything.</p>
     </div>
   </section>
 
   <!-- ── THE REST OF YOUR LIFE ────────────────────────────────── -->
   <section class="section bg-raised" aria-labelledby="more-title">
     <div class="container">
-      <p class="eyebrow reveal">Also in the Forge</p>
-      <h2 id="more-title" class="statement reveal reveal-delay-1">It keeps the rest of your life, too.</h2>
+      <div class="more-head">
+        <div>
+          <p class="eyebrow">Also in the Forge</p>
+          <h2 id="more-title" class="statement">It keeps the rest of your life, too.</h2>
+        </div>
+        <p class="section-sub">What you eat, where you eat it, and what you love. Kept in the same place as the watch, the same way.</p>
+      </div>
       <ul class="more-grid">
-        <li class="more-card reveal">
-          <figure class="more-shot"><img src="/assets/app/pantry-960.webp" srcset="/assets/app/pantry-480.webp 480w, /assets/app/pantry-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="The Pantry screen in the app, shown with demo foods: sparkling water, Greek yogurt and a protein bar, each with a label photo, calories, protein and how often it was eaten."></figure>
-          <div class="more-body">
-            <h3 class="sr-only">The Pantry</h3>
-            <p>What you eat again and again, recorded once, with a photo of the label.</p>
-          </div>
+        <li class="more-card">
+          <h3 class="sr-only">The Pantry</h3>
+          <figure class="more-shot"><img src="/assets/app/pantry-960.webp" srcset="/assets/app/pantry-480.webp 480w, /assets/app/pantry-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="The Pantry screen in the app, shown with demo foods: raw whole milk from a farm, Greek yogurt and a protein bar, each with a label photo, calories, protein and how often it was eaten."></figure>
         </li>
-        <li class="more-card reveal reveal-delay-1">
+        <li class="more-card">
+          <h3 class="sr-only">The Watchman&rsquo;s List</h3>
           <figure class="more-shot">
             <div class="app app-list" role="img" aria-label="The Watchman&rsquo;s List in the app, shown with a demo restaurant: five stars for the visit and a score out of 10 for each meal.">
               <p class="app-title">The Watchman&rsquo;s List</p>
@@ -592,20 +663,13 @@
               </div>
             </div>
           </figure>
-          <div class="more-body">
-            <h3 class="sr-only">The Watchman&rsquo;s List</h3>
-            <p>Your top restaurants, and nowhere else. Stars for every visit, a score for every meal.</p>
-          </div>
         </li>
-        <li class="more-card reveal reveal-delay-2">
+        <li class="more-card">
+          <h3 class="sr-only">Collections</h3>
           <figure class="more-shot"><img src="/assets/app/films-960.webp" srcset="/assets/app/films-480.webp 480w, /assets/app/films-960.webp 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="Collections in the app, on the Films shelf with demo titles: an up-next queue, the movie assistant and a ranked list starting with Movie One and Movie Two."></figure>
-          <div class="more-body">
-            <h3 class="sr-only">Collections</h3>
-            <p>What you love, kept where you can see it: places, films, fragrances and collectibles.</p>
-          </div>
         </li>
       </ul>
-      <p class="demo-note reveal">Screens shown with demo data.</p>
+      <p class="demo-note">Screens shown with demo data.</p>
     </div>
   </section>
 
@@ -613,80 +677,86 @@
   <section class="section" id="order" aria-labelledby="order-title">
     <div class="container">
       <div class="section-header">
-        <p class="eyebrow reveal">The Order</p>
-        <h2 id="order-title" class="section-title reveal reveal-delay-1">You don&rsquo;t hold the wall alone.</h2>
-        <p class="section-sub reveal reveal-delay-2">The Order is a band of AI knights inside the Forge. They do real work, not just chat.</p>
+        <p class="eyebrow">The Order</p>
+        <h2 id="order-title" class="section-title">You don&rsquo;t hold the wall alone.</h2>
+        <p class="section-sub">The Order is a band of AI knights inside the Forge. They do real work, not just chat.</p>
       </div>
       <div class="order-grid">
-      <figure class="shot shot-order reveal">
-        <img class="shot-img" src="/assets/app/order-960.webp" srcset="/assets/app/order-480.webp 480w, /assets/app/order-960.webp 960w" sizes="(max-width: 900px) 92vw, 460px" width="960" height="1086" loading="lazy" decoding="async" alt="Order of the Watchmen, in the app: a cathedral hall where the knights of the Order stand ready.">
+      <figure class="shot shot-order" data-live>
+        <img class="shot-img" src="/assets/app/order-960.webp" srcset="/assets/app/order-480.webp 480w, /assets/app/order-960.webp 960w" sizes="(max-width: 900px) 92vw, 560px" width="960" height="1086" loading="lazy" decoding="async" alt="Order of the Watchmen, in the app: a cathedral hall where the knights of the Order stand ready.">
+        <svg class="order-fx" viewBox="0 0 960 1086" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <radialGradient id="oRose"><stop offset="0" stop-color="#a9e2ff" stop-opacity=".6"/><stop offset=".45" stop-color="#3f8fe0" stop-opacity=".22"/><stop offset="1" stop-color="#3f8fe0" stop-opacity="0"/></radialGradient>
+            <linearGradient id="oShaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd8ff" stop-opacity=".2"/><stop offset=".7" stop-color="#9fd8ff" stop-opacity=".05"/><stop offset="1" stop-color="#9fd8ff" stop-opacity="0"/></linearGradient>
+            <radialGradient id="oFlame"><stop offset="0" stop-color="#ffe7b4"/><stop offset=".3" stop-color="#f0a346" stop-opacity=".6"/><stop offset="1" stop-color="#f0a346" stop-opacity="0"/></radialGradient>
+            <linearGradient id="oScan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fd0ff" stop-opacity="0"/><stop offset=".85" stop-color="#5fd0ff" stop-opacity=".07"/><stop offset="1" stop-color="#9fe6ff" stop-opacity=".1"/></linearGradient>
+          </defs>
+          <path class="o-shaft" d="M430 150L526 150L700 900L256 900Z" fill="url(#oShaft)"/>
+          <circle class="o-rose" cx="478" cy="92" r="118" fill="url(#oRose)"/>
+          <ellipse class="o-pool" cx="478" cy="935" rx="150" ry="90" fill="url(#oRose)"/>
+          <circle class="o-flame" cx="478" cy="493" r="24" fill="url(#oFlame)"/>
+          <g class="o-motes"><circle cx="467" cy="559" r="1.8" style="animation-duration:14.2s;animation-delay:-0.1s"/><circle cx="481" cy="811" r="1.7" style="animation-duration:12.3s;animation-delay:-9.2s"/><circle cx="315" cy="562" r="2.9" style="animation-duration:11.7s;animation-delay:-10.9s"/><circle cx="357" cy="494" r="1.8" style="animation-duration:12.0s;animation-delay:-13.9s"/><circle cx="513" cy="752" r="2.3" style="animation-duration:13.5s;animation-delay:-1.5s"/><circle cx="405" cy="704" r="2.9" style="animation-duration:11.5s;animation-delay:-1.3s"/><circle cx="396" cy="481" r="2.1" style="animation-duration:13.9s;animation-delay:-3.0s"/><circle cx="619" cy="802" r="1.7" style="animation-duration:11.3s;animation-delay:-7.4s"/><circle cx="308" cy="584" r="3.2" style="animation-duration:9.7s;animation-delay:-9.0s"/><circle cx="344" cy="658" r="3.2" style="animation-duration:10.2s;animation-delay:-0.1s"/><circle cx="330" cy="639" r="1.6" style="animation-duration:9.5s;animation-delay:-7.5s"/><circle cx="632" cy="582" r="2.3" style="animation-duration:12.8s;animation-delay:-1.4s"/><circle cx="509" cy="463" r="2.7" style="animation-duration:14.7s;animation-delay:-0.8s"/><circle cx="500" cy="671" r="1.9" style="animation-duration:10.6s;animation-delay:-14.9s"/><circle cx="659" cy="438" r="2.9" style="animation-duration:14.7s;animation-delay:-3.6s"/><circle cx="520" cy="401" r="2.3" style="animation-duration:13.0s;animation-delay:-8.9s"/></g>
+          <rect class="o-scan" x="0" y="-120" width="960" height="120" fill="url(#oScan)"/>
+        </svg>
       </figure>
-      <ul class="knights">
-        <li class="knight reveal">
-          <div class="knight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3c-7 1-12 6-13 13l-1 5"/><path d="M20 3c0 7-5 12-12 13"/><path d="M8 16l5-5"/></svg></div>
-          <p class="knight-rank">The first knight <span class="tag">Free</span></p>
-          <h3>The Scribe</h3>
-          <p>Keeps the record and calls you in the field: &ldquo;Status report, Ranger.&rdquo; You talk; it takes it down. &ldquo;Copy that, Ranger. Scribe out.&rdquo; On Android.</p>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="sgGlow" cx=".5" cy=".55" r=".55"><stop offset="0" stop-color="#3cb0b4" stop-opacity=".22"/><stop offset="1" stop-color="#3cb0b4" stop-opacity="0"/></radialGradient><linearGradient id="sgGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7da94"/><stop offset="1" stop-color="#c99a45"/></linearGradient><filter id="sgT" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs></svg>
+      <ul class="roster">
+        <li class="knight">
+          <svg class="sigil" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 58V28C14 16.5 22 9.5 32 4.5C42 9.5 50 16.5 50 28V58Z" fill="url(#sgGlow)" stroke="#f0c666" stroke-opacity=".45" stroke-width="1"/><path d="M10 58H54" stroke="#f0c666" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/><path d="M44.5 10.5C35.5 15 27.5 25 22.6 40.2L25.6 41.6C30.6 29 37.4 20.4 46.3 12.6Z" fill="#f0c666" fill-opacity=".12" stroke="url(#sgGold)" stroke-width="1.3" stroke-linejoin="round"/><path d="M45.6 11.4L21 46.4" stroke="#f0c666" stroke-width="1.2" stroke-linecap="round"/><path d="M39.5 16.6l3.4 1.6M36.2 20.6l3.6 1.5M33.2 24.8l3.6 1.4M30.4 29.2l3.4 1.3M28 33.6l3 1.1" stroke="#f0c666" stroke-opacity=".6" stroke-width=".8" stroke-linecap="round"/><path d="M22.3 44.6L19.6 49.4L23.6 46.6Z" fill="#f0c666"/><g filter="url(#sgT)" stroke="#6fe0e0" stroke-width="1.6" stroke-linecap="round"><path d="M26 49v2M29 47.5v5M32 45.5v9M35 47v6M38 48.5v3M41 47.8v4.4M44 49.2v1.6"/></g></svg>
+          <div>
+            <p class="knight-rank">The first knight <span class="tag">Free</span></p>
+            <h3>The Scribe</h3>
+            <p>Keeps the record and calls you in the field: &ldquo;Status report, Ranger.&rdquo; You talk; it takes it down. &ldquo;Copy that, Ranger. Scribe out.&rdquo; On Android.</p>
+          </div>
         </li>
-        <li class="knight reveal reveal-delay-1">
-          <div class="knight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7 14h3M14 14h3M7 17h3"/></svg></div>
-          <p class="knight-rank">Knight</p>
-          <h3>The Seneschal</h3>
-          <p>Plans your week, so Monday doesn&rsquo;t ambush you.</p>
+        <li class="knight">
+          <svg class="sigil" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 58V28C14 16.5 22 9.5 32 4.5C42 9.5 50 16.5 50 28V58Z" fill="url(#sgGlow)" stroke="#f0c666" stroke-opacity=".45" stroke-width="1"/><path d="M10 58H54" stroke="#f0c666" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/><g fill="#f0c666" fill-opacity=".07" stroke="url(#sgGold)" stroke-width="1.3"><circle cx="32" cy="12.6" r="3.6"/><circle cx="32" cy="20.6" r="3.6"/><circle cx="28" cy="16.6" r="3.6"/><circle cx="36" cy="16.6" r="3.6"/></g><circle cx="32" cy="16.6" r="3.1" fill="#05060b"/><path transform="translate(28.204 12.914) scale(0.0404)" d="M 92.95 175.33 C 92.91 175.23 92.65 174.57 92.37 173.84 C 91.28 171.05 90.42 169.08 89.25 166.73 C 87.04 162.33 84.71 158.96 81.38 155.36 C 79.76 153.6 76.77 150.92 74.38 149.06 C 74.05 148.81 73.63 148.46 73.45 148.29 C 73.12 147.97 72.75 147.5 72.75 147.39 C 72.75 147.24 73.51 146.36 74.59 145.25 C 75.25 144.58 75.86 143.93 75.96 143.81 L 76.12 143.58 L 76.22 142.46 C 76.27 141.85 76.34 140.64 76.37 139.78 C 76.41 138.92 76.48 137.84 76.53 137.38 C 76.59 136.91 76.66 135.95 76.69 135.25 C 76.72 134.55 76.79 133.12 76.84 132.09 C 76.89 131.06 76.98 129.18 77.03 127.91 C 77.08 126.63 77.14 125.44 77.16 125.25 C 77.24 124.33 77.52 116.39 77.62 112.06 C 77.66 110.5 77.72 108.22 77.75 107 C 77.78 105.78 77.84 103.49 77.88 101.91 C 77.91 100.33 77.97 98.16 78 97.09 C 78.04 96.03 78.06 93.24 78.06 90.91 L 78.06 86.66 L 77.97 84.09 C 77.81 79.5 77.58 77.21 77.17 75.94 C 76.99 75.35 76.74 74.9 76.3 74.31 L 75.92 73.8 L 75.55 73.53 C 74.72 72.92 73.12 72.27 71.62 71.95 L 70.84 71.78 L 69 71.78 L 67.16 71.78 L 66.16 71.96 C 64.9 72.18 63.69 72.49 63 72.75 C 62.71 72.86 61.99 73.2 61.41 73.5 L 60.34 74.04 L 59.5 74.6 C 59.04 74.91 58.43 75.35 58.16 75.58 C 57.88 75.81 57.65 75.98 57.64 75.97 C 57.63 75.97 57.6 75.53 57.56 75 C 57.41 72.68 57.14 71.71 56.17 69.88 C 54.98 67.64 53.71 65.9 52.08 64.31 C 50.01 62.28 47.97 60.87 44.91 59.37 L 43.54 58.69 L 43.77 58.6 C 43.89 58.54 44.01 58.5 44.03 58.5 C 44.09 58.5 46.24 57.23 47.18 56.64 C 53.68 52.56 56.34 49.33 57.75 43.78 C 57.88 43.27 58.04 42.58 58.1 42.27 C 58.16 41.95 58.24 41.69 58.27 41.69 C 58.3 41.69 58.48 41.81 58.68 41.96 C 60.49 43.34 62.65 44.22 65.84 44.88 L 66.53 45.03 L 68.53 45.03 L 70.53 45.03 L 71.12 44.95 C 72.32 44.78 73.74 44.36 75.12 43.75 C 76.85 42.99 77.8 41.83 78.56 39.58 C 78.88 38.62 79 37.94 79.05 36.83 C 79.16 34.68 78.83 32.12 78.21 30.25 C 77.92 29.4 77.67 28.91 77.13 28.17 C 76.89 27.84 76.71 27.55 76.74 27.54 C 76.76 27.52 77.18 27.36 77.66 27.19 C 78.86 26.74 79.82 26.3 80.82 25.73 C 83.19 24.4 85.05 22.96 87.29 20.72 L 88.6 19.41 L 89.41 18.44 C 90.57 17.03 91.31 16.02 92.72 13.91 C 93.41 12.88 94 12.04 94.03 12.03 C 94.07 12.03 94.66 12.88 95.34 13.91 C 96.75 16.02 97.49 17.03 98.66 18.44 L 99.46 19.41 L 100.78 20.72 C 103.98 23.91 106.93 25.89 110.4 27.19 C 110.89 27.36 111.3 27.52 111.32 27.54 C 111.35 27.55 111.17 27.84 110.93 28.17 C 110.39 28.91 110.14 29.4 109.85 30.25 C 109.23 32.12 108.9 34.68 109.01 36.83 C 109.06 37.94 109.19 38.62 109.5 39.58 C 110.26 41.83 111.21 42.99 112.94 43.75 C 114.32 44.36 115.74 44.78 116.94 44.95 L 117.53 45.03 L 119.53 45.03 L 121.53 45.03 L 122.22 44.88 C 125.41 44.22 127.57 43.34 129.39 41.96 C 129.58 41.81 129.76 41.69 129.79 41.69 C 129.82 41.69 129.9 41.95 129.96 42.27 C 130.03 42.58 130.18 43.27 130.31 43.78 C 131.72 49.33 134.38 52.56 140.89 56.64 C 141.82 57.23 143.97 58.5 144.03 58.5 C 144.05 58.5 144.17 58.54 144.3 58.6 L 144.53 58.69 L 143.15 59.37 C 140.1 60.87 138.05 62.28 135.98 64.31 C 134.35 65.9 133.08 67.64 131.89 69.88 C 130.92 71.71 130.66 72.68 130.5 75 C 130.47 75.53 130.43 75.97 130.42 75.97 C 130.41 75.98 130.18 75.81 129.91 75.58 C 129.63 75.35 129.03 74.91 128.56 74.6 L 127.72 74.04 L 126.66 73.5 C 126.07 73.2 125.35 72.86 125.06 72.75 C 124.37 72.49 123.16 72.18 121.91 71.96 L 120.91 71.78 L 119.06 71.78 L 117.22 71.78 L 116.44 71.95 C 114.95 72.27 113.34 72.92 112.51 73.53 L 112.15 73.8 L 111.76 74.31 C 111.32 74.9 111.08 75.35 110.89 75.94 C 110.48 77.21 110.26 79.5 110.09 84.09 L 110 86.66 L 110 90.91 C 110 93.24 110.03 96.03 110.06 97.09 C 110.09 98.16 110.15 100.33 110.19 101.91 C 110.22 103.49 110.28 105.78 110.31 107 C 110.35 108.22 110.4 110.5 110.44 112.06 C 110.54 116.39 110.82 124.33 110.91 125.25 C 110.92 125.44 110.98 126.63 111.03 127.91 C 111.08 129.18 111.17 131.06 111.22 132.09 C 111.27 133.12 111.34 134.55 111.37 135.25 C 111.41 135.95 111.48 136.91 111.53 137.38 C 111.58 137.84 111.65 138.92 111.69 139.78 C 111.72 140.64 111.79 141.85 111.84 142.46 L 111.94 143.58 L 112.11 143.81 C 112.2 143.93 112.81 144.58 113.47 145.25 C 114.55 146.36 115.31 147.24 115.31 147.39 C 115.31 147.5 114.95 147.97 114.61 148.29 C 114.43 148.46 114.01 148.81 113.69 149.06 C 110.45 151.57 107.5 154.33 105.13 157.09 C 104.34 158.01 102.67 160.2 102.02 161.19 C 99.71 164.65 97.69 168.69 95.69 173.84 C 95.41 174.57 95.14 175.24 95.1 175.34 Z" fill="#f0c666"/><path d="M32 24.2V45.6" stroke="#e9bd5c" stroke-width="2.3" stroke-linecap="round"/><path d="M29.4 27.2H34.6" stroke="#f0c666" stroke-width="1.4" stroke-linecap="round"/><path d="M33 36.4H39.6V39.8H36.8V41.4H39.6V45.2H33" fill="#f0c666" fill-opacity=".1" stroke="#f0c666" stroke-width="1.3" stroke-linejoin="round"/><g filter="url(#sgT)"><path d="M17 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="#6fe0e0" stroke="#6fe0e0" stroke-width=".7"/><path d="M22 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="#6fe0e0" stroke="#6fe0e0" stroke-width=".7"/><path d="M27 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="#6fe0e0" stroke="#6fe0e0" stroke-width=".7"/><path d="M32 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="#6fe0e0" stroke="#6fe0e0" stroke-width=".7"/><path d="M37 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="#6fe0e0" stroke="#6fe0e0" stroke-width=".7"/><path d="M42 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="none" stroke="#6fe0e0" stroke-width=".7"/><path d="M47 50.4l1.6 1.6l-1.6 1.6l-1.6-1.6z" fill="none" stroke="#6fe0e0" stroke-width=".7"/></g></svg>
+          <div>
+            <p class="knight-rank">Knight</p>
+            <h3>The Seneschal</h3>
+            <p>Plans your week, so Monday doesn&rsquo;t ambush you.</p>
+          </div>
         </li>
-        <li class="knight reveal reveal-delay-2">
-          <div class="knight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l8-6 8 6v10H4z"/><circle cx="12" cy="13" r="2"/><path d="M12 15v3"/></svg></div>
-          <p class="knight-rank">The vault</p>
-          <h3>The Reliquary</h3>
-          <p>Your encrypted second brain: a place for notes, ideas and the things worth keeping.</p>
+        <li class="knight">
+          <svg class="sigil" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 58V28C14 16.5 22 9.5 32 4.5C42 9.5 50 16.5 50 28V58Z" fill="url(#sgGlow)" stroke="#f0c666" stroke-opacity=".45" stroke-width="1"/><path d="M10 58H54" stroke="#f0c666" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/><path transform="translate(25.559 9.376) scale(0.0685)" d="M 92.95 175.33 C 92.91 175.23 92.65 174.57 92.37 173.84 C 91.28 171.05 90.42 169.08 89.25 166.73 C 87.04 162.33 84.71 158.96 81.38 155.36 C 79.76 153.6 76.77 150.92 74.38 149.06 C 74.05 148.81 73.63 148.46 73.45 148.29 C 73.12 147.97 72.75 147.5 72.75 147.39 C 72.75 147.24 73.51 146.36 74.59 145.25 C 75.25 144.58 75.86 143.93 75.96 143.81 L 76.12 143.58 L 76.22 142.46 C 76.27 141.85 76.34 140.64 76.37 139.78 C 76.41 138.92 76.48 137.84 76.53 137.38 C 76.59 136.91 76.66 135.95 76.69 135.25 C 76.72 134.55 76.79 133.12 76.84 132.09 C 76.89 131.06 76.98 129.18 77.03 127.91 C 77.08 126.63 77.14 125.44 77.16 125.25 C 77.24 124.33 77.52 116.39 77.62 112.06 C 77.66 110.5 77.72 108.22 77.75 107 C 77.78 105.78 77.84 103.49 77.88 101.91 C 77.91 100.33 77.97 98.16 78 97.09 C 78.04 96.03 78.06 93.24 78.06 90.91 L 78.06 86.66 L 77.97 84.09 C 77.81 79.5 77.58 77.21 77.17 75.94 C 76.99 75.35 76.74 74.9 76.3 74.31 L 75.92 73.8 L 75.55 73.53 C 74.72 72.92 73.12 72.27 71.62 71.95 L 70.84 71.78 L 69 71.78 L 67.16 71.78 L 66.16 71.96 C 64.9 72.18 63.69 72.49 63 72.75 C 62.71 72.86 61.99 73.2 61.41 73.5 L 60.34 74.04 L 59.5 74.6 C 59.04 74.91 58.43 75.35 58.16 75.58 C 57.88 75.81 57.65 75.98 57.64 75.97 C 57.63 75.97 57.6 75.53 57.56 75 C 57.41 72.68 57.14 71.71 56.17 69.88 C 54.98 67.64 53.71 65.9 52.08 64.31 C 50.01 62.28 47.97 60.87 44.91 59.37 L 43.54 58.69 L 43.77 58.6 C 43.89 58.54 44.01 58.5 44.03 58.5 C 44.09 58.5 46.24 57.23 47.18 56.64 C 53.68 52.56 56.34 49.33 57.75 43.78 C 57.88 43.27 58.04 42.58 58.1 42.27 C 58.16 41.95 58.24 41.69 58.27 41.69 C 58.3 41.69 58.48 41.81 58.68 41.96 C 60.49 43.34 62.65 44.22 65.84 44.88 L 66.53 45.03 L 68.53 45.03 L 70.53 45.03 L 71.12 44.95 C 72.32 44.78 73.74 44.36 75.12 43.75 C 76.85 42.99 77.8 41.83 78.56 39.58 C 78.88 38.62 79 37.94 79.05 36.83 C 79.16 34.68 78.83 32.12 78.21 30.25 C 77.92 29.4 77.67 28.91 77.13 28.17 C 76.89 27.84 76.71 27.55 76.74 27.54 C 76.76 27.52 77.18 27.36 77.66 27.19 C 78.86 26.74 79.82 26.3 80.82 25.73 C 83.19 24.4 85.05 22.96 87.29 20.72 L 88.6 19.41 L 89.41 18.44 C 90.57 17.03 91.31 16.02 92.72 13.91 C 93.41 12.88 94 12.04 94.03 12.03 C 94.07 12.03 94.66 12.88 95.34 13.91 C 96.75 16.02 97.49 17.03 98.66 18.44 L 99.46 19.41 L 100.78 20.72 C 103.98 23.91 106.93 25.89 110.4 27.19 C 110.89 27.36 111.3 27.52 111.32 27.54 C 111.35 27.55 111.17 27.84 110.93 28.17 C 110.39 28.91 110.14 29.4 109.85 30.25 C 109.23 32.12 108.9 34.68 109.01 36.83 C 109.06 37.94 109.19 38.62 109.5 39.58 C 110.26 41.83 111.21 42.99 112.94 43.75 C 114.32 44.36 115.74 44.78 116.94 44.95 L 117.53 45.03 L 119.53 45.03 L 121.53 45.03 L 122.22 44.88 C 125.41 44.22 127.57 43.34 129.39 41.96 C 129.58 41.81 129.76 41.69 129.79 41.69 C 129.82 41.69 129.9 41.95 129.96 42.27 C 130.03 42.58 130.18 43.27 130.31 43.78 C 131.72 49.33 134.38 52.56 140.89 56.64 C 141.82 57.23 143.97 58.5 144.03 58.5 C 144.05 58.5 144.17 58.54 144.3 58.6 L 144.53 58.69 L 143.15 59.37 C 140.1 60.87 138.05 62.28 135.98 64.31 C 134.35 65.9 133.08 67.64 131.89 69.88 C 130.92 71.71 130.66 72.68 130.5 75 C 130.47 75.53 130.43 75.97 130.42 75.97 C 130.41 75.98 130.18 75.81 129.91 75.58 C 129.63 75.35 129.03 74.91 128.56 74.6 L 127.72 74.04 L 126.66 73.5 C 126.07 73.2 125.35 72.86 125.06 72.75 C 124.37 72.49 123.16 72.18 121.91 71.96 L 120.91 71.78 L 119.06 71.78 L 117.22 71.78 L 116.44 71.95 C 114.95 72.27 113.34 72.92 112.51 73.53 L 112.15 73.8 L 111.76 74.31 C 111.32 74.9 111.08 75.35 110.89 75.94 C 110.48 77.21 110.26 79.5 110.09 84.09 L 110 86.66 L 110 90.91 C 110 93.24 110.03 96.03 110.06 97.09 C 110.09 98.16 110.15 100.33 110.19 101.91 C 110.22 103.49 110.28 105.78 110.31 107 C 110.35 108.22 110.4 110.5 110.44 112.06 C 110.54 116.39 110.82 124.33 110.91 125.25 C 110.92 125.44 110.98 126.63 111.03 127.91 C 111.08 129.18 111.17 131.06 111.22 132.09 C 111.27 133.12 111.34 134.55 111.37 135.25 C 111.41 135.95 111.48 136.91 111.53 137.38 C 111.58 137.84 111.65 138.92 111.69 139.78 C 111.72 140.64 111.79 141.85 111.84 142.46 L 111.94 143.58 L 112.11 143.81 C 112.2 143.93 112.81 144.58 113.47 145.25 C 114.55 146.36 115.31 147.24 115.31 147.39 C 115.31 147.5 114.95 147.97 114.61 148.29 C 114.43 148.46 114.01 148.81 113.69 149.06 C 110.45 151.57 107.5 154.33 105.13 157.09 C 104.34 158.01 102.67 160.2 102.02 161.19 C 99.71 164.65 97.69 168.69 95.69 173.84 C 95.41 174.57 95.14 175.24 95.1 175.34 Z" fill="#f0c666"/><path d="M19 33.5L32 22.5L45 33.5Z" fill="#f0c666" fill-opacity=".08" stroke="url(#sgGold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M22.6 30.4l-1-1.6M26.2 27.4l-1-1.7M37.8 27.4l1-1.7M41.4 30.4l1-1.6" stroke="#f0c666" stroke-width="1" stroke-linecap="round"/><circle cx="32" cy="29.4" r="1.7" fill="none" stroke="#f0c666" stroke-width=".8"/><circle cx="32" cy="29.4" r=".5" fill="#f0c666"/><path d="M20.5 33.5H43.5V48H20.5Z" fill="#f0c666" fill-opacity=".05" stroke="url(#sgGold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M23.5 46V40C23.5 37.6 24.6 36.2 26 35.6C27.4 36.2 28.5 37.6 28.5 40V46M35.5 46V40C35.5 37.6 36.6 36.2 38 35.6C39.4 36.2 40.5 37.6 40.5 40V46" fill="none" stroke="#f0c666" stroke-opacity=".7" stroke-width=".9"/><g filter="url(#sgT)" fill="#6fe0e0"><circle cx="32" cy="39.4" r="1.8"/><path d="M31.1 40.4L30.5 44.6H33.5L32.9 40.4Z"/></g><path d="M18 48H46V51.2H18Z" fill="#f0c666" fill-opacity=".1" stroke="url(#sgGold)" stroke-width="1.2" stroke-linejoin="round"/><path d="M20.5 51.2V54.4H23.5V51.2M40.5 51.2V54.4H43.5V51.2" fill="none" stroke="#f0c666" stroke-width="1.1" stroke-linejoin="round"/></svg>
+          <div>
+            <p class="knight-rank">The vault</p>
+            <h3>The Reliquary</h3>
+            <p>Your encrypted second brain: a place for notes, ideas and the things worth keeping.</p>
+          </div>
         </li>
       </ul>
       </div>
-      <p class="order-more reveal">More knights scout products and help keep the shop, for those who sell.</p>
+      <p class="order-more">More knights scout products and help keep the shop, for those who sell.</p>
     </div>
   </section>
 
   <!-- ── PRIVACY ──────────────────────────────────────────────── -->
   <section class="section bg-raised" id="privacy" aria-labelledby="privacy-title">
     <div class="container privacy-grid">
-      <div>
-        <p class="eyebrow reveal">Privacy</p>
-        <h2 id="privacy-title" class="section-title reveal reveal-delay-1">Your records stay yours.</h2>
-        <p class="section-sub reveal reveal-delay-2">An accountability app sees your real days. You deserve a straight answer about where they go.</p>
+      <div class="privacy-head">
+        <p class="eyebrow">Privacy</p>
+        <h2 id="privacy-title" class="section-title">Your records stay yours.</h2>
+        <p class="section-sub">An accountability app sees your real days. You deserve a straight answer about where they go.</p>
       </div>
-      <ul class="vows">
-        <li class="vow reveal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
-          <h3>We never sell your data.</h3>
-          <p>Not to advertisers, not to anyone. And no ads in anything you pay for.</p>
-        </li>
-        <li class="vow reveal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
-          <h3>Your calls stay with the Scribe.</h3>
-          <p>Calls are never sold, never shared and never used to train AI. The audio is deleted once it&rsquo;s turned into text, and your check-ins are stored encrypted, for you only.</p>
-        </li>
-        <li class="vow reveal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
-          <h3>Outside lookups go through the Forge.</h3>
-          <p>When the Forge looks something up for you, the request goes out through us, so the outside service deals with the Forge, not with you.</p>
-        </li>
-        <li class="vow reveal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
-          <h3>This site practices it too.</h3>
-          <p>No cookies, no analytics, no ad pixels. The waitlist never touches Google. <a href="/privacy-policy">Read the plain-words privacy policy</a>.</p>
-        </li>
-      </ul>
+      <ol class="vows">
+        <li class="vow"><span class="vow-num" aria-hidden="true">I</span><h3>We never sell your data.</h3><p>Not to advertisers, not to anyone. And no ads in anything you pay for.</p></li>
+        <li class="vow"><span class="vow-num" aria-hidden="true">II</span><h3>Your calls stay with the Scribe.</h3><p>Calls are never sold, never shared and never used to train AI. The audio is deleted once it&rsquo;s turned into text, and your check-ins are stored encrypted, for you only.</p></li>
+        <li class="vow"><span class="vow-num" aria-hidden="true">III</span><h3>Outside lookups go through the Forge.</h3><p>When the Forge looks something up for you, the request goes out through us, so the outside service deals with the Forge, not with you.</p></li>
+        <li class="vow"><span class="vow-num" aria-hidden="true">IV</span><h3>This site practices it too.</h3><p>No cookies, no analytics, no ad pixels. The waitlist never touches Google. <a href="/privacy-policy">Read the plain-words privacy policy</a>.</p></li>
+      </ol>
     </div>
   </section>
 
   <!-- ── FAQ ──────────────────────────────────────────────────── -->
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="container">
-      <div class="section-header">
-        <p class="eyebrow reveal">Questions</p>
-        <h2 id="faq-title" class="section-title reveal reveal-delay-1">Straight answers</h2>
+      <div class="faq-grid">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title" class="section-title">Straight answers</h2>
       </div>
-      <div class="faq reveal">
+      <div class="faq">
         <details>
           <summary>Is it on iPhone?</summary>
           <p>Not yet. Watchman Forge is Android first. Join the waitlist and we&rsquo;ll tell you when there&rsquo;s news on iPhone.</p>
@@ -708,13 +778,14 @@
           <p>One of the first 100 people to join the waitlist and confirm their email. You get in first, and you hear the founding offer before anyone else.</p>
         </details>
       </div>
+      </div>
     </div>
   </section>
 
   <!-- ── JOIN ─────────────────────────────────────────────────── -->
   <section class="section" id="join" aria-labelledby="join-title">
     <div class="container">
-      <div class="join-box reveal">
+      <div class="join-box">
         <p class="eyebrow">Founding Knights</p>
         <h2 id="join-title" class="section-title">Take your post early.</h2>
         <p class="section-sub">Join the waitlist for early access. The first 100 become Founding Knights: you get in first, and you hear the founding offer before anyone else.</p>
@@ -774,7 +845,7 @@
 </footer>
 <!-- /chrome:footer -->
 
-<script src="/js/main.js?v=397547b940"></script>
-<script src="/js/watchman-fx.js?v=1a2373d7af"></script>
+<script src="/js/main.js?v=a883b89328"></script>
+<script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>
