@@ -300,25 +300,72 @@
 
   /* ── The Order: the cathedral, and the roster ───────────────── */
   .order-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; }
-  .shot-order { isolation: isolate; }
-  .shot-order .shot-img { height: 100%; object-fit: cover; }
-  /* The hall moves as it does in the app: the rose window breathes, light falls, motes rise, the altar flame burns */
-  .order-fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
-  .order-fx * { animation-play-state: paused; }
-  .shot-order.is-live .order-fx * { animation-play-state: running; }
-  .o-rose, .o-pool, .o-shaft { transform-box: fill-box; transform-origin: center; }
-  .o-rose { animation: o-breathe 6s ease-in-out infinite; }
-  .o-pool { animation: o-breathe 6s ease-in-out -1.2s infinite; }
-  .o-shaft { animation: o-shaft 6s ease-in-out -.6s infinite; }
-  @keyframes o-breathe { 0%,100% { opacity: .45; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
-  @keyframes o-shaft { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
-  .o-flame { transform-box: fill-box; transform-origin: center; animation: o-flick 1.6s ease-in-out infinite; }
-  @keyframes o-flick { 0%,100% { opacity: .75; transform: scale(.9); } 35% { opacity: 1; transform: scale(1.12); } 60% { opacity: .85; transform: scale(.98); } }
-  .o-motes circle { fill: #d7f1ff; opacity: 0; animation: o-mote 11s linear infinite; }
-  @keyframes o-mote { 0% { opacity: 0; transform: translate(0, 0); } 15% { opacity: .9; } 75% { opacity: .7; } 100% { opacity: 0; transform: translate(6px, -120px); } }
-  .o-scan { animation: o-scan 9s linear infinite; }
-  @keyframes o-scan { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(1206px); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .order-fx * { animation: none !important; } .o-motes, .o-scan { display: none; } }
+  /* The hall is the app's own Order of the Watchmen screen (tools/order-hall/make_hall.py): the plate
+     and six knights in one picture, the Seneschal as his own layer. What moves, how fast and in what
+     colours are the app's (order-screen/NOTES.md); sizes are cqw of the hall, scaled from the app's
+     390px-wide phone scene. */
+  .hall { aspect-ratio: 1170 / 1470; align-self: center; isolation: isolate; container-type: inline-size; }
+  .hall-plate { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hall-fx, .hall-fx > * { position: absolute; inset: 0; pointer-events: none; }
+  .hall-fx * { animation-play-state: paused; }
+  .hall.is-live .hall-fx * { animation-play-state: running; }
+  @keyframes hall-breath { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+  .hall-moon { mix-blend-mode: screen; background: radial-gradient(60% 50% at 50% 34%, rgba(150,190,255,.12), transparent 70%); animation: hall-breath 8s ease-in-out infinite; }
+  .hall-rose { inset: auto; left: 50%; top: 17.5%; width: 19cqw; aspect-ratio: 1; transform: translate(-50%, -50%); mix-blend-mode: screen; filter: blur(1.5cqw);
+    background: radial-gradient(circle, rgba(180,215,255,.5), rgba(120,180,255,0) 70%); animation: hall-breath 6s ease-in-out infinite; }
+  .hall-beams { inset: auto; left: 50%; top: 17.5%; width: 0; height: 0; mix-blend-mode: screen; }
+  .hall-beams i { position: absolute; left: 0; top: 0; width: 14cqw; height: 110cqw; transform-origin: top center; filter: blur(2.3cqw); opacity: .7;
+    background: linear-gradient(180deg, rgba(210,230,255,.34) 0%, rgba(180,210,255,.10) 38%, rgba(180,210,255,0) 78%); }
+  .hall-beams .b1 { transform: translateX(-50%) rotate(-15deg); animation: hall-sway1 9s ease-in-out infinite; }
+  .hall-beams .b2 { width: 21cqw; transform: translateX(-50%) rotate(-5deg); animation: hall-sway2 11s ease-in-out infinite; }
+  .hall-beams .b3 { width: 17cqw; transform: translateX(-50%) rotate(6deg); animation: hall-sway3 10s ease-in-out infinite; }
+  .hall-beams .b4 { transform: translateX(-50%) rotate(16deg); animation: hall-sway1 12s ease-in-out infinite reverse; }
+  @keyframes hall-sway1 { 0%,100% { opacity: .45; transform: translateX(-50%) rotate(-16deg); } 50% { opacity: .8; transform: translateX(-50%) rotate(-13deg); } }
+  @keyframes hall-sway2 { 0%,100% { opacity: .6; transform: translateX(-50%) rotate(-6deg); } 50% { opacity: .95; transform: translateX(-50%) rotate(-4deg); } }
+  @keyframes hall-sway3 { 0%,100% { opacity: .5; transform: translateX(-50%) rotate(5deg); } 50% { opacity: .85; transform: translateX(-50%) rotate(8deg); } }
+  .hall-motes i { position: absolute; width: .8cqw; height: .8cqw; min-width: 2px; min-height: 2px; border-radius: 50%; opacity: 0;
+    background: rgba(210,230,255,.8); box-shadow: 0 0 1.3cqw rgba(210,230,255,.9); animation: hall-drift 10s linear infinite; }
+  @keyframes hall-drift { 0% { opacity: 0; transform: translate(0, 0); } 15% { opacity: .9; } 85% { opacity: .7; } 100% { opacity: 0; transform: translate(var(--dx), -11.8cqw); } }
+  /* the altar flame: the app's fire, scaled to the small flame on the phone plate */
+  .hall-fire { inset: auto; left: 50%; top: 51.5%; width: 11cqw; height: 13cqw; transform: translate(-50%, -70%); mix-blend-mode: screen; }
+  .hall-fire > i { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); border-radius: 50%; filter: blur(1.2cqw); }
+  .hall-fire .f1 { width: 100%; height: 100%; background: radial-gradient(circle at 50% 70%, rgba(255,200,90,.7), rgba(255,120,30,.3) 45%, transparent 70%); animation: hall-flick1 1.9s ease-in-out infinite; }
+  .hall-fire .f2 { width: 62%; height: 78%; background: radial-gradient(circle at 50% 72%, rgba(255,235,170,.85), rgba(255,140,40,.4) 50%, transparent 72%); animation: hall-flick2 1.3s ease-in-out infinite; }
+  .hall-fire .f3 { width: 36%; height: 52%; background: radial-gradient(circle at 50% 75%, #fff3cf, rgba(255,170,60,.5) 55%, transparent 75%); animation: hall-flick3 .8s ease-in-out infinite; }
+  @keyframes hall-flick1 { 0%,100% { opacity: .7; transform: translateX(-50%) scaleY(1) scaleX(1); } 50% { opacity: 1; transform: translateX(-52%) scaleY(1.08) scaleX(.96); } }
+  @keyframes hall-flick2 { 0%,100% { opacity: .8; transform: translateX(-50%) scaleY(.96); } 40% { opacity: 1; transform: translateX(-48%) scaleY(1.12); } 70% { opacity: .85; transform: translateX(-51%) scaleY(1.02); } }
+  @keyframes hall-flick3 { 0%,100% { opacity: .85; transform: translateX(-50%) scaleY(1); } 50% { opacity: 1; transform: translateX(-49%) scaleY(1.15); } }
+  .hall-embers i { position: absolute; width: .6cqw; height: .6cqw; min-width: 1.5px; min-height: 1.5px; border-radius: 50%; opacity: 0;
+    background: #ffcf7a; box-shadow: 0 0 1.5cqw #ff9b3a; animation: hall-rise 3.5s ease-out infinite; }
+  @keyframes hall-rise { 0% { opacity: 0; transform: translate(0, 0) scale(1); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--ex), -13cqw) scale(.3); } }
+  /* the Seneschal: his gold presence. Opacity only on phones, as the app does (a moving, filtered
+     figure is what iPhones paint in the wrong place); on desktop he also sways and breathes. */
+  .sen { inset: auto; left: 36.25%; top: 51.65%; width: 27.51%; aspect-ratio: 753 / 1000; transform-origin: 50% 100%; }
+  .sen > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sen-fig { transform-origin: 50% 100%; filter: drop-shadow(0 0 7px rgba(255,206,104,.4)) drop-shadow(0 0 17px rgba(255,184,80,.24)); }
+  .sen-halo::before, .sen-self { -webkit-mask: url(/assets/app/seneschal-330.webp) center bottom / contain no-repeat; mask: url(/assets/app/seneschal-330.webp) center bottom / contain no-repeat; }
+  /* the blur sits on the halo and the figure's mask on its child, so the gold spills past his outline */
+  .sen-halo { mix-blend-mode: screen; filter: blur(4cqw); transform: scale(1.12); transform-origin: 50% 100%; animation: hall-aura 5.5s ease-in-out infinite; }
+  .sen-halo::before { content: ''; position: absolute; inset: 0; background: rgba(255,206,104,.5); }
+  .sen-self { mix-blend-mode: screen; }
+  .sen-self { background: radial-gradient(60% 52% at 50% 42%, rgba(255,214,128,.22), rgba(255,184,86,.07) 58%, transparent 82%); animation: hall-self 5s ease-in-out infinite; }
+  @keyframes hall-aura { 0%,100% { opacity: .32; } 50% { opacity: .58; } }
+  @keyframes hall-self { 0%,100% { opacity: .5; } 50% { opacity: .82; } }
+  .sen-wisps { inset: auto; left: 38%; top: 38.63%; width: 24%; height: 42.1%; }
+  .sen-wisps i { position: absolute; border-radius: 50%; opacity: 0; mix-blend-mode: screen; filter: blur(2.3cqw);
+    background: radial-gradient(circle, rgba(255,212,115,.3), transparent 70%); animation: hall-wisp 6s ease-out infinite; }
+  @keyframes hall-wisp { 0% { opacity: 0; transform: translate(0, 0) scale(.7); } 22% { opacity: .55; } 100% { opacity: 0; transform: translate(var(--wx), -28.2cqw) scale(1.3); } }
+  @media (min-width: 901px) and (hover: hover) {
+    .sen { animation: hall-sway 7s ease-in-out infinite; }
+    .sen-fig { animation: hall-glow 5s ease-in-out infinite, hall-breathe 4.4s ease-in-out infinite; }
+    @keyframes hall-sway { 0%,50%,100% { transform: rotate(0deg); } 25% { transform: rotate(.6deg); } 75% { transform: rotate(-.6deg); } }
+    @keyframes hall-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.014); } }
+    @keyframes hall-glow { 0%,100% { filter: drop-shadow(0 0 7px rgba(255,206,104,.4)) drop-shadow(0 0 17px rgba(255,184,80,.24)); }
+      50% { filter: drop-shadow(0 0 12px rgba(255,216,120,.58)) drop-shadow(0 0 30px rgba(255,194,86,.36)); } }
+  }
+  /* the app's faint CRT veil over the whole scene */
+  .hall-crt { background: repeating-linear-gradient(0deg, rgba(0,0,0,.10) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; opacity: .5; }
+  @media (prefers-reduced-motion: reduce) { .hall-fx * { animation: none !important; } .hall-motes, .hall-embers, .sen-wisps { display: none; } }
 
   .roster { display: grid; align-content: center; border-top: 1px solid var(--gold-line); }
   .knight { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 22px; align-items: start; padding: 26px 4px; border-bottom: 1px solid var(--line); }
@@ -328,7 +375,7 @@
   .knight h3 { font-family: var(--font-black); font-weight: 400; letter-spacing: 0; font-size: 2.05rem; line-height: 1.05; color: var(--gold); margin: 6px 0 8px; }
   .knight p:last-child { color: var(--text-2); }
   .order-more { margin-top: 28px; color: var(--text-2); }
-  @media (max-width: 900px) { .order-grid { grid-template-columns: 1fr; } .shot-order { max-height: 460px; } }
+  @media (max-width: 900px) { .order-grid { grid-template-columns: 1fr; } .hall { width: min(100%, 440px); justify-self: center; } }
   @media (max-width: 420px) { .knight { grid-template-columns: 60px minmax(0, 1fr); gap: 16px; } .sigil { width: 60px; height: 60px; } }
 
   /* ── Privacy: four vows ───────────────────────────────────── */
@@ -674,22 +721,22 @@
         <p class="section-sub">The Order is a band of AI knights inside the Forge. They do real work, not just chat.</p>
       </div>
       <div class="order-grid">
-      <figure class="shot shot-order" data-live>
-        <img class="shot-img" src="/assets/app/order-960.webp" srcset="/assets/app/order-480.webp 480w, /assets/app/order-960.webp 960w" sizes="(max-width: 900px) 92vw, 560px" width="960" height="1086" loading="lazy" decoding="async" alt="Order of the Watchmen, in the app: a cathedral hall where the knights of the Order stand ready.">
-        <svg class="order-fx" viewBox="0 0 960 1086" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs>
-            <radialGradient id="oRose"><stop offset="0" stop-color="#a9e2ff" stop-opacity=".6"/><stop offset=".45" stop-color="#3f8fe0" stop-opacity=".22"/><stop offset="1" stop-color="#3f8fe0" stop-opacity="0"/></radialGradient>
-            <linearGradient id="oShaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd8ff" stop-opacity=".2"/><stop offset=".7" stop-color="#9fd8ff" stop-opacity=".05"/><stop offset="1" stop-color="#9fd8ff" stop-opacity="0"/></linearGradient>
-            <radialGradient id="oFlame"><stop offset="0" stop-color="#ffe7b4"/><stop offset=".3" stop-color="#f0a346" stop-opacity=".6"/><stop offset="1" stop-color="#f0a346" stop-opacity="0"/></radialGradient>
-            <linearGradient id="oScan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fd0ff" stop-opacity="0"/><stop offset=".85" stop-color="#5fd0ff" stop-opacity=".07"/><stop offset="1" stop-color="#9fe6ff" stop-opacity=".1"/></linearGradient>
-          </defs>
-          <path class="o-shaft" d="M430 150L526 150L700 900L256 900Z" fill="url(#oShaft)"/>
-          <circle class="o-rose" cx="478" cy="92" r="118" fill="url(#oRose)"/>
-          <ellipse class="o-pool" cx="478" cy="935" rx="150" ry="90" fill="url(#oRose)"/>
-          <circle class="o-flame" cx="478" cy="493" r="24" fill="url(#oFlame)"/>
-          <g class="o-motes"><circle cx="467" cy="559" r="1.8" style="animation-duration:14.2s;animation-delay:-0.1s"/><circle cx="481" cy="811" r="1.7" style="animation-duration:12.3s;animation-delay:-9.2s"/><circle cx="315" cy="562" r="2.9" style="animation-duration:11.7s;animation-delay:-10.9s"/><circle cx="357" cy="494" r="1.8" style="animation-duration:12.0s;animation-delay:-13.9s"/><circle cx="513" cy="752" r="2.3" style="animation-duration:13.5s;animation-delay:-1.5s"/><circle cx="405" cy="704" r="2.9" style="animation-duration:11.5s;animation-delay:-1.3s"/><circle cx="396" cy="481" r="2.1" style="animation-duration:13.9s;animation-delay:-3.0s"/><circle cx="619" cy="802" r="1.7" style="animation-duration:11.3s;animation-delay:-7.4s"/><circle cx="308" cy="584" r="3.2" style="animation-duration:9.7s;animation-delay:-9.0s"/><circle cx="344" cy="658" r="3.2" style="animation-duration:10.2s;animation-delay:-0.1s"/><circle cx="330" cy="639" r="1.6" style="animation-duration:9.5s;animation-delay:-7.5s"/><circle cx="632" cy="582" r="2.3" style="animation-duration:12.8s;animation-delay:-1.4s"/><circle cx="509" cy="463" r="2.7" style="animation-duration:14.7s;animation-delay:-0.8s"/><circle cx="500" cy="671" r="1.9" style="animation-duration:10.6s;animation-delay:-14.9s"/><circle cx="659" cy="438" r="2.9" style="animation-duration:14.7s;animation-delay:-3.6s"/><circle cx="520" cy="401" r="2.3" style="animation-duration:13.0s;animation-delay:-8.9s"/></g>
-          <rect class="o-scan" x="0" y="-120" width="960" height="120" fill="url(#oScan)"/>
-        </svg>
+      <figure class="shot shot-order hall" data-live>
+        <img class="hall-plate" src="/assets/app/order-hall-1170.webp" srcset="/assets/app/order-hall-600.webp 600w, /assets/app/order-hall-880.webp 880w, /assets/app/order-hall-1170.webp 1170w" sizes="(max-width: 900px) 92vw, 540px" width="1170" height="1470" loading="lazy" decoding="async" alt="Order of the Watchmen, in the app: a cathedral hall where the knights of the Order stand ready, the Seneschal glowing gold at the centre.">
+        <div class="hall-fx" aria-hidden="true">
+          <div class="hall-moon"></div>
+          <div class="hall-rose"></div>
+          <div class="hall-beams"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i></div>
+          <div class="hall-motes"><i style="left:42.2%;top:36.2%;--dx:0.7cqw;animation-duration:12.7s;animation-delay:-7.6s"></i><i style="left:53.7%;top:56.4%;--dx:-2.5cqw;animation-duration:8.6s;animation-delay:-7.7s"></i><i style="left:38.5%;top:50.9%;--dx:3.5cqw;animation-duration:13.2s;animation-delay:-7.6s"></i><i style="left:53.3%;top:43.2%;--dx:2.3cqw;animation-duration:11.5s;animation-delay:-8.6s"></i><i style="left:62.9%;top:49.3%;--dx:-3.9cqw;animation-duration:8.0s;animation-delay:-3.8s"></i><i style="left:47.5%;top:48.2%;--dx:0.4cqw;animation-duration:7.1s;animation-delay:-5.1s"></i><i style="left:42.6%;top:55.7%;--dx:2.4cqw;animation-duration:12.1s;animation-delay:-2.1s"></i><i style="left:58.0%;top:58.8%;--dx:-1.8cqw;animation-duration:10.8s;animation-delay:-1.5s"></i><i style="left:58.8%;top:35.6%;--dx:1.5cqw;animation-duration:7.1s;animation-delay:-1.3s"></i><i style="left:56.3%;top:62.3%;--dx:2.0cqw;animation-duration:9.5s;animation-delay:-7.9s"></i><i style="left:60.1%;top:39.0%;--dx:-3.3cqw;animation-duration:7.0s;animation-delay:-8.0s"></i><i style="left:49.5%;top:65.6%;--dx:3.3cqw;animation-duration:12.3s;animation-delay:-1.6s"></i><i style="left:52.2%;top:39.4%;--dx:-4.1cqw;animation-duration:8.0s;animation-delay:-6.1s"></i><i style="left:55.5%;top:37.6%;--dx:2.4cqw;animation-duration:7.7s;animation-delay:-1.6s"></i></div>
+          <div class="hall-fire"><i class="f1"></i><i class="f2"></i><i class="f3"></i><span class="hall-embers"><i style="left:63%;bottom:26%;--ex:-0.3cqw;animation-duration:3.5s;animation-delay:-0.8s"></i><i style="left:54%;bottom:10%;--ex:-1.8cqw;animation-duration:4.3s;animation-delay:-2.9s"></i><i style="left:52%;bottom:21%;--ex:-0.9cqw;animation-duration:2.5s;animation-delay:-3.5s"></i><i style="left:61%;bottom:15%;--ex:-0.3cqw;animation-duration:2.7s;animation-delay:-3.9s"></i><i style="left:62%;bottom:27%;--ex:2.1cqw;animation-duration:4.1s;animation-delay:-2.4s"></i><i style="left:57%;bottom:17%;--ex:-2.1cqw;animation-duration:4.0s;animation-delay:-0.1s"></i><i style="left:48%;bottom:18%;--ex:1.7cqw;animation-duration:4.8s;animation-delay:-0.5s"></i><i style="left:45%;bottom:17%;--ex:0.6cqw;animation-duration:3.6s;animation-delay:-0.8s"></i><i style="left:44%;bottom:27%;--ex:-0.1cqw;animation-duration:2.9s;animation-delay:-1.2s"></i><i style="left:52%;bottom:21%;--ex:-2.1cqw;animation-duration:4.5s;animation-delay:-3.7s"></i></span></div>
+          <div class="sen">
+            <div class="sen-halo"></div>
+            <img class="sen-fig" src="/assets/app/seneschal-330.webp" alt="" width="330" height="438" loading="lazy" decoding="async">
+            <div class="sen-self"></div>
+          </div>
+          <div class="sen-wisps"><i style="width:8.6cqw;height:8.6cqw;left:37%;top:45%;--wx:-4.0cqw;animation-duration:7.4s;animation-delay:-2.7s"></i><i style="width:7.8cqw;height:7.8cqw;left:33%;top:87%;--wx:-4.7cqw;animation-duration:7.1s;animation-delay:-1.5s"></i><i style="width:5.3cqw;height:5.3cqw;left:84%;top:60%;--wx:0.0cqw;animation-duration:6.8s;animation-delay:-1.7s"></i><i style="width:5.1cqw;height:5.1cqw;left:51%;top:55%;--wx:-3.7cqw;animation-duration:6.1s;animation-delay:-5.3s"></i><i style="width:5.3cqw;height:5.3cqw;left:27%;top:70%;--wx:0.1cqw;animation-duration:6.9s;animation-delay:-4.1s"></i><i style="width:5.9cqw;height:5.9cqw;left:44%;top:52%;--wx:3.8cqw;animation-duration:8.0s;animation-delay:-2.2s"></i></div>
+          <div class="hall-crt"></div>
+        </div>
       </figure>
       <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><radialGradient id="sgGlow" cx=".5" cy=".55" r=".55"><stop offset="0" stop-color="#3cb0b4" stop-opacity=".22"/><stop offset="1" stop-color="#3cb0b4" stop-opacity="0"/></radialGradient><linearGradient id="sgGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7da94"/><stop offset="1" stop-color="#c99a45"/></linearGradient><filter id="sgT" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs></svg>
       <ul class="roster">

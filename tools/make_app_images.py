@@ -6,11 +6,9 @@ make_app_images.py — app screens for the homepage that stay images.
   python3 tools/make_app_images.py
 
 The Ledger, the Forge and the Watchman's List are live HTML on the homepage
-now (so their dates are always today's), so only two kinds of image are left:
+now (so their dates are always today's), and the Order's hall is built from the
+app's own screen by tools/order-hall/make_hall.py, so only these are left:
 
-  order          cut from the founder's phone screenshots in OneDrive
-                 (Claude/Website screenshots): the cathedral and the knights,
-                 none of the real account's data.
   films, pantry  demo-data rebuilds rendered by tools/demo-screens/shoot.js;
                  every name and number in those is made up ("Movie One").
 
@@ -26,11 +24,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = "/mnt/c/Users/sirdo/OneDrive/Claude/Website screenshots"
 OUT = os.path.join(ROOT, "assets", "app")
 
-# name: (file, (left, top, right, bottom)) in the 1216x2688 originals
-CROPS = {
-    # Order of the Watchmen: the cathedral and the knights, nothing else
-    "order":   ("Screenshot_20261101_211528.jpg", (0, 700, 1216, 2075)),
-}
+# name: (file, (left, top, right, bottom)) in the 1216x2688 originals of the founder's phone
+# screenshots (none left: the Order's hall now comes from tools/order-hall/make_hall.py)
+CROPS = {}
 DEMO = os.path.join(ROOT, "tools", "demo-screens", "out")
 DEMO_CROPS = {   # 1215x2688 renders; from the screen title down, past the app header
     "films":  ("demo-films.png",  (0, 290, 1215, 1640)),
