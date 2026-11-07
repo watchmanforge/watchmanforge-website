@@ -2,6 +2,8 @@
    WATCHMAN FORGE — Collections pages
    Fragrances: the atomizer, the assistant's pick, the cut-out slider.
    Games: a guide whose boxes tick on sync; Want / Playing / Played.
+   Movies & TV: a shelf that re-ranks as you score; Up Next (three at
+   most); picks to Want to watch; a poster to choose.
    Everything here is a demo of the app, on made-up data; nothing is
    stored and nothing leaves the page.
    ============================================================ */
@@ -211,6 +213,111 @@
     if (!b) return;
     group.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
   }));
+
+  /* ── Movies & TV: the shelf ranks itself ─────────────────
+     Rows sort by score out of 100, and slide from where they were.
+     The row being scored never leaves the DOM (that would end the
+     drag); the others are moved around it. */
+  const rank = document.querySelector('[data-rank]');
+  if (rank) {
+    const list = rank.querySelector('.mv-list');
+    const me = list.querySelector('.mv-me');
+    const input = me.querySelector('input');
+    const rows = () => [...list.children];
+    const score = (li) => Number(li.querySelector('.mv-s').textContent);
+    const number = () => {
+      let n = 0;
+      rows().forEach(li => { if (!li.hidden) li.querySelector('.mv-n').textContent = ++n; });
+      rank.querySelector('[data-count]').textContent = n;
+    };
+    const reorder = () => {
+      const now = rows();
+      const sorted = now.slice().sort((a, b) => score(b) - score(a));
+      if (sorted.every((li, i) => li === now[i])) return;
+      const before = new Map(now.map(li => [li, li.getBoundingClientRect().top]));
+      const at = sorted.indexOf(me);
+      sorted.slice(0, at).forEach(li => list.insertBefore(li, me));
+      sorted.slice(at + 1).forEach(li => list.appendChild(li));
+      number();
+      if (reduce) return;
+      rows().forEach(li => {
+        const dy = before.get(li) - li.getBoundingClientRect().top;
+        if (!dy) return;
+        li.style.transition = 'none';
+        li.style.transform = `translateY(${dy}px)`;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          li.style.transition = 'transform .45s cubic-bezier(0.22, 1, 0.36, 1)';
+          li.style.transform = '';
+        }));
+      });
+    };
+    input.addEventListener('input', () => {
+      me.querySelector('.mv-s').textContent = input.value;
+      reorder();
+    });
+    rank.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => {
+      rank.querySelectorAll('[data-f]').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      rows().forEach(li => { li.hidden = b.dataset.f !== 'all' && li.dataset.type !== b.dataset.f; });
+      number();
+    }));
+  }
+
+  /* ── Movies & TV: Up Next holds three at most ──────────── */
+  const un = document.querySelector('[data-upnext]');
+  if (un) {
+    const slots = un.querySelector('.un-slots');
+    const want = un.querySelector('.un-want ul');
+    const msg = un.querySelector('.un-msg');
+    const art = (id) => `<svg viewBox="0 0 40 60" aria-hidden="true"><use href="#${id}" width="40" height="60"/></svg>`;
+    const filled = () => [...slots.children].filter(li => li.dataset.id);
+    const keep = (from, to) => ['id', 'name', 'meta', 'art'].forEach(k => { to.dataset[k] = from.dataset[k]; });
+
+    un.addEventListener('click', (e) => {
+      const add = e.target.closest('.un-add');
+      const off = e.target.closest('.un-x');
+      if (add) {
+        if (filled().length >= 3) {
+          msg.textContent = 'Up Next holds three at most. Watch one, or take one off, to make room.';
+          return;
+        }
+        const item = add.closest('li');
+        const slot = [...slots.children].find(li => !li.dataset.id);
+        keep(item, slot);
+        slot.innerHTML = `<span class="un-card">${art(item.dataset.art)}<button class="un-x" type="button" aria-label="Take ${item.dataset.name} off Up Next">&times;</button></span><p class="un-name"></p>`;
+        slot.querySelector('.un-name').textContent = item.dataset.name;
+        item.remove();
+        msg.textContent = filled().length >= 3 ? 'Up Next is full: three is the most it holds.' : `${slot.dataset.name} is up next.`;
+      } else if (off) {
+        const slot = off.closest('li');
+        const item = document.createElement('li');
+        keep(slot, item);
+        item.innerHTML = `<span class="pst">${art(slot.dataset.art)}</span><span><b></b><small></small></span><button class="un-add" type="button">+ Up Next</button>`;
+        item.querySelector('b').textContent = slot.dataset.name;
+        item.querySelector('small').textContent = slot.dataset.meta;
+        want.prepend(item);
+        msg.textContent = `${slot.dataset.name} went back to Want to watch.`;
+        slots.appendChild(slot);
+        ['id', 'name', 'meta', 'art'].forEach(k => { delete slot.dataset[k]; });
+        slot.innerHTML = '<span class="un-card empty">Open spot</span><p class="un-name">&nbsp;</p>';
+      }
+    });
+  }
+
+  /* ── Movies & TV: a pick goes to Want to watch in one tap ── */
+  document.querySelectorAll('.mp-add').forEach(b => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.textContent = on ? 'Added' : '+ Want to watch';
+  }));
+
+  /* ── Movies & TV: choose a poster ─────────────────────── */
+  const ml = document.querySelector('[data-lookup]');
+  if (ml) {
+    ml.querySelectorAll('.ml-opts button').forEach(b => b.addEventListener('click', () => {
+      ml.querySelectorAll('.ml-opts button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      ml.querySelector('[data-ml-art]').setAttribute('href', '#' + b.dataset.art);
+    }));
+  }
 
   /* ── Fragrances: your photo against the cut-out ─────────── */
   document.querySelectorAll('[data-cut]').forEach(box => {

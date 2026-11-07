@@ -400,6 +400,8 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
   .wl-input[aria-invalid="true"] { border-color: var(--bad); }
   .wl-submit { width: 100%; min-height: 52px; }
 }
+/* Narrow phones: the address must stay on one line */
+@media (max-width: 400px) { .wl-addr { padding-left: 12px; } .wl-addr-text { font-size: 0.96rem; } }
 
 /* ============================================================
    Legal pages
