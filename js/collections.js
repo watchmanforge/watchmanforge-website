@@ -1,6 +1,7 @@
 /* ============================================================
    WATCHMAN FORGE — Collections pages
    Fragrances: the atomizer, the assistant's pick, the cut-out slider.
+   Games: a guide whose boxes tick on sync; Want / Playing / Played.
    Everything here is a demo of the app, on made-up data; nothing is
    stored and nothing leaves the page.
    ============================================================ */
@@ -172,6 +173,44 @@
     fa.querySelector('[data-fa-img]').setAttribute('href', '#fb-' + id);
     fa.querySelectorAll('[data-b]').forEach(li => li.classList.toggle('is-pick', li.dataset.b === id));
   }
+
+  /* ── Games: a sync ticks the guide's boxes ────────────────
+     With Xbox linking, achievements sync every 6 hours and the guide
+     ticks off what they cover. Here the sync is a button. */
+  document.querySelectorAll('[data-guide]').forEach(g => {
+    const btn = g.querySelector('.gd-sync');
+    const ach = g.querySelector('[data-g-ach]');
+    const gs = g.querySelector('[data-g-gs]');
+    const bar = g.querySelector('.ap-bar i');
+    const toast = g.querySelector('.gd-toast');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const steps = [...g.querySelectorAll('li[data-unlock]:not(.done)')];
+      if (!steps.length) return;
+      btn.disabled = true;
+      btn.textContent = 'Syncing…';
+      steps.forEach((li, i) => setTimeout(() => {
+        li.classList.add('done', 'just');
+        li.querySelector('.gd-box').setAttribute('aria-label', 'Done');
+        put(ach, Number(ach.textContent) + 1);
+        const total = Number(gs.textContent.replace(/,/g, '')) + Number(li.dataset.unlock);
+        put(gs, total.toLocaleString('en-US'));
+        bar.style.width = (total / 10) + '%';
+        if (i === steps.length - 1) {
+          btn.textContent = 'Synced just now';
+          const names = steps.map(s => s.dataset.name);
+          toast.textContent = `${names.length} achievements unlocked: ${names.join(' and ')}. Their boxes ticked themselves.`;
+        }
+      }, reduce ? 0 : 600 + i * 700));
+    });
+  });
+
+  /* ── Games: Want, Playing, Played ─────────────────────── */
+  document.querySelectorAll('.sh-state').forEach(group => group.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    group.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+  }));
 
   /* ── Fragrances: your photo against the cut-out ─────────── */
   document.querySelectorAll('[data-cut]').forEach(box => {
