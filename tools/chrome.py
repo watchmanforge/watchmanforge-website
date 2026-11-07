@@ -16,7 +16,8 @@ Nothing here ships — tools/ is in .vercelignore. The stamped HTML is what ship
 """
 
 # Waitlist form endpoint. Buttondown's embed-subscribe URL for the account.
-# Until the account exists this stays a placeholder; sync_chrome.py warns while it does.
+# For launch (2026-11-06) the site has no forms: people email watchmanforge@gmail.com to join.
+# When the sign-up build brings a form back, set this; sync_chrome.py warns if a form is unwired.
 BUTTONDOWN_USERNAME = "BUTTONDOWN_USERNAME"
 WAITLIST_ACTION = f"https://buttondown.com/api/emails/embed-subscribe/{BUTTONDOWN_USERNAME}"
 

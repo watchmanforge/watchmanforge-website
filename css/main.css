@@ -355,12 +355,18 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
 .wl-fine a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
 .wl-status { margin-top: 10px; font-size: 0.9rem; color: var(--bad); }
 .wl-status:empty { margin: 0; }
+/* For launch the waitlist is by email (no list service yet): the address sits where the field was. */
+.wl-addr { flex: 1 1 auto; min-width: 0; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 6px 0 12px; }
+.wl-addr-text { font-weight: 500; color: var(--text); overflow-wrap: anywhere; user-select: all; }
+.wl-copy { flex: none; padding: 6px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: var(--brand); }
+.wl-copy:hover { background: var(--brand-soft); }
 .wl-done { max-width: 500px; padding: 18px 20px; border: 1px solid var(--brand-line); border-radius: 14px; background: var(--brand-soft); }
 .wl-done-title { font-weight: 700; color: var(--brand); }
 .wl-done p { margin-top: 4px; color: var(--text-2); font-size: 0.97rem; }
 @media (max-width: 520px) {
   .wl-row { flex-direction: column; padding: 0; border: 0; background: none; box-shadow: none !important; gap: 10px; }
-  .wl-input { border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); padding: 0 16px; min-height: 52px; }
+  .wl-input, .wl-addr { border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); padding: 0 16px; min-height: 52px; }
+  .wl-addr { padding-right: 6px; }
   .wl-input:focus { border-color: var(--brand-line); box-shadow: 0 0 0 4px var(--brand-soft); }
   .wl-input[aria-invalid="true"] { border-color: var(--bad); }
   .wl-submit { width: 100%; min-height: 52px; }

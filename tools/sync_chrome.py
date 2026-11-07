@@ -84,9 +84,10 @@ def main():
                     f.write(new)
     verb = "out of date" if check else "updated"
     print(f"  {len(stale)} page(s) {verb}" + (": " + ", ".join(stale) if stale else ""))
-    if BUTTONDOWN_USERNAME == "BUTTONDOWN_USERNAME":
+    unwired = [os.path.relpath(p, ROOT) for p in pages() if WAITLIST_FORM.search(open(p, encoding="utf-8").read())]
+    if unwired and BUTTONDOWN_USERNAME == "BUTTONDOWN_USERNAME":
         print("  WARNING: waitlist forms still point at the BUTTONDOWN_USERNAME placeholder "
-              "(set it in tools/chrome.py). Do not ship like this.")
+              "(set it in tools/chrome.py). Do not ship like this: " + ", ".join(unwired))
     if check and stale:
         sys.exit(1)
 

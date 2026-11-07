@@ -1,6 +1,6 @@
 /* ============================================================
    WATCHMAN FORGE — Main JavaScript
-   Nav · mobile menu · app-screen dates · waitlist forms
+   Nav · mobile menu · app-screen dates · copy buttons · waitlist forms
    ============================================================ */
 
 (function () {
@@ -67,8 +67,22 @@
     el.textContent = (FORMATS[el.dataset.fmt] || FORMATS.short)(d);
   });
 
+  /* ── Copy buttons (the waitlist address) ─────────────────── */
+  if (navigator.clipboard && window.isSecureContext) {
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.hidden = false;
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+          btn.textContent = 'Copied';
+          setTimeout(() => { btn.textContent = 'Copy'; }, 1600);
+        });
+      });
+    });
+  }
+
   /* ── Waitlist forms ─────────────────────────────────────────
-     Plain HTML forms that POST to Buttondown (our email list host).
+     (None on the site for launch: people email us to join. This is for the
+     sign-up build that replaces that.) Plain HTML forms that POST to Buttondown.
      With JS we send the same POST in the background and swap in a
      "check your inbox" message; without JS the browser posts the
      form and lands on Buttondown's own confirmation page. Either

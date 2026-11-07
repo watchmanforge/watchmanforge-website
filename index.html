@@ -28,7 +28,7 @@
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/unifraktur-maguntia-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=208cc538c9">
+<link rel="stylesheet" href="/css/main.css?v=660979e8ba">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -416,21 +416,12 @@
       <div class="hero-copy">
         <h1 id="hero-title" class="hero-title"><span class="text-silver">Stop starting.</span> <span class="text-gradient">Start finishing.</span></h1>
         <p class="hero-sub">Watchman Forge is a daily accountability app for people with a day job and a pile of unfinished side projects. A short list, a phone call, and one rule: <strong>never miss twice.</strong></p>
-        <div class="wl">
-          <form class="wl-form" data-waitlist action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" novalidate>
-            <input type="hidden" name="embed" value="1">
-            <label class="sr-only" for="wl-email-hero">Email address</label>
-            <div class="wl-row">
-              <input class="wl-input" id="wl-email-hero" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com">
-              <button class="btn btn-primary wl-submit" type="submit">Join the waitlist</button>
-            </div>
-            <p class="wl-status" aria-live="polite"></p>
-            <p class="wl-fine">Early access, Android first. The Watch is free. Forever. No spam, and we never sell your email.</p>
-          </form>
-          <div class="wl-done" role="status" hidden>
-            <p class="wl-done-title">Almost there</p>
-            <p>Check your inbox and tap the confirmation link. Then you&rsquo;re on the list.</p>
+        <div class="wl wl-mail">
+          <div class="wl-row">
+            <span class="wl-addr"><span class="wl-addr-text">watchmanforge@gmail.com</span><button class="wl-copy" type="button" data-copy="watchmanforge@gmail.com" hidden>Copy</button></span>
+            <a class="btn btn-primary wl-submit" href="mailto:watchmanforge@gmail.com?subject=Join%20the%20Watchman%20Forge%20waitlist">Email us to join</a>
           </div>
+          <p class="wl-fine">Any message will do; we&rsquo;ll write back when your spot opens. Early access, Android first. The Watch is free. Forever. We never sell your email.</p>
         </div>
       </div>
 
@@ -744,7 +735,7 @@
         <li class="vow"><span class="vow-num" aria-hidden="true">I</span><h3>We never sell your data.</h3><p>Not to advertisers, not to anyone. And no ads in anything you pay for.</p></li>
         <li class="vow"><span class="vow-num" aria-hidden="true">II</span><h3>Your calls stay with the Scribe.</h3><p>Calls are never sold, never shared and never used to train AI. The audio is deleted once it&rsquo;s turned into text, and your check-ins are stored encrypted, for you only.</p></li>
         <li class="vow"><span class="vow-num" aria-hidden="true">III</span><h3>Outside lookups go through the Forge.</h3><p>When the Forge looks something up for you, the request goes out through us, so the outside service deals with the Forge, not with you.</p></li>
-        <li class="vow"><span class="vow-num" aria-hidden="true">IV</span><h3>This site practices it too.</h3><p>No cookies, no analytics, no ad pixels. The waitlist never touches Google. <a href="/privacy-policy">Read the plain-words privacy policy</a>.</p></li>
+        <li class="vow"><span class="vow-num" aria-hidden="true">IV</span><h3>This site practices it too.</h3><p>No cookies, no analytics, no ad pixels, and nothing on these pages loads from Google or anyone else. <a href="/privacy-policy">Read the plain-words privacy policy</a>.</p></li>
       </ol>
     </div>
   </section>
@@ -776,7 +767,7 @@
         </details>
         <details>
           <summary>What&rsquo;s a Founding Knight?</summary>
-          <p>One of the first 100 people to join the waitlist and confirm their email. You get in first, and you hear the founding offer before anyone else.</p>
+          <p>One of the first 100 people to email us to join the waitlist. You get in first, and you hear the founding offer before anyone else.</p>
         </details>
       </div>
       </div>
@@ -790,21 +781,12 @@
         <p class="eyebrow">Founding Knights</p>
         <h2 id="join-title" class="section-title">Take your post early.</h2>
         <p class="section-sub">Join the waitlist for early access. The first 100 become Founding Knights: you get in first, and you hear the founding offer before anyone else.</p>
-        <div class="wl">
-          <form class="wl-form" data-waitlist action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME" method="post" novalidate>
-            <input type="hidden" name="embed" value="1">
-            <label class="sr-only" for="wl-email-join">Email address</label>
-            <div class="wl-row">
-              <input class="wl-input" id="wl-email-join" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required placeholder="you@example.com">
-              <button class="btn btn-primary wl-submit" type="submit">Join the waitlist</button>
-            </div>
-            <p class="wl-status" aria-live="polite"></p>
-            <p class="wl-fine">We&rsquo;ll email you when your spot opens, plus the odd note from the forge. Unsubscribe in one click. We never sell or share your email. <a href="/privacy-policy">Privacy policy</a>.</p>
-          </form>
-          <div class="wl-done" role="status" hidden>
-            <p class="wl-done-title">Almost there</p>
-            <p>Check your inbox and tap the confirmation link. Then you&rsquo;re on the list.</p>
+        <div class="wl wl-mail">
+          <div class="wl-row">
+            <span class="wl-addr"><span class="wl-addr-text">watchmanforge@gmail.com</span><button class="wl-copy" type="button" data-copy="watchmanforge@gmail.com" hidden>Copy</button></span>
+            <a class="btn btn-primary wl-submit" href="mailto:watchmanforge@gmail.com?subject=Join%20the%20Watchman%20Forge%20waitlist">Email us to join</a>
           </div>
+          <p class="wl-fine">Any message will do. We&rsquo;ll write back when your spot opens, plus the odd note from the forge. Ask any time and we&rsquo;ll take you off the list. We never sell or share your email. <a href="/privacy-policy">Privacy policy</a>.</p>
         </div>
       </div>
     </div>
@@ -846,7 +828,7 @@
 </footer>
 <!-- /chrome:footer -->
 
-<script src="/js/main.js?v=a883b89328"></script>
+<script src="/js/main.js?v=38b020c5c7"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>
