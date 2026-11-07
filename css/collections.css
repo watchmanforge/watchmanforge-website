@@ -506,3 +506,36 @@ html:not(.js) .js-only { display: none; }
 .tk-notes ul { display: grid; gap: 8px; margin-top: 10px; }
 .tk-notes li { position: relative; padding-left: 20px; font-size: 0.94rem; line-height: 1.5; color: var(--text); }
 .tk-notes li::before { content: ''; position: absolute; left: 3px; top: 0.6em; width: 6px; height: 6px; transform: rotate(45deg); background: var(--gold); }
+
+
+/* ============================================================
+   THE OVERVIEW — the four doors, and Collectibles in full
+   ============================================================ */
+.cx-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 24px 64px; align-items: end; }
+.cx-intro h1 { margin-bottom: 0; }
+.cx-intro .lead { margin-bottom: 6px; }
+@media (max-width: 860px) { .cx-intro { grid-template-columns: minmax(0, 1fr); } }
+
+.ci { padding: 20px; }
+.ci-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ci-title { font-family: var(--font-black); font-size: 2.05rem; line-height: 1.05; color: var(--gold); }
+.ci-add { width: auto; min-height: 42px; border-radius: 99px; font-size: 0.92rem; pointer-events: none; }
+.ci-sel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 10px; margin-top: 16px; }
+.ci-sel span { display: flex; align-items: center; justify-content: space-between; min-height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid #2a3846; background: #0c131d; font-size: 0.92rem; white-space: nowrap; }
+.ci-sel span::after { content: ''; width: 7px; height: 7px; margin: -4px 2px 0 10px; border-right: 1.5px solid var(--text-2); border-bottom: 1.5px solid var(--text-2); transform: rotate(45deg); }
+.ci-sum { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; font-size: 0.92rem; color: var(--text-2); }
+.ci-sum b { font-size: 1.12rem; color: var(--gold); }
+.ci-checked { margin-top: 4px; font-size: 0.8rem; color: var(--text-3); }
+.ci-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.ci-card { min-width: 0; }
+.ci-img { aspect-ratio: 1; border-radius: 14px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); }
+.ci-img svg { display: block; width: 100%; height: 100%; }
+.ci-name { margin-top: 10px; font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+.ci-cat { margin-top: 2px; font-size: 0.8rem; color: var(--text-3); line-height: 1.4; }
+.ci-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ci-chips span { padding: 3px 10px; border-radius: 99px; font-size: 0.78rem; white-space: nowrap; border: 1px solid #2a3846; color: var(--text-2); }
+.ci-chips .gold { border-color: rgba(240,198,102,0.6); color: #f7e3b5; font-variant-numeric: tabular-nums; }
+.ci-sell { display: flex; align-items: center; gap: 7px; margin-top: 9px; padding: 7px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; line-height: 1.35;
+  color: var(--gold); background: var(--gold-soft); border: 1px solid var(--gold-line); }
+.ci-sell svg { flex: none; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 420px) { .ci { padding: 16px; } .ci-title { font-size: 1.75rem; } .ci-grid { gap: 10px; } .ci-sel span { font-size: 0.84rem; padding: 0 11px; } }

@@ -28,7 +28,7 @@
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/unifraktur-maguntia-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=62a5553141">
+<link rel="stylesheet" href="/css/main.css?v=9ee798aec5">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -300,76 +300,7 @@
   /* ── Collections: four doors, each with a small live panel in the app's style ── */
   .more-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 24px 64px; align-items: end; }
   .more-head .section-sub { margin-bottom: 4px; }
-  .doors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 52px); }
-  .door { display: flex; flex-direction: column; height: 100%; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface);
-    border: 1px solid var(--line); transition: border-color .2s ease, transform .2s ease; }
-  .door:hover { border-color: var(--gold-line); transform: translateY(-3px); color: var(--text); }
-  .door-art { position: relative; aspect-ratio: 4 / 3.45; overflow: hidden; container-type: inline-size; border-bottom: 1px solid var(--line);
-    background: radial-gradient(130% 75% at 50% 0%, #0a1424 0%, #05060b 70%); }
-  .door-art::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(to bottom, rgba(5,6,11,0), #05060b); pointer-events: none; }
-  .door-body { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 22px; flex: 1; }
-  .door-body h3 { font-family: var(--font-title); font-size: 1.22rem; letter-spacing: .01em; }
-  .door-body p { color: var(--text-2); font-size: 0.95rem; flex: 1; }
-  .door-go { margin-top: 4px; font-size: 0.88rem; font-weight: 600; color: var(--brand-hi); }
-  @media (max-width: 1099px) { .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .doors { grid-template-columns: 1fr; } }
-
-  /* Movies & TV: the ranked shelf, with poster cards we draw ourselves */
-  .mini-rank { list-style: none; margin: 0; padding: 7cqw 6cqw; display: grid; gap: 3.6cqw; }
-  .mini-rank li { display: grid; grid-template-columns: 4cqw 13cqw minmax(0, 1fr) auto; align-items: center; gap: 3.4cqw; }
-  .mr-n { font-size: 3.6cqw; color: var(--text-3); font-weight: 600; text-align: center; }
-  .poster { display: grid; place-items: center; aspect-ratio: 2 / 3; border-radius: 1.4cqw; font: 700 3.2cqw var(--font-title); color: var(--gold); letter-spacing: .04em;
-    box-shadow: 0 1cqw 3cqw rgba(0,0,0,.6), inset 0 0 0 1px rgba(240,198,102,.25); }
-  .p-chosen { background: linear-gradient(160deg, #23374a, #0c1622 60%, #1b2833); }
-  .p-lion { background: linear-gradient(160deg, #6b4a1f, #2a1a0c 55%, #0f1520); }
-  .p-kings { background: linear-gradient(160deg, #3e3a34, #15130f 60%, #2a241a); color: #efe6cf; }
-  .mr-t { display: flex; flex-direction: column; font-size: 4.1cqw; font-weight: 600; line-height: 1.25; color: var(--text); }
-  .mr-t small { font-size: 3.2cqw; font-weight: 500; color: var(--text-3); }
-  .mini-rank b { font: 600 6.4cqw var(--font-serif); color: var(--gold); }
-
-  /* Fragrances: two bottles from the shelf, as the app shows them */
-  .mini-frag { display: grid; grid-template-columns: 1fr 1fr; gap: 3.4cqw; padding: 5.5cqw 5.5cqw 0; }
-  .mf-card { padding: 3cqw; border-radius: 4cqw; background: #0c131d; border: 1px solid #1e2a36; }
-  .mf-img { display: grid; place-items: center; aspect-ratio: 1 / .78; border-radius: 3cqw; background: radial-gradient(70% 60% at 50% 70%, #1a2230, #0a0f17); }
-  .mf-img svg { height: 86%; width: auto; }
-  .mf-name { margin-top: 2.6cqw; font-size: 4cqw; font-weight: 700; color: var(--text); }
-  .mf-house { font-size: 3cqw; color: var(--text-2); }
-  .mf-bar { display: block; height: 1.3cqw; margin-top: 2.4cqw; border-radius: 1cqw; background: #1e2a36; overflow: hidden; }
-  .mf-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #b98a3b, #f0c666, #f7da94); }
-  .mf-pct { margin-top: 1.4cqw; font-size: 3cqw; color: var(--text-2); }
-  .mf-btn { display: block; margin-top: 2.6cqw; padding: 2cqw 0; border-radius: 2.6cqw; border: 1px solid rgba(240,198,102,.55); text-align: center;
-    font-size: 3.2cqw; font-weight: 700; color: #f7e3b5; background: rgba(240,198,102,.04); }
-
-  /* Games: the Hall of Trophies, gold plaques for 100% */
-  .mini-hall { padding: 5.5cqw 5.5cqw 0; }
-  .mh-head { display: flex; justify-content: space-between; align-items: baseline; font: 700 3.2cqw var(--font-title); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
-  .mh-head span:last-child { font: 500 3cqw var(--font-body); letter-spacing: 0; text-transform: none; color: var(--text-2); }
-  .mh-row { display: flex; gap: 5cqw; margin-top: 4cqw; justify-content: center; }
-  .plaque { position: relative; width: 36cqw; text-align: center; }
-  .plaque-art { aspect-ratio: 3 / 4; border-radius: 2.4cqw; overflow: hidden; padding: .9cqw; background: linear-gradient(140deg, #8a6428, #f3d27a 40%, #b98a3b 70%, #f7da94);
-    box-shadow: 0 0 6cqw rgba(240,198,102,.18); }
-  .plaque-art svg { display: block; width: 100%; height: 100%; border-radius: 1.6cqw; }
-  .plaque-medal { position: absolute; left: 50%; top: calc(36cqw * 4 / 3 - 7cqw); transform: translateX(-50%); width: 11cqw; height: 11cqw; display: grid; place-items: center;
-    border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff1c4, #e2b250 55%, #8a6428); box-shadow: 0 1cqw 3cqw rgba(0,0,0,.6); }
-  .plaque-medal svg { width: 62%; height: 62%; }
-  .plaque-ribbon { position: absolute; left: 50%; top: calc(36cqw * 4 / 3 + 2.4cqw); transform: translateX(-50%); padding: .5cqw 3cqw;
-    font: 700 3cqw var(--font-serif); color: #2a1c06; background: linear-gradient(90deg, #c99a45, #f7da94, #c99a45);
-    clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%, 8% 50%); }
-  .plaque-name { margin-top: 8cqw; font-size: 3.4cqw; font-weight: 600; color: var(--text); line-height: 1.25; }
-  .plaque-date { font-size: 2.9cqw; color: var(--text-2); }
-
-  /* Collectibles: what it's worth, from sold prices */
-  .mini-col { padding: 5.5cqw 5.5cqw 0; }
-  .mc-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 3.4cqw; color: var(--text-2); }
-  .mc-head b { font-size: 4.6cqw; color: var(--gold); }
-  .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.4cqw; margin-top: 3.4cqw; }
-  .mc-img { aspect-ratio: 1; border-radius: 3cqw; overflow: hidden; }
-  .mc-img svg { display: block; width: 100%; height: 100%; }
-  .mc-name { margin-top: 2.4cqw; font-size: 3.4cqw; font-weight: 700; color: var(--text); line-height: 1.25; }
-  .mc-chips { display: flex; flex-wrap: wrap; gap: 1.6cqw; margin-top: 2cqw; }
-  .mc-chips span { padding: .8cqw 2.2cqw; border-radius: 99px; font-size: 2.8cqw; white-space: nowrap; }
-  .chip-gold { border: 1px solid rgba(240,198,102,.55); color: #f7e3b5; }
-  .chip { border: 1px solid #2a3846; color: var(--text-2); }
+  /* the doors themselves (.doors, .door, the mini panels) live in main.css, shared with /collections */
 
   /* Also in the Forge: the Pantry and the List */
   .forge-more-head { margin-top: clamp(48px, 7vw, 80px); }
@@ -791,9 +722,9 @@
           <a class="door" href="/collections/movies-tv">
             <div class="door-art" aria-hidden="true">
               <ol class="mini-rank">
-                <li><span class="mr-n">1</span><span class="poster p-chosen">TC</span><span class="mr-t">The Chosen<small>TV show</small></span><b>98</b></li>
-                <li><span class="mr-n">2</span><span class="poster p-lion">LWW</span><span class="mr-t">The Lion, the Witch and the Wardrobe<small>Movie</small></span><b>95</b></li>
-                <li><span class="mr-n">3</span><span class="poster p-kings">KK</span><span class="mr-t">The King of Kings<small>Movie &middot; 1927</small></span><b>91</b></li>
+                <li><span class="mr-n">1</span><span class="poster"><svg viewBox="0 0 40 60" aria-hidden="true"><defs><linearGradient id="dpNight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1830"/><stop offset=".7" stop-color="#1d3550"/><stop offset="1" stop-color="#0a0f1a"/></linearGradient></defs><rect width="40" height="60" fill="url(#dpNight)"/><circle cx="29" cy="14" r="3.2" fill="#f3e6c4" opacity=".9"/><rect y="44" width="40" height="16" fill="#0a1626"/><path d="M0 44h40" stroke="#5c7fa0" stroke-opacity=".55" stroke-width=".4"/><path d="M19 33.5v10" stroke="#050a12" stroke-width=".7"/><path d="M19.6 34.5l5.2 8.5h-5.2z" fill="#d9cfb4" opacity=".75"/><path d="M11 43.5h16l-2.6 3.2H13.6z" fill="#050a12"/><path d="M5 50h10M23 53.5h12M9 56.5h8" stroke="#5c7fa0" stroke-opacity=".35" stroke-width=".4"/><text x="20" y="26" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="4.4" letter-spacing=".3" fill="#f2e3bd">THE CHOSEN</text></svg></span><span class="mr-t">The Chosen<small>TV show</small></span><b>98</b></li>
+                <li><span class="mr-n">2</span><span class="poster"><svg viewBox="0 0 40 60" aria-hidden="true"><defs><linearGradient id="dpSnow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1426"/><stop offset="1" stop-color="#2a3d58"/></linearGradient><radialGradient id="dpLamp"><stop offset="0" stop-color="#ffd27a" stop-opacity=".75"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient></defs><rect width="40" height="60" fill="url(#dpSnow)"/><circle cx="20" cy="27" r="8" fill="url(#dpLamp)"/><path d="M20 49V28" stroke="#121212" stroke-width="1"/><path d="M17.6 25h4.8l-1-1.6h-2.8z" fill="#121212"/><rect x="18.2" y="25" width="3.6" height="4.2" rx=".5" fill="#ffd27a"/><path d="M0 50q10-4 20-1t20-2V60H0z" fill="#e3ebf4"/><g fill="#fff" opacity=".85"><circle cx="6" cy="22" r=".35"/><circle cx="11" cy="31" r=".3"/><circle cx="31" cy="20" r=".35"/><circle cx="34" cy="33" r=".3"/><circle cx="27" cy="40" r=".3"/><circle cx="8" cy="40" r=".35"/><circle cx="15" cy="16" r=".3"/></g><text x="20" y="8.5" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="2.9" fill="#f2e7cf">THE LION, THE WITCH</text><text x="20" y="12.6" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="2.9" fill="#f2e7cf">AND THE WARDROBE</text></svg></span><span class="mr-t">The Lion, the Witch and the Wardrobe<small>Movie</small></span><b>95</b></li>
+                <li><span class="mr-n">3</span><span class="poster"><img src="/assets/images/films/king-of-kings-1927-96.webp?v=91c16a5b1a" srcset="/assets/images/films/king-of-kings-1927-96.webp?v=91c16a5b1a 96w, /assets/images/films/king-of-kings-1927-192.webp?v=9daaf81444 192w" sizes="48px" width="96" height="144" alt="" loading="lazy"></span><span class="mr-t">The King of Kings<small>Movie &middot; 1927</small></span><b>91</b></li>
               </ol>
             </div>
             <div class="door-body">
