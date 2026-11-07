@@ -1,6 +1,6 @@
 /* ============================================================
    WATCHMAN FORGE — Main JavaScript
-   Nav · mobile menu · app-screen dates · copy buttons · waitlist forms
+   Nav · Collections drop-down · mobile menu · app-screen dates · copy buttons · waitlist forms
    ============================================================ */
 
 (function () {
@@ -37,6 +37,16 @@
     if (wide.addEventListener) wide.addEventListener('change', (mq) => { if (mq.matches) setOpen(false); });
   }
 
+  /* Collections drop-down (desktop): opens on click or tap as well as hover, closes on Escape
+     or a click elsewhere */
+  document.querySelectorAll('.nav-drop').forEach(drop => {
+    const btn = drop.querySelector('.nav-drop-btn');
+    const set = (open) => { drop.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); };
+    btn.addEventListener('click', () => set(!drop.classList.contains('open')));
+    document.addEventListener('click', (e) => { if (!drop.contains(e.target)) set(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drop.classList.contains('open')) { set(false); btn.focus(); } });
+  });
+
   /* Active nav link (page links only; the in-page #anchors stay neutral) */
   const path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
   document.querySelectorAll('.nav-links a').forEach(a => {
@@ -52,7 +62,8 @@
      The app screens on the homepage carry demo data, but their dates
      follow the visitor's own calendar. data-day is days from today;
      data-fmt="long" is the Ledger's "Friday, the 6th of November",
-     the default is the app's "Fri, Nov 6, 2026". */
+     "md" the Hall of Trophies' "Nov 6, 2026", the default the app's
+     "Fri, Nov 6, 2026". */
   const DAYS   = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
                   'August', 'September', 'October', 'November', 'December'];
@@ -60,6 +71,7 @@
   const FORMATS = {
     long:  (d) => `${DAYS[d.getDay()]}, the ${nth(d.getDate())} of ${MONTHS[d.getMonth()]}`,
     short: (d) => `${DAYS[d.getDay()].slice(0, 3)}, ${MONTHS[d.getMonth()].slice(0, 3)} ${d.getDate()}, ${d.getFullYear()}`,
+    md:    (d) => `${MONTHS[d.getMonth()].slice(0, 3)} ${d.getDate()}, ${d.getFullYear()}`,
   };
   document.querySelectorAll('[data-day]').forEach(el => {
     const d = new Date();

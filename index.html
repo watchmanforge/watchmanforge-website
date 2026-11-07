@@ -28,7 +28,7 @@
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/unifraktur-maguntia-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=660979e8ba">
+<link rel="stylesheet" href="/css/main.css?v=3ef0d3c85c">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {
@@ -297,19 +297,92 @@
   .adhd-line strong { color: var(--text); }
   @media (max-width: 760px) { .rule-band { grid-template-columns: 1fr; } }
 
-  /* ── The rest of your life ────────────────────────────────── */
+  /* ── Collections: four doors, each with a small live panel in the app's style ── */
   .more-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 24px 64px; align-items: end; }
   .more-head .section-sub { margin-bottom: 4px; }
-  .more-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: clamp(36px, 5vw, 56px); align-items: start; }
+  .doors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 52px); }
+  .door { display: flex; flex-direction: column; height: 100%; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface);
+    border: 1px solid var(--line); transition: border-color .2s ease, transform .2s ease; }
+  .door:hover { border-color: var(--gold-line); transform: translateY(-3px); color: var(--text); }
+  .door-art { position: relative; aspect-ratio: 4 / 3.45; overflow: hidden; container-type: inline-size; border-bottom: 1px solid var(--line);
+    background: radial-gradient(130% 75% at 50% 0%, #0a1424 0%, #05060b 70%); }
+  .door-art::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(to bottom, rgba(5,6,11,0), #05060b); pointer-events: none; }
+  .door-body { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 22px; flex: 1; }
+  .door-body h3 { font-family: var(--font-title); font-size: 1.22rem; letter-spacing: .01em; }
+  .door-body p { color: var(--text-2); font-size: 0.95rem; flex: 1; }
+  .door-go { margin-top: 4px; font-size: 0.88rem; font-weight: 600; color: var(--brand-hi); }
+  @media (max-width: 1099px) { .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .doors { grid-template-columns: 1fr; } }
+
+  /* Movies & TV: the ranked shelf, with poster cards we draw ourselves */
+  .mini-rank { list-style: none; margin: 0; padding: 7cqw 6cqw; display: grid; gap: 3.6cqw; }
+  .mini-rank li { display: grid; grid-template-columns: 4cqw 13cqw minmax(0, 1fr) auto; align-items: center; gap: 3.4cqw; }
+  .mr-n { font-size: 3.6cqw; color: var(--text-3); font-weight: 600; text-align: center; }
+  .poster { display: grid; place-items: center; aspect-ratio: 2 / 3; border-radius: 1.4cqw; font: 700 3.2cqw var(--font-title); color: var(--gold); letter-spacing: .04em;
+    box-shadow: 0 1cqw 3cqw rgba(0,0,0,.6), inset 0 0 0 1px rgba(240,198,102,.25); }
+  .p-chosen { background: linear-gradient(160deg, #23374a, #0c1622 60%, #1b2833); }
+  .p-lion { background: linear-gradient(160deg, #6b4a1f, #2a1a0c 55%, #0f1520); }
+  .p-kings { background: linear-gradient(160deg, #3e3a34, #15130f 60%, #2a241a); color: #efe6cf; }
+  .mr-t { display: flex; flex-direction: column; font-size: 4.1cqw; font-weight: 600; line-height: 1.25; color: var(--text); }
+  .mr-t small { font-size: 3.2cqw; font-weight: 500; color: var(--text-3); }
+  .mini-rank b { font: 600 6.4cqw var(--font-serif); color: var(--gold); }
+
+  /* Fragrances: two bottles from the shelf, as the app shows them */
+  .mini-frag { display: grid; grid-template-columns: 1fr 1fr; gap: 3.4cqw; padding: 5.5cqw 5.5cqw 0; }
+  .mf-card { padding: 3cqw; border-radius: 4cqw; background: #0c131d; border: 1px solid #1e2a36; }
+  .mf-img { display: grid; place-items: center; aspect-ratio: 1 / .78; border-radius: 3cqw; background: radial-gradient(70% 60% at 50% 70%, #1a2230, #0a0f17); }
+  .mf-img svg { height: 86%; width: auto; }
+  .mf-name { margin-top: 2.6cqw; font-size: 4cqw; font-weight: 700; color: var(--text); }
+  .mf-house { font-size: 3cqw; color: var(--text-2); }
+  .mf-bar { display: block; height: 1.3cqw; margin-top: 2.4cqw; border-radius: 1cqw; background: #1e2a36; overflow: hidden; }
+  .mf-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #b98a3b, #f0c666, #f7da94); }
+  .mf-pct { margin-top: 1.4cqw; font-size: 3cqw; color: var(--text-2); }
+  .mf-btn { display: block; margin-top: 2.6cqw; padding: 2cqw 0; border-radius: 2.6cqw; border: 1px solid rgba(240,198,102,.55); text-align: center;
+    font-size: 3.2cqw; font-weight: 700; color: #f7e3b5; background: rgba(240,198,102,.04); }
+
+  /* Games: the Hall of Trophies, gold plaques for 100% */
+  .mini-hall { padding: 5.5cqw 5.5cqw 0; }
+  .mh-head { display: flex; justify-content: space-between; align-items: baseline; font: 700 3.2cqw var(--font-title); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+  .mh-head span:last-child { font: 500 3cqw var(--font-body); letter-spacing: 0; text-transform: none; color: var(--text-2); }
+  .mh-row { display: flex; gap: 5cqw; margin-top: 4cqw; justify-content: center; }
+  .plaque { position: relative; width: 36cqw; text-align: center; }
+  .plaque-art { aspect-ratio: 3 / 4; border-radius: 2.4cqw; overflow: hidden; padding: .9cqw; background: linear-gradient(140deg, #8a6428, #f3d27a 40%, #b98a3b 70%, #f7da94);
+    box-shadow: 0 0 6cqw rgba(240,198,102,.18); }
+  .plaque-art svg { display: block; width: 100%; height: 100%; border-radius: 1.6cqw; }
+  .plaque-medal { position: absolute; left: 50%; top: calc(36cqw * 4 / 3 - 7cqw); transform: translateX(-50%); width: 11cqw; height: 11cqw; display: grid; place-items: center;
+    border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff1c4, #e2b250 55%, #8a6428); box-shadow: 0 1cqw 3cqw rgba(0,0,0,.6); }
+  .plaque-medal svg { width: 62%; height: 62%; }
+  .plaque-ribbon { position: absolute; left: 50%; top: calc(36cqw * 4 / 3 + 2.4cqw); transform: translateX(-50%); padding: .5cqw 3cqw;
+    font: 700 3cqw var(--font-serif); color: #2a1c06; background: linear-gradient(90deg, #c99a45, #f7da94, #c99a45);
+    clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%, 8% 50%); }
+  .plaque-name { margin-top: 8cqw; font-size: 3.4cqw; font-weight: 600; color: var(--text); line-height: 1.25; }
+  .plaque-date { font-size: 2.9cqw; color: var(--text-2); }
+
+  /* Collectibles: what it's worth, from sold prices */
+  .mini-col { padding: 5.5cqw 5.5cqw 0; }
+  .mc-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 3.4cqw; color: var(--text-2); }
+  .mc-head b { font-size: 4.6cqw; color: var(--gold); }
+  .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.4cqw; margin-top: 3.4cqw; }
+  .mc-img { aspect-ratio: 1; border-radius: 3cqw; overflow: hidden; }
+  .mc-img svg { display: block; width: 100%; height: 100%; }
+  .mc-name { margin-top: 2.4cqw; font-size: 3.4cqw; font-weight: 700; color: var(--text); line-height: 1.25; }
+  .mc-chips { display: flex; flex-wrap: wrap; gap: 1.6cqw; margin-top: 2cqw; }
+  .mc-chips span { padding: .8cqw 2.2cqw; border-radius: 99px; font-size: 2.8cqw; white-space: nowrap; }
+  .chip-gold { border: 1px solid rgba(240,198,102,.55); color: #f7e3b5; }
+  .chip { border: 1px solid #2a3846; color: var(--text-2); }
+
+  /* Also in the Forge: the Pantry and the List */
+  .forge-more-head { margin-top: clamp(48px, 7vw, 80px); }
+  .more-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 780px; align-items: start; }
   .more-card { border-radius: var(--radius-lg); background: var(--bg); border: 1px solid var(--line-strong); overflow: hidden;
     box-shadow: 0 30px 60px -34px rgba(0,0,0,.9); }
-  @media (min-width: 761px) { .more-card:nth-child(2) { margin-top: 44px; } }
   .more-shot { position: relative; background: var(--bg); }
   .more-shot img { width: 100%; aspect-ratio: 960 / 900; object-fit: cover; object-position: top; }
   .more-shot::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 18%; pointer-events: none;
     background: linear-gradient(to bottom, rgba(5,6,11,0), #05060b); }
   .demo-note { margin-top: 18px; font-size: 0.82rem; color: var(--text-3); }
-  @media (max-width: 760px) { .more-grid { grid-template-columns: 1fr; } .more-head { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .more-head { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .more-grid { grid-template-columns: 1fr; } }
 
   /* ── The Order: the cathedral, and the roster ───────────────── */
   .order-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; }
@@ -445,11 +518,19 @@
       <img src="/assets/images/wordmark-96.webp?v=8b6d6252e9" alt="Watchman Forge" class="nav-wordmark" width="330" height="96">
     </a>
     <ul class="nav-links">
-      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#how">The Watch</a></li>
+      <li class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-controls="nav-collections">Collections <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-panel" id="nav-collections">
+          <a class="feat" href="/collections/movies-tv"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg><span class="feat-name">Movies &amp; TV</span><span class="feat-line">A ranked shelf, and picks for tonight</span></a>
+          <a class="feat" href="/collections/fragrances"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 2.8h5v3.2h-5z"/><path d="M7 10.5C7 9.1 8.1 8 9.5 8h5C15.9 8 17 9.1 17 10.5V19a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M10.5 6v2M13.5 6v2M7 14h10"/></svg><span class="feat-name">Fragrances</span><span class="feat-line">A rotation that knows what&rsquo;s left</span></a>
+          <a class="feat" href="/collections/games"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 8h9c2.8 0 4.5 2.2 5 6l.4 2.6c.3 1.9-1.9 3-3.2 1.6L16.5 16h-9l-2.2 2.2c-1.3 1.4-3.5.3-3.2-1.6L2.5 14c.5-3.8 2.2-6 5-6z"/><path d="M7.5 10.5v3M6 12h3"/><circle cx="15.6" cy="11.2" r=".6"/><circle cx="17.6" cy="13" r=".6"/></svg><span class="feat-name">Games</span><span class="feat-line">The Quest Log: guides and trophies</span></a>
+          <a class="feat" href="/collections#collectibles"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4L12 9l2.5-5M12 9v11"/></svg><span class="feat-name">Collectibles</span><span class="feat-line">What it&rsquo;s worth, from sold prices</span></a>
+          <a class="nav-panel-all" href="/collections">All of Collections &rarr;</a>
+        </div>
+      </li>
       <li><a href="/#order">The Order</a></li>
-      <li><a href="/#privacy">Privacy</a></li>
       <li><a href="/about">Why Watchman</a></li>
-      <li><a href="/gallery">Gallery</a></li>
     </ul>
     <div class="nav-right">
       <a href="/#join" class="btn btn-primary btn-sm nav-cta">Join<span class="nav-cta-more"> the waitlist</span></a>
@@ -458,12 +539,28 @@
   </div>
 </nav>
 <div class="mobile-nav" id="mobile-nav" hidden>
-  <a href="/#how">How it works</a>
-  <a href="/#order">The Order</a>
-  <a href="/#privacy">Privacy</a>
-  <a href="/about">Why Watchman</a>
-  <a href="/gallery">The Gallery</a>
-  <a href="/contact">Contact</a>
+  <div class="mmap-group">
+    <p class="mmap-head">The Watch</p>
+    <a class="feat" href="/#how"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5C5.5 5 8.5 5 12 6.8C15.5 5 18.5 5 21 6.5V19C18.5 17.6 15.5 17.6 12 19.3C8.5 17.6 5.5 17.6 3 19Z"/><path d="M12 6.8v12.5"/></svg><span class="feat-name">The Ledger</span><span class="feat-line">Today&rsquo;s watch, held or conquered</span></a>
+    <a class="feat" href="/#scribe-call"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6.5 1.1 3.3-1.8 1.3a11 11 0 0 0 5 5l1.3-1.8 3.3 1.1.5 2.6c-.3 1.4-1.5 2.3-2.9 2.2C9.6 17.3 5.2 12.9 4.4 6.4c-.1-1.4.8-2.6 2.2-2.9z"/><path d="M15 3.5a6 6 0 0 1 5.5 5.5M15 6.6a3 3 0 0 1 2.4 2.4"/></svg><span class="feat-name">The Scribe&rsquo;s call</span><span class="feat-line">A phone call takes your report</span></a>
+    <a class="feat" href="/#replay"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/><path d="M10 9l5 3-5 3z"/></svg><span class="feat-name">The nightly replay</span><span class="feat-line">Watch the day back, patch what broke</span></a>
+    <a class="feat" href="/#armory"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l7.5 2.8v5.6c0 4.7-3.2 8.3-7.5 10-4.3-1.7-7.5-5.3-7.5-10V5.6z"/><path d="M12 7v9M8.8 10.2h6.4"/></svg><span class="feat-name">The Armory</span><span class="feat-line">Patches that hold become armor</span></a>
+  </div>
+  <div class="mmap-group">
+    <p class="mmap-head">Collections</p>
+    <a class="feat" href="/collections/movies-tv"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg><span class="feat-name">Movies &amp; TV</span><span class="feat-line">A ranked shelf, and picks for tonight</span></a>
+    <a class="feat" href="/collections/fragrances"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 2.8h5v3.2h-5z"/><path d="M7 10.5C7 9.1 8.1 8 9.5 8h5C15.9 8 17 9.1 17 10.5V19a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M10.5 6v2M13.5 6v2M7 14h10"/></svg><span class="feat-name">Fragrances</span><span class="feat-line">A rotation that knows what&rsquo;s left</span></a>
+    <a class="feat" href="/collections/games"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 8h9c2.8 0 4.5 2.2 5 6l.4 2.6c.3 1.9-1.9 3-3.2 1.6L16.5 16h-9l-2.2 2.2c-1.3 1.4-3.5.3-3.2-1.6L2.5 14c.5-3.8 2.2-6 5-6z"/><path d="M7.5 10.5v3M6 12h3"/><circle cx="15.6" cy="11.2" r=".6"/><circle cx="17.6" cy="13" r=".6"/></svg><span class="feat-name">Games</span><span class="feat-line">The Quest Log: guides and trophies</span></a>
+    <a class="feat" href="/collections#collectibles"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4L12 9l2.5-5M12 9v11"/></svg><span class="feat-name">Collectibles</span><span class="feat-line">What it&rsquo;s worth, from sold prices</span></a>
+  </div>
+  <div class="mmap-group">
+    <p class="mmap-head">The Forge</p>
+    <a class="feat" href="/#forge-more"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v3H8z"/><path d="M7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg><span class="feat-name">The Pantry</span><span class="feat-line">Foods you eat often, logged by count</span></a>
+    <a class="feat" href="/#forge-more"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span class="feat-name">The Watchman&rsquo;s List</span><span class="feat-line">Places to eat and things to do</span></a>
+    <a class="feat" href="/#order"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 20v-9a6.5 6.5 0 0 1 13 0v9z"/><path d="M5.5 13h13M12 13v7M8 16.2h2M14 16.2h2"/></svg><span class="feat-name">The Order</span><span class="feat-line">AI knights that do real work</span></a>
+    <a class="feat" href="/#reliquary"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10l7-6 7 6z"/><path d="M6 10h12v8H6z"/><path d="M4.5 18h15v2.5h-15z"/><circle cx="12" cy="13.2" r="1.2"/><path d="M12 14.4v1.8"/></svg><span class="feat-name">The Reliquary</span><span class="feat-line">Your encrypted second brain</span></a>
+  </div>
+  <p class="mmap-small"><a href="/about">Why Watchman</a><a href="/#privacy">Privacy</a><a href="/contact">Contact</a></p>
   <a href="/#join" class="btn btn-primary mobile-nav-cta">Join the waitlist</a>
 </div>
 <!-- /chrome:nav -->
@@ -621,17 +718,17 @@
           <h3>Held or Conquered</h3>
           <p>Bad day? Do the minimum and it&rsquo;s <strong>Held</strong>. Good day? Go all the way and it&rsquo;s <strong>Conquered</strong>. Either way, the day counts.</p>
         </li>
-        <li class="day-step" style="--c: var(--ember)">
+        <li class="day-step" id="scribe-call" style="--c: var(--ember)">
           <span class="day-when">In the field &middot; set times, or by surprise</span>
           <h3>Your phone rings</h3>
           <p>&ldquo;Status report, Ranger.&rdquo; The Scribe calls and takes your report down by voice, like dictation. No app to open, no form to fill. <span class="tag">Free</span> <span class="tag">Android</span></p>
         </li>
-        <li class="day-step" style="--c: #8fa9d8" data-vref="PS 130:6">
+        <li class="day-step" id="replay" style="--c: #8fa9d8" data-vref="PS 130:6">
           <span class="day-when">Night &middot; the Ranger comes in</span>
           <h3>The replay, in the Forge</h3>
           <p>From the wall, the Watchman watches the day back. Not a judge handing down a sentence. Whatever went wrong gets hammered into a <strong>patch</strong>: a when-then fix for next time.</p>
         </li>
-        <li class="day-step" style="--c: var(--gold)" data-vref="EPH 6:11">
+        <li class="day-step" id="armory" style="--c: var(--gold)" data-vref="EPH 6:11">
           <span class="day-when">Over the weeks &middot; the Armory</span>
           <h3>Patches become armor</h3>
           <p>A patch that holds five times is tempered into a piece in your Armory. Slip, and it dulls, but nothing is ever deleted: <strong>Reforge</strong> it, and three holds bring it back.</p>
@@ -679,16 +776,86 @@
     </div>
   </section>
 
-  <!-- ── THE REST OF YOUR LIFE ────────────────────────────────── -->
-  <section class="section bg-raised" aria-labelledby="more-title">
+  <!-- ── COLLECTIONS ──────────────────────────────────────────── -->
+  <section class="section bg-raised" id="collections" aria-labelledby="coll-title">
     <div class="container">
       <div class="more-head">
         <div>
-          <p class="eyebrow">Also in the Forge</p>
-          <h2 id="more-title" class="statement">It keeps the rest of your life, too.</h2>
+          <p class="eyebrow">Collections</p>
+          <h2 id="coll-title" class="statement">What you love, kept where you can see it.</h2>
         </div>
-        <p class="section-sub">What you eat, where you eat it, and what you love. Kept in the same place as the watch, the same way.</p>
+        <p class="section-sub">Four shelves in the same app as your watch. Use them on their own, or alongside it.</p>
       </div>
+      <ul class="doors">
+        <li>
+          <a class="door" href="/collections/movies-tv">
+            <div class="door-art" aria-hidden="true">
+              <ol class="mini-rank">
+                <li><span class="mr-n">1</span><span class="poster p-chosen">TC</span><span class="mr-t">The Chosen<small>TV show</small></span><b>98</b></li>
+                <li><span class="mr-n">2</span><span class="poster p-lion">LWW</span><span class="mr-t">The Lion, the Witch and the Wardrobe<small>Movie</small></span><b>95</b></li>
+                <li><span class="mr-n">3</span><span class="poster p-kings">KK</span><span class="mr-t">The King of Kings<small>Movie &middot; 1927</small></span><b>91</b></li>
+              </ol>
+            </div>
+            <div class="door-body">
+              <h3>Movies &amp; TV</h3>
+              <p>Score each one out of 100 and the shelf ranks itself. The assistant picks three for tonight.</p>
+              <span class="door-go">Movies &amp; TV &rarr;</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="door" href="/collections/fragrances">
+            <div class="door-art" aria-hidden="true">
+              <div class="mini-frag">
+                <div class="mf-card"><div class="mf-img"><svg viewBox="0 0 60 80" aria-hidden="true"><defs><linearGradient id="bgh1" x1="0" x2="1"><stop offset="0" stop-color="#262b34"/><stop offset=".45" stop-color="#4c5560"/><stop offset="1" stop-color="#1a1e26"/></linearGradient><linearGradient id="bch1" x1="0" x2="1"><stop offset="0" stop-color="#9c7432"/><stop offset=".5" stop-color="#f3d27a"/><stop offset="1" stop-color="#8a6428"/></linearGradient></defs><rect x="23" y="7" width="14" height="13" rx="1.6" fill="url(#bch1)"/><rect x="26" y="19" width="8" height="5" fill="#5e4a24"/><rect x="12" y="24" width="36" height="47" rx="5" fill="url(#bgh1)"/><rect x="18" y="39" width="24" height="15" rx="1" fill="#ece2c8"/><text x="30" y="48.4" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="5.4" fill="#3a2a12">VIGIL</text><rect x="14.5" y="27" width="2.6" height="40" rx="1.3" fill="#fff" opacity=".13"/></svg></div><p class="mf-name">Vigil</p><p class="mf-house">Greywatch Parfums</p><span class="mf-bar"><i style="width:69%"></i></span><p class="mf-pct">69%</p><span class="mf-btn">Wore it today</span></div>
+                <div class="mf-card"><div class="mf-img"><svg viewBox="0 0 60 80" aria-hidden="true"><defs><linearGradient id="bgh2" x1="0" x2="1"><stop offset="0" stop-color="#4e2410"/><stop offset=".5" stop-color="#c66a2e"/><stop offset="1" stop-color="#421c0c"/></linearGradient></defs><rect x="25" y="5" width="10" height="15" rx="5" fill="#15171c"/><rect x="27" y="19" width="6" height="5" fill="#2a2a2a"/><path d="M17 31c0-4 4-7 13-7s13 3 13 7v34c0 4-3 6-6 6H23c-3 0-6-2-6-6z" fill="url(#bgh2)"/><rect x="21.5" y="43" width="17" height="13" rx="1" fill="#141210" stroke="#c9a24b" stroke-width=".6"/><text x="30" y="49.2" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="3.4" fill="#e9c77a">EMBER</text><text x="30" y="53.4" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="3.4" fill="#e9c77a">OUD</text><rect x="19.5" y="31" width="2.4" height="32" rx="1.2" fill="#fff" opacity=".16"/></svg></div><p class="mf-name">Ember Oud</p><p class="mf-house">Greywatch Parfums</p><span class="mf-bar"><i style="width:84%"></i></span><p class="mf-pct">84%</p><span class="mf-btn">Wore it today</span></div>
+              </div>
+            </div>
+            <div class="door-body">
+              <h3>Fragrances</h3>
+              <p>Tap &ldquo;Wore it today&rdquo; and the bottle drops with it: millilitres, sprays and wears left.</p>
+              <span class="door-go">Fragrances &rarr;</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="door" href="/collections/games">
+            <div class="door-art" aria-hidden="true">
+              <div class="mini-hall">
+                <p class="mh-head"><span>Hall of Trophies</span><span>6 completed</span></p>
+                <div class="mh-row">
+                  <div class="plaque"><div class="plaque-art"><svg viewBox="0 0 60 80" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="cvh1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16243c"/><stop offset=".62" stop-color="#cf7a3a"/><stop offset="1" stop-color="#26160f"/></linearGradient></defs><rect width="60" height="80" fill="url(#cvh1)"/><circle cx="17" cy="44" r="6" fill="#ffdcaa" opacity=".9"/><path d="M0 63L17 53L29 59L44 49L60 57V80H0z" fill="#110b0b"/><path d="M27 80L30.5 59h2L40 80z" fill="#3a2418"/><path d="M41 51V35h5v16zM40 35h7v-3h-7z" fill="#0c0909"/><text x="30" y="17" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="7.2" fill="#f6e2b8">EMBER</text><text x="30" y="25.5" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="7.2" fill="#f6e2b8">ROAD</text></svg></div><span class="plaque-medal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0z" fill="#2a1c06"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5A3.5 3.5 0 0 1 16.5 10" fill="none" stroke="#2a1c06" stroke-width="1.6"/><path d="M10.5 13h3v3h-3zM8 19h8v-2H8z" fill="#2a1c06"/></svg></span><span class="plaque-ribbon">100%</span><p class="plaque-name">Ember Road</p><p class="plaque-date" data-day="-5" data-fmt="md">Nov 1, 2026</p></div>
+                  <div class="plaque"><div class="plaque-art"><svg viewBox="0 0 60 80" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="cvh2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d2230"/><stop offset=".6" stop-color="#2f7d84"/><stop offset="1" stop-color="#0a1418"/></linearGradient></defs><rect width="60" height="80" fill="url(#cvh2)"/><path d="M0 58L14 40L24 52L36 34L50 50L60 42V80H0z" fill="#0b1a20"/><path d="M22 80V60a8 8 0 0 1 16 0v20z" fill="#05090c"/><path d="M22 66h16M30 66v14" stroke="#7fe3e3" stroke-width=".8"/><text x="30" y="15" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="5.6" fill="#e9f6f5">WARDENS</text><text x="30" y="22.5" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="4.2" fill="#e9f6f5">OF THE VALE</text></svg></div><span class="plaque-medal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0z" fill="#2a1c06"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5A3.5 3.5 0 0 1 16.5 10" fill="none" stroke="#2a1c06" stroke-width="1.6"/><path d="M10.5 13h3v3h-3zM8 19h8v-2H8z" fill="#2a1c06"/></svg></span><span class="plaque-ribbon">100%</span><p class="plaque-name">Wardens of the Vale</p><p class="plaque-date" data-day="-12" data-fmt="md">Oct 25, 2026</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="door-body">
+              <h3>Games</h3>
+              <p>The Quest Log: guides, achievements and a Hall of Trophies for every 100%. Xbox first.</p>
+              <span class="door-go">The Quest Log &rarr;</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="door" href="/collections#collectibles">
+            <div class="door-art" aria-hidden="true">
+              <div class="mini-col">
+                <p class="mc-head"><span>26 items</span><span>worth about <b>$2,140</b></span></p>
+                <div class="mc-grid">
+                  <div class="mc-card"><div class="mc-img"><svg viewBox="0 0 60 60" aria-hidden="true"><rect width="60" height="60" fill="#14100e"/><path d="M10 22l20-8 20 8v24l-20 8-20-8z" fill="#1f1a17" stroke="#3a2c22"/><path d="M10 22l20 8 20-8M30 30v24" stroke="#3a2c22"/><path d="M13 27l4 1.6M13 31l4 1.6M13 35l4 1.6M43 28.6l4-1.6M43 32.6l4-1.6" stroke="#e4723c" stroke-width="1.6"/><text x="30" y="21" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="4" fill="#f0c666">EMBER ROAD</text></svg></div><p class="mc-name">Ember Road Collector&rsquo;s Edition</p><p class="mc-chips"><span class="chip-gold">$295 &middot; +97%</span><span class="chip">Good</span></p></div>
+                  <div class="mc-card"><div class="mc-img"><svg viewBox="0 0 60 60" aria-hidden="true"><defs><linearGradient id="bxh2" x1="0" x2="1"><stop offset="0" stop-color="#5c6b72"/><stop offset=".5" stop-color="#c9d6da"/><stop offset="1" stop-color="#4a575d"/></linearGradient></defs><rect width="60" height="60" fill="#0e1418"/><rect x="17" y="8" width="26" height="44" rx="2" fill="url(#bxh2)"/><path d="M23 42V30a7 7 0 0 1 14 0v12z" fill="#22303a"/><path d="M23 34h14M30 34v8" stroke="#3cb0b4" stroke-width=".9"/><text x="30" y="17" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="3.4" fill="#16212a">WARDENS</text></svg></div><p class="mc-name">Wardens of the Vale Steelbook</p><p class="mc-chips"><span class="chip-gold">$85 &middot; +40%</span><span class="chip">Like new</span></p></div>
+                </div>
+              </div>
+            </div>
+            <div class="door-body">
+              <h3>Collectibles</h3>
+              <p>What your collection is worth, from real sold prices, and a nudge when prices run high.</p>
+              <span class="door-go">Collectibles &rarr;</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <p class="eyebrow forge-more-head" id="forge-more">Also in the Forge</p>
       <ul class="more-grid">
         <li class="more-card">
           <h3 class="sr-only">The Pantry</h3>
@@ -716,12 +883,8 @@
             </div>
           </figure>
         </li>
-        <li class="more-card">
-          <h3 class="sr-only">Collections</h3>
-          <figure class="more-shot"><img src="/assets/app/films-960.webp?v=2af69299a3" srcset="/assets/app/films-480.webp?v=338bf6dce3 480w, /assets/app/films-960.webp?v=2af69299a3 960w" sizes="(max-width: 760px) 92vw, 360px" width="960" height="1067" loading="lazy" decoding="async" alt="Collections in the app, on the Films shelf with demo titles: an up-next queue, the movie assistant and a ranked list starting with Movie One and Movie Two."></figure>
-        </li>
       </ul>
-      <p class="demo-note">Screens shown with demo data.</p>
+      <p class="demo-note">Screens and items shown with demo data.</p>
     </div>
   </section>
 
@@ -769,7 +932,7 @@
             <p>Plans your week, so Monday doesn&rsquo;t ambush you.</p>
           </div>
         </li>
-        <li class="knight">
+        <li class="knight" id="reliquary">
           <svg class="sigil" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 58V28C14 16.5 22 9.5 32 4.5C42 9.5 50 16.5 50 28V58Z" fill="url(#sgGlow)" stroke="#f0c666" stroke-opacity=".45" stroke-width="1"/><path d="M10 58H54" stroke="#f0c666" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/><path transform="translate(25.559 9.376) scale(0.0685)" d="M 92.95 175.33 C 92.91 175.23 92.65 174.57 92.37 173.84 C 91.28 171.05 90.42 169.08 89.25 166.73 C 87.04 162.33 84.71 158.96 81.38 155.36 C 79.76 153.6 76.77 150.92 74.38 149.06 C 74.05 148.81 73.63 148.46 73.45 148.29 C 73.12 147.97 72.75 147.5 72.75 147.39 C 72.75 147.24 73.51 146.36 74.59 145.25 C 75.25 144.58 75.86 143.93 75.96 143.81 L 76.12 143.58 L 76.22 142.46 C 76.27 141.85 76.34 140.64 76.37 139.78 C 76.41 138.92 76.48 137.84 76.53 137.38 C 76.59 136.91 76.66 135.95 76.69 135.25 C 76.72 134.55 76.79 133.12 76.84 132.09 C 76.89 131.06 76.98 129.18 77.03 127.91 C 77.08 126.63 77.14 125.44 77.16 125.25 C 77.24 124.33 77.52 116.39 77.62 112.06 C 77.66 110.5 77.72 108.22 77.75 107 C 77.78 105.78 77.84 103.49 77.88 101.91 C 77.91 100.33 77.97 98.16 78 97.09 C 78.04 96.03 78.06 93.24 78.06 90.91 L 78.06 86.66 L 77.97 84.09 C 77.81 79.5 77.58 77.21 77.17 75.94 C 76.99 75.35 76.74 74.9 76.3 74.31 L 75.92 73.8 L 75.55 73.53 C 74.72 72.92 73.12 72.27 71.62 71.95 L 70.84 71.78 L 69 71.78 L 67.16 71.78 L 66.16 71.96 C 64.9 72.18 63.69 72.49 63 72.75 C 62.71 72.86 61.99 73.2 61.41 73.5 L 60.34 74.04 L 59.5 74.6 C 59.04 74.91 58.43 75.35 58.16 75.58 C 57.88 75.81 57.65 75.98 57.64 75.97 C 57.63 75.97 57.6 75.53 57.56 75 C 57.41 72.68 57.14 71.71 56.17 69.88 C 54.98 67.64 53.71 65.9 52.08 64.31 C 50.01 62.28 47.97 60.87 44.91 59.37 L 43.54 58.69 L 43.77 58.6 C 43.89 58.54 44.01 58.5 44.03 58.5 C 44.09 58.5 46.24 57.23 47.18 56.64 C 53.68 52.56 56.34 49.33 57.75 43.78 C 57.88 43.27 58.04 42.58 58.1 42.27 C 58.16 41.95 58.24 41.69 58.27 41.69 C 58.3 41.69 58.48 41.81 58.68 41.96 C 60.49 43.34 62.65 44.22 65.84 44.88 L 66.53 45.03 L 68.53 45.03 L 70.53 45.03 L 71.12 44.95 C 72.32 44.78 73.74 44.36 75.12 43.75 C 76.85 42.99 77.8 41.83 78.56 39.58 C 78.88 38.62 79 37.94 79.05 36.83 C 79.16 34.68 78.83 32.12 78.21 30.25 C 77.92 29.4 77.67 28.91 77.13 28.17 C 76.89 27.84 76.71 27.55 76.74 27.54 C 76.76 27.52 77.18 27.36 77.66 27.19 C 78.86 26.74 79.82 26.3 80.82 25.73 C 83.19 24.4 85.05 22.96 87.29 20.72 L 88.6 19.41 L 89.41 18.44 C 90.57 17.03 91.31 16.02 92.72 13.91 C 93.41 12.88 94 12.04 94.03 12.03 C 94.07 12.03 94.66 12.88 95.34 13.91 C 96.75 16.02 97.49 17.03 98.66 18.44 L 99.46 19.41 L 100.78 20.72 C 103.98 23.91 106.93 25.89 110.4 27.19 C 110.89 27.36 111.3 27.52 111.32 27.54 C 111.35 27.55 111.17 27.84 110.93 28.17 C 110.39 28.91 110.14 29.4 109.85 30.25 C 109.23 32.12 108.9 34.68 109.01 36.83 C 109.06 37.94 109.19 38.62 109.5 39.58 C 110.26 41.83 111.21 42.99 112.94 43.75 C 114.32 44.36 115.74 44.78 116.94 44.95 L 117.53 45.03 L 119.53 45.03 L 121.53 45.03 L 122.22 44.88 C 125.41 44.22 127.57 43.34 129.39 41.96 C 129.58 41.81 129.76 41.69 129.79 41.69 C 129.82 41.69 129.9 41.95 129.96 42.27 C 130.03 42.58 130.18 43.27 130.31 43.78 C 131.72 49.33 134.38 52.56 140.89 56.64 C 141.82 57.23 143.97 58.5 144.03 58.5 C 144.05 58.5 144.17 58.54 144.3 58.6 L 144.53 58.69 L 143.15 59.37 C 140.1 60.87 138.05 62.28 135.98 64.31 C 134.35 65.9 133.08 67.64 131.89 69.88 C 130.92 71.71 130.66 72.68 130.5 75 C 130.47 75.53 130.43 75.97 130.42 75.97 C 130.41 75.98 130.18 75.81 129.91 75.58 C 129.63 75.35 129.03 74.91 128.56 74.6 L 127.72 74.04 L 126.66 73.5 C 126.07 73.2 125.35 72.86 125.06 72.75 C 124.37 72.49 123.16 72.18 121.91 71.96 L 120.91 71.78 L 119.06 71.78 L 117.22 71.78 L 116.44 71.95 C 114.95 72.27 113.34 72.92 112.51 73.53 L 112.15 73.8 L 111.76 74.31 C 111.32 74.9 111.08 75.35 110.89 75.94 C 110.48 77.21 110.26 79.5 110.09 84.09 L 110 86.66 L 110 90.91 C 110 93.24 110.03 96.03 110.06 97.09 C 110.09 98.16 110.15 100.33 110.19 101.91 C 110.22 103.49 110.28 105.78 110.31 107 C 110.35 108.22 110.4 110.5 110.44 112.06 C 110.54 116.39 110.82 124.33 110.91 125.25 C 110.92 125.44 110.98 126.63 111.03 127.91 C 111.08 129.18 111.17 131.06 111.22 132.09 C 111.27 133.12 111.34 134.55 111.37 135.25 C 111.41 135.95 111.48 136.91 111.53 137.38 C 111.58 137.84 111.65 138.92 111.69 139.78 C 111.72 140.64 111.79 141.85 111.84 142.46 L 111.94 143.58 L 112.11 143.81 C 112.2 143.93 112.81 144.58 113.47 145.25 C 114.55 146.36 115.31 147.24 115.31 147.39 C 115.31 147.5 114.95 147.97 114.61 148.29 C 114.43 148.46 114.01 148.81 113.69 149.06 C 110.45 151.57 107.5 154.33 105.13 157.09 C 104.34 158.01 102.67 160.2 102.02 161.19 C 99.71 164.65 97.69 168.69 95.69 173.84 C 95.41 174.57 95.14 175.24 95.1 175.34 Z" fill="#f0c666"/><path d="M19 33.5L32 22.5L45 33.5Z" fill="#f0c666" fill-opacity=".08" stroke="url(#sgGold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M22.6 30.4l-1-1.6M26.2 27.4l-1-1.7M37.8 27.4l1-1.7M41.4 30.4l1-1.6" stroke="#f0c666" stroke-width="1" stroke-linecap="round"/><circle cx="32" cy="29.4" r="1.7" fill="none" stroke="#f0c666" stroke-width=".8"/><circle cx="32" cy="29.4" r=".5" fill="#f0c666"/><path d="M20.5 33.5H43.5V48H20.5Z" fill="#f0c666" fill-opacity=".05" stroke="url(#sgGold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M23.5 46V40C23.5 37.6 24.6 36.2 26 35.6C27.4 36.2 28.5 37.6 28.5 40V46M35.5 46V40C35.5 37.6 36.6 36.2 38 35.6C39.4 36.2 40.5 37.6 40.5 40V46" fill="none" stroke="#f0c666" stroke-opacity=".7" stroke-width=".9"/><g filter="url(#sgT)" fill="#6fe0e0"><circle cx="32" cy="39.4" r="1.8"/><path d="M31.1 40.4L30.5 44.6H33.5L32.9 40.4Z"/></g><path d="M18 48H46V51.2H18Z" fill="#f0c666" fill-opacity=".1" stroke="url(#sgGold)" stroke-width="1.2" stroke-linejoin="round"/><path d="M20.5 51.2V54.4H23.5V51.2M40.5 51.2V54.4H43.5V51.2" fill="none" stroke="#f0c666" stroke-width="1.1" stroke-linejoin="round"/></svg>
           <div>
             <p class="knight-rank">The vault</p>
@@ -826,6 +989,14 @@
           <p>No. Your records stay yours. We don&rsquo;t sell data, and there are no ads in anything you pay for. The <a href="/privacy-policy">privacy policy</a> has the details in plain words.</p>
         </details>
         <details>
+          <summary>Can I use it just for my collections?</summary>
+          <p>Yes. Movies &amp; TV, Fragrances, Games and Collectibles work on their own. The daily watch is one tap away whenever you want it.</p>
+        </details>
+        <details>
+          <summary>Is the Quest Log on PlayStation or Steam?</summary>
+          <p>Not yet. The Quest Log is Xbox first.</p>
+        </details>
+        <details>
           <summary>What&rsquo;s a Founding Knight?</summary>
           <p>One of the first 100 people to email us to join the waitlist. You get in first, and you hear the founding offer before anyone else.</p>
         </details>
@@ -866,10 +1037,16 @@
       <a class="footer-email" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
     </div>
     <div class="footer-col"><h2>The app</h2><ul>
-      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#how">The Watch</a></li>
       <li><a href="/#order">The Order</a></li>
       <li><a href="/#privacy">Privacy</a></li>
       <li><a href="/#join">Join the waitlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>Collections</h2><ul>
+      <li><a href="/collections/movies-tv">Movies &amp; TV</a></li>
+      <li><a href="/collections/fragrances">Fragrances</a></li>
+      <li><a href="/collections/games">Games</a></li>
+      <li><a href="/collections#collectibles">Collectibles</a></li>
     </ul></div>
     <div class="footer-col"><h2>The Forge</h2><ul>
       <li><a href="/about">Why Watchman</a></li>
@@ -888,7 +1065,7 @@
 </footer>
 <!-- /chrome:footer -->
 
-<script src="/js/main.js?v=38b020c5c7"></script>
+<script src="/js/main.js?v=83ce87add7"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>

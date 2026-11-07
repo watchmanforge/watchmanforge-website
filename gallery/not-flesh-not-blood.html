@@ -26,7 +26,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=660979e8ba">
+<link rel="stylesheet" href="/css/main.css?v=3ef0d3c85c">
 <style>
   :root{ --accent:#25d3d8; --accent-rgb:37,211,216; }
   :root{
@@ -201,11 +201,19 @@
       <img src="/assets/images/wordmark-96.webp?v=8b6d6252e9" alt="Watchman Forge" class="nav-wordmark" width="330" height="96">
     </a>
     <ul class="nav-links">
-      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#how">The Watch</a></li>
+      <li class="nav-drop">
+        <button class="nav-drop-btn" type="button" aria-expanded="false" aria-controls="nav-collections">Collections <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3"/></svg></button>
+        <div class="nav-panel" id="nav-collections">
+          <a class="feat" href="/collections/movies-tv"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg><span class="feat-name">Movies &amp; TV</span><span class="feat-line">A ranked shelf, and picks for tonight</span></a>
+          <a class="feat" href="/collections/fragrances"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 2.8h5v3.2h-5z"/><path d="M7 10.5C7 9.1 8.1 8 9.5 8h5C15.9 8 17 9.1 17 10.5V19a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M10.5 6v2M13.5 6v2M7 14h10"/></svg><span class="feat-name">Fragrances</span><span class="feat-line">A rotation that knows what&rsquo;s left</span></a>
+          <a class="feat" href="/collections/games"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 8h9c2.8 0 4.5 2.2 5 6l.4 2.6c.3 1.9-1.9 3-3.2 1.6L16.5 16h-9l-2.2 2.2c-1.3 1.4-3.5.3-3.2-1.6L2.5 14c.5-3.8 2.2-6 5-6z"/><path d="M7.5 10.5v3M6 12h3"/><circle cx="15.6" cy="11.2" r=".6"/><circle cx="17.6" cy="13" r=".6"/></svg><span class="feat-name">Games</span><span class="feat-line">The Quest Log: guides and trophies</span></a>
+          <a class="feat" href="/collections#collectibles"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4L12 9l2.5-5M12 9v11"/></svg><span class="feat-name">Collectibles</span><span class="feat-line">What it&rsquo;s worth, from sold prices</span></a>
+          <a class="nav-panel-all" href="/collections">All of Collections &rarr;</a>
+        </div>
+      </li>
       <li><a href="/#order">The Order</a></li>
-      <li><a href="/#privacy">Privacy</a></li>
       <li><a href="/about">Why Watchman</a></li>
-      <li><a href="/gallery">Gallery</a></li>
     </ul>
     <div class="nav-right">
       <a href="/#join" class="btn btn-primary btn-sm nav-cta">Join<span class="nav-cta-more"> the waitlist</span></a>
@@ -214,12 +222,28 @@
   </div>
 </nav>
 <div class="mobile-nav" id="mobile-nav" hidden>
-  <a href="/#how">How it works</a>
-  <a href="/#order">The Order</a>
-  <a href="/#privacy">Privacy</a>
-  <a href="/about">Why Watchman</a>
-  <a href="/gallery">The Gallery</a>
-  <a href="/contact">Contact</a>
+  <div class="mmap-group">
+    <p class="mmap-head">The Watch</p>
+    <a class="feat" href="/#how"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5C5.5 5 8.5 5 12 6.8C15.5 5 18.5 5 21 6.5V19C18.5 17.6 15.5 17.6 12 19.3C8.5 17.6 5.5 17.6 3 19Z"/><path d="M12 6.8v12.5"/></svg><span class="feat-name">The Ledger</span><span class="feat-line">Today&rsquo;s watch, held or conquered</span></a>
+    <a class="feat" href="/#scribe-call"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6.5 1.1 3.3-1.8 1.3a11 11 0 0 0 5 5l1.3-1.8 3.3 1.1.5 2.6c-.3 1.4-1.5 2.3-2.9 2.2C9.6 17.3 5.2 12.9 4.4 6.4c-.1-1.4.8-2.6 2.2-2.9z"/><path d="M15 3.5a6 6 0 0 1 5.5 5.5M15 6.6a3 3 0 0 1 2.4 2.4"/></svg><span class="feat-name">The Scribe&rsquo;s call</span><span class="feat-line">A phone call takes your report</span></a>
+    <a class="feat" href="/#replay"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/><path d="M10 9l5 3-5 3z"/></svg><span class="feat-name">The nightly replay</span><span class="feat-line">Watch the day back, patch what broke</span></a>
+    <a class="feat" href="/#armory"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l7.5 2.8v5.6c0 4.7-3.2 8.3-7.5 10-4.3-1.7-7.5-5.3-7.5-10V5.6z"/><path d="M12 7v9M8.8 10.2h6.4"/></svg><span class="feat-name">The Armory</span><span class="feat-line">Patches that hold become armor</span></a>
+  </div>
+  <div class="mmap-group">
+    <p class="mmap-head">Collections</p>
+    <a class="feat" href="/collections/movies-tv"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg><span class="feat-name">Movies &amp; TV</span><span class="feat-line">A ranked shelf, and picks for tonight</span></a>
+    <a class="feat" href="/collections/fragrances"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 2.8h5v3.2h-5z"/><path d="M7 10.5C7 9.1 8.1 8 9.5 8h5C15.9 8 17 9.1 17 10.5V19a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z"/><path d="M10.5 6v2M13.5 6v2M7 14h10"/></svg><span class="feat-name">Fragrances</span><span class="feat-line">A rotation that knows what&rsquo;s left</span></a>
+    <a class="feat" href="/collections/games"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 8h9c2.8 0 4.5 2.2 5 6l.4 2.6c.3 1.9-1.9 3-3.2 1.6L16.5 16h-9l-2.2 2.2c-1.3 1.4-3.5.3-3.2-1.6L2.5 14c.5-3.8 2.2-6 5-6z"/><path d="M7.5 10.5v3M6 12h3"/><circle cx="15.6" cy="11.2" r=".6"/><circle cx="17.6" cy="13" r=".6"/></svg><span class="feat-name">Games</span><span class="feat-line">The Quest Log: guides and trophies</span></a>
+    <a class="feat" href="/collections#collectibles"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4L12 9l2.5-5M12 9v11"/></svg><span class="feat-name">Collectibles</span><span class="feat-line">What it&rsquo;s worth, from sold prices</span></a>
+  </div>
+  <div class="mmap-group">
+    <p class="mmap-head">The Forge</p>
+    <a class="feat" href="/#forge-more"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v3H8z"/><path d="M7 6h10l1 3v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/></svg><span class="feat-name">The Pantry</span><span class="feat-line">Foods you eat often, logged by count</span></a>
+    <a class="feat" href="/#forge-more"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span class="feat-name">The Watchman&rsquo;s List</span><span class="feat-line">Places to eat and things to do</span></a>
+    <a class="feat" href="/#order"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 20v-9a6.5 6.5 0 0 1 13 0v9z"/><path d="M5.5 13h13M12 13v7M8 16.2h2M14 16.2h2"/></svg><span class="feat-name">The Order</span><span class="feat-line">AI knights that do real work</span></a>
+    <a class="feat" href="/#reliquary"><svg class="feat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10l7-6 7 6z"/><path d="M6 10h12v8H6z"/><path d="M4.5 18h15v2.5h-15z"/><circle cx="12" cy="13.2" r="1.2"/><path d="M12 14.4v1.8"/></svg><span class="feat-name">The Reliquary</span><span class="feat-line">Your encrypted second brain</span></a>
+  </div>
+  <p class="mmap-small"><a href="/about">Why Watchman</a><a href="/#privacy">Privacy</a><a href="/contact">Contact</a></p>
   <a href="/#join" class="btn btn-primary mobile-nav-cta">Join the waitlist</a>
 </div>
 <!-- /chrome:nav -->
@@ -329,10 +353,16 @@
       <a class="footer-email" href="mailto:watchmanforge@gmail.com">watchmanforge@gmail.com</a>
     </div>
     <div class="footer-col"><h2>The app</h2><ul>
-      <li><a href="/#how">How it works</a></li>
+      <li><a href="/#how">The Watch</a></li>
       <li><a href="/#order">The Order</a></li>
       <li><a href="/#privacy">Privacy</a></li>
       <li><a href="/#join">Join the waitlist</a></li>
+    </ul></div>
+    <div class="footer-col"><h2>Collections</h2><ul>
+      <li><a href="/collections/movies-tv">Movies &amp; TV</a></li>
+      <li><a href="/collections/fragrances">Fragrances</a></li>
+      <li><a href="/collections/games">Games</a></li>
+      <li><a href="/collections#collectibles">Collectibles</a></li>
     </ul></div>
     <div class="footer-col"><h2>The Forge</h2><ul>
       <li><a href="/about">Why Watchman</a></li>
@@ -350,7 +380,7 @@
   </div>
 </footer>
 <!-- /chrome:footer -->
-<script src="/js/main.js?v=38b020c5c7"></script>
+<script src="/js/main.js?v=83ce87add7"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>
