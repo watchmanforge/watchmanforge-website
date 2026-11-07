@@ -12,7 +12,9 @@ For every *.html in the site (tools/ and assets/ excluded):
      the copies in tools/chrome.py;
   2. rewrites every /css/*.css and /js/*.js reference to ?v=<content hash>,
      so a changed file always gets a new URL and an unchanged one never does
-     (both directories are served with a one-year immutable cache);
+     (both directories are served with a one-year immutable cache); images under
+     /assets/app, /assets/images and /assets/gallery in src and srcset get the same
+     treatment, so a redrawn picture never shows up as the old one from a cache;
   3. fills the waitlist form action from tools/chrome.py.
 
 Run it after editing chrome.py, any CSS/JS file, or after build_gallery.py.
@@ -30,6 +32,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKIP_DIRS = {".git", ".vercel", ".claude", "tools", "assets", "node_modules"}
 
 ASSET_REF = re.compile(r'((?:href|src)="/((?:css|js)/[^"?#]+\.(?:css|js)))(?:\?v=[^"]*)?"')
+IMG_ATTR = re.compile(r'\b(src|srcset)="([^"]*)"')
+IMG_URL = re.compile(r'(/((?:assets/(?:app|images|gallery))/[^"\s,?]+\.(?:webp|jpg|jpeg|png|svg)))(?:\?v=[0-9a-f]+)?')
 WAITLIST_FORM = re.compile(r'(<form\b[^>]*\bdata-waitlist\b[^>]*\baction=")[^"]*(")')
 
 
@@ -65,6 +69,7 @@ def sync(html, path):
     html = replace_block(html, "nav", NAV, path)
     html = replace_block(html, "footer", FOOTER, path)
     html = ASSET_REF.sub(lambda m: f'{m.group(1)}?v={asset_hash(m.group(2))}"', html)
+    html = IMG_ATTR.sub(lambda m: f'{m.group(1)}="' + IMG_URL.sub(lambda u: f'{u.group(1)}?v={asset_hash(u.group(2))}', m.group(2)) + '"', html)
     html = WAITLIST_FORM.sub(lambda m: m.group(1) + WAITLIST_ACTION + m.group(2), html)
     return html
 
