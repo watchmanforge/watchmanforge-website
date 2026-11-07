@@ -28,8 +28,8 @@
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/unifraktur-maguntia-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=9ee798aec5">
-<link rel="stylesheet" href="/css/collections.css?v=714552dab4">
+<link rel="stylesheet" href="/css/main.css?v=5f7cd4d5ba">
+<link rel="stylesheet" href="/css/collections.css?v=ee8e99a145">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -143,7 +143,7 @@
         <div>
           <p class="eyebrow">Collections &middot; Movies &amp; TV</p>
           <h1><span>Score it once.</span> <span class="text-gradient">The shelf ranks itself.</span></h1>
-          <p class="lead">Movies, TV shows and short films, each scored out of 100 and kept in order. <strong>Up Next</strong> holds three at most, and the assistant picks three for tonight from what you haven&rsquo;t seen.</p>
+          <p class="lead">Movies, TV shows and short films, each scored out of 100 and kept in order. <strong>Up next</strong> holds three at most, and the assistant picks three for tonight from what you haven&rsquo;t seen.</p>
           <div class="cx-hero-ctas">
             <a href="#join" class="btn btn-primary">Join the waitlist</a>
             <a href="#assistant" class="btn btn-outline">Get three picks</a>
@@ -159,19 +159,27 @@
               <button type="button" aria-pressed="false" data-f="tv">TV shows</button>
               <button type="button" aria-pressed="false" data-f="short">Short films</button>
             </div>
-            <ol class="mv-list">
-              <li data-type="tv"><span class="mv-n">1</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-chosen" width="40" height="60"/></svg></span><span class="mv-t"><b>The Chosen</b><small>TV show &middot; 2019</small></span><b class="mv-s">98</b></li>
-              <li data-type="movie"><span class="mv-n">2</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-matrix" width="40" height="60"/></svg></span><span class="mv-t"><b>The Matrix</b><small>Movie &middot; 1999</small></span><b class="mv-s">96</b></li>
-              <li data-type="movie"><span class="mv-n">3</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-lww" width="40" height="60"/></svg></span><span class="mv-t"><b>The Lion, the Witch and the Wardrobe</b><small>Movie &middot; 2005</small></span><b class="mv-s">95</b></li>
-              <li data-type="movie"><span class="mv-n">4</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-passion" width="40" height="60"/></svg></span><span class="mv-t"><b>The Passion of the Christ</b><small>Movie &middot; 2004</small></span><b class="mv-s">94</b></li>
-              <li data-type="movie"><span class="mv-n">5</span><span class="pst"><img src="/assets/images/films/king-of-kings-1927-96.webp?v=91c16a5b1a" srcset="/assets/images/films/king-of-kings-1927-96.webp?v=91c16a5b1a 96w, /assets/images/films/king-of-kings-1927-192.webp?v=9daaf81444 192w" sizes="40px" width="96" height="144" alt="" loading="lazy"></span><span class="mv-t"><b>The King of Kings</b><small>Movie &middot; 1927</small></span><b class="mv-s">91</b></li>
-              <li data-type="tv"><span class="mv-n">6</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-bible" width="40" height="60"/></svg></span><span class="mv-t"><b>The Bible</b><small>TV show &middot; 2013</small></span><b class="mv-s">90</b></li>
-              <li class="mv-me" data-type="movie"><span class="mv-n">7</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-br" width="40" height="60"/></svg></span><span class="mv-t"><b>Blade Runner 2049</b><small>Movie &middot; 2017</small></span><b class="mv-s">88</b><label class="mv-rate js-only">Your score <input type="range" min="0" max="100" value="88" aria-label="Your score for Blade Runner 2049"></label></li>
-              <li data-type="movie"><span class="mv-n">8</span><span class="pst"><img src="/assets/images/films/ben-hur-1925-96.webp?v=46b897ef19" srcset="/assets/images/films/ben-hur-1925-96.webp?v=46b897ef19 96w, /assets/images/films/ben-hur-1925-192.webp?v=6722cc5990 192w" sizes="40px" width="96" height="144" alt="" loading="lazy"></span><span class="mv-t"><b>Ben-Hur: A Tale of the Christ</b><small>Movie &middot; 1925</small></span><b class="mv-s">86</b></li>
-              <li data-type="short"><span class="mv-n">9</span><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-shepherd" width="40" height="60"/></svg></span><span class="mv-t"><b>The Shepherd</b><small>Short film &middot; 2017</small></span><b class="mv-s">84</b></li>
+            <p class="ap-head mv-head">Your ranking</p>
+            <ol class="mv-grid">
+              <li data-type="tv"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-chosen" width="40" height="60"/></svg></span><span class="mv-n">1</span><b>The Chosen</b><small>2019 &middot; <span class="mv-s">98</span> / 100</small></li>
+              <li data-type="movie"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-matrix" width="40" height="60"/></svg></span><span class="mv-n">2</span><b>The Matrix</b><small>1999 &middot; <span class="mv-s">96</span> / 100</small></li>
+              <li data-type="movie"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-lww" width="40" height="60"/></svg></span><span class="mv-n">3</span><b>The Lion, the Witch and the Wardrobe</b><small>2005 &middot; <span class="mv-s">95</span> / 100</small></li>
+              <li data-type="movie"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-passion" width="40" height="60"/></svg></span><span class="mv-n">4</span><b>The Passion of the Christ</b><small>2004 &middot; <span class="mv-s">94</span> / 100</small></li>
+              <li data-type="movie"><span class="pst"><img src="/assets/images/films/king-of-kings-1927-96.webp?v=91c16a5b1a" srcset="/assets/images/films/king-of-kings-1927-96.webp?v=91c16a5b1a 96w, /assets/images/films/king-of-kings-1927-192.webp?v=9daaf81444 192w" sizes="(max-width: 480px) 30vw, 120px" width="96" height="144" alt="" loading="lazy"></span><span class="mv-n">5</span><b>The King of Kings</b><small>1927 &middot; <span class="mv-s">91</span> / 100</small></li>
+              <li data-type="tv"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-bible" width="40" height="60"/></svg></span><span class="mv-n">6</span><b>The Bible</b><small>2013 &middot; <span class="mv-s">90</span> / 100</small></li>
+              <li class="mv-me" data-type="movie"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-br" width="40" height="60"/></svg></span><span class="mv-n">7</span><b>Blade Runner 2049</b><small>2017 &middot; <span class="mv-s">88</span> / 100</small></li>
+              <li data-type="movie"><span class="pst"><img src="/assets/images/films/ben-hur-1925-96.webp?v=46b897ef19" srcset="/assets/images/films/ben-hur-1925-96.webp?v=46b897ef19 96w, /assets/images/films/ben-hur-1925-192.webp?v=6722cc5990 192w" sizes="(max-width: 480px) 30vw, 120px" width="96" height="144" alt="" loading="lazy"></span><span class="mv-n">8</span><b>Ben-Hur: A Tale of the Christ</b><small>1925 &middot; <span class="mv-s">86</span> / 100</small></li>
+              <li data-type="short"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-shepherd" width="40" height="60"/></svg></span><span class="mv-n">9</span><b>The Shepherd</b><small>2017 &middot; <span class="mv-s">84</span> / 100</small></li>
             </ol>
+            <div class="mv-sheet js-only">
+              <span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-br" width="40" height="60"/></svg></span>
+              <div>
+                <b>Blade Runner 2049</b><small>Movie &middot; 2017</small>
+                <label>Your score <span><output>88</output> / 100</span><input type="range" min="0" max="100" value="88" aria-label="Your score for Blade Runner 2049"></label>
+              </div>
+            </div>
           </div>
-          <p class="ap-note">Drag the score on Blade Runner 2049 and the shelf re-ranks. The 1920s posters are the originals, now in the public domain; the rest are our own cards.</p>
+          <p class="ap-note">Score Blade Runner 2049 and watch your ranking re-order. The 1920s posters are the originals, now in the public domain; the rest are our own cards.</p>
         </div>
       </div>
     </div>
@@ -180,38 +188,37 @@
   <section class="section bg-raised" id="up-next" aria-labelledby="upnext-title">
     <div class="container cx-split">
       <div class="cx-copy">
-        <p class="eyebrow">Up Next</p>
+        <p class="eyebrow">Up next</p>
         <h2 id="upnext-title" class="section-title">Three at most. Then you watch one.</h2>
-        <p>Up Next never holds more than three titles, so you&rsquo;re choosing tonight&rsquo;s film from three, not three hundred. Everything else waits in Want to watch.</p>
+        <p>Up next never holds more than three titles, so you&rsquo;re choosing tonight&rsquo;s film from three, not three hundred. Everything else waits in Want to watch, and you move a title up from its own page.</p>
         <ul class="cx-rules">
           <li><strong>Want to watch</strong> holds the rest, as long as you like.</li>
-          <li><strong>Watched, forgot it</strong> is for the ones you&rsquo;ve seen but barely remember.</li>
+          <li><strong>Watched but forgot</strong> keeps the ones worth a rewatch, and <strong>Give these a score</strong> the ones you haven&rsquo;t rated yet.</li>
         </ul>
-        <p class="js-only">Try it: add a film to Up Next.</p>
+        <p class="js-only">Try it: tap a poster in Want to watch.</p>
       </div>
 
       <div class="ap un" data-upnext>
-        <p class="ap-label">Up Next &middot; three at most</p>
+        <p class="ap-label">Up next &middot; three at most</p>
         <ol class="un-slots">
-          <li data-id="tencom" data-name="The Ten Commandments" data-meta="Movie · 1956" data-art="pc-tencom"><span class="un-card"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-tencom" width="40" height="60"/></svg><button class="un-x js-only" type="button" aria-label="Take The Ten Commandments off Up Next">&times;</button></span><p class="un-name">The Ten Commandments</p></li>
-          <li data-id="inter" data-name="Interstellar" data-meta="Movie · 2014" data-art="pc-inter"><span class="un-card"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-inter" width="40" height="60"/></svg><button class="un-x js-only" type="button" aria-label="Take Interstellar off Up Next">&times;</button></span><p class="un-name">Interstellar</p></li>
-          <li><span class="un-card empty">Open spot</span><p class="un-name">&nbsp;</p></li>
+          <li data-id="tencom" data-name="The Ten Commandments" data-meta="Movie · 1956" data-art="pc-tencom"><button class="un-tile" type="button"><b>The Ten Commandments</b><small>from Dad</small></button></li>
+          <li data-id="inter" data-name="Interstellar" data-meta="Movie · 2014" data-art="pc-inter"><button class="un-tile" type="button"><b>Interstellar</b><small>from Sam</small></button></li>
+          <li><span class="un-tile empty">Empty slot</span></li>
         </ol>
-        <div class="un-want">
-          <p class="ap-label">Want to watch</p>
-          <ul>
-            <li data-id="hacksaw" data-name="Hacksaw Ridge" data-meta="Movie · 2016" data-art="pc-hacksaw"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-hacksaw" width="40" height="60"/></svg></span><span><b>Hacksaw Ridge</b><small>Movie &middot; 2016</small></span><button class="un-add js-only" type="button">+ Up Next</button></li>
-            <li data-id="fellow" data-name="The Fellowship of the Ring" data-meta="Movie · 2001" data-art="pc-fellow"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-fellow" width="40" height="60"/></svg></span><span><b>The Fellowship of the Ring</b><small>Movie &middot; 2001</small></span><button class="un-add js-only" type="button">+ Up Next</button></li>
-          </ul>
+        <p class="ap-head un-h">Want to watch</p>
+        <ul class="un-grid">
+          <li data-id="hacksaw" data-name="Hacksaw Ridge" data-meta="Movie · 2016" data-art="pc-hacksaw"><button class="un-poster" type="button"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-hacksaw" width="40" height="60"/></svg></span><b>Hacksaw Ridge</b></button></li>
+          <li data-id="fellow" data-name="The Fellowship of the Ring" data-meta="Movie · 2001" data-art="pc-fellow"><button class="un-poster" type="button"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-fellow" width="40" height="60"/></svg></span><b>The Fellowship of the Ring</b></button></li>
+        </ul>
+        <div class="un-sheet js-only" hidden>
+          <span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-hacksaw" width="40" height="60" data-sheet-art/></svg></span>
+          <div><b data-sheet-name></b><small data-sheet-meta></small><button class="ap-btn un-act" type="button"></button></div>
         </div>
         <p class="un-msg js-only" aria-live="polite"></p>
-        <details class="un-forgot">
-          <summary>Watched, forgot it &middot; 2</summary>
-          <ul>
-            <li>Fireproof <small>&middot; Movie &middot; 2008</small></li>
-            <li>Courageous <small>&middot; Movie &middot; 2011</small></li>
-          </ul>
-        </details>
+        <p class="ap-head un-h">Watched but forgot <small>&middot; rewatch these</small></p>
+        <ul class="un-rows"><li>Fireproof <small>2008</small></li><li>Courageous <small>2011</small></li></ul>
+        <p class="ap-head un-h">Give these a score</p>
+        <ul class="un-rows"><li>Ben-Hur <small>1959</small></li><li>The Mission <small>1986</small></li></ul>
       </div>
     </div>
   </section>
@@ -236,7 +243,6 @@
           <div class="mp-pick"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-imagine" width="40" height="60"/></svg></span><p class="mp-name">I Can Only Imagine</p><p class="mp-meta">Movie &middot; 2018</p><button class="ap-btn mp-add js-only" type="button" aria-pressed="false">+ Want to watch</button></div>
           <div class="mp-pick"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-egypt" width="40" height="60"/></svg></span><p class="mp-name">The Prince of Egypt</p><p class="mp-meta">Movie &middot; 1998</p><button class="ap-btn mp-add js-only" type="button" aria-pressed="false">+ Want to watch</button></div>
         </div>
-        <p class="fa-skip mp-skip"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></svg>Skipped The Chosen and The Bible: already on your shelf.</p>
       </div>
     </div>
   </section>
@@ -246,8 +252,8 @@
       <div class="cx-copy">
         <p class="eyebrow">Look it up</p>
         <h2 id="lookup-title" class="section-title">Type a title. The details fill in.</h2>
-        <p>Look it up fills in the year, the director and the series a title belongs to, then offers a few posters to choose from.</p>
-        <p class="js-only">Try it: pick a poster. (On this page the posters are our own cards.)</p>
+        <p>Look it up fills in the year, the director and the series a title belongs to. Find posters brings back what it can find, in an art style if you want one. Nothing is kept until you save.</p>
+        <p class="js-only">Try it: pick a poster and save. (On this page the posters are our own cards.)</p>
       </div>
 
       <div class="ap ml" data-lookup>
@@ -259,17 +265,21 @@
             <dl class="lk-rows">
               <div><dt>Year</dt><dd>2017</dd></div>
               <div><dt>Director</dt><dd>Denis Villeneuve</dd></div>
-              <div><dt>Series</dt><dd>Blade Runner <i>&middot; film 2 of 2</i></dd></div>
+              <div><dt>Series</dt><dd>Blade Runner</dd></div>
             </dl>
           </div>
         </div>
+        <div class="ml-btns"><span class="ap-plain">Look it up</span><span class="ap-plain">Find posters</span></div>
         <div class="ml-choose">
-          <p class="ap-label">Choose a poster</p>
-          <div class="ml-opts" role="group" aria-label="Choose a poster">
+          <p class="ml-pick">Pick one. Nothing is kept until you save.</p>
+          <div class="ml-opts" role="group" aria-label="Pick a poster">
             <button type="button" aria-pressed="true" data-art="pc-br" aria-label="Poster 1"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-br" width="40" height="60"/></svg></span></button>
             <button type="button" aria-pressed="false" data-art="pc-br-b" aria-label="Poster 2"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-br-b" width="40" height="60"/></svg></span></button>
             <button type="button" aria-pressed="false" data-art="pc-br-c" aria-label="Poster 3"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#pc-br-c" width="40" height="60"/></svg></span></button>
+            <button class="ap-save ml-save js-only" type="button">Save</button>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
@@ -280,7 +290,7 @@
       <div class="cx-copy">
         <p class="eyebrow">Talk it through</p>
         <h2 id="talk-title" class="section-title">A short chat, boiled down to notes.</h2>
-        <p>Just finished something? Talk it through for a minute. What you said is boiled down into a few clear notes, kept with the title.</p>
+        <p>Just finished something? Talk it through for a minute. What you said is boiled down into notes: what you liked, what you&rsquo;re taking from it, and its elements.</p>
       </div>
 
       <div class="ap tk">
@@ -291,12 +301,12 @@
           <p class="tk-me">Aslan takes Edmund&rsquo;s place. It&rsquo;s the clearest picture of the cross I&rsquo;ve seen on screen.</p>
         </div>
         <div class="ap-card tk-notes">
-          <p class="ap-label">Notes &middot; The Lion, the Witch and the Wardrobe</p>
-          <ul>
-            <li>The Stone Table hit hardest.</li>
-            <li>Didn&rsquo;t expect that from a family film.</li>
-            <li>Aslan taking Edmund&rsquo;s place reads as the cross.</li>
-          </ul>
+          <p class="ap-label">What I liked</p>
+          <ul><li>The Stone Table hit hardest.</li><li>A family film that didn&rsquo;t play it safe.</li></ul>
+          <p class="ap-label">What I&rsquo;m taking</p>
+          <ul><li>Aslan taking Edmund&rsquo;s place reads as the cross.</li></ul>
+          <p class="ap-label">Elements</p>
+          <ul><li>Sacrifice &middot; Taking another&rsquo;s place</li></ul>
         </div>
       </div>
     </div>
@@ -383,7 +393,7 @@
 <!-- /chrome:footer -->
 
 <script src="/js/main.js?v=27c49eaeaa"></script>
-<script src="/js/collections.js?v=2682a0fee3"></script>
+<script src="/js/collections.js?v=21065f63ee"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>

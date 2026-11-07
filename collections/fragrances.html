@@ -27,8 +27,8 @@
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/main.css?v=9ee798aec5">
-<link rel="stylesheet" href="/css/collections.css?v=714552dab4">
+<link rel="stylesheet" href="/css/main.css?v=5f7cd4d5ba">
+<link rel="stylesheet" href="/css/collections.css?v=ee8e99a145">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -191,25 +191,21 @@
 
             <div class="atom-read">
               <p class="atom-name">Vigil</p>
-              <p class="atom-house">Greywatch Parfums</p>
+              <p class="atom-house">Greywatch Parfums &middot; 100 ml</p>
               <dl class="atom-stats">
                 <div><dt>Left</dt><dd><span data-out="ml">69.0</span><small>ml</small></dd></div>
                 <div><dt>Sprays</dt><dd><span data-out="sprays">690</span></dd></div>
                 <div><dt>Wears</dt><dd><span data-out="wears">138</span></dd></div>
               </dl>
               <span class="ap-bar"><i style="width:69%"></i></span>
-              <span class="atom-pct"><span data-out="pct">69%</span> of 100 ml</span>
+              <span class="atom-pct"><span data-out="pct">69%</span><span data-out="left">~138 wears</span></span>
               <button class="ap-btn atom-wore atom-js" type="button">Wore it today</button>
-              <p class="atom-rate"><span><b data-out="rate">0.1</b> ml a spray &middot; <span data-out="rate-note">starting guess</span></span></p>
-              <p class="atom-rate"><span class="atom-step atom-js" role="group" aria-label="Sprays a wear"><button type="button" data-step="-1" aria-label="One spray fewer">&minus;</button><output data-out="spw">5</output><button type="button" data-step="1" aria-label="One spray more">+</button></span><span>sprays a wear</span></p>
-              <p class="atom-log atom-js" aria-live="polite">Each tap is one wear: 5 sprays at 0.1 ml.</p>
-              <div class="atom-cal" hidden>
-                <p><b><span data-out="counted">10</span> sprays counted.</b> Set the level you see in the bottle, and the app learns its real spray.</p>
-                <label for="atom-level">Level by eye: <output data-out="eye">68.0</output> ml</label>
-                <input id="atom-level" type="range" min="60" max="69" step="0.1" value="68">
-                <p data-out="math">Same as counted: about 0.1 ml a spray.</p>
-                <div class="atom-cal-row"><button class="atom-cal-save" type="button">Save the level</button></div>
+              <p class="atom-rate" data-out="rate-line">Counted at <b>0.1</b> ml a spray; set the fill by eye now and then and it learns this sprayer.</p>
+              <div class="atom-ctrl atom-js">
+                <label class="atom-spw">Sprays a wear <input type="number" min="1" max="12" value="5" inputmode="numeric"></label>
+                <label class="atom-full"><span>How full</span><output data-out="eye">69.0 ml</output><input id="atom-level" type="range" min="0" max="100" step="0.5" value="69"></label>
               </div>
+              <p class="atom-log atom-js" aria-live="polite">Each tap is one wear: 5 sprays at 0.1 ml.</p>
               <div class="atom-foot atom-js"><button class="atom-reset" type="button">Start over</button></div>
             </div>
           </figure>
@@ -235,7 +231,7 @@
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 3h6v3h-6z"/><path d="M5.5 9a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v10a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2z"/><path d="M5.5 13.5h12" stroke-dasharray="2 2"/><path d="M21 12l1.5 1.5L21 15l-1.5-1.5z"/></svg>
           <h3>It learns your bottle</h3>
-          <p>After 10 sprays, set the level by eye once. The app compares what you see with what it counted, and learns how much this bottle really gives.</p>
+          <p>Now and then, set how full it looks. The app compares that with the sprays it counted, and learns how much this sprayer really gives.</p>
         </li>
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18M4 5h3M4 9h5M4 13h3M4 17h5"/><path d="M12 9h8M12 13h6M12 17h7"/><path d="M12 5h3"/></svg>
@@ -250,10 +246,10 @@
     <div class="container cx-split">
       <div class="cx-copy">
         <p class="eyebrow">The fragrance assistant</p>
-        <h2 id="assistant-title" class="section-title">It only picks from your shelf.</h2>
-        <p>Ask what to wear and it chooses from the bottles you already own.</p>
+        <h2 id="assistant-title" class="section-title">It picks from your shelf first.</h2>
+        <p>Ask what to wear and it chooses from the bottles you already own, then adds one new one to try.</p>
         <ul class="cx-rules">
-          <li><strong>Only bottles you own.</strong> It never suggests something to buy.</li>
+          <li><strong>Your bottles first,</strong> plus one &ldquo;new to try&rdquo; that isn&rsquo;t on your shelf.</li>
           <li><strong>Skips today&rsquo;s bottle.</strong> What you already wore today stays off the list.</li>
           <li><strong>Leans on the season,</strong> and on the bottle you&rsquo;ve gone longest without.</li>
           <li class="soon"><strong>Coming:</strong> today&rsquo;s weather, day or night, and layering two bottles. <span class="tag tag-soon">Coming</span></li>
@@ -273,17 +269,11 @@
             </div>
           </div>
           <p class="fa-why" data-fa-why>Cedar and black pepper suit autumn, and it&rsquo;s been 31 days since you last wore it.</p>
-          <p class="fa-skip"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></svg>Skipped Vigil: you wore it today.</p>
         </div>
-        <div class="fa-shelf">
-          <p class="ap-label">Your shelf &middot; last worn</p>
-          <ol>
-            <li class="is-today" data-b="vigil"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-vigil" width="60" height="80"/></svg><span><b>Vigil</b>Today</span></li>
-            <li data-b="ember"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-ember" width="60" height="80"/></svg><span><b>Ember Oud</b>23 days</span></li>
-            <li class="is-pick" data-b="cedar"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-cedar" width="60" height="80"/></svg><span><b>Cedar Watch</b>31 days</span></li>
-            <li data-b="harbor"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-harbor" width="60" height="80"/></svg><span><b>Harbor Light</b>47 days</span></li>
-            <li data-b="orchard"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-orchard" width="60" height="80"/></svg><span><b>Orchard Psalm</b>16 days</span></li>
-          </ol>
+        <div class="ap-card fa-new">
+          <p class="fa-tagline">New to try &middot; not on your shelf</p>
+          <p class="fa-name">Lantern Smoke</p>
+          <p class="fa-house">House of Vale &middot; incense, black tea, cedar</p>
         </div>
       </div>
     </div>
@@ -459,7 +449,7 @@
 <!-- /chrome:footer -->
 
 <script src="/js/main.js?v=27c49eaeaa"></script>
-<script src="/js/collections.js?v=2682a0fee3"></script>
+<script src="/js/collections.js?v=21065f63ee"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 /* ============================================================
    WATCHMAN FORGE — Collections pages
    Fragrances: the atomizer, the assistant's pick, the cut-out slider.
-   Games: a guide whose boxes tick on sync; Want / Playing / Played.
-   Movies & TV: a shelf that re-ranks as you score; Up Next (three at
-   most); picks to Want to watch; a poster to choose.
+   Games: a guide whose boxes tick on sync; Want to play / Playing / Played.
+   Movies & TV: a ranking that re-orders as you score; Up next (three at
+   most) from a title's sheet; picks to Want to watch; pick a poster, save.
    Everything here is a demo of the app, on made-up data; nothing is
    stored and nothing leaves the page.
    ============================================================ */
@@ -19,16 +19,15 @@
   };
 
   /* ── Fragrances: the atomizer ─────────────────────────────
-     As in the app: a bottle starts at 0.1 ml a spray and 5 sprays a
-     wear. Once 10 sprays are counted, setting the level by eye teaches
-     it the bottle's real spray: (level then - level now) / sprays. */
+     As in the app: counted at 0.1 ml a spray and 5 sprays a wear. Set
+     "How full" by eye now and then, and it learns the sprayer's real
+     output: (level then - level now) / sprays counted since. */
   const atom = document.querySelector('[data-atom]');
   if (atom) {
     const SIZE = 100;          // ml in the bottle when full
     const EMPTY_Y = 278;       // the cavity's floor in the SVG; 100 ml fills 172 units above it
     const PER_ML = 1.72;
     const TICK = 28;           // rail px per ml
-    const TO_LEARN = 10;       // sprays counted before the level can be set by eye
     const fresh = () => ({ ml: 69, rate: 0.1, spw: 5, learned: false, since: 69, counted: 0, wears: 0 });
     let s = fresh();
 
@@ -36,8 +35,7 @@
     const out = (name) => $(`[data-out="${name}"]`);
     const svg = $('.atom-svg'), liq = $('.atom-liqg'), ticks = $('.atom-ticks'), bar = $('.ap-bar i');
     const head = $('.atom-head'), mist = $('.atom-mist'), log = $('.atom-log');
-    const cal = $('.atom-cal'), eye = $('#atom-level');
-    const less = $('[data-step="-1"]'), more = $('[data-step="1"]');
+    const eye = $('#atom-level'), spw = $('.atom-spw input');
 
     const frag = document.createDocumentFragment();
     for (let i = 0; i <= SIZE * 2; i++) {
@@ -60,50 +58,45 @@
       liq.style.transform = `translateY(${(EMPTY_Y - ml * PER_ML).toFixed(2)}px)`;
       ticks.style.transform = `translateY(${(-(SIZE - ml) * TICK).toFixed(1)}px)`;
       bar.style.width = (ml / SIZE * 100).toFixed(1) + '%';
-      out('pct').textContent = Math.round(ml / SIZE * 100) + '%';
+      out('eye').textContent = ml.toFixed(1) + ' ml';
       svg.setAttribute('aria-label', `A ${SIZE} ml bottle of Vigil, ${ml.toFixed(1)} ml left`);
     };
 
     const render = () => {
       const sprays = Math.floor(s.ml / s.rate + 1e-9);
+      const wears = Math.floor(sprays / s.spw);
+      const pct = Math.round(s.ml / SIZE * 100);
       put(out('ml'), s.ml.toFixed(1));
       put(out('sprays'), sprays);
-      put(out('wears'), Math.floor(sprays / s.spw));
-      out('rate').textContent = num(s.rate);
-      out('rate-note').textContent = s.learned ? 'learned from this bottle' : 'starting guess';
-      out('spw').textContent = s.spw;
-      less.disabled = s.spw <= 1;
-      more.disabled = s.spw >= 12;
+      put(out('wears'), wears);
+      out('pct').textContent = pct + '%';
+      out('left').textContent = pct <= 15 ? 'running low' : `~${wears} wears`;
+      out('rate-line').innerHTML = s.learned
+        ? `Your sprayer puts out about <b>${num(s.rate)}</b> ml a spray, learned from your corrections.`
+        : 'Counted at <b>0.1</b> ml a spray; set the fill by eye now and then and it learns this sprayer.';
+      eye.value = s.ml;
       level(s.ml);
     };
 
-    // The level by eye can sit anywhere from 0.04 to 0.3 ml a spray below the starting level.
-    const openCal = () => {
-      eye.min = Math.max(0, s.since - s.counted * 0.3).toFixed(1);
-      eye.max = (s.since - s.counted * 0.04).toFixed(1);
-      eye.value = s.ml.toFixed(1);
-      out('counted').textContent = s.counted;
-      cal.hidden = false;
-      onEye();
-    };
-    const onEye = () => {
+    eye.addEventListener('input', () => level(Number(eye.value)));
+    eye.addEventListener('change', () => {
       const v = Number(eye.value);
-      out('eye').textContent = v.toFixed(1);
-      const r = (s.since - v) / s.counted;
-      out('math').textContent = Math.abs(r - s.rate) < 0.005
-        ? `Same as counted: about ${num(s.rate)} ml a spray.`
-        : `${s.since.toFixed(1)} to ${v.toFixed(1)} ml over ${s.counted} sprays: about ${num(r)} ml a spray.`;
-      level(v);
-    };
-    eye.addEventListener('input', onEye);
-
-    $('.atom-cal-save').addEventListener('click', () => {
-      const v = Number(eye.value);
-      s.rate = Math.min(0.3, Math.max(0.04, (s.since - v) / s.counted));
-      s.ml = v; s.since = v; s.counted = 0; s.learned = true;
-      cal.hidden = true;
+      if (s.counted >= 5 && v < s.since) {
+        s.rate = Math.min(0.3, Math.max(0.04, (s.since - v) / s.counted));
+        s.learned = true;
+        say(`Learned from your correction: about ${num(s.rate)} ml a spray.`);
+      } else {
+        say(`Set to ${v.toFixed(1)} ml.`);
+      }
+      s.ml = v; s.since = v; s.counted = 0;
       render();
-      say(`Learned: about ${num(s.rate)} ml a spray. Sprays and wears left now use it.`);
+    });
+
+    spw.addEventListener('change', () => {
+      s.spw = Math.min(12, Math.max(1, Math.round(Number(spw.value) || 5)));
+      spw.value = s.spw;
+      render();
+      say(`${s.spw} ${s.spw === 1 ? 'spray' : 'sprays'} a wear.`);
     });
 
     const puff = (n) => {
@@ -128,24 +121,12 @@
       s.wears += 1;
       puff(s.spw);
       render();
-      let text = `Wear ${s.wears} logged: ${s.spw} sprays, ${num(used)} ml.`;
-      if (s.counted >= TO_LEARN && s.ml > 0) {
-        openCal();
-        text += ' Now you can set the level by eye.';
-      }
-      say(text);
+      say(`Wear ${s.wears} logged: ${s.spw} sprays, ${num(used)} ml.` + (s.wears === 2 && !s.learned ? ' Now set How full by eye.' : ''));
     });
-
-    atom.querySelectorAll('[data-step]').forEach(btn => btn.addEventListener('click', () => {
-      s.spw = Math.min(12, Math.max(1, s.spw + Number(btn.dataset.step)));
-      render();
-      if (!cal.hidden) onEye();
-      say(`${s.spw} ${s.spw === 1 ? 'spray' : 'sprays'} a wear.`);
-    }));
 
     $('.atom-reset').addEventListener('click', () => {
       s = fresh();
-      cal.hidden = true;
+      spw.value = s.spw;
       render();
       say('Each tap is one wear: 5 sprays at 0.1 ml.');
     });
@@ -156,7 +137,7 @@
   /* ── Fragrances: the assistant's pick ─────────────────────
      It leans on the season, so the demo does too: the pick follows the
      visitor's own month (northern seasons). Vigil was worn today, so it
-     is never the pick. */
+     is never the pick; the app skips it without saying so. */
   const fa = document.querySelector('[data-fa]');
   if (fa) {
     const PICKS = {
@@ -173,7 +154,6 @@
     fa.querySelector('[data-fa-house]').textContent = house;
     fa.querySelector('[data-fa-why]').textContent = why;
     fa.querySelector('[data-fa-img]').setAttribute('href', '#fb-' + id);
-    fa.querySelectorAll('[data-b]').forEach(li => li.classList.toggle('is-pick', li.dataset.b === id));
   }
 
   /* ── Games: a sync ticks the guide's boxes ────────────────
@@ -181,16 +161,17 @@
      ticks off what they cover. Here the sync is a button. */
   document.querySelectorAll('[data-guide]').forEach(g => {
     const btn = g.querySelector('.gd-sync');
+    const label = btn && btn.querySelector('span');
     const ach = g.querySelector('[data-g-ach]');
     const gs = g.querySelector('[data-g-gs]');
     const bar = g.querySelector('.ap-bar i');
     const toast = g.querySelector('.gd-toast');
     if (!btn) return;
+    const clock = () => 'Synced ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
     btn.addEventListener('click', () => {
       const steps = [...g.querySelectorAll('li[data-unlock]:not(.done)')];
-      if (!steps.length) return;
-      btn.disabled = true;
-      btn.textContent = 'Syncing…';
+      label.textContent = 'Syncing…';
+      if (!steps.length) { setTimeout(() => { label.textContent = clock(); }, reduce ? 0 : 700); return; }
       steps.forEach((li, i) => setTimeout(() => {
         li.classList.add('done', 'just');
         li.querySelector('.gd-box').setAttribute('aria-label', 'Done');
@@ -199,8 +180,8 @@
         put(gs, total.toLocaleString('en-US'));
         bar.style.width = (total / 10) + '%';
         if (i === steps.length - 1) {
-          btn.textContent = 'Synced just now';
-          const names = steps.map(s => s.dataset.name);
+          label.textContent = clock();
+          const names = steps.map(x => x.dataset.name);
           toast.textContent = `${names.length} achievements unlocked: ${names.join(' and ')}. Their boxes ticked themselves.`;
         }
       }, reduce ? 0 : 600 + i * 700));
@@ -214,92 +195,111 @@
     group.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
   }));
 
-  /* ── Movies & TV: the shelf ranks itself ─────────────────
-     Rows sort by score out of 100, and slide from where they were.
-     The row being scored never leaves the DOM (that would end the
-     drag); the others are moved around it. */
+  /* ── Movies & TV: your ranking re-orders as you score ────
+     Scores are out of 100; the poster grid sorts by score, and each
+     tile slides from where it was (FLIP). Filters hide and renumber. */
   const rank = document.querySelector('[data-rank]');
   if (rank) {
-    const list = rank.querySelector('.mv-list');
+    const list = rank.querySelector('.mv-grid');
     const me = list.querySelector('.mv-me');
-    const input = me.querySelector('input');
-    const rows = () => [...list.children];
+    const input = rank.querySelector('.mv-sheet input');
+    const shown = rank.querySelector('.mv-sheet output');
+    const tiles = () => [...list.children];
     const score = (li) => Number(li.querySelector('.mv-s').textContent);
     const number = () => {
       let n = 0;
-      rows().forEach(li => { if (!li.hidden) li.querySelector('.mv-n').textContent = ++n; });
+      tiles().forEach(li => { if (!li.hidden) li.querySelector('.mv-n').textContent = ++n; });
       rank.querySelector('[data-count]').textContent = n;
     };
     const reorder = () => {
-      const now = rows();
+      const now = tiles();
       const sorted = now.slice().sort((a, b) => score(b) - score(a));
       if (sorted.every((li, i) => li === now[i])) return;
-      const before = new Map(now.map(li => [li, li.getBoundingClientRect().top]));
-      const at = sorted.indexOf(me);
-      sorted.slice(0, at).forEach(li => list.insertBefore(li, me));
-      sorted.slice(at + 1).forEach(li => list.appendChild(li));
+      const before = new Map(now.map(li => [li, li.getBoundingClientRect()]));
+      sorted.forEach(li => list.appendChild(li));
       number();
       if (reduce) return;
-      rows().forEach(li => {
-        const dy = before.get(li) - li.getBoundingClientRect().top;
-        if (!dy) return;
+      tiles().forEach(li => {
+        const a = before.get(li), b = li.getBoundingClientRect();
+        const dx = a.left - b.left, dy = a.top - b.top;
+        if (!dx && !dy) return;
         li.style.transition = 'none';
-        li.style.transform = `translateY(${dy}px)`;
+        li.style.transform = `translate(${dx}px, ${dy}px)`;
         requestAnimationFrame(() => requestAnimationFrame(() => {
-          li.style.transition = 'transform .45s cubic-bezier(0.22, 1, 0.36, 1)';
+          li.style.transition = 'transform .5s cubic-bezier(0.22, 1, 0.36, 1)';
           li.style.transform = '';
         }));
       });
     };
     input.addEventListener('input', () => {
       me.querySelector('.mv-s').textContent = input.value;
+      shown.textContent = input.value;
       reorder();
     });
     rank.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => {
       rank.querySelectorAll('[data-f]').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
-      rows().forEach(li => { li.hidden = b.dataset.f !== 'all' && li.dataset.type !== b.dataset.f; });
+      tiles().forEach(li => { li.hidden = b.dataset.f !== 'all' && li.dataset.type !== b.dataset.f; });
       number();
     }));
   }
 
-  /* ── Movies & TV: Up Next holds three at most ──────────── */
+  /* ── Movies & TV: Up next holds three at most ────────────
+     As in the app, a title moves on and off Up next from its own
+     sheet: tap a poster in Want to watch, or a tile in Up next. */
   const un = document.querySelector('[data-upnext]');
   if (un) {
     const slots = un.querySelector('.un-slots');
-    const want = un.querySelector('.un-want ul');
+    const grid = un.querySelector('.un-grid');
+    const sheet = un.querySelector('.un-sheet');
+    const act = sheet.querySelector('.un-act');
     const msg = un.querySelector('.un-msg');
-    const art = (id) => `<svg viewBox="0 0 40 60" aria-hidden="true"><use href="#${id}" width="40" height="60"/></svg>`;
+    const KEYS = ['id', 'name', 'meta', 'art'];
     const filled = () => [...slots.children].filter(li => li.dataset.id);
-    const keep = (from, to) => ['id', 'name', 'meta', 'art'].forEach(k => { to.dataset[k] = from.dataset[k]; });
+    let open = null;
+
+    const show = (li, where) => {
+      open = { li, where };
+      sheet.querySelector('[data-sheet-art]').setAttribute('href', '#' + li.dataset.art);
+      sheet.querySelector('[data-sheet-name]').textContent = li.dataset.name;
+      sheet.querySelector('[data-sheet-meta]').textContent = li.dataset.meta;
+      act.textContent = where === 'want' ? '+ Add to Up next' : 'Take off Up next';
+      sheet.hidden = false;
+      msg.textContent = '';
+    };
+    const empty = (slot) => {
+      KEYS.forEach(k => { delete slot.dataset[k]; });
+      slot.innerHTML = '<span class="un-tile empty">Empty slot</span>';
+    };
 
     un.addEventListener('click', (e) => {
-      const add = e.target.closest('.un-add');
-      const off = e.target.closest('.un-x');
-      if (add) {
-        if (filled().length >= 3) {
-          msg.textContent = 'Up Next holds three at most. Watch one, or take one off, to make room.';
-          return;
-        }
-        const item = add.closest('li');
-        const slot = [...slots.children].find(li => !li.dataset.id);
-        keep(item, slot);
-        slot.innerHTML = `<span class="un-card">${art(item.dataset.art)}<button class="un-x" type="button" aria-label="Take ${item.dataset.name} off Up Next">&times;</button></span><p class="un-name"></p>`;
-        slot.querySelector('.un-name').textContent = item.dataset.name;
-        item.remove();
-        msg.textContent = filled().length >= 3 ? 'Up Next is full: three is the most it holds.' : `${slot.dataset.name} is up next.`;
-      } else if (off) {
-        const slot = off.closest('li');
+      const poster = e.target.closest('.un-poster');
+      const tile = e.target.closest('button.un-tile');
+      if (poster) show(poster.closest('li'), 'want');
+      else if (tile) show(tile.closest('li'), 'slot');
+    });
+    act.addEventListener('click', () => {
+      if (!open) return;
+      const { li, where } = open;
+      if (where === 'want') {
+        if (filled().length >= 3) { msg.textContent = 'Up next holds three at most. Watch one first, or take one off.'; return; }
+        const slot = [...slots.children].find(x => !x.dataset.id);
+        KEYS.forEach(k => { slot.dataset[k] = li.dataset[k]; });
+        slot.innerHTML = '<button class="un-tile" type="button"><b></b></button>';
+        slot.querySelector('b').textContent = li.dataset.name;
+        li.remove();
+        msg.textContent = `${slot.dataset.name} is up next.`;
+      } else {
         const item = document.createElement('li');
-        keep(slot, item);
-        item.innerHTML = `<span class="pst">${art(slot.dataset.art)}</span><span><b></b><small></small></span><button class="un-add" type="button">+ Up Next</button>`;
-        item.querySelector('b').textContent = slot.dataset.name;
-        item.querySelector('small').textContent = slot.dataset.meta;
-        want.prepend(item);
-        msg.textContent = `${slot.dataset.name} went back to Want to watch.`;
-        slots.appendChild(slot);
-        ['id', 'name', 'meta', 'art'].forEach(k => { delete slot.dataset[k]; });
-        slot.innerHTML = '<span class="un-card empty">Open spot</span><p class="un-name">&nbsp;</p>';
+        KEYS.forEach(k => { item.dataset[k] = li.dataset[k]; });
+        item.innerHTML = `<button class="un-poster" type="button"><span class="pst"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#${li.dataset.art}" width="40" height="60"/></svg></span><b></b></button>`;
+        item.querySelector('b').textContent = li.dataset.name;
+        grid.prepend(item);
+        msg.textContent = `${li.dataset.name} went back to Want to watch.`;
+        slots.appendChild(li);
+        empty(li);
       }
+      sheet.hidden = true;
+      open = null;
     });
   }
 
@@ -313,10 +313,13 @@
   /* ── Movies & TV: choose a poster ─────────────────────── */
   const ml = document.querySelector('[data-lookup]');
   if (ml) {
-    ml.querySelectorAll('.ml-opts button').forEach(b => b.addEventListener('click', () => {
-      ml.querySelectorAll('.ml-opts button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    const save = ml.querySelector('.ml-save');
+    ml.querySelectorAll('.ml-opts [data-art]').forEach(b => b.addEventListener('click', () => {
+      ml.querySelectorAll('.ml-opts [data-art]').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
       ml.querySelector('[data-ml-art]').setAttribute('href', '#' + b.dataset.art);
+      save.textContent = 'Save';
     }));
+    save.addEventListener('click', () => { save.textContent = 'Saved'; });
   }
 
   /* ── Fragrances: your photo against the cut-out ─────────── */

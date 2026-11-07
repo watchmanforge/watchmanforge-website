@@ -10,3 +10,8 @@ Cinzel is subset from the Google Fonts source to Latin (variable weight).
 All are self-hosted so visitors' browsers never contact Google.
 UnifrakturMaguntia is the blackletter the app uses for its screen titles;
 Cinzel sets the site's headlines.
+
+
+Atkinson Hyperlegible (atkinson-hyperlegible-latin-400/700.woff2), the app's body font, used inside the
+app panels on the Collections pages. Copyright 2020 Braille Institute of America, Inc.
+SIL Open Font License 1.1 (https://openfontlicense.org). Files from @fontsource/atkinson-hyperlegible 5.1.1.
