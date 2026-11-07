@@ -97,6 +97,21 @@ def ring(y, r, a0=0.0, a1=math.pi, n=48):
              y - ry(y, r) * math.sin(a0 + (a1 - a0) * i / n)) for i in range(n + 1)]
 
 
+CHANNEL_A = 0.484          # the channels sit this far round from the front (radians)
+RING_Y, ARCH_Y, APEX_Y = 266.0, 208.0, 181.0
+
+
+def channel_x(side, y):
+    return TX + side * r_shaft(y) * math.sin(CHANNEL_A)
+
+
+def channel(side):
+    """One channel of light, from behind the wall up round the window and into the crown."""
+    x0, xa = channel_x(side, 392), channel_x(side, ARCH_Y)
+    return (f"M{f(x0)} 392 L{f(xa)} {f(ARCH_Y)} C{f(xa)} {f(ARCH_Y - 12)} {f(TX + side * 7)} {f(APEX_Y + 6)} "
+            f"{TX} {f(APEX_Y)} L{TX} 141")
+
+
 def rot(pt, deg, origin):
     a = math.radians(deg)
     x, y = pt
@@ -155,9 +170,8 @@ def far_layer(rnd):
     g.append(f'<path d="{poly([(px - 3.6, py + 2), (px - 3.2, 240), (px + 3.2, 240), (px + 3.6, py + 2)])}" fill="#0a1320"/>')
     g.append(f'<path d="{poly([(px - 5, 240.6), (px - 5, 236.4), (px + 5, 236.4), (px + 5, 240.6)])}" fill="#0a1320"/>')
     g.append(f'<path d="M{f(px - 5)} 236.4h2.2v-2.4h-2.2zM{f(px - 1.1)} 236.4h2.2v-2.4h-2.2zM{f(px + 2.8)} 236.4h2.2v-2.4h-2.2z" fill="#0a1320"/>')
-    g.append(f'<path d="M{f(px + 3.3)} 241v28" stroke="#3cb0b4" stroke-width="0.5" opacity="0.45"/>')
+    g.append(f'<path class="emit" d="M{f(px)} 241.5v27" stroke="#3cb0b4" stroke-width="0.45" opacity="0.6"/>')
     g.append(f'<circle class="emit" cx="{f(FAR_BEACON[0])}" cy="{f(FAR_BEACON[1])}" r="1.5" fill="#fff0c8"/>')
-    g.append(f'<rect class="emit" x="{f(px - 0.5)}" y="250" width="1" height="2.4" fill="#f0c666" opacity="0.8"/>')
     return g
 
 
@@ -278,19 +292,28 @@ def tower_layer(rnd):
     # rim light from the city, down the right edge
     g.append(f'<path d="M{f(TX + r_shaft(top) - 0.3)} {top} L{f(TX + r_shaft(bot) - 0.3)} {bot}" stroke="#5fc2c6" stroke-width="0.6" opacity="0.4"/>')
 
-    # tech: a conduit up the lit side, carrying the field's signal up to the watch
-    a = 0.78
-    cx0, cx1 = TX + r_shaft(170) * math.cos(a), TX + r_shaft(380) * math.cos(a)
-    g.append(f'<path class="emit" d="M{f(cx1)} 380 L{f(cx0)} 170" stroke="#3cb0b4" stroke-width="0.7" opacity="0.75"/>')
-    for y in range(186, 380, 34):
-        xx = TX + r_shaft(y) * math.cos(a)
-        g.append(f'<rect class="emit" x="{f(xx - 0.9)}" y="{y}" width="1.8" height="2.6" rx="0.4" fill="#7fe3e3" opacity="0.85"/>')
-    # a broken ring of light at the mid-tower
-    yr = 252
-    g.append(f'<path class="emit" d="{smooth(ring(yr, r_shaft(yr) + 0.2, 0.1, math.pi - 0.1, 30))}" stroke="url(#neon)" stroke-width="0.7" fill="none" stroke-dasharray="7 3 2 3" opacity="0.7"/>')
+    # tech: channels of light cut into the stone, not stuck on it. Two rise from the wall, part around
+    # the cross window as a pointed arch, meet above it and run up into the crown where he stands.
+    # A ring ties them together at mid-tower.
+    g.append('<defs><linearGradient id="rise" gradientUnits="userSpaceOnUse" x1="0" y1="392" x2="0" y2="141">'
+             '<stop offset="0" stop-color="#6fe0e0" stop-opacity=".18"/><stop offset=".45" stop-color="#6fe0e0" stop-opacity=".75"/>'
+             '<stop offset=".7" stop-color="#7fe8e6"/><stop offset="1" stop-color="#a8f5f2"/></linearGradient></defs>')
+    groove = lambda d, core: (f'<path d="{d}" stroke="#020407" stroke-width="2.1" fill="none" stroke-linejoin="round"/>'
+                              f'<path d="{d}" stroke="#0f2229" stroke-width="1.3" fill="none" stroke-linejoin="round"/>'
+                              f'<path class="emit" d="{d}" stroke="{core}" stroke-width="0.62" fill="none" stroke-linejoin="round"/>')
+    yr = RING_Y
+    ring_d = smooth(ring(yr, r_shaft(yr) + 0.05, 0.06, math.pi - 0.06, 40))
+    g.append(groove(ring_d, "url(#neon)"))
+    for side in (-1, 1):
+        g.append(groove(channel(side), "url(#rise)"))
+    nodes = [(channel_x(side, yr), yr - ry(yr, r_shaft(yr)) * math.cos(CHANNEL_A)) for side in (-1, 1)]
+    nodes += [(channel_x(side, ARCH_Y), ARCH_Y) for side in (-1, 1)] + [(TX, APEX_Y), (TX, 158.5)]
+    for x, y in nodes:
+        g.append(f'<path d="M{f(x)} {f(y - 2.2)}l2.2 2.2l-2.2 2.2l-2.2 -2.2z" fill="#020407"/>')
+        g.append(f'<path class="emit" d="M{f(x)} {f(y - 1.2)}l1.2 1.2l-1.2 1.2l-1.2 -1.2z" fill="#a8f5f2"/>')
 
     # a window in the shape of the logo's cross, lit by the lamps inside: the logo's band of metal is
-    # amber glass, its middle clear glass, leaded between. Two arrow slits below.
+    # amber glass, its middle clear glass, leaded between. It is the tower's one lit window.
     band, outer, inner = logo_cross()
     s = WINDOW_H / 163.5                             # the logo cross is 163.5 tall in icon.svg
     lead = "#1a1107"
@@ -307,8 +330,6 @@ def tower_layer(rnd):
              f'<path d="{inner}" fill="none" stroke="{lead}" stroke-width="1.9"/>'
              f'<path d="{outer}" fill="none" stroke="{lead}" stroke-width="2.6"/>'
              '</g>')
-    g.append(f'<rect class="emit" x="{TX - 10.9}" y="282" width="1.6" height="9" rx="0.8" fill="#f0c666" opacity="0.55"/>')
-    g.append(f'<rect class="emit" x="{TX + 9.2}" y="331" width="1.6" height="9" rx="0.8" fill="#f0c666" opacity="0.35"/>')
 
     # corbels under the crown
     rc, yc0, yc1 = 47, 148, 162
