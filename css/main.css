@@ -287,7 +287,7 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
 .nav-drop { position: relative; }
 .nav-drop-btn { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 8px; font-size: 0.92rem; font-weight: 500; color: var(--text-2); }
 .nav-drop-btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: transform .2s ease; }
-.nav-drop-btn:hover, .nav-drop.open .nav-drop-btn { color: var(--text); }
+.nav-drop-btn:hover, .nav-drop.open .nav-drop-btn, .nav-drop-btn.active { color: var(--text); }
 .nav-drop.open .nav-drop-btn svg { transform: rotate(180deg); }
 .nav-panel { display: none; position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); width: 580px;
   grid-template-columns: 1fr 1fr; gap: 4px; padding: 12px; border-radius: 18px;

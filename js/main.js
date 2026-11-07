@@ -57,6 +57,9 @@
       a.setAttribute('aria-current', 'page');
     }
   });
+  if (path === '/collections' || path.startsWith('/collections/')) {
+    document.querySelectorAll('.nav-drop-btn').forEach(b => b.classList.add('active'));
+  }
 
   /* ── App screens: today's date ──────────────────────────────
      The app screens on the homepage carry demo data, but their dates
