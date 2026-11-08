@@ -28,7 +28,7 @@
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/main.css?v=5f7cd4d5ba">
-<link rel="stylesheet" href="/css/collections.css?v=ee8e99a145">
+<link rel="stylesheet" href="/css/collections.css?v=b93b02205c">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -188,7 +188,7 @@
         <div class="gd-tabs" aria-hidden="true"><span class="on">Guide</span><span>Achievements</span><span>Runs</span><span>Ask</span></div>
         <p class="ap-label gd-chapter">Act II &middot; The Hollow</p>
         <ol class="gd-steps">
-          <li class="done"><span class="gd-box" role="img" aria-label="Done"></span><div><b>Light the beacon at the Hollow&rsquo;s edge</b><small><span class="gd-ach">Beacon-Bearer &middot; 20 G</span></small></div></li>
+          <li class="done"><span class="gd-box" role="img" aria-label="Done"></span><div><b>Light the beacon at the Hollow&rsquo;s edge</b><small><span class="gd-ach">Beacon-Bearer &middot; 20 G</span><span class="gd-two"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.3l2.6 2.5L11 4.3"/></svg>Confirmed</span></small></div></li>
           <li data-unlock="40" data-name="Wayfinder"><span class="gd-box" role="img" aria-label="Not done yet"></span><div><b>Find all six waystones before you cross the bridge</b><small><span class="gd-ach">Wayfinder &middot; 40 G</span><span class="gd-two"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.3l2.6 2.5L11 4.3"/></svg>Confirmed</span></small></div></li>
           <li data-unlock="30" data-name="Gatekeeper"><span class="gd-box" role="img" aria-label="Not done yet"></span><div><b>Beat the Gatekeeper without healing</b><small><span class="gd-ach">Gatekeeper &middot; 30 G</span><span class="gd-two"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.3l2.6 2.5L11 4.3"/></svg>Confirmed</span></small></div></li>
           <li><span class="gd-box" role="img" aria-label="Not done yet"></span><div><b>Side quest: the Ferryman&rsquo;s Debt</b><small><span class="gd-ach">Paid in Full &middot; 25 G</span><span class="gd-one">One source</span></small></div></li>
@@ -240,38 +240,23 @@
       <div class="cx-copy">
         <p class="eyebrow">The Games shelf</p>
         <h2 id="shelf-title" class="section-title">Search a whole universe at once.</h2>
-        <p>Look up a series and its whole game world comes back, drawn from Wikipedia and Wikidata. Mark each game Want to play, Playing or Played and give it a score; a whole series gets one too: Playing now, Been there or Want to explore.</p>
+        <p>Look up a series and its whole game world comes back, drawn from Wikipedia and Wikidata. It&rsquo;s grouped into main games, spin-offs, and remakes and collections. Mark each game Want to play, Playing or Played; score the whole series or a single game, and give a series its status: Playing now, Been there or Want to explore.</p>
         <p class="js-only">Try it: tap Want to play, Playing or Played.</p>
       </div>
 
       <div class="ap sh">
-        <div class="sh-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span class="sh-q">Ember Road</span><span class="tag">Universe</span></div>
-        <p class="sh-uni"><b>The Ember Road universe</b> &middot; 4 games <span class="pill hot">Playing now</span></p>
+        <div class="sh-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span class="sh-q">Ember Road</span></div>
+        <div class="ci-sel sh-menus" aria-hidden="true"><span>Show</span><span>Sort</span></div>
+        <div class="sh-uni"><div><b>The Ember Road universe</b><small>4 games</small></div><span class="pill hot">Playing now</span><span class="sh-score" title="Your score for the series">92</span></div>
+        <p class="ap-label sh-group">Main games</p>
         <ul class="sh-list">
-          <li>
-            <span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-ember" width="60" height="80"/></svg></span>
-            <span class="sh-t"><b>Ember Road</b><small>2019</small></span>
-            <span class="sh-score">92</span>
-            <span class="sh-state" role="group" aria-label="Ember Road"><button type="button" aria-pressed="false">Want to play</button><button type="button" aria-pressed="false">Playing</button><button type="button" aria-pressed="true">Played</button></span>
-          </li>
-          <li>
-            <span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-wardens" width="60" height="80"/></svg></span>
-            <span class="sh-t"><b>Wardens of the Vale</b><small>2020 &middot; an Ember Road story</small></span>
-            <span class="sh-score">88</span>
-            <span class="sh-state" role="group" aria-label="Wardens of the Vale"><button type="button" aria-pressed="false">Want to play</button><button type="button" aria-pressed="false">Playing</button><button type="button" aria-pressed="true">Played</button></span>
-          </li>
-          <li>
-            <span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-ashfall" width="60" height="80"/></svg></span>
-            <span class="sh-t"><b>Ember Road: Ashfall</b><small>2023</small></span>
-            <span class="sh-score none">&ndash;</span>
-            <span class="sh-state" role="group" aria-label="Ember Road: Ashfall"><button type="button" aria-pressed="false">Want to play</button><button type="button" aria-pressed="true">Playing</button><button type="button" aria-pressed="false">Played</button></span>
-          </li>
-          <li>
-            <span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-lanterns" width="60" height="80"/></svg></span>
-            <span class="sh-t"><b>Ember Road: Lanterns</b><small>2025</small></span>
-            <span class="sh-score none">&ndash;</span>
-            <span class="sh-state" role="group" aria-label="Ember Road: Lanterns"><button type="button" aria-pressed="true">Want to play</button><button type="button" aria-pressed="false">Playing</button><button type="button" aria-pressed="false">Played</button></span>
-          </li>
+            <li><span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-ember" width="60" height="80"/></svg></span><span class="sh-t"><b>Ember Road</b><small>2019</small></span><span class="sh-state" role="group" aria-label="Ember Road"><button type="button" aria-pressed="false">Want to play</button><button type="button" aria-pressed="false">Playing</button><button type="button" aria-pressed="true">Played</button></span></li>
+            <li><span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-ashfall" width="60" height="80"/></svg></span><span class="sh-t"><b>Ember Road: Ashfall</b><small>2023</small></span><span class="sh-state" role="group" aria-label="Ember Road: Ashfall"><button type="button" aria-pressed="false">Want to play</button><button type="button" aria-pressed="true">Playing</button><button type="button" aria-pressed="false">Played</button></span></li>
+            <li><span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-lanterns" width="60" height="80"/></svg></span><span class="sh-t"><b>Ember Road: Lanterns</b><small>2025</small></span><span class="sh-state" role="group" aria-label="Ember Road: Lanterns"><button type="button" aria-pressed="true">Want to play</button><button type="button" aria-pressed="false">Playing</button><button type="button" aria-pressed="false">Played</button></span></li>
+        </ul>
+        <p class="ap-label sh-group">Spin-offs</p>
+        <ul class="sh-list">
+            <li><span class="cov"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#cv-wardens" width="60" height="80"/></svg></span><span class="sh-t"><b>Wardens of the Vale</b><small>2020</small></span><span class="sh-state" role="group" aria-label="Wardens of the Vale"><button type="button" aria-pressed="false">Want to play</button><button type="button" aria-pressed="false">Playing</button><button type="button" aria-pressed="true">Played</button></span></li>
         </ul>
       </div>
     </div>
@@ -283,7 +268,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.2"/></svg>
         <div>
           <h2>Xbox first</h2>
-          <p>Achievements come from Xbox. Linking your own Xbox account is coming; once it&rsquo;s linked, the Quest Log syncs every 6 hours. PlayStation and Steam achievements aren&rsquo;t planned yet.</p>
+          <p>Achievements come from Xbox. Linking your own Xbox account is coming; once it&rsquo;s linked, the Quest Log syncs every 6 hours. PlayStation and Steam come later, once Xbox is done.</p>
         </div>
       </aside>
       <aside class="cx-honest">
@@ -377,7 +362,7 @@
 <!-- /chrome:footer -->
 
 <script src="/js/main.js?v=27c49eaeaa"></script>
-<script src="/js/collections.js?v=21065f63ee"></script>
+<script src="/js/collections.js?v=05dbc3cb90"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>

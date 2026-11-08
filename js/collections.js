@@ -322,6 +322,17 @@
     save.addEventListener('click', () => { save.textContent = 'Saved'; });
   }
 
+  /* ── Fragrances: just one, or layer two; wearing it today ── */
+  document.querySelectorAll('[data-fa]').forEach(panel => {
+    const one = panel.querySelector('.fa-a:not(.fa-pair)'), two = panel.querySelector('.fa-pair');
+    panel.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => {
+      panel.querySelectorAll('[data-mode]').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      one.hidden = b.dataset.mode !== 'one';
+      two.hidden = b.dataset.mode === 'one';
+    }));
+    panel.querySelectorAll('.fa-wear').forEach(b => b.addEventListener('click', () => { b.textContent = 'Worn today ✓'; b.disabled = true; }));
+  });
+
   /* ── Fragrances: your photo against the cut-out ─────────── */
   document.querySelectorAll('[data-cut]').forEach(box => {
     const input = box.querySelector('input');

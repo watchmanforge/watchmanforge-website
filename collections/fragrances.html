@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fragrances — Watchman Forge</title>
-<meta name="description" content="Keep your fragrance collection on one shelf. Tap “Wore it today” and the app tracks the millilitres, sprays and wears left in every bottle, with an assistant that picks only from bottles you own.">
+<meta name="description" content="Keep your fragrance collection on one shelf. Tap “Wore it today” and the app keeps track of what’s left in every bottle, with an assistant that picks from your shelf first.">
 <meta property="og:title" content="Fragrances — Watchman Forge">
-<meta property="og:description" content="Every bottle, and what’s left in it. A fragrance shelf that counts your sprays and picks from your own collection.">
+<meta property="og:description" content="Every bottle, and what’s left in it. A fragrance shelf that counts your sprays and picks from your own collection first.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.watchmanforge.com/collections/fragrances">
 <meta property="og:site_name" content="Watchman Forge">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="Watchman Forge — Stop starting. Start finishing.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Fragrances — Watchman Forge">
-<meta name="twitter:description" content="Every bottle, and what’s left in it. A fragrance shelf that counts your sprays and picks from your own collection.">
+<meta name="twitter:description" content="Every bottle, and what’s left in it. A fragrance shelf that counts your sprays and picks from your own collection first.">
 <meta name="twitter:image" content="https://www.watchmanforge.com/assets/images/og-image.jpg">
 <meta name="theme-color" content="#05060b">
 <link rel="canonical" href="https://www.watchmanforge.com/collections/fragrances">
@@ -28,7 +28,7 @@
 <link rel="preload" href="/assets/webfonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/webfonts/cinzel-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/main.css?v=5f7cd4d5ba">
-<link rel="stylesheet" href="/css/collections.css?v=ee8e99a145">
+<link rel="stylesheet" href="/css/collections.css?v=b93b02205c">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -122,7 +122,7 @@
         <div>
           <p class="eyebrow">Collections &middot; Fragrances</p>
           <h1><span>Every bottle,</span> <span class="text-gradient">and what&rsquo;s left in it.</span></h1>
-          <p class="lead">Keep your fragrances on one shelf. Tap <strong>Wore it today</strong> and the app counts the sprays, so every bottle shows the millilitres, sprays and wears it has left.</p>
+          <p class="lead">Keep your fragrances on one shelf. Tap <strong>Wore it today</strong> and the app counts the sprays, so every bottle shows how full it is and about how many wears it has left.</p>
           <div class="cx-hero-ctas">
             <a href="#join" class="btn btn-primary">Join the waitlist</a>
             <a href="#assistant" class="btn btn-outline">Meet the assistant</a>
@@ -236,7 +236,7 @@
         <li>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18M4 5h3M4 9h5M4 13h3M4 17h5"/><path d="M12 9h8M12 13h6M12 17h7"/><path d="M12 5h3"/></svg>
           <h3>Always knows what&rsquo;s left</h3>
-          <p>Millilitres, sprays and wears left, on every bottle. Body sprays are counted in cans.</p>
+          <p>Every bottle shows how full it is and about how many wears are left; its own page has the millilitres and sprays. Body sprays are counted in cans.</p>
         </li>
       </ol>
     </div>
@@ -252,12 +252,15 @@
           <li><strong>Your bottles first,</strong> plus one &ldquo;new to try&rdquo; that isn&rsquo;t on your shelf.</li>
           <li><strong>Skips today&rsquo;s bottle.</strong> What you already wore today stays off the list.</li>
           <li><strong>Leans on the season,</strong> and on the bottle you&rsquo;ve gone longest without.</li>
-          <li class="soon"><strong>Coming:</strong> today&rsquo;s weather, day or night, and layering two bottles. <span class="tag tag-soon">Coming</span></li>
+          <li><strong>Just one, or layer two.</strong> Ask for a pair and it picks two that go together.</li>
+          <li><strong>Wearing it today</strong> is one tap from the pick.</li>
+          <li class="soon"><strong>Coming:</strong> today&rsquo;s weather, and day or night. <span class="tag tag-soon">Coming</span></li>
         </ul>
       </div>
 
       <div class="ap fa" data-fa>
         <span class="ap-btn fa-ask"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z"/></svg>Ask the fragrance assistant</span>
+        <div class="chips fa-mode js-only" role="group" aria-label="How many"><button type="button" aria-pressed="true" data-mode="one">Just one</button><button type="button" aria-pressed="false" data-mode="two">Layer two</button></div>
         <p class="fa-q">What should I wear today?</p>
         <div class="ap-card fa-a">
           <div class="fa-pick">
@@ -269,6 +272,19 @@
             </div>
           </div>
           <p class="fa-why" data-fa-why>Cedar and black pepper suit autumn, and it&rsquo;s been 31 days since you last wore it.</p>
+          <button class="ap-btn fa-wear js-only" type="button">Wearing it today</button>
+        </div>
+        <div class="ap-card fa-a fa-pair" hidden>
+          <div class="fa-pick">
+            <div class="fa-img fa-img2"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-cedar" width="60" height="80"/></svg><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#fb-ember" width="60" height="80"/></svg></div>
+            <div>
+              <p class="fa-tagline">Layer these two</p>
+              <p class="fa-name">Cedar Watch + Ember Oud</p>
+              <p class="fa-house">Lantern &amp; Oak &middot; Greywatch Parfums</p>
+            </div>
+          </div>
+          <p class="fa-why">Cedar and black pepper over amber and smoke: a warm pair that wears well together.</p>
+          <button class="ap-btn fa-wear js-only" type="button">Wearing it today</button>
         </div>
         <div class="ap-card fa-new">
           <p class="fa-tagline">New to try &middot; not on your shelf</p>
@@ -449,7 +465,7 @@
 <!-- /chrome:footer -->
 
 <script src="/js/main.js?v=27c49eaeaa"></script>
-<script src="/js/collections.js?v=21065f63ee"></script>
+<script src="/js/collections.js?v=05dbc3cb90"></script>
 <script src="/js/watchman-fx.js?v=c37cb709bb"></script>
 </body>
 </html>
